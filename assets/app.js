@@ -175,6 +175,13 @@ function typeLine(){
     }
   })();
 }
+// FIX nhảy layout: đo chiều cao đầy đủ trước, giữ cố định rồi mới gõ
+(function reserveTerm(){
+  if (!termBody || reduced) return;
+  termBody.innerHTML = LINES.map(([c, o]) => "<div>" + c + "</div><div>" + o + "</div>").join("");
+  termBody.style.minHeight = termBody.offsetHeight + "px";
+  termBody.innerHTML = "";
+})();
 const tio = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting){ tio.disconnect(); typeLine(); }
 }), { threshold: .4 });

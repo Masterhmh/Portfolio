@@ -246,3 +246,5 @@ footer{border-top:1px solid var(--line);padding:26px 0 44px;position:relative;z-
     box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 24px color-mix(in srgb,var(--cyan) 35%,transparent)}
   .mobile-cta:active{transform:scale(.98)}
 }
+
+#typedRole{display:inline-block;min-width:36ch;vertical-align:bottom}
