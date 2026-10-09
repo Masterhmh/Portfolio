@@ -28,3 +28,20 @@ projects/
 - Ảnh bìa nên là ảnh đẹp nhất, tỉ lệ ngang (~4:3).
 - Folder bắt đầu bằng `_` hoặc `.` sẽ bị bỏ qua.
 - File này (`README.md`) không hiện lên web.
+
+## info.txt — biến dự án thành case study (khuyến khích)
+
+Trong mỗi folder dự án, tạo thêm file `info.txt` để web hiện phần
+**VẤN ĐỀ → GIẢI PHÁP → KẾT QUẢ** khi mở dự án. Không có file này,
+web vẫn hiện gallery ảnh bình thường.
+
+```
+TEN: Tên hiển thị đẹp (không bắt buộc — mặc định lấy tên folder)
+VAN_DE: Quán mới mở, chưa có nhận diện, khách đi ngang không nhớ tên.
+GIAI_PHAP: Logo + bộ màu tươi, menu 1 tờ dễ đọc, biển hiệu bắt mắt từ xa.
+KET_QUA: Chủ quán ưng ý, khai trương đúng hẹn.
+```
+
+- Mỗi dòng bắt đầu bằng `TEN:`, `VAN_DE:`, `GIAI_PHAP:` hoặc `KET_QUA:`.
+- Viết số liệu thật nếu có (vd: "khách check-in tăng rõ sau 1 tháng").
+  Không bịa số liệu.

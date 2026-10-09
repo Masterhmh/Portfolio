@@ -2,7 +2,7 @@
 :root{
   --bg:#04060c; --bg2:#080d18; --panel:#0a1220;
   --cyan:#00e5ff; --mag:#ff2ea6; --green:#00ff9d; --amber:#ffb300;
-  --text:#d7e3f4; --dim:#7b8aa5;
+  --text:#d7e3f4; --dim:#8a98b8;
   --line:rgba(0,229,255,.14);
   --mono:'JetBrains Mono',ui-monospace,monospace;
   --disp:'Space Grotesk','Be Vietnam Pro',system-ui,sans-serif;
@@ -65,6 +65,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;
 .nav-links a:hover{color:var(--cyan)}
 .nav-links a:hover::before{opacity:1}
 .nav-right{display:flex;align-items:center;gap:12px}
+.nav-cta{padding:10px 22px;font-size:12px}
 .sys-clock{font-family:var(--mono);font-size:12px;color:var(--dim)}
 .sys-clock span{color:var(--green)}
 .icon-btn{width:38px;height:38px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--cyan);
@@ -219,4 +220,29 @@ footer{border-top:1px solid var(--line);padding:26px 0 44px;position:relative;z-
   .rv{opacity:1;transform:none}
   #boot{display:none}
   html{scroll-behavior:auto}
+}
+
+/* case study: VAN_DE / GIAI_PHAP / KET_QUA */
+.case{padding:6px 26px 0;font-family:var(--mono);font-size:13px;line-height:1.9}
+.case .crow{margin-bottom:12px}
+.case .ck{color:var(--cyan);font-size:11px;letter-spacing:2px;display:block;margin-bottom:3px}
+.case .cv{color:var(--text)}
+
+/* sticky mobile CTA — nút liên hệ luôn hiện trên điện thoại */
+.mobile-cta{display:none}
+@media(max-width:920px){
+  .nav-in{flex-wrap:wrap;row-gap:10px}
+  .nav-links{display:flex;gap:16px;order:3;flex-basis:100%;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{font-size:12px;white-space:nowrap}
+  .nav-links a::before{display:none}
+  .nav-cta{display:none}
+  html{scroll-padding-top:132px}
+  body{padding-bottom:88px}
+  .mobile-cta{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:55;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    font-family:var(--mono);font-size:14px;font-weight:700;letter-spacing:1px;color:#001318;text-decoration:none;
+    padding:16px;border-radius:12px;background:linear-gradient(135deg,var(--cyan),color-mix(in srgb,var(--cyan) 55%,#005577));
+    box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 24px color-mix(in srgb,var(--cyan) 35%,transparent)}
+  .mobile-cta:active{transform:scale(.98)}
 }

@@ -56,6 +56,7 @@ window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e 
 
 /* ---------- canvas nền: mạng lưới hạt ---------- */
 (function bg(){
+  if (innerWidth < 920) return; // mobile: tắt hiệu ứng hạt cho nhẹ
   if (reduced) return;
   const cv = document.getElementById("bg-canvas"), ctx = cv.getContext("2d");
   let W, H, pts;
@@ -209,6 +210,18 @@ async function loadProjects(){
     const dirs = (Array.isArray(items) ? items : [])
       .filter(x => x.type === "dir" && !x.name.startsWith(".") && !x.name.startsWith("_"));
     if (!dirs.length) return showEmpty();
+    async function getInfo(dir){
+      try{
+        const r = await fetch(raw(`${GH.dir}/${encodeURIComponent(dir)}/info.txt`));
+        if(!r.ok) return null;
+        const t = await r.text(), m = {};
+        t.split(/\r?\n/).forEach(line => {
+          const mm = line.match(/^(TEN|VAN_DE|GIAI_PHAP|KET_QUA)\s*:\s*(.+)$/);
+          if(mm) m[mm[1]] = mm[2].trim();
+        });
+        return (m.VAN_DE || m.GIAI_PHAP || m.KET_QUA) ? m : null;
+      }catch(e){ return null; }
+    }
     const jobs = dirs.map(async d => {
       try {
         const files = await ghJson(`${GH.dir}/${d.name}`);
@@ -216,7 +229,7 @@ async function loadProjects(){
           .filter(f => f.type === "file" && IMG_RE.test(f.name))
           .sort((a, b) => numOf(a.name) - numOf(b.name) || a.name.localeCompare(b.name));
         if (!imgs.length) return null;
-        return { name: d.name, imgs: imgs.map(f => raw(`${GH.dir}/${encodeURIComponent(d.name)}/${encodeURIComponent(f.name)}`)) };
+        return { name: d.name, imgs: imgs.map(f => raw(`${GH.dir}/${encodeURIComponent(d.name)}/${encodeURIComponent(f.name)}`)) , info: await getInfo(d.name) };
       } catch { return null; }
     });
     const projects = (await Promise.all(jobs)).filter(Boolean);
@@ -248,9 +261,23 @@ function showEmpty(){
 }
 
 function openModal(p){
-  mTitle.textContent = p.name;
+  mTitle.textContent = (p.info && p.info.TEN) || p.name;
   mCount.textContent = "// " + p.imgs.length + " ẢNH";
   mBody.innerHTML = "";
+  if (p.info){
+    const cs = document.createElement("div");
+    cs.className = "case";
+    [["VẤN_ĐỀ", p.info.VAN_DE], ["GIẢI_PHÁP", p.info.GIAI_PHAP], ["KẾT_QUẢ", p.info.KET_QUA]]
+      .filter(r => r[1])
+      .forEach(r => {
+        const row = document.createElement("div");
+        row.className = "crow";
+        const k = document.createElement("span"); k.className = "ck"; k.textContent = r[0];
+        const v = document.createElement("span"); v.className = "cv"; v.textContent = r[1];
+        row.append(k, v); cs.append(row);
+      });
+    mBody.append(cs);
+  }
   p.imgs.forEach((src, i) => {
     const img = document.createElement("img");
     img.src = src; img.loading = "lazy"; img.alt = `${p.name} — ảnh ${i + 1}`;
