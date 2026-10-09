@@ -50,7 +50,7 @@ async function getInfo(dir){
 }
 
 async function loadProjects(){
-  const grid = document.getElementById("projGrid");
+  const grid = document.getElementById("projList");
   const empty = document.getElementById("projEmpty");
   let dirs = [];
   try{
@@ -74,22 +74,39 @@ async function loadProjects(){
 
   projects.forEach((p, i) => {
     const title = (p.info && p.info.TEN) || p.name.replace(/[-_]+/g, " ");
+    const idx = String(i + 1).padStart(2, "0");
     const el = document.createElement("article");
-    el.className = "proj rv";
-    el.style.setProperty("--d", (i % 3 * 0.08) + "s");
-    el.innerHTML =
-      '<div class="proj-cover"><img loading="lazy" alt=""></div>' +
-      '<div class="proj-meta"><h3></h3><p>' + (p.info ? "Xem case study →" : "Xem ảnh →") + "</p></div>";
-    el.querySelector("img").src = p.imgs[0];
-    el.querySelector("h3").textContent = title;
+    el.className = "feat rv";
+    el.style.setProperty("--d", (i % 2 * 0.08) + "s");
+    const media = document.createElement("div");
+    media.className = "feat-media";
+    const img = document.createElement("img");
+    img.loading = "lazy"; img.alt = title; img.src = p.imgs[0];
+    media.appendChild(img);
+    const body = document.createElement("div");
+    body.className = "feat-body";
+    const k = document.createElement("p");
+    k.className = "feat-idx"; k.textContent = "[ dự án " + idx + " ]";
+    const h = document.createElement("h3"); h.textContent = title;
+    body.append(k, h);
+    if (p.info && p.info.VAN_DE){
+      const ex = document.createElement("p");
+      ex.className = "feat-ex"; ex.textContent = p.info.VAN_DE;
+      body.append(ex);
+    }
+    const link = document.createElement("p");
+    link.className = "feat-link";
+    link.textContent = p.info ? "Mở case study →" : "Xem ảnh →";
+    body.append(link);
+    el.append(media, body);
     el.addEventListener("click", () => openModal(p, title));
     grid.appendChild(el);
   });
-  // reveal cho card mới thêm
+  // reveal cho dự án mới thêm
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target); }
   }), { threshold: .1 });
-  grid.querySelectorAll(".proj").forEach(e => io.observe(e));
+  grid.querySelectorAll(".feat").forEach(e => io.observe(e));
 }
 
 /* ---------- modal case study ---------- */
