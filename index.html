@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="light">
+<html lang="vi" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hoàng Hùng — Designer đồ họa × Code × AI</title>
-<meta name="description" content="Hoàng Hùng — designer đồ họa 7 năm trong ngành F&B, biết code, vận dụng AI. Đồng hành cùng hơn 3.000 chủ quán.">
+<title>~/hoang-hung — designer × coder × AI</title>
+<meta name="description" content="Hoàng Hùng — designer đồ họa 7 năm F&B, biết code, vận dụng AI. Đồng hành cùng hơn 3.000 chủ quán.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◈</text></svg>">
 </head>
@@ -15,15 +15,16 @@
 
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="#top">Hoàng Hùng <span class="mono ver">v9</span></a>
+    <a class="brand" href="#top"><span class="prompt">~</span>/hoang-hung</a>
     <nav class="nav-links">
-      <a href="#profile">Profile</a>
-      <a href="#services">Năng lực</a>
-      <a href="#projects">Dự án</a>
-      <a href="#process">Quy trình</a>
-      <a href="#contact">Liên hệ</a>
+      <a href="#profile">profile</a>
+      <a href="#services">năng-lực</a>
+      <a href="#projects">repos</a>
+      <a href="#process">deploy</a>
+      <a href="#contact">liên-hệ</a>
     </nav>
     <div class="nav-right">
+      <button id="paletteBtn" class="kbd-btn" aria-label="Mở bảng lệnh (Ctrl+K)">⌘K</button>
       <button id="themeBtn" class="icon-btn" aria-label="Đổi chế độ sáng/tối">◐</button>
       <a class="btn btn-primary btn-sm" href="https://www.facebook.com/masterhmh" target="_blank" rel="noopener">Nhắn tin</a>
     </div>
@@ -32,164 +33,148 @@
 
 <main id="top">
 
-  <!-- HERO: 3 giọng — serif / mono / italic -->
+  <!-- HERO: terminal session -->
   <section class="hero">
     <div class="wrap">
-      <p class="eyebrow mono-line rv">// portfolio — hoang.hung</p>
-      <h1 class="rv" style="--d:.08s">
-        <span class="l-serif">Designer đồ họa</span>
-        <span class="l-mono">biết_code();</span>
-        <span class="l-serif"><em>vận dụng AI.</em></span>
-      </h1>
-      <p class="lede rv" style="--d:.16s">Mình là Hoàng Hùng — 7 năm thiết kế trong ngành F&B, đồng hành cùng hơn 3.000 chủ quán. Thiết kế bằng mắt thẩm mỹ, dựng sản phẩm bằng code, tăng tốc bằng AI.</p>
-      <div class="hero-cta rv" style="--d:.24s">
-        <a class="btn btn-primary" href="#projects">Xem dự án</a>
+      <div class="term rv">
+        <div class="term-bar"><i></i><i></i><i></i><span>hoang-hung — zsh</span></div>
+        <div class="term-body">
+          <p><span class="p">$</span> whoami</p>
+          <p class="out">Hoàng Hùng <span class="dim">—</span> designer đồ họa <span class="acc">×</span> coder <span class="acc">×</span> AI</p>
+          <p><span class="p">$</span> cat profile.txt</p>
+          <p class="out sm">7 năm thiết kế F&B · 3000+ chủ quán đồng hành<br>thiết kế bằng mắt thẩm mỹ — dựng bằng code — tăng tốc bằng AI</p>
+          <p><span class="p">$</span> ./nhan-tin --facebook <span class="caret"></span></p>
+        </div>
+      </div>
+      <h1 class="sr">Hoàng Hùng — Designer đồ họa biết code, vận dụng AI</h1>
+      <div class="hero-cta rv" style="--d:.12s">
+        <a class="btn btn-primary" href="#projects">ls ./repos</a>
         <a class="btn btn-ghost" href="https://www.facebook.com/masterhmh" target="_blank" rel="noopener">Nhắn tin Facebook</a>
       </div>
     </div>
   </section>
 
-  <!-- 01 · PROFILE.SYS — bento -->
+  <!-- 01 · PROFILE.SYS -->
   <section id="profile">
-    <div class="wrap sec-head">
-      <p class="eyebrow rv"><span class="sec-no">01</span>Profile.sys</p>
-      <span class="ghost" aria-hidden="true">01</span>
-    </div>
     <div class="wrap">
+      <p class="eyebrow rv"><span class="sec-no">01</span>profile.sys</p>
       <div class="bento">
-        <article class="b-card b-design rv" style="--d:.1s">
-          <p class="b-label">[ design ]</p>
-          <h3>Mắt thẩm mỹ của designer.</h3>
-          <p>7 năm làm nghề trong ngành F&B — từ logo, menu, biển hiệu đến bao bì. Mình tin thiết kế đẹp phải bán được hàng: menu khiến khách gọi thêm món, biển hiệu khiến người đi đường dừng lại.</p>
+        <article class="panel b-design rv" style="--d:.08s">
+          <div class="p-head"><span class="b-label">[ design ]</span></div>
+          <div class="p-body">
+            <h3>Mắt thẩm mỹ của designer.</h3>
+            <p>7 năm làm nghề trong ngành F&B — logo, menu, biển hiệu, bao bì. Thiết kế đẹp phải bán được hàng: menu khiến khách gọi thêm món, biển hiệu khiến người đi đường dừng lại.</p>
+          </div>
         </article>
-        <article class="b-card b-code rv" style="--d:.16s">
-          <p class="b-label">[ code ]</p>
+        <article class="panel rv" style="--d:.14s">
+          <div class="p-head"><span class="b-label">[ code ]</span></div>
+          <div class="p-body">
 <pre class="code-block"><code><span class="ck">const</span> hung = {
   role: <span class="cs">"designer × builder"</span>,
   code: [<span class="cs">"HTML"</span>, <span class="cs">"CSS"</span>, <span class="cs">"JS"</span>],
-  note: <span class="cs">"web này tự tay dựng,<br>        không dùng template"</span>
+  note: <span class="cs">"web này tự tay dựng"</span>
 };</code></pre>
+          </div>
         </article>
-        <article class="b-card rv" style="--d:.22s">
-          <p class="b-label">[ ai ]</p>
-          <h3>AI làm phần lặp,<br>mình giữ quyết định.</h3>
-          <ul class="ai-rules">
-            <li>→ AI đề xuất, mình chọn</li>
-            <li>→ test với dữ liệu thật</li>
-            <li>→ bàn giao để tự vận hành</li>
-          </ul>
+        <article class="panel rv" style="--d:.2s">
+          <div class="p-head"><span class="b-label">[ ai ]</span></div>
+          <div class="p-body">
+            <h3>AI làm phần lặp.</h3>
+            <ul class="ai-rules">
+              <li>→ AI đề xuất, mình chọn</li>
+              <li>→ test với dữ liệu thật</li>
+              <li>→ bàn giao để tự vận hành</li>
+            </ul>
+          </div>
         </article>
-        <article class="b-card b-stats rv" style="--d:.28s">
-          <p class="b-label">[ stats ]</p>
-          <div class="b-stats-row">
+        <article class="panel rv" style="--d:.26s">
+          <div class="p-head"><span class="b-label">[ stats ]</span></div>
+          <div class="p-body stats-row">
             <div><strong>7+</strong><span>năm F&B</span></div>
             <div><strong>3.000+</strong><span>chủ quán</span></div>
             <div><strong>3</strong><span>mảng việc</span></div>
           </div>
         </article>
-        <article class="b-card b-status rv" style="--d:.34s">
-          <p class="b-label">[ status ]</p>
-          <p class="status-line"><i class="dot"></i>nhận dự án mới</p>
-          <a href="#contact" class="mono-link">gửi brief 3 dòng →</a>
+        <article class="panel rv" style="--d:.32s">
+          <div class="p-head"><span class="b-label">[ status ]</span></div>
+          <div class="p-body">
+            <p class="status-line"><i class="dot"></i>nhận dự án mới</p>
+            <a href="#contact" class="mono-link">gửi brief 3 dòng →</a>
+          </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- 02 · NĂNG LỰC — editorial index -->
+  <!-- 02 · NĂNG LỰC -->
   <section id="services">
-    <div class="wrap sec-head">
-      <p class="eyebrow rv"><span class="sec-no">02</span>Năng lực</p>
-      <span class="ghost" aria-hidden="true">02</span>
-    </div>
     <div class="wrap">
+      <p class="eyebrow rv"><span class="sec-no">02</span>năng-lực</p>
       <div class="index-list">
-        <div class="index-row rv" style="--d:.1s">
+        <div class="index-row rv" style="--d:.08s">
           <span class="idx">01</span>
-          <div class="idx-main">
-            <h3>Thương hiệu F&B</h3>
-            <p>Logo, nhận diện, menu, biển hiệu, bao bì — đồng bộ từ online tới mặt tiền quán.</p>
-          </div>
-          <span class="idx-tags">logo · menu · biển hiệu · bao bì · fanpage</span>
+          <div class="idx-main"><h3>Thương hiệu F&B</h3><p>Logo, nhận diện, menu, biển hiệu, bao bì — đồng bộ từ online tới mặt tiền quán.</p></div>
+          <span class="idx-tags">logo · menu · biển hiệu · bao bì</span>
         </div>
-        <div class="index-row rv" style="--d:.18s">
+        <div class="index-row rv" style="--d:.14s">
           <span class="idx">02</span>
-          <div class="idx-main">
-            <h3>Miniapp & Website</h3>
-            <p>Miniapp đặt món, web giới thiệu — gọn nhẹ, chủ quán tự quản được.</p>
-          </div>
-          <span class="idx-tags">miniapp zalo · landing page · đặt bàn</span>
+          <div class="idx-main"><h3>Miniapp & Website</h3><p>Miniapp đặt món, web giới thiệu — gọn nhẹ, chủ quán tự quản được.</p></div>
+          <span class="idx-tags">miniapp zalo · landing page</span>
         </div>
-        <div class="index-row rv" style="--d:.26s">
+        <div class="index-row rv" style="--d:.2s">
           <span class="idx">03</span>
-          <div class="idx-main">
-            <h3>Tự động hóa</h3>
-            <p>Script đăng bài, bot trả lời, quy trình tự chạy — bớt việc lặp mỗi ngày.</p>
-          </div>
-          <span class="idx-tags">auto đăng bài · chatbot · workflow</span>
+          <div class="idx-main"><h3>Tự động hóa</h3><p>Script đăng bài, bot trả lời, quy trình tự chạy — bớt việc lặp mỗi ngày.</p></div>
+          <span class="idx-tags">auto đăng bài · chatbot</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 03 · DỰ ÁN — editorial feature rows -->
+  <!-- 03 · REPOS -->
   <section id="projects">
-    <div class="wrap sec-head">
-      <p class="eyebrow rv"><span class="sec-no">03</span>Dự án</p>
-      <span class="ghost" aria-hidden="true">03</span>
-    </div>
     <div class="wrap">
-      <p class="lede-sm rv" style="--d:.1s">Mỗi dự án trả lời ba câu hỏi: vấn đề của quán là gì, mình chọn hướng nào và vì sao, kết quả ra sao. Danh sách tự cập nhật từ thư mục dự án.</p>
-      <div id="projList" class="feat-list"></div>
-      <p id="projEmpty" class="empty" hidden>Chưa có dự án nào — thêm folder vào <code>projects/</code> là web tự hiện.</p>
+      <p class="eyebrow rv"><span class="sec-no">03</span>repos</p>
+      <p class="lede-sm rv" style="--d:.08s">Mỗi repo là một dự án thật: vấn đề → hướng giải quyết → kết quả. Bấm vào để mở case study.</p>
+      <div id="repoList" class="repo-list"></div>
+      <p id="projEmpty" class="empty" hidden>chưa có repo nào — thêm folder vào <code>projects/</code> là web tự hiện.</p>
     </div>
   </section>
 
   <!-- 04 · KHÁCH NÓI GÌ -->
   <section id="testimonials">
-    <div class="wrap sec-head">
-      <p class="eyebrow rv"><span class="sec-no">04</span>Khách nói gì</p>
-      <span class="ghost" aria-hidden="true">04</span>
-    </div>
-    <div class="wrap narrow">
-      <h2 class="h2 rv" style="--d:.08s">Để chủ quán nhận xét.</h2>
-      <p class="lede-sm rv" style="--d:.14s">Mình không tự nhận xét về mình — để các chủ quán đã làm việc cùng nói.</p>
-      <blockquote class="quote-empty rv" style="--d:.2s">
-        <p>Đang tổng hợp đánh giá từ các chủ quán đã làm việc cùng — quay lại sau, hoặc hỏi trực tiếp khi nhắn tin.</p>
-      </blockquote>
+    <div class="wrap">
+      <p class="eyebrow rv"><span class="sec-no">04</span>khách-nói-gì</p>
+      <div class="wrap-narrow">
+        <h2 class="h2 rv" style="--d:.08s">Để chủ quán nhận xét.</h2>
+        <blockquote class="quote-empty rv" style="--d:.14s">
+          <p>Đang tổng hợp đánh giá từ các chủ quán đã làm việc cùng — quay lại sau, hoặc hỏi trực tiếp khi nhắn tin.</p>
+        </blockquote>
+      </div>
     </div>
   </section>
 
-  <!-- 05 · QUY TRÌNH -->
+  <!-- 05 · DEPLOY -->
   <section id="process">
-    <div class="wrap sec-head">
-      <p class="eyebrow rv"><span class="sec-no">05</span>Quy trình</p>
-      <span class="ghost" aria-hidden="true">05</span>
-    </div>
     <div class="wrap">
-      <h2 class="h2 rv" style="--d:.08s">Bốn bước, rõ ràng từ đầu.</h2>
-      <ol class="steps">
-        <li class="rv" style="--d:.1s"><span class="step-no">1</span><h3>Brief</h3><p>Gửi mình brief ngắn: quán cần gì, dùng ở đâu, muốn xong khi nào.</p></li>
-        <li class="rv" style="--d:.18s"><span class="step-no">2</span><h3>Explore</h3><p>Mình nghiên cứu quán, khách hàng và đối thủ rồi đề xuất 2–3 hướng.</p></li>
-        <li class="rv" style="--d:.26s"><span class="step-no">3</span><h3>Build</h3><p>Thiết kế, dựng miniapp, viết automation — cập nhật tiến độ thường xuyên.</p></li>
-        <li class="rv" style="--d:.34s"><span class="step-no">4</span><h3>Ship</h3><p>Bàn giao, hướng dẫn vận hành, hỗ trợ sau bàn giao.</p></li>
+      <p class="eyebrow rv"><span class="sec-no">05</span>deploy</p>
+      <h2 class="h2 rv" style="--d:.08s">Pipeline 4 bước.</h2>
+      <ol class="pipe">
+        <li class="rv" style="--d:.08s"><span class="pipe-no">01</span><h3>$ brief</h3><p>Quán cần gì, dùng ở đâu, muốn xong khi nào.</p></li>
+        <li class="rv" style="--d:.14s"><span class="pipe-no">02</span><h3>$ explore</h3><p>Nghiên cứu quán, khách hàng, đối thủ → 2–3 hướng.</p></li>
+        <li class="rv" style="--d:.2s"><span class="pipe-no">03</span><h3>$ build</h3><p>Thiết kế, dựng miniapp, viết automation.</p></li>
+        <li class="rv" style="--d:.26s"><span class="pipe-no">04</span><h3>$ ship</h3><p>Bàn giao + hướng dẫn tự vận hành.</p></li>
       </ol>
     </div>
   </section>
 
   <!-- 06 · LIÊN HỆ -->
   <section id="contact">
-    <div class="wrap narrow center">
-      <p class="eyebrow rv" style="justify-content:center"><span class="sec-no">06</span>Liên hệ</p>
-      <h2 class="display-sm rv" style="--d:.08s">Có việc cần làm?<br><em>Gửi mình brief ngắn.</em></h2>
-      <p class="lede-sm rv" style="--d:.14s">Ba dòng là đủ — mình trả lời nhanh, báo giá rõ ràng:</p>
-      <ul class="brief-list rv" style="--d:.2s">
-        <li>Quán cần gì</li>
-        <li>Dùng ở đâu <span>(biển hiệu, menu, online…)</span></li>
-        <li>Muốn xong khi nào</li>
-      </ul>
-      <div class="rv" style="--d:.26s">
-        <a class="btn btn-primary btn-lg" href="https://www.facebook.com/masterhmh" target="_blank" rel="noopener">Nhắn tin Facebook</a>
+    <div class="wrap center">
+      <p class="eyebrow rv" style="justify-content:center"><span class="sec-no">06</span>liên-hệ</p>
+      <p class="term-line rv" style="--d:.08s"><span class="p">$</span> ./ket-noi <span class="flag">--facebook</span> <span class="caret"></span></p>
+      <p class="lede-sm rv" style="--d:.14s">Ba dòng là đủ — mình trả lời nhanh, báo giá rõ ràng: quán cần gì · dùng ở đâu · muốn xong khi nào.</p>
+      <div class="rv" style="--d:.2s">
+        <a class="btn btn-primary btn-lg" href="https://www.facebook.com/masterhmh" target="_blank" rel="noopener">Chạy lệnh → Nhắn tin</a>
       </div>
     </div>
   </section>
@@ -198,12 +183,26 @@
 
 <footer>
   <div class="wrap foot-in">
-    <p>© <span id="yr"></span> Hoàng Hùng · <span class="mono">v9.0</span></p>
-    <p class="colophon">Dựng tay từ HTML/CSS/JS thuần — không dùng template.</p>
+    <p>© <span id="yr"></span> Hoàng Hùng · <span class="mono">v10.0</span> · dựng tay từ HTML/CSS/JS thuần</p>
   </div>
 </footer>
 
+<div class="statusbar" aria-hidden="true">
+  <span class="sb-l"><i class="dot"></i>main</span>
+  <span class="sb-c">hoang-hung/portfolio</span>
+  <span class="sb-r">v10.0 · utf-8</span>
+</div>
+
 <a class="mobile-cta" href="https://www.facebook.com/masterhmh" target="_blank" rel="noopener">Nhắn tin Facebook</a>
+
+<!-- Command palette -->
+<div class="palette" id="palette" aria-hidden="true">
+  <div class="pal-box" role="dialog" aria-modal="true" aria-label="Bảng lệnh">
+    <input id="palInput" placeholder="gõ lệnh… (vd: dự án, theme)" autocomplete="off" spellcheck="false">
+    <ul id="palList"></ul>
+    <p class="pal-hint">↑↓ chọn · enter chạy · esc đóng</p>
+  </div>
+</div>
 
 <!-- Modal case study -->
 <div class="modal" id="modal" aria-hidden="true">

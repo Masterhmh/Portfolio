@@ -6,8 +6,7 @@
   const root = document.documentElement;
   const btn = document.getElementById("themeBtn");
   const saved = localStorage.getItem("hh-theme");
-  const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
-  root.dataset.theme = saved || (prefersDark ? "dark" : "light");
+  root.dataset.theme = saved || "dark";
   btn.addEventListener("click", () => {
     root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
     localStorage.setItem("hh-theme", root.dataset.theme);
@@ -50,7 +49,7 @@ async function getInfo(dir){
 }
 
 async function loadProjects(){
-  const grid = document.getElementById("projList");
+  const grid = document.getElementById("repoList");
   const empty = document.getElementById("projEmpty");
   let dirs = [];
   try{
@@ -74,31 +73,40 @@ async function loadProjects(){
 
   projects.forEach((p, i) => {
     const title = (p.info && p.info.TEN) || p.name.replace(/[-_]+/g, " ");
-    const idx = String(i + 1).padStart(2, "0");
+    const slug = p.name.toLowerCase();
     const el = document.createElement("article");
-    el.className = "feat rv";
-    el.style.setProperty("--d", (i % 2 * 0.08) + "s");
-    const media = document.createElement("div");
-    media.className = "feat-media";
+    el.className = "repo rv";
+    el.style.setProperty("--d", (i % 3 * 0.06) + "s");
+    const main = document.createElement("div");
+    const name = document.createElement("p");
+    name.className = "repo-name";
+    const acc = document.createElement("span");
+    acc.className = "acc"; acc.textContent = "masterhmh / ";
+    name.append(acc, document.createTextNode(slug));
+    const vis = document.createElement("span");
+    vis.className = "repo-visibility"; vis.textContent = "public";
+    name.append(vis);
+    const desc = document.createElement("p");
+    desc.className = "repo-desc";
+    desc.textContent = (p.info && p.info.VAN_DE) || "Bấm để xem ảnh và case study.";
+    const meta = document.createElement("p");
+    meta.className = "repo-meta";
+    const nImg = document.createElement("span"); nImg.textContent = p.imgs.length + " ảnh";
+    meta.append(nImg);
+    if (p.info){
+      const tag = document.createElement("span");
+      tag.className = "tag"; tag.textContent = "case-study";
+      meta.append(tag);
+    }
+    main.append(name, desc, meta);
+    const thumb = document.createElement("div");
+    thumb.className = "repo-thumb";
     const img = document.createElement("img");
     img.loading = "lazy"; img.alt = title; img.src = p.imgs[0];
-    media.appendChild(img);
-    const body = document.createElement("div");
-    body.className = "feat-body";
-    const k = document.createElement("p");
-    k.className = "feat-idx"; k.textContent = "[ dự án " + idx + " ]";
-    const h = document.createElement("h3"); h.textContent = title;
-    body.append(k, h);
-    if (p.info && p.info.VAN_DE){
-      const ex = document.createElement("p");
-      ex.className = "feat-ex"; ex.textContent = p.info.VAN_DE;
-      body.append(ex);
-    }
-    const link = document.createElement("p");
-    link.className = "feat-link";
-    link.textContent = p.info ? "Mở case study →" : "Xem ảnh →";
-    body.append(link);
-    el.append(media, body);
+    thumb.appendChild(img);
+    const go = document.createElement("span");
+    go.className = "repo-go"; go.textContent = "→";
+    el.append(main, thumb, go);
     el.addEventListener("click", () => openModal(p, title));
     grid.appendChild(el);
   });
@@ -106,7 +114,7 @@ async function loadProjects(){
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target); }
   }), { threshold: .1 });
-  grid.querySelectorAll(".feat").forEach(e => io.observe(e));
+  grid.querySelectorAll(".repo").forEach(e => io.observe(e));
 }
 
 /* ---------- modal case study ---------- */
@@ -178,3 +186,55 @@ addEventListener("keydown", e => {
 });
 
 loadProjects();
+
+/* ---------- command palette (Ctrl/⌘+K) ---------- */
+(function palette(){
+  const pal = document.getElementById("palette");
+  const input = document.getElementById("palInput");
+  const list = document.getElementById("palList");
+  if (!pal) return;
+  const go = s => document.querySelector(s).scrollIntoView({ behavior: "smooth" });
+  const toggleTheme = () => document.getElementById("themeBtn").click();
+  const ACTIONS = [
+    { t: "đi tới: profile", k: "sec", run: () => go("#profile") },
+    { t: "đi tới: năng lực", k: "sec", run: () => go("#services") },
+    { t: "đi tới: repos", k: "sec", run: () => go("#projects") },
+    { t: "đi tới: deploy", k: "sec", run: () => go("#process") },
+    { t: "đi tới: liên hệ", k: "sec", run: () => go("#contact") },
+    { t: "đổi chế độ sáng / tối", k: "ui", run: toggleTheme },
+    { t: "nhắn tin facebook", k: "link", run: () => open("https://www.facebook.com/masterhmh", "_blank") },
+  ];
+  let items = ACTIONS, sel = 0;
+  function render(){
+    list.innerHTML = "";
+    items.forEach((a, i) => {
+      const li = document.createElement("li");
+      if (i === sel) li.className = "sel";
+      const t = document.createElement("span"); t.textContent = a.t;
+      const k = document.createElement("span"); k.className = "k"; k.textContent = a.k;
+      li.append(t, k);
+      li.addEventListener("click", () => { close(); a.run(); });
+      li.addEventListener("mousemove", () => { sel = i; render(); });
+      list.appendChild(li);
+    });
+  }
+  function openPal(){ pal.classList.add("open"); pal.setAttribute("aria-hidden", "false"); input.value = ""; items = ACTIONS; sel = 0; render(); setTimeout(() => input.focus(), 30); }
+  function close(){ pal.classList.remove("open"); pal.setAttribute("aria-hidden", "true"); }
+  function isOpen(){ return pal.classList.contains("open"); }
+  document.getElementById("paletteBtn").addEventListener("click", openPal);
+  pal.addEventListener("click", e => { if (e.target === pal) close(); });
+  input.addEventListener("input", () => {
+    const q = input.value.trim().toLowerCase();
+    items = ACTIONS.filter(a => a.t.toLowerCase().includes(q));
+    sel = 0; render();
+  });
+  input.addEventListener("keydown", e => {
+    if (e.key === "ArrowDown"){ e.preventDefault(); sel = Math.min(sel + 1, items.length - 1); render(); }
+    else if (e.key === "ArrowUp"){ e.preventDefault(); sel = Math.max(sel - 1, 0); render(); }
+    else if (e.key === "Enter" && items[sel]){ close(); items[sel].run(); }
+  });
+  addEventListener("keydown", e => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k"){ e.preventDefault(); isOpen() ? close() : openPal(); }
+    else if (e.key === "Escape" && isOpen()) close();
+  });
+})();
