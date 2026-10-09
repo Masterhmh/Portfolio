@@ -94,7 +94,7 @@
 /* ---------- typing: hero-sub (chỉ đổi chiều rộng, không nhảy layout) ---------- */
 (function(){
   const el = document.getElementById("typed");
-  const words = ["Designer F&B — 7 năm kinh nghiệm", "3.000+ chủ quán đồng hành", "Biết code · Vận dụng AI"];
+  const words = ["Designer F&B — 7 năm kinh nghiệm", "3.000+ chủ quán đồng hành", "Đọc hiểu code · Vận dụng AI", "Rành mạng & xử lý sự cố máy tính"];
   if (!el || matchMedia("(prefers-reduced-motion: reduce)").matches){
     if (el) el.textContent = words[0];
     return;
