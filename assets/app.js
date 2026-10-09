@@ -131,7 +131,7 @@ function tilt(card){
 (function typedRole(){
   const el = document.getElementById("typedRole");
   if (!el || reduced){ if (el) el.textContent = "brand_designer --fnb --ai"; return; }
-  const words = ["brand_designer --fnb", "7_nam_kinh_nghiem", "3000+_chu_quan", "ai × automation"];
+  const words = ["designer × builder --fnb", "7_nam -- 3000+_chu_quan", "thuong_hieu -- miniapp -- automation"];
   let w = 0, i = 0, del = false;
   (function tick(){
     const word = words[w];
