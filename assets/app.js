@@ -1,305 +1,163 @@
-/* Hoàng Hùng — Portfolio v3 · app.js (cyberpunk) */
-(function(){
+/* ============ Hoàng Hùng — Premium Minimal ============ */
 "use strict";
 
-/* ---------- cấu hình ---------- */
-const GH = { owner: "Masterhmh", repo: "Portfolio", branch: "main", dir: "projects" };
-const IMG_RE = /\.(jpe?g|png|webp|gif|avif|bmp)$/i;
-const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-/* ---------- boot ---------- */
-(function boot(){
-  const boot = document.getElementById("boot"), bar = document.getElementById("bootBar"),
-        log = document.getElementById("bootLog");
-  if (reduced){ boot.classList.add("done"); return; }
-  const steps = ["> tải modules ............ OK", "> kết nối ai-core ........ OK", "> render giao diện ....... OK"];
-  let i = 0;
-  const t = setInterval(() => {
-    if (i < steps.length){
-      log.textContent = steps[i];
-      bar.style.width = ((i + 1) / steps.length * 100) + "%";
-      i++;
-    } else {
-      clearInterval(t);
-      setTimeout(() => boot.classList.add("done"), 250);
-    }
-  }, 260);
-})();
-
-/* ---------- theme: tự động theo hệ thống + nhớ lựa chọn ---------- */
-const root = document.documentElement;
-const themeBtn = document.getElementById("themeBtn");
-(function initTheme(){
+/* ---------- theme: sáng/tối tự động + đổi tay ---------- */
+(function theme(){
+  const root = document.documentElement;
+  const btn = document.getElementById("themeBtn");
   const saved = localStorage.getItem("hh-theme");
-  const sysLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-  root.dataset.theme = saved || (sysLight ? "light" : "dark");
-})();
-themeBtn.addEventListener("click", () => {
-  const next = root.dataset.theme === "light" ? "dark" : "light";
-  root.dataset.theme = next;
-  localStorage.setItem("hh-theme", next);
-});
-window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
-  if (!localStorage.getItem("hh-theme")) root.dataset.theme = e.matches ? "light" : "dark";
-});
-
-/* ---------- đồng hồ hệ thống ---------- */
-(function clock(){
-  const el = document.getElementById("clock");
-  if (!el) return;
-  const tick = () => {
-    const d = new Date();
-    el.textContent = String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0") + ":" + String(d.getSeconds()).padStart(2,"0");
-  };
-  tick(); setInterval(tick, 1000);
-})();
-
-/* ---------- canvas nền: mạng lưới hạt ---------- */
-(function bg(){
-  if (innerWidth < 920) return; // mobile: tắt hiệu ứng hạt cho nhẹ
-  if (reduced) return;
-  const cv = document.getElementById("bg-canvas"), ctx = cv.getContext("2d");
-  let W, H, pts;
-  function resize(){
-    W = cv.width = innerWidth; H = cv.height = innerHeight;
-    const n = Math.min(70, Math.floor(W * H / 26000));
-    pts = Array.from({length: n}, () => ({
-      x: Math.random()*W, y: Math.random()*H,
-      vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35
-    }));
-  }
-  resize(); addEventListener("resize", resize);
-  const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-  (function frame(){
-    ctx.clearRect(0, 0, W, H);
-    const cyan = css("--cyan") || "#00e5ff";
-    for (const p of pts){
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
-    }
-    ctx.lineWidth = 1;
-    for (let i = 0; i < pts.length; i++){
-      for (let j = i+1; j < pts.length; j++){
-        const a = pts[i], b = pts[j], dx = a.x-b.x, dy = a.y-b.y, d = Math.hypot(dx, dy);
-        if (d < 130){
-          ctx.strokeStyle = cyan; ctx.globalAlpha = (1 - d/130) * .14;
-          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-        }
-      }
-    }
-    ctx.globalAlpha = .5; ctx.fillStyle = cyan;
-    for (const p of pts){ ctx.beginPath(); ctx.arc(p.x, p.y, 1.4, 0, 7); ctx.fill(); }
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(frame);
-  })();
-})();
-
-/* ---------- reveal on scroll ---------- */
-const io = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
-}), { threshold: .12 });
-document.querySelectorAll(".rv").forEach(el => io.observe(el));
-
-/* ---------- đếm số ---------- */
-const cio = new IntersectionObserver(es => es.forEach(e => {
-  if (!e.isIntersecting) return;
-  cio.unobserve(e.target);
-  const el = e.target, target = +el.dataset.count, t0 = performance.now(), dur = 1400;
-  (function tick(t){
-    const p = Math.min((t - t0) / dur, 1), ease = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.round(target * ease).toLocaleString("vi-VN");
-    if (p < 1) requestAnimationFrame(tick);
-  })(t0);
-}), { threshold: .5 });
-document.querySelectorAll("[data-count]").forEach(el => cio.observe(el));
-
-/* ---------- nghiêng 3D nhẹ cho thẻ dự án ---------- */
-if (window.matchMedia("(pointer: fine)").matches){
-  document.addEventListener("pointermove", () => {});
-}
-function tilt(card){
-  if (!window.matchMedia("(pointer: fine)").matches || reduced) return;
-  card.addEventListener("pointermove", e => {
-    const r = card.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-    card.style.transform = `perspective(900px) rotateX(${-y*5}deg) rotateY(${x*5}deg) translateY(-5px)`;
+  const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = saved || (prefersDark ? "dark" : "light");
+  btn.addEventListener("click", () => {
+    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem("hh-theme", root.dataset.theme);
   });
-  card.addEventListener("pointerleave", () => { card.style.transform = ""; });
-}
-
-/* ---------- gõ chữ: role hero ---------- */
-(function typedRole(){
-  const el = document.getElementById("typedRole");
-  if (!el || reduced){ if (el) el.textContent = "brand_designer --fnb --ai"; return; }
-  const words = ["designer × builder --fnb", "7_nam -- 3000+_chu_quan", "thuong_hieu -- miniapp -- automation"];
-  let w = 0, i = 0, del = false;
-  (function tick(){
-    const word = words[w];
-    el.textContent = word.slice(0, i);
-    if (!del && i < word.length){ i++; setTimeout(tick, 55); }
-    else if (!del){ del = true; setTimeout(tick, 1600); }
-    else if (i > 0){ i--; setTimeout(tick, 28); }
-    else { del = false; w = (w + 1) % words.length; setTimeout(tick, 400); }
-  })();
 })();
 
-/* ---------- terminal AI gõ lệnh ---------- */
-const LINES = [
-  ['$ <span class="p">ai.build</span>("miniapp-dat-mon")', '<span class="ok">✓</span> Miniapp đặt món cho quán — chạy ngay trên Zalo'],
-  ['$ <span class="p">auto.script</span>("dang-bai-moi-sang")', '<span class="ok">✓</span> 30 bài fanpage — tự đăng đúng 7h sáng'],
-  ['$ <span class="p">ai.mockup</span>("logo-pho-bo")', '<span class="ok">✓</span> 12 phương án logo — xong trong 10 phút'],
-];
-const termBody = document.getElementById("termBody");
-let li = 0;
-function escapeHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
-function typeLine(){
-  if (!termBody) return;
-  if (reduced){ termBody.innerHTML = LINES.map(l => l[0] + "\n" + l[1]).join("\n"); return; }
-  const [cmd, out] = LINES[li % LINES.length];
-  const cmdText = cmd.replace(/<[^>]+>/g, "");
-  const div = document.createElement("div");
-  termBody.appendChild(div);
-  let i = 0;
-  (function type(){
-    if (i <= cmdText.length){
-      div.innerHTML = escapeHtml(cmdText.slice(0, i)) + '<span class="caret"></span>';
-      i++; setTimeout(type, 34);
-    } else {
-      div.innerHTML = cmd;
-      const o = document.createElement("div");
-      o.innerHTML = out;
-      termBody.appendChild(o);
-      li++;
-      setTimeout(() => { if (termBody.children.length > 8) termBody.innerHTML = ""; typeLine(); }, 2100);
-    }
-  })();
-}
-// FIX nhảy layout: đo chiều cao đầy đủ trước, giữ cố định rồi mới gõ
-(function reserveTerm(){
-  if (!termBody || reduced) return;
-  termBody.innerHTML = LINES.map(([c, o]) => "<div>" + c + "</div><div>" + o + "</div>").join("");
-  termBody.style.minHeight = termBody.offsetHeight + "px";
-  termBody.innerHTML = "";
+/* ---------- reveal on scroll (chỉ fade, không đẩy layout) ---------- */
+(function reveal(){
+  const els = document.querySelectorAll(".rv");
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches){
+    els.forEach(e => e.classList.add("on"));
+    return;
+  }
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target); }
+  }), { threshold: .12 });
+  els.forEach(e => io.observe(e));
 })();
-const tio = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting){ tio.disconnect(); typeLine(); }
-}), { threshold: .4 });
-if (termBody) tio.observe(termBody);
 
 /* ---------- năm footer ---------- */
 document.getElementById("yr").textContent = new Date().getFullYear();
 
-/* ================================================================
-   DỰ ÁN — tự động đọc từ folder `projects/` trên GitHub
-   ================================================================ */
-const grid = document.getElementById("projGrid");
-const emptyBox = document.getElementById("projEmpty");
-const modal = document.getElementById("modal");
-const mTitle = document.getElementById("mTitle");
-const mCount = document.getElementById("mCount");
-const mBody = document.getElementById("mBody");
-
-const api = p => `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${p}`;
+/* ---------- dự án: tự tải từ folder GitHub ---------- */
+const GH = { owner: "Masterhmh", repo: "Portfolio", branch: "main", dir: "projects" };
+const api = p => `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${p}?ref=${GH.branch}`;
 const raw = p => `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/${p}`;
-const numOf = n => { const m = String(n).match(/(\d+)/); return m ? parseInt(m[1], 10) : 1e9; };
+const IMG = /\.(jpe?g|png|webp|gif)$/i;
 
-async function ghJson(path){
-  const r = await fetch(api(path));
-  if (!r.ok) throw new Error("gh:" + r.status);
-  return r.json();
+async function getInfo(dir){
+  try{
+    const r = await fetch(raw(`${GH.dir}/${encodeURIComponent(dir)}/info.txt`));
+    if (!r.ok) return null;
+    const m = {};
+    (await r.text()).split(/\r?\n/).forEach(line => {
+      const mm = line.match(/^(TEN|VAN_DE|GIAI_PHAP|KET_QUA)\s*:\s*(.+)$/);
+      if (mm) m[mm[1]] = mm[2].trim();
+    });
+    return (m.VAN_DE || m.GIAI_PHAP || m.KET_QUA) ? m : null;
+  }catch(e){ return null; }
 }
 
 async function loadProjects(){
-  grid.innerHTML = '<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
-  try {
-    const items = await ghJson(GH.dir);
-    const dirs = (Array.isArray(items) ? items : [])
-      .filter(x => x.type === "dir" && !x.name.startsWith(".") && !x.name.startsWith("_"));
-    if (!dirs.length) return showEmpty();
-    async function getInfo(dir){
-      try{
-        const r = await fetch(raw(`${GH.dir}/${encodeURIComponent(dir)}/info.txt`));
-        if(!r.ok) return null;
-        const t = await r.text(), m = {};
-        t.split(/\r?\n/).forEach(line => {
-          const mm = line.match(/^(TEN|VAN_DE|GIAI_PHAP|KET_QUA)\s*:\s*(.+)$/);
-          if(mm) m[mm[1]] = mm[2].trim();
-        });
-        return (m.VAN_DE || m.GIAI_PHAP || m.KET_QUA) ? m : null;
-      }catch(e){ return null; }
-    }
-    const jobs = dirs.map(async d => {
-      try {
-        const files = await ghJson(`${GH.dir}/${d.name}`);
-        const imgs = (Array.isArray(files) ? files : [])
-          .filter(f => f.type === "file" && IMG_RE.test(f.name))
-          .sort((a, b) => numOf(a.name) - numOf(b.name) || a.name.localeCompare(b.name));
-        if (!imgs.length) return null;
-        return { name: d.name, imgs: imgs.map(f => raw(`${GH.dir}/${encodeURIComponent(d.name)}/${encodeURIComponent(f.name)}`)) , info: await getInfo(d.name) };
-      } catch { return null; }
-    });
-    const projects = (await Promise.all(jobs)).filter(Boolean);
-    if (!projects.length) return showEmpty();
-    renderProjects(projects);
-  } catch { showEmpty(); }
-}
+  const grid = document.getElementById("projGrid");
+  const empty = document.getElementById("projEmpty");
+  let dirs = [];
+  try{
+    const r = await fetch(api(GH.dir));
+    if (!r.ok) throw 0;
+    dirs = (await r.json()).filter(d => d.type === "dir" && !/^[._]/.test(d.name));
+  }catch(e){ empty.hidden = false; return; }
+  if (!dirs.length){ empty.hidden = false; return; }
 
-function renderProjects(projects){
-  grid.innerHTML = "";
-  projects.forEach(p => {
-    const card = document.createElement("article");
-    card.className = "proj-card panel rv in";
-    card.innerHTML = `
-      <div class="proj-cover">
-        <img src="${p.imgs[0]}" alt="${escapeHtml(p.name)}" loading="lazy">
-        <div class="proj-meta"><b>${escapeHtml(p.name)}</b><span class="count">${p.imgs.length} ẢNH</span></div>
-      </div>`;
-    card.addEventListener("click", () => openModal(p));
-    tilt(card);
-    grid.appendChild(card);
+  const jobs = dirs.map(async d => {
+    let files = [];
+    try{
+      const r = await fetch(api(`${GH.dir}/${encodeURIComponent(d.name)}`));
+      if (r.ok) files = (await r.json()).filter(f => f.type === "file" && IMG.test(f.name));
+    }catch(e){}
+    files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+    const imgs = files.map(f => raw(`${GH.dir}/${encodeURIComponent(d.name)}/${encodeURIComponent(f.name)}`));
+    return { name: d.name, imgs, info: await getInfo(d.name) };
   });
+  const projects = (await Promise.all(jobs)).filter(p => p.imgs.length);
+
+  projects.forEach((p, i) => {
+    const title = (p.info && p.info.TEN) || p.name.replace(/[-_]+/g, " ");
+    const el = document.createElement("article");
+    el.className = "proj rv";
+    el.style.setProperty("--d", (i % 3 * 0.08) + "s");
+    el.innerHTML =
+      '<div class="proj-cover"><img loading="lazy" alt=""></div>' +
+      '<div class="proj-meta"><h3></h3><p>' + (p.info ? "Xem case study →" : "Xem ảnh →") + "</p></div>";
+    el.querySelector("img").src = p.imgs[0];
+    el.querySelector("h3").textContent = title;
+    el.addEventListener("click", () => openModal(p, title));
+    grid.appendChild(el);
+  });
+  // reveal cho card mới thêm
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target); }
+  }), { threshold: .1 });
+  grid.querySelectorAll(".proj").forEach(e => io.observe(e));
 }
 
-function showEmpty(){
-  grid.innerHTML = "";
-  emptyBox.hidden = false;
-  emptyBox.classList.add("in");
-}
+/* ---------- modal case study ---------- */
+const modal = document.getElementById("modal");
+const mTitle = document.getElementById("mTitle");
+const mCase = document.getElementById("mCase");
+const mBody = document.getElementById("mBody");
 
-function openModal(p){
-  mTitle.textContent = (p.info && p.info.TEN) || p.name;
-  mCount.textContent = "// " + p.imgs.length + " ẢNH";
-  mBody.innerHTML = "";
+function openModal(p, title){
+  mTitle.textContent = title;
+  mCase.innerHTML = "";
   if (p.info){
-    const cs = document.createElement("div");
-    cs.className = "case";
-    [["VẤN_ĐỀ", p.info.VAN_DE], ["GIẢI_PHÁP", p.info.GIAI_PHAP], ["KẾT_QUẢ", p.info.KET_QUA]]
-      .filter(r => r[1])
-      .forEach(r => {
-        const row = document.createElement("div");
-        row.className = "crow";
-        const k = document.createElement("span"); k.className = "ck"; k.textContent = r[0];
-        const v = document.createElement("span"); v.className = "cv"; v.textContent = r[1];
-        row.append(k, v); cs.append(row);
-      });
-    mBody.append(cs);
+    const rows = [["Vấn đề", p.info.VAN_DE], ["Giải pháp", p.info.GIAI_PHAP], ["Kết quả", p.info.KET_QUA]];
+    const box = document.createElement("div");
+    box.className = "case";
+    rows.filter(r => r[1]).forEach(r => {
+      const row = document.createElement("div");
+      row.className = "case-row";
+      const k = document.createElement("span"); k.className = "case-k"; k.textContent = r[0];
+      const v = document.createElement("span"); v.className = "case-v"; v.textContent = r[1];
+      row.append(k, v); box.append(row);
+    });
+    mCase.append(box);
   }
+  mBody.innerHTML = "";
   p.imgs.forEach((src, i) => {
     const img = document.createElement("img");
-    img.src = src; img.loading = "lazy"; img.alt = `${p.name} — ảnh ${i + 1}`;
+    img.src = src; img.loading = "lazy"; img.alt = title + " " + (i + 1);
+    img.addEventListener("click", () => openLightbox(p.imgs, i));
     mBody.appendChild(img);
   });
-  modal.hidden = false;
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 }
 function closeModal(){
-  modal.hidden = true;
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
 }
 document.getElementById("mClose").addEventListener("click", closeModal);
 modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
-document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) closeModal(); });
+
+/* ---------- lightbox ---------- */
+const lb = document.getElementById("lightbox");
+const lbImg = document.getElementById("lbImg");
+let lbList = [], lbIdx = 0;
+function openLightbox(list, i){
+  lbList = list; lbIdx = i;
+  lbImg.src = list[i];
+  lb.classList.add("open");
+  lb.setAttribute("aria-hidden", "false");
+}
+function closeLightbox(){
+  lb.classList.remove("open");
+  lb.setAttribute("aria-hidden", "true");
+}
+function lbGo(d){ lbIdx = (lbIdx + d + lbList.length) % lbList.length; lbImg.src = lbList[lbIdx]; }
+document.getElementById("lbClose").addEventListener("click", closeLightbox);
+document.getElementById("lbPrev").addEventListener("click", e => { e.stopPropagation(); lbGo(-1); });
+document.getElementById("lbNext").addEventListener("click", e => { e.stopPropagation(); lbGo(1); });
+lb.addEventListener("click", e => { if (e.target === lb) closeLightbox(); });
+addEventListener("keydown", e => {
+  if (e.key === "Escape"){ closeModal(); closeLightbox(); }
+  if (lb.classList.contains("open")){
+    if (e.key === "ArrowLeft") lbGo(-1);
+    if (e.key === "ArrowRight") lbGo(1);
+  }
+});
 
 loadProjects();
-})();
