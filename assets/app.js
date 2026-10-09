@@ -1,19 +1,39 @@
-/* Hoàng Hùng — Portfolio · app.js */
+/* Hoàng Hùng — Portfolio v3 · app.js (cyberpunk) */
 (function(){
 "use strict";
 
 /* ---------- cấu hình ---------- */
 const GH = { owner: "Masterhmh", repo: "Portfolio", branch: "main", dir: "projects" };
 const IMG_RE = /\.(jpe?g|png|webp|gif|avif|bmp)$/i;
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- boot ---------- */
+(function boot(){
+  const boot = document.getElementById("boot"), bar = document.getElementById("bootBar"),
+        log = document.getElementById("bootLog");
+  if (reduced){ boot.classList.add("done"); return; }
+  const steps = ["> tải modules ............ OK", "> kết nối ai-core ........ OK", "> render giao diện ....... OK"];
+  let i = 0;
+  const t = setInterval(() => {
+    if (i < steps.length){
+      log.textContent = steps[i];
+      bar.style.width = ((i + 1) / steps.length * 100) + "%";
+      i++;
+    } else {
+      clearInterval(t);
+      setTimeout(() => boot.classList.add("done"), 250);
+    }
+  }, 260);
+})();
 
 /* ---------- theme: tự động theo hệ thống + nhớ lựa chọn ---------- */
 const root = document.documentElement;
 const themeBtn = document.getElementById("themeBtn");
-function initTheme(){
+(function initTheme(){
   const saved = localStorage.getItem("hh-theme");
   const sysLight = window.matchMedia("(prefers-color-scheme: light)").matches;
   root.dataset.theme = saved || (sysLight ? "light" : "dark");
-}
+})();
 themeBtn.addEventListener("click", () => {
   const next = root.dataset.theme === "light" ? "dark" : "light";
   root.dataset.theme = next;
@@ -22,7 +42,57 @@ themeBtn.addEventListener("click", () => {
 window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
   if (!localStorage.getItem("hh-theme")) root.dataset.theme = e.matches ? "light" : "dark";
 });
-initTheme();
+
+/* ---------- đồng hồ hệ thống ---------- */
+(function clock(){
+  const el = document.getElementById("clock");
+  if (!el) return;
+  const tick = () => {
+    const d = new Date();
+    el.textContent = String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0") + ":" + String(d.getSeconds()).padStart(2,"0");
+  };
+  tick(); setInterval(tick, 1000);
+})();
+
+/* ---------- canvas nền: mạng lưới hạt ---------- */
+(function bg(){
+  if (reduced) return;
+  const cv = document.getElementById("bg-canvas"), ctx = cv.getContext("2d");
+  let W, H, pts;
+  function resize(){
+    W = cv.width = innerWidth; H = cv.height = innerHeight;
+    const n = Math.min(70, Math.floor(W * H / 26000));
+    pts = Array.from({length: n}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35
+    }));
+  }
+  resize(); addEventListener("resize", resize);
+  const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  (function frame(){
+    ctx.clearRect(0, 0, W, H);
+    const cyan = css("--cyan") || "#00e5ff";
+    for (const p of pts){
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+    }
+    ctx.lineWidth = 1;
+    for (let i = 0; i < pts.length; i++){
+      for (let j = i+1; j < pts.length; j++){
+        const a = pts[i], b = pts[j], dx = a.x-b.x, dy = a.y-b.y, d = Math.hypot(dx, dy);
+        if (d < 130){
+          ctx.strokeStyle = cyan; ctx.globalAlpha = (1 - d/130) * .14;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+    ctx.globalAlpha = .5; ctx.fillStyle = cyan;
+    for (const p of pts){ ctx.beginPath(); ctx.arc(p.x, p.y, 1.4, 0, 7); ctx.fill(); }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(frame);
+  })();
+})();
 
 /* ---------- reveal on scroll ---------- */
 const io = new IntersectionObserver(es => es.forEach(e => {
@@ -43,19 +113,37 @@ const cio = new IntersectionObserver(es => es.forEach(e => {
 }), { threshold: .5 });
 document.querySelectorAll("[data-count]").forEach(el => cio.observe(el));
 
-/* ---------- nghiêng 3D nhẹ cho thẻ dự án (bỏ qua mobile) ---------- */
-const fine = window.matchMedia("(pointer: fine)").matches;
+/* ---------- nghiêng 3D nhẹ cho thẻ dự án ---------- */
+if (window.matchMedia("(pointer: fine)").matches){
+  document.addEventListener("pointermove", () => {});
+}
 function tilt(card){
-  if (!fine) return;
+  if (!window.matchMedia("(pointer: fine)").matches || reduced) return;
   card.addEventListener("pointermove", e => {
     const r = card.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-    card.style.transform = `perspective(900px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateY(-6px)`;
+    card.style.transform = `perspective(900px) rotateX(${-y*5}deg) rotateY(${x*5}deg) translateY(-5px)`;
   });
   card.addEventListener("pointerleave", () => { card.style.transform = ""; });
 }
 
-/* ---------- terminal gõ chữ ---------- */
+/* ---------- gõ chữ: role hero ---------- */
+(function typedRole(){
+  const el = document.getElementById("typedRole");
+  if (!el || reduced){ if (el) el.textContent = "brand_designer --fnb --ai"; return; }
+  const words = ["brand_designer --fnb", "7_nam_kinh_nghiem", "3000+_chu_quan", "ai × automation"];
+  let w = 0, i = 0, del = false;
+  (function tick(){
+    const word = words[w];
+    el.textContent = word.slice(0, i);
+    if (!del && i < word.length){ i++; setTimeout(tick, 55); }
+    else if (!del){ del = true; setTimeout(tick, 1600); }
+    else if (i > 0){ i--; setTimeout(tick, 28); }
+    else { del = false; w = (w + 1) % words.length; setTimeout(tick, 400); }
+  })();
+})();
+
+/* ---------- terminal AI gõ lệnh ---------- */
 const LINES = [
   ['$ <span class="p">ai.build</span>("miniapp-dat-mon")', '<span class="ok">✓</span> Miniapp đặt món cho quán — chạy ngay trên Zalo'],
   ['$ <span class="p">auto.script</span>("dang-bai-moi-sang")', '<span class="ok">✓</span> 30 bài fanpage — tự đăng đúng 7h sáng'],
@@ -63,11 +151,10 @@ const LINES = [
 ];
 const termBody = document.getElementById("termBody");
 let li = 0;
+function escapeHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
 function typeLine(){
-  if (!termBody || window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-    if (termBody) termBody.innerHTML = LINES.map(l => l[0] + "\n" + l[1]).join("\n");
-    return;
-  }
+  if (!termBody) return;
+  if (reduced){ termBody.innerHTML = LINES.map(l => l[0] + "\n" + l[1]).join("\n"); return; }
   const [cmd, out] = LINES[li % LINES.length];
   const cmdText = cmd.replace(/<[^>]+>/g, "");
   const div = document.createElement("div");
@@ -78,7 +165,7 @@ function typeLine(){
       div.innerHTML = escapeHtml(cmdText.slice(0, i)) + '<span class="caret"></span>';
       i++; setTimeout(type, 34);
     } else {
-      div.innerHTML = cmd; // hiện lại bản có màu
+      div.innerHTML = cmd;
       const o = document.createElement("div");
       o.innerHTML = out;
       termBody.appendChild(o);
@@ -87,7 +174,6 @@ function typeLine(){
     }
   })();
 }
-function escapeHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
 const tio = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting){ tio.disconnect(); typeLine(); }
 }), { threshold: .4 });
@@ -98,8 +184,6 @@ document.getElementById("yr").textContent = new Date().getFullYear();
 
 /* ================================================================
    DỰ ÁN — tự động đọc từ folder `projects/` trên GitHub
-   Quy ước:  projects/Ten-Du-An/1.jpg, 2.jpg, 3.png ...
-   - Tên folder = tên dự án · ảnh số 1 = ảnh bìa · tự sắp theo số
    ================================================================ */
 const grid = document.getElementById("projGrid");
 const emptyBox = document.getElementById("projEmpty");
@@ -119,7 +203,6 @@ async function ghJson(path){
 }
 
 async function loadProjects(){
-  // skeleton khi đang tải
   grid.innerHTML = '<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
   try {
     const items = await ghJson(GH.dir);
@@ -146,11 +229,11 @@ function renderProjects(projects){
   grid.innerHTML = "";
   projects.forEach(p => {
     const card = document.createElement("article");
-    card.className = "proj-card glass rv in";
+    card.className = "proj-card panel rv in";
     card.innerHTML = `
       <div class="proj-cover">
         <img src="${p.imgs[0]}" alt="${escapeHtml(p.name)}" loading="lazy">
-        <div class="proj-meta"><h3>${escapeHtml(p.name)}</h3><span class="count">${p.imgs.length} ảnh</span></div>
+        <div class="proj-meta"><b>${escapeHtml(p.name)}</b><span class="count">${p.imgs.length} ẢNH</span></div>
       </div>`;
     card.addEventListener("click", () => openModal(p));
     tilt(card);
@@ -166,7 +249,7 @@ function showEmpty(){
 
 function openModal(p){
   mTitle.textContent = p.name;
-  mCount.textContent = p.imgs.length + " ảnh";
+  mCount.textContent = "// " + p.imgs.length + " ẢNH";
   mBody.innerHTML = "";
   p.imgs.forEach((src, i) => {
     const img = document.createElement("img");
