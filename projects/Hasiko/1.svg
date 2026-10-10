@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7a4a21"/><stop offset="1" stop-color="#c98a3d"/></linearGradient></defs>
+<rect width="1200" height="900" fill="url(#g)"/>
+<circle cx="1060" cy="110" r="190" fill="#ffffff" opacity="0.10"/>
+<circle cx="110" cy="790" r="230" fill="#000000" opacity="0.12"/>
+<circle cx="600" cy="450" r="300" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.18"/>
+<text x="600" y="470" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="150" font-weight="bold" fill="#ffffff" letter-spacing="10">HASIKO</text>
+<text x="600" y="545" text-anchor="middle" font-family="'Courier New',monospace" font-size="36" fill="#ffffff" opacity="0.8" letter-spacing="8">TRÀ SỮA · THƯƠNG HIỆU F&B</text>
+<text x="600" y="835" text-anchor="middle" font-family="'Courier New',monospace" font-size="28" fill="#ffffff" opacity="0.55" letter-spacing="5">[ &#7842;NH DEMO &#8212; S&#7868; THAY SAU ]</text>
+</svg>
