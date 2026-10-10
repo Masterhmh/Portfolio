@@ -19,11 +19,11 @@
   const fill = document.getElementById("boot-fill");
   const boot = document.getElementById("boot");
   const lines = [
-    "> initializing portfolio.sys ...",
-    "> loading modules [████████] OK",
-    "> connecting designer uplink ... OK",
-    "> rendering interface ... OK",
-    "> welcome, guest 👋"
+    "> đang khởi động portfolio.sys ...",
+    "> tải mô-đun [████████] xong",
+    "> kết nối designer ... xong",
+    "> dựng giao diện ... xong",
+    "> chào mừng bạn 👋"
   ];
   let i = 0;
   const t = setInterval(() => {
@@ -94,7 +94,7 @@
 /* ---------- typing: hero-sub (chỉ đổi chiều rộng, không nhảy layout) ---------- */
 (function(){
   const el = document.getElementById("typed");
-  const words = ["Designer F&B — 7 năm kinh nghiệm", "3.000+ chủ quán đồng hành", "Đọc hiểu code · Vận dụng AI", "Rành mạng & xử lý sự cố máy tính"];
+  const words = ["Thiết kế F&B — 7 năm kinh nghiệm", "3.000+ chủ quán đồng hành", "Đọc hiểu code · Vận dụng AI", "Rành mạng & xử lý sự cố máy tính"];
   if (!el || matchMedia("(prefers-reduced-motion: reduce)").matches){
     if (el) el.textContent = words[0];
     return;
@@ -224,11 +224,11 @@ async function loadProjects(){
     d.textContent = (p.info && p.info.VAN_DE) || "Bấm để xem ảnh và case study.";
     const tech = document.createElement("div");
     tech.className = "proj-tech";
-    (p.info ? ["case-study"] : ["gallery"]).forEach(t => {
+    (p.info ? ["chi-tiết"] : ["hình-ảnh"]).forEach(t => {
       const s = document.createElement("span"); s.textContent = t; tech.append(s);
     });
     const link = document.createElement("span");
-    link.className = "proj-link"; link.textContent = p.info ? "mở_case_study ▸" : "xem_ảnh ▸";
+    link.className = "proj-link"; link.textContent = p.info ? "mở_chi_tiết ▸" : "xem_ảnh ▸";
     body.append(h, d, tech, link);
     el.append(top, body);
     el.addEventListener("click", () => openModal(p, title));
