@@ -162,7 +162,7 @@ document.getElementById("yr") && (document.getElementById("yr").textContent = ne
 const GH = { owner: "Masterhmh", repo: "Portfolio", branch: "main", dir: "projects" };
 const api = p => `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${p}?ref=${GH.branch}`;
 const raw = p => `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/${p}`;
-const IMG = /\.(jpe?g|png|webp|gif)$/i;
+const IMG = /\.(jpe?g|png|webp|gif|svg)$/i;
 
 async function getInfo(dir){
   try{

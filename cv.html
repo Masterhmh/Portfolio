@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV — Hoàng Hùng | Designer đồ họa F&B</title>
+<meta name="description" content="CV của Hoàng Hùng — Designer đồ họa F&B, Tech Solver.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/avatar.css">
+<style>
+:root{--ink:#1a2333;--muted:#5b6b82;--line:#e3e9f2;--accent:#0b6e99;--bg:#f2f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:15px}
+.cv-topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
+.cv-topbar .in{max-width:860px;margin:0 auto;padding:12px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.cv-topbar a.back{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--muted);text-decoration:none}
+.cv-topbar a.back:hover{color:var(--accent)}
+.btn-print{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 20px;cursor:pointer}
+.btn-print:hover{filter:brightness(1.1)}
+.sheet{max-width:860px;margin:32px auto 64px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(20,40,70,.08)}
+.cv-head{display:grid;grid-template-columns:170px 1fr;gap:32px;padding:44px 48px;background:linear-gradient(135deg,#0b6e99,#083f5c);color:#fff}
+.photo{width:170px;height:170px;border-radius:50%;border:4px solid rgba(255,255,255,.35);flex:none}
+.cv-head h1{font-size:2.4rem;letter-spacing:-.01em;line-height:1.15}
+.cv-head .role{font-family:"JetBrains Mono",monospace;font-size:13.5px;color:#bfe3f2;margin:10px 0 18px;letter-spacing:.04em}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-size:13.5px}
+.contact a{color:#fff;text-decoration:none}
+.contact a:hover{text-decoration:underline}
+.contact .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;color:#9fd0e6;text-transform:uppercase;display:block}
+.cv-body{padding:40px 48px}
+.cv-sec{margin-bottom:36px}
+.cv-sec h2{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:8px;margin-bottom:20px}
+.summary{font-size:15.5px;color:#33415a}
+.job{margin-bottom:24px}
+.job:last-child{margin-bottom:0}
+.job .when{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--accent);letter-spacing:.06em}
+.job h3{font-size:1.1rem;margin:4px 0 2px}
+.job h3 span{color:var(--muted);font-weight:500;font-size:.92rem}
+.job ul{margin:8px 0 0 18px;color:#33415a;font-size:14.5px}
+.job li{margin-bottom:5px}
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px}
+.skill .row{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px}
+.skill .row b{font-weight:600}
+.skill .row span{font-family:"JetBrains Mono",monospace;color:var(--muted);font-size:12px}
+.bar{height:7px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#33a8d8);border-radius:99px}
+.proj-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.proj{border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:14px}
+.proj b{display:block}
+.proj span{color:var(--muted);font-size:13px}
+.cv-foot{padding:24px 48px;border-top:1px solid var(--line);font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:640px){
+  .cv-head{grid-template-columns:1fr;text-align:center;padding:36px 24px}
+  .photo{margin:0 auto;width:140px;height:140px}
+  .contact{grid-template-columns:1fr}
+  .cv-body{padding:28px 22px}
+  .skills{grid-template-columns:1fr}
+  .proj-list{grid-template-columns:1fr}
+  .sheet{margin:16px 12px 48px}
+}
+@media print{
+  .cv-topbar{display:none}
+  body{background:#fff}
+  .sheet{margin:0;box-shadow:none;border:none;border-radius:0;max-width:none}
+  .cv-head{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<div class="cv-topbar">
+  <div class="in">
+    <a class="back" href="index.html">← về portfolio</a>
+    <button class="btn-print" onclick="window.print()">⎙ In / Tải PDF</button>
+  </div>
+</div>
+
+<div class="sheet">
+  <header class="cv-head">
+    <div class="photo avatar-photo" role="img" aria-label="Ảnh Hoàng Hùng"></div>
+    <div>
+      <h1>Hoàng Hùng</h1>
+      <p class="role">Designer đồ họa F&B × Tech Solver</p>
+      <div class="contact">
+        <div><span class="k">Điện thoại</span><a href="tel:+84964843943">0964.843.943</a></div>
+        <div><span class="k">Email</span><a href="mailto:masterhmh@gmail.com">masterhmh@gmail.com</a></div>
+        <div><span class="k">Facebook</span><a href="https://www.facebook.com/masterhmh" target="_blank" rel="noopener">facebook.com/masterhmh</a></div>
+        <div><span class="k">Địa điểm</span>Việt Nam</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="cv-body">
+    <section class="cv-sec">
+      <h2>Tóm tắt</h2>
+      <p class="summary">Designer đồ họa với <b>10+ năm kinh nghiệm thực chiến</b> (từ 2016), chuyên sâu ngành <b>F&B</b>. Hiện đảm nhận mảng thiết kế 2D tại <b>Namas — Viện nghiên cứu & đào tạo pha chế</b>, đồng thời vận dụng <b>AI</b> để tối ưu toàn bộ quy trình sáng tạo và vận hành của học viện cùng hệ sinh thái công ty. Đã <b>đồng hành cùng hơn 3.000 chủ quán</b>. Thế mạnh: thích nghi nhanh với công nghệ mới, đọc hiểu code, rành hệ thống mạng và xử lý sự cố máy tính — một người lo được từ thiết kế đến kỹ thuật.</p>
+    </section>
+
+    <section class="cv-sec">
+      <h2>Kinh nghiệm làm việc</h2>
+      <div class="job">
+        <p class="when">2019 — NAY</p>
+        <h3>Designer đồ họa (mảng 2D) <span>— Namas, Viện nghiên cứu & đào tạo pha chế</span></h3>
+        <ul>
+          <li>Đảm nhận toàn bộ mảng thiết kế 2D của học viện: thương hiệu, ấn phẩm, tài liệu đào tạo, nội dung truyền thông.</li>
+          <li>Vận dụng AI xử lý công việc của học viện và các hệ sinh thái liên quan của công ty — rút ngắn thời gian sản xuất, giữ chất lượng đồng đều.</li>
+          <li>Đồng hành cùng hơn 3.000 chủ quán trong hệ sinh thái: từ thiết kế đến miniapp, automation và hỗ trợ kỹ thuật.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <p class="when">2016 — 2019</p>
+        <h3>Freelancer thiết kế đồ họa <span>— tự do</span></h3>
+        <ul>
+          <li>Thiết kế đồ họa tự do cho khách hàng cá nhân, quán ăn, cửa hàng nhỏ.</li>
+          <li>Song song buôn bán, sửa chữa máy tính, xử lý sự cố máy tính và hệ thống mạng — nền tảng kỹ thuật vững chắc cho mọi việc sau này.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cv-sec">
+      <h2>Học vấn</h2>
+      <div class="job">
+        <p class="when">2012 — 2016</p>
+        <h3>Sinh viên <span>— Đại học Thủy Lợi</span></h3>
+        <ul><li>Thời sinh viên đã tự mày mò thiết kế đồ họa và kỹ thuật máy tính — tiền đề cho hướng đi sau này.</li></ul>
+      </div>
+    </section>
+
+    <section class="cv-sec">
+      <h2>Kỹ năng</h2>
+      <div class="skills">
+        <div class="skill"><div class="row"><b>Thiết kế thương hiệu F&B</b><span>95%</span></div><div class="bar"><i style="width:95%"></i></div></div>
+        <div class="skill"><div class="row"><b>AI & tự động hóa</b><span>88%</span></div><div class="bar"><i style="width:88%"></i></div></div>
+        <div class="skill"><div class="row"><b>Thích nghi công nghệ mới</b><span>90%</span></div><div class="bar"><i style="width:90%"></i></div></div>
+        <div class="skill"><div class="row"><b>Đọc hiểu code × vận dụng AI</b><span>85%</span></div><div class="bar"><i style="width:85%"></i></div></div>
+        <div class="skill"><div class="row"><b>Mạng máy tính & xử lý sự cố</b><span>82%</span></div><div class="bar"><i style="width:82%"></i></div></div>
+        <div class="skill"><div class="row"><b>Branding & ấn phẩm</b><span>90%</span></div><div class="bar"><i style="width:90%"></i></div></div>
+      </div>
+    </section>
+
+    <section class="cv-sec">
+      <h2>Dự án tiêu biểu</h2>
+      <!-- DEMO: Hùng sẽ thay bằng dự án thật -->
+      <div class="proj-list">
+        <div class="proj"><b>Hasiko</b><span>Thương hiệu F&B</span></div>
+        <div class="proj"><b>Cọng</b><span>Ẩm thực Việt</span></div>
+        <div class="proj"><b>Lofita</b><span>Fresh & healthy</span></div>
+        <div class="proj"><b>Demolen</b><span>Bánh ngọt · tráng miệng</span></div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="cv-foot">
+    <span>CV — Hoàng Hùng · cập nhật 10/2026</span>
+    <span>masterhmh.github.io/Portfolio/cv.html</span>
+  </footer>
+</div>
+
+</body>
+</html>
