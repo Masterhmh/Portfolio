@@ -1,0 +1,4 @@
+TEN: Layer
+VAN_DE: Quán cà phê phong cách Hàn Quốc theo hướng tối giản — cần nhận diện đơn giản mà tinh tế, đúng chất minimal.
+GIAI_PHAP: Thiết kế logo và bộ ấn phẩm tối giản: biển hiệu, menu, ly/túi mang đi — ít chi tiết, nhiều khoảng thở.
+KET_QUA: Nhận diện toát lên đúng tinh thần của quán — sang mà không phô.

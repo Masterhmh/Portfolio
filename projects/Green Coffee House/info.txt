@@ -1,0 +1,4 @@
+TEN: Green Coffee House
+VAN_DE: Quán đã hoạt động nhưng nhận diện cũ lỗi thời, thiếu nhất quán — cần làm lại để theo kịp thị hiếu mới.
+GIAI_PHAP: Làm mới toàn bộ: logo, biển hiệu, menu, bao bì, ảnh truyền thông — giữ cái hồn quen thuộc của quán, khoác diện mạo hiện đại hơn.
+KET_QUA: Quán lột xác với diện mạo mới mà khách cũ vẫn nhận ra.

@@ -1,0 +1,4 @@
+TEN: 22 Coffee
+VAN_DE: Quán mới mở, cần bộ nhận diện từ con số 0 — chưa có logo, chưa có phong cách riêng để khách nhớ mặt.
+GIAI_PHAP: Thiết kế logo và bộ ấn phẩm đồng bộ: biển hiệu, menu, tem ly, ảnh mạng xã hội — một tinh thần xuyên suốt từ ngoài cửa đến tay khách.
+KET_QUA: Quán khai trương với bộ mặt chuyên nghiệp, nhất quán mọi điểm chạm.
