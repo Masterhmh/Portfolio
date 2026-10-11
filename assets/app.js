@@ -386,15 +386,3 @@ addEventListener("keydown", e => {
 });
 
 loadProjects();
-/* tu chan doan: CSS nao dang duoc ap dung (chay sau khi load) */
-function checkCssVer(){
-  try{
-    const _t=document.createElement("div");_t.className="proj-body";
-    _t.style.cssText="position:absolute;visibility:hidden;pointer-events:none";
-    document.body.appendChild(_t);
-    const _p=parseFloat(getComputedStyle(_t).paddingLeft)||0;_t.remove();
-    const _v=document.querySelector(".ver");
-    if(_v){const b=_v.textContent.split("·")[0].trim();_v.textContent=b+" · "+(_p>26?"css mới":"css cũ");}
-  }catch(e){}
-}
-window.addEventListener("load",()=>setTimeout(checkCssVer,800));

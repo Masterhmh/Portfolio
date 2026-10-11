@@ -199,8 +199,8 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .proj-body p{color:var(--dim);font-size:14px;line-height:1.7;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .proj-tech{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
 .proj-tech span{font-family:var(--mono);font-size:11px;color:var(--cyan);border:1px solid rgba(0,229,255,.3);padding:4px 10px;border-radius:20px}
-.proj-link{display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:1px;color:var(--cyan);
-  border:1px solid var(--cyan);padding:11px 26px;background:rgba(0,229,255,.06);
+.proj-link{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--cyan);
+  border:1px solid var(--cyan);padding:9px 20px;background:rgba(0,229,255,.06);
   transition:all .25s;margin-left:auto;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
 .proj:hover .proj-link{background:var(--cyan);color:#001318;font-weight:700;box-shadow:0 0 24px rgba(0,229,255,.55)}
 
@@ -215,7 +215,6 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .c-item .tx strong{font-size:16px;font-weight:600}
 .status-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:blink 1.6s steps(1) infinite;margin-right:8px}
 
-.ver{font-family:var(--mono);font-size:11px;color:var(--dim);border:1px solid var(--line);padding:2px 8px;margin-left:8px;letter-spacing:1px}
 footer{border-top:1px solid var(--line);padding:24px 0;position:relative;z-index:2;font-family:var(--mono);font-size:12px;color:var(--dim)}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .t-green{color:var(--green)}
