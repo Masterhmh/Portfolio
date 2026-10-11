@@ -195,14 +195,14 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .proj:hover .proj-top img{transform:scale(1.06)}
 .proj-top .ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(4,6,12,.55));pointer-events:none}
 .proj-top 
-.proj-body{padding:24px;flex:1;display:flex;flex-direction:column}
+.proj-body{padding:26px 30px;flex:1;display:flex;flex-direction:column}
 .proj-body h3{font-size:19px;margin:0 0 8px}
 .proj-body p{color:var(--dim);font-size:14px;line-height:1.7;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .proj-tech{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
 .proj-tech span{font-family:var(--mono);font-size:11px;color:var(--cyan);border:1px solid rgba(0,229,255,.3);padding:4px 10px;border-radius:20px}
 .proj-link{display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:1px;color:var(--cyan);
   border:1px solid var(--cyan);padding:11px 26px;background:rgba(0,229,255,.06);
-  transition:all .25s;align-self:flex-start;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+  transition:all .25s;align-self:flex-end;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
 .proj:hover .proj-link{background:var(--cyan);color:#001318;font-weight:700;box-shadow:0 0 24px rgba(0,229,255,.55)}
 
 /* ---------- contact ---------- */
