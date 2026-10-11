@@ -179,17 +179,18 @@
 document.getElementById("yr") && (document.getElementById("yr").textContent = new Date().getFullYear());
 
 /* ---------- nén ảnh: file >400KB tự qua proxy resize, lỗi thì về gốc ---------- */
-function optUrl(u, size, w){
+function optUrl(dir, name, url, size, w){
   if (size > 400 * 1024){
-    return "https://images.weserv.nl/?url=" + encodeURIComponent(u.replace(/^https?:\/\//, "")) +
-           "&w=" + w + "&q=70&output=jpg";
+    const clean = "raw.githubusercontent.com/" + GH.owner + "/" + GH.repo + "/" + GH.branch +
+                  "/projects/" + dir + "/" + name;
+    return "https://images.weserv.nl/?url=" + encodeURIComponent(clean) + "&w=" + w + "&q=70&output=jpg";
   }
-  return u;
+  return url;
 }
-function smartImg(img, u, size, w){
-  const opt = optUrl(u, size, w);
+function smartImg(img, dir, file, w){
+  const opt = optUrl(dir, file.name, file.url, file.size, w);
   img.decoding = "async";
-  if (opt !== u) img.onerror = () => { img.onerror = null; img.src = u; };
+  if (opt !== file.url) img.onerror = () => { img.onerror = null; img.src = file.url; };
   img.src = opt;
 }
 
@@ -215,60 +216,95 @@ async function getInfo(dir){
 async function loadProjects(){
   const grid = document.getElementById("proj-grid");
   const empty = document.getElementById("proj-empty");
-  let dirs = [];
-  try{
+  const errBox = document.getElementById("proj-error");
+  const CACHE_KEY = "hh-projects-v1", TTL = 15 * 60 * 1000;
+
+  function render(projects){
+    grid.innerHTML = "";
+    const rio = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting){ e.target.classList.add("on"); rio.unobserve(e.target); }
+    }), { threshold: .1 });
+    projects.forEach((p, i) => {
+      const title = (p.info && p.info.TEN) || p.name.replace(/[-_]+/g, " ");
+      const el = document.createElement("article");
+      el.className = "proj rv";
+      el.style.setProperty("--d", (i % 3 * 0.08) + "s");
+      const top = document.createElement("div");
+      top.className = "proj-top";
+      const img = document.createElement("img");
+      img.loading = "lazy"; img.alt = title;
+      smartImg(img, p.name, p.imgs[0], 800);
+      const ov = document.createElement("div"); ov.className = "ov";
+      const tag = document.createElement("span"); tag.className = "p-tag"; tag.textContent = "[dự_án]";
+      top.append(img, ov, tag);
+      const body = document.createElement("div");
+      body.className = "proj-body";
+      const h = document.createElement("h3"); h.textContent = title;
+      const d = document.createElement("p");
+      d.textContent = (p.info && p.info.VAN_DE) || "Bấm để xem ảnh và chi tiết dự án.";
+      const link = document.createElement("span");
+      link.className = "proj-link"; link.textContent = p.info ? "mở_chi_tiết ▸" : "xem_ảnh ▸";
+      body.append(h, d, link);
+      el.append(top, body);
+      el.addEventListener("click", () => openModal(p, title));
+      grid.appendChild(el);
+      rio.observe(el);
+    });
+  }
+
+  async function fetchFresh(){
     const r = await fetch(api(GH.dir));
-    if (!r.ok) throw 0;
-    dirs = (await r.json()).filter(d => d.type === "dir" && !/^[._]/.test(d.name));
-  }catch(e){ empty.hidden = false; return; }
-  if (!dirs.length){ empty.hidden = false; return; }
+    if (!r.ok) throw new Error("list " + r.status);
+    const dirs = (await r.json()).filter(d => d.type === "dir" && !/^[._]/.test(d.name));
+    let failed = false;
+    const jobs = dirs.map(async d => {
+      let files = [];
+      try{
+        const rr = await fetch(api(`${GH.dir}/${encodeURIComponent(d.name)}`));
+        if (!rr.ok) throw 0;
+        files = (await rr.json()).filter(f => f.type === "file" && IMG.test(f.name));
+      }catch(e){ failed = true; }
+      files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+      return {
+        name: d.name,
+        imgs: files.map(f => ({
+          name: f.name, size: f.size || 0,
+          url: raw(`${GH.dir}/${encodeURIComponent(d.name)}/${encodeURIComponent(f.name)}`)
+        })),
+        info: await getInfo(d.name)
+      };
+    });
+    const projects = (await Promise.all(jobs)).filter(x => x.imgs.length);
+    if (!failed){
+      try{ localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), projects })); }catch(e){}
+    }
+    return projects;
+  }
 
-  const jobs = dirs.map(async d => {
-    let files = [];
+  function readCache(){
     try{
-      const r = await fetch(api(`${GH.dir}/${encodeURIComponent(d.name)}`));
-      if (r.ok) files = (await r.json()).filter(f => f.type === "file" && IMG.test(f.name));
+      const c = JSON.parse(localStorage.getItem(CACHE_KEY) || "null");
+      if (c && Date.now() - c.t < TTL && c.projects && c.projects.length) return c.projects;
     }catch(e){}
-    files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
-    const imgs = files.map(f => ({
-      url: raw(`${GH.dir}/${encodeURIComponent(d.name)}/${encodeURIComponent(f.name)}`),
-      size: f.size || 0
-    }));
-    return { name: d.name, imgs, info: await getInfo(d.name) };
-  });
-  const projects = (await Promise.all(jobs)).filter(p => p.imgs.length);
-  if (!projects.length){ empty.hidden = false; return; }
+    return null;
+  }
 
-  const rio = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting){ e.target.classList.add("on"); rio.unobserve(e.target); }
-  }), { threshold: .1 });
+  async function boot(){
+    errBox.hidden = true; empty.hidden = true;
+    const cached = readCache();
+    if (cached) render(cached);
+    try{
+      const fresh = await fetchFresh();
+      if (fresh.length){ render(fresh); return; }
+      if (!cached) empty.hidden = false;
+    }catch(e){
+      if (!cached) errBox.hidden = false;
+    }
+  }
 
-  projects.forEach((p, i) => {
-    const title = (p.info && p.info.TEN) || p.name.replace(/[-_]+/g, " ");
-    const el = document.createElement("article");
-    el.className = "proj rv";
-    el.style.setProperty("--d", (i % 3 * 0.08) + "s");
-    const top = document.createElement("div");
-    top.className = "proj-top";
-    const img = document.createElement("img");
-    img.loading = "lazy"; img.alt = title;
-    smartImg(img, p.imgs[0].url, p.imgs[0].size, 800);
-    const ov = document.createElement("div"); ov.className = "ov";
-    const tag = document.createElement("span"); tag.className = "p-tag"; tag.textContent = "[dự_án]";
-    top.append(img, ov, tag);
-    const body = document.createElement("div");
-    body.className = "proj-body";
-    const h = document.createElement("h3"); h.textContent = title;
-    const d = document.createElement("p");
-    d.textContent = (p.info && p.info.VAN_DE) || "Bấm để xem ảnh và case study.";
-    const link = document.createElement("span");
-    link.className = "proj-link"; link.textContent = p.info ? "mở_chi_tiết ▸" : "xem_ảnh ▸";
-    body.append(h, d, link);
-    el.append(top, body);
-    el.addEventListener("click", () => openModal(p, title));
-    grid.appendChild(el);
-    rio.observe(el);
-  });
+  const retry = document.getElementById("proj-retry");
+  if (retry) retry.addEventListener("click", boot);
+  boot();
 }
 
 /* ---------- modal case study ---------- */
@@ -294,9 +330,9 @@ function openModal(p, title){
   mBody.innerHTML = "";
   p.imgs.forEach((im, i) => {
     const img = document.createElement("img");
-    smartImg(img, im.url, im.size, 1600);
+    smartImg(img, p.name, im, 1600);
     img.loading = "lazy"; img.alt = title + " " + (i + 1);
-    img.addEventListener("click", () => openLightbox(p.imgs, i));
+    img.addEventListener("click", () => openLightbox(p, i));
     mBody.appendChild(img);
   });
   modal.classList.add("open");
@@ -315,13 +351,14 @@ modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
 const lb = document.getElementById("lightbox");
 const lbImg = document.getElementById("lbImg");
 let lbList = [], lbIdx = 0;
-function lbShow(){ const im = lbList[lbIdx]; smartImg(lbImg, im.url, im.size, 1600); }
-function openLightbox(list, i){
-  lbList = list; lbIdx = i; lbShow();
+let lbProj = null;
+function lbShow(){ const im = lbProj.imgs[lbIdx]; smartImg(lbImg, lbProj.name, im, 1600); }
+function openLightbox(p, i){
+  lbProj = p; lbIdx = i; lbShow();
   lb.classList.add("open"); lb.setAttribute("aria-hidden", "false");
 }
 function closeLightbox(){ lb.classList.remove("open"); lb.setAttribute("aria-hidden", "true"); }
-function lbGo(d){ lbIdx = (lbIdx + d + lbList.length) % lbList.length; lbShow(); }
+function lbGo(d){ lbIdx = (lbIdx + d + lbProj.imgs.length) % lbProj.imgs.length; lbShow(); }
 document.getElementById("lbClose").addEventListener("click", closeLightbox);
 document.getElementById("lbPrev").addEventListener("click", e => { e.stopPropagation(); lbGo(-1); });
 document.getElementById("lbNext").addEventListener("click", e => { e.stopPropagation(); lbGo(1); });
