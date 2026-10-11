@@ -206,7 +206,7 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .proj:hover .proj-link{background:var(--cyan);color:#001318;font-weight:700;box-shadow:0 0 24px rgba(0,229,255,.55)}
 
 /* ---------- contact ---------- */
-.contact-grid{display:grid;grid-template-columns:1fr;gap:32px;max-width:680px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 @media(max-width:860px){.contact-grid{grid-template-columns:1fr}}
 .c-item{display:flex;align-items:center;gap:18px;margin-bottom:22px;padding:18px 20px;background:var(--panel);border:1px solid var(--line);text-decoration:none;color:var(--text);transition:all .25s;
   clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
