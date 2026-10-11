@@ -216,71 +216,83 @@ async function getInfo(dir){
   }catch(e){ return null; }
 }
 
+async function fetchJson(url){
+  const r = await fetch(url);
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  return r.json();
+}
+
 async function loadProjects(){
   const grid = document.getElementById("proj-grid");
   const empty = document.getElementById("proj-empty");
   const errBox = document.getElementById("proj-error");
-  const CACHE_KEY = "hh-projects-v1", TTL = 15 * 60 * 1000;
+  const CACHE_KEY = "hh-projects-v2", TTL = 15 * 60 * 1000;
+
+  function card(p, i, rio){
+    const title = (p.info && p.info.TEN) || p.name.replace(/[-_]+/g, " ");
+    const el = document.createElement("article");
+    el.className = "proj rv";
+    el.style.setProperty("--d", (i % 3 * 0.08) + "s");
+    const top = document.createElement("div");
+    top.className = "proj-top";
+    const img = document.createElement("img");
+    img.loading = "lazy"; img.alt = title;
+    smartImg(img, p.name, p.imgs[0], 800);
+    const ov = document.createElement("div"); ov.className = "ov";
+    const tag = document.createElement("span"); tag.className = "p-tag"; tag.textContent = "[dự_án]";
+    top.append(img, ov, tag);
+    const body = document.createElement("div");
+    body.className = "proj-body";
+    const h = document.createElement("h3"); h.textContent = title;
+    const d = document.createElement("p");
+    d.textContent = (p.info && p.info.VAN_DE) || "Bấm để xem ảnh và chi tiết dự án.";
+    const link = document.createElement("span");
+    link.className = "proj-link"; link.textContent = p.info ? "mở_chi_tiết ▸" : "xem_ảnh ▸";
+    body.append(h, d, link);
+    el.append(top, body);
+    el.addEventListener("click", () => openModal(p, title));
+    grid.appendChild(el);
+    rio.observe(el);
+    return { el, d, link, h };
+  }
 
   function render(projects){
     grid.innerHTML = "";
     const rio = new IntersectionObserver(es => es.forEach(e => {
       if (e.isIntersecting){ e.target.classList.add("on"); rio.unobserve(e.target); }
     }), { threshold: .1 });
-    projects.forEach((p, i) => {
-      const title = (p.info && p.info.TEN) || p.name.replace(/[-_]+/g, " ");
-      const el = document.createElement("article");
-      el.className = "proj rv";
-      el.style.setProperty("--d", (i % 3 * 0.08) + "s");
-      const top = document.createElement("div");
-      top.className = "proj-top";
-      const img = document.createElement("img");
-      img.loading = "lazy"; img.alt = title;
-      smartImg(img, p.name, p.imgs[0], 800);
-      const ov = document.createElement("div"); ov.className = "ov";
-      const tag = document.createElement("span"); tag.className = "p-tag"; tag.textContent = "[dự_án]";
-      top.append(img, ov, tag);
-      const body = document.createElement("div");
-      body.className = "proj-body";
-      const h = document.createElement("h3"); h.textContent = title;
-      const d = document.createElement("p");
-      d.textContent = (p.info && p.info.VAN_DE) || "Bấm để xem ảnh và chi tiết dự án.";
-      const link = document.createElement("span");
-      link.className = "proj-link"; link.textContent = p.info ? "mở_chi_tiết ▸" : "xem_ảnh ▸";
-      body.append(h, d, link);
-      el.append(top, body);
-      el.addEventListener("click", () => openModal(p, title));
-      grid.appendChild(el);
-      rio.observe(el);
+    const refs = projects.map((p, i) => Object.assign(card(p, i, rio), { p }));
+    // tải case study nền: có thì cập nhật thẻ, không thì thôi
+    refs.forEach(({ p, d, link, h }) => {
+      getInfo(p.name).then(info => {
+        if (!info) return;
+        p.info = info;
+        if (info.TEN) h.textContent = info.TEN;
+        if (info.VAN_DE) d.textContent = info.VAN_DE;
+        link.textContent = "mở_chi_tiết ▸";
+      }).catch(() => {});
     });
   }
 
   async function fetchFresh(){
-    const r = await fetch(api(GH.dir));
-    if (!r.ok) throw new Error("list " + r.status);
-    const dirs = (await r.json()).filter(d => d.type === "dir" && !/^[._]/.test(d.name));
-    let failed = false;
-    const jobs = dirs.map(async d => {
-      let files = [];
-      try{
-        const rr = await fetch(api(`${GH.dir}/${encodeURIComponent(d.name)}`));
-        if (!rr.ok) throw 0;
-        files = (await rr.json()).filter(f => f.type === "file" && IMG.test(f.name));
-      }catch(e){ failed = true; }
-      files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
-      return {
-        name: d.name,
-        imgs: files.map(f => ({
-          name: f.name, size: f.size || 0,
-          url: raw(`${GH.dir}/${encodeURIComponent(d.name)}/${encodeURIComponent(f.name)}`)
-        })),
-        info: await getInfo(d.name)
-      };
+    // 1 request duy nhất: toàn bộ cây file qua git trees API
+    const t = await fetchJson(`https://api.github.com/repos/${GH.owner}/${GH.repo}/git/trees/${GH.branch}?recursive=1`);
+    if (t.truncated) throw new Error("tree truncated");
+    const map = {};
+    (t.tree || []).forEach(e => {
+      if (e.type !== "blob") return;
+      const m = e.path.match(/^projects\/([^/]+)\/(.+)$/);
+      if (!m || /^[._]/.test(m[1]) || !IMG.test(m[2])) return;
+      (map[m[1]] = map[m[1]] || []).push({
+        name: m[2], size: e.size || 0,
+        url: raw(`projects/${encodeURIComponent(m[1])}/${encodeURIComponent(m[2])}`)
+      });
     });
-    const projects = (await Promise.all(jobs)).filter(x => x.imgs.length);
-    if (!failed){
-      try{ localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), projects })); }catch(e){}
-    }
+    const projects = Object.keys(map).map(dir => ({
+      name: dir, info: null,
+      imgs: map[dir].sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
+    })).filter(x => x.imgs.length);
+    try{ localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), projects })); }catch(e){}
     return projects;
   }
 
@@ -294,14 +306,14 @@ async function loadProjects(){
 
   async function boot(){
     errBox.hidden = true; empty.hidden = true;
-    const cached = readCache();
-    if (cached) render(cached);
     try{
       const fresh = await fetchFresh();
       if (fresh.length){ render(fresh); return; }
-      if (!cached) empty.hidden = false;
+      const cached = readCache();
+      if (cached) render(cached); else empty.hidden = false;
     }catch(e){
-      if (!cached) errBox.hidden = false;
+      const cached = readCache();
+      if (cached) render(cached); else errBox.hidden = false;
     }
   }
 
