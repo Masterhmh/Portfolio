@@ -206,7 +206,7 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .proj:hover .proj-link{background:var(--cyan);color:#001318;font-weight:700;box-shadow:0 0 24px rgba(0,229,255,.55)}
 
 /* ---------- contact ---------- */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:32px;max-width:680px}
 @media(max-width:860px){.contact-grid{grid-template-columns:1fr}}
 .c-item{display:flex;align-items:center;gap:18px;margin-bottom:22px;padding:18px 20px;background:var(--panel);border:1px solid var(--line);text-decoration:none;color:var(--text);transition:all .25s;
   clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
@@ -251,26 +251,4 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:24px;cursor:pointer;font-family:var(--mono)}
 #lbPrev{left:20px}#lbNext{right:20px}
 
-/* ---------- mobile CTA ---------- */
-.mobile-cta{display:none}
-@media(max-width:640px){
-  .mobile-cta{display:flex;position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:60;
-    align-items:center;justify-content:center;text-decoration:none;
-    background:linear-gradient(135deg,var(--cyan),#0090c8);color:#001318;font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:1px;
-    padding:16px;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
-    box-shadow:0 10px 30px rgba(0,229,255,.35)}
-  body{padding-bottom:88px}
-  .sheet{padding:28px 20px}
-  .sheet-grid{grid-template-columns:repeat(2,1fr)}
-}
 
-/* ---------- testimonials ---------- */
-.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.quote{background:var(--panel);border:1px solid var(--line);padding:30px 26px;position:relative;transition:transform .25s,box-shadow .25s;
-  clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)}
-.quote:hover{transform:translateY(-5px);box-shadow:0 0 26px rgba(0,229,255,.14)}
-.quote::before{content:'\201C';position:absolute;top:6px;left:18px;font-family:var(--disp);font-size:52px;color:var(--cyan);opacity:.35;line-height:1}
-.quote p{font-size:14.5px;line-height:1.8;margin:14px 0;color:var(--text)}
-.quote span{font-family:var(--mono);font-size:12px;color:var(--cyan)}
-.quote em{color:var(--dim);font-style:normal}
-@media(max-width:860px){.quotes{grid-template-columns:1fr}}
