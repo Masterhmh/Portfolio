@@ -13,6 +13,9 @@
   });
 })();
 
+/* ---------- luôn về đầu trang khi tải lại ---------- */
+addEventListener("load", () => setTimeout(() => window.scrollTo(0, 0), 0));
+
 /* ---------- boot sequence: hiệu ứng + âm thanh tech ---------- */
 (function(){
   const log = document.getElementById("boot-log");

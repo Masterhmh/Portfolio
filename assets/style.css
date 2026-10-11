@@ -52,7 +52,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--disp);overflow-x:h
 /* ---------- layout ---------- */
 main{position:relative;z-index:2}
 .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
-section{padding:88px 0;position:relative}
+section{padding:70px 0;position:relative}
 
 /* ---------- nav ---------- */
 nav{position:fixed;top:0;left:0;right:0;z-index:50;
@@ -77,8 +77,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;
 @media(max-width:760px){.nav-links{display:none}.sys-clock{display:none}}
 
 /* ---------- hero ---------- */
-#home{min-height:100vh;display:flex;align-items:center;padding-top:90px}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;width:100%}
+#home{min-height:100vh;display:flex;align-items:center;padding-top:76px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;width:100%}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
 .tag{font-family:var(--mono);font-size:12px;color:var(--green);border:1px solid rgba(0,255,157,.35);display:inline-block;padding:6px 14px;border-radius:4px;letter-spacing:2px;margin-bottom:22px;background:rgba(0,255,157,.05)}
 [data-theme="light"] .tag{background:rgba(10,155,94,.07)}
@@ -115,14 +115,14 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .t-cursor{display:inline-block;animation:blink 1s steps(1) infinite;color:var(--green);font-weight:700}
 
 /* ---------- section headers ---------- */
-.sec-head{font-family:var(--mono);margin-bottom:40px}
+.sec-head{font-family:var(--mono);margin-bottom:30px}
 .sec-head .kicker{color:var(--mag);font-size:13px;letter-spacing:3px}
 .sec-head h2{font-size:clamp(28px,4vw,42px);margin-top:10px;font-family:var(--disp);font-weight:700}
 .sec-head h2 .n{color:var(--cyan);font-family:var(--mono);font-size:.65em;vertical-align:middle;margin-right:10px}
 .sec-head p{color:var(--dim);margin-top:10px;font-family:var(--mono);font-size:13px}
 
 /* ---------- stats ---------- */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:-30px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-20px}
 @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
 .stat{background:var(--panel);border:1px solid var(--line);padding:26px 20px;text-align:center;
   clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);
@@ -140,7 +140,7 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .panel::after{content:attr(data-label);position:absolute;top:10px;right:18px;font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:2px}
 
 /* ---------- about ---------- */
-.about-grid{display:grid;grid-template-columns:320px 1fr;gap:44px;align-items:start}
+.about-grid{display:grid;grid-template-columns:300px 1fr;gap:32px;align-items:start}
 @media(max-width:860px){.about-grid{grid-template-columns:1fr}}
 .avatar-frame{position:relative;width:280px;max-width:78vw;aspect-ratio:1;margin:0 auto;display:flex;align-items:center;justify-content:center}
 .avatar-wrap{width:76%;aspect-ratio:1;border-radius:50%;padding:4px;position:relative;z-index:2;
@@ -161,7 +161,7 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .info-list li a:hover{text-decoration:underline}
 
 /* ---------- skills ---------- */
-.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
 @media(max-width:860px){.skills-grid{grid-template-columns:1fr}}
 .skill{margin-bottom:24px}
 .skill .row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;margin-bottom:8px}
@@ -185,7 +185,7 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .t-item p{color:var(--dim);font-size:14.5px;line-height:1.7}
 
 /* ---------- projects ---------- */
-.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:960px){.proj-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.proj-grid{grid-template-columns:1fr}}
 .proj{background:var(--panel);border:1px solid var(--line);overflow:hidden;transition:transform .3s,box-shadow .3s;position:relative;display:flex;flex-direction:column;cursor:pointer}
@@ -205,11 +205,8 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
   transition:all .25s;align-self:flex-start;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
 .proj:hover .proj-link{background:var(--cyan);color:#001318;font-weight:700;box-shadow:0 0 24px rgba(0,229,255,.55)}
 
-/* ---------- testimonials ---------- */
-.panel p{line-height:1.9}
-
 /* ---------- contact ---------- */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
 @media(max-width:860px){.contact-grid{grid-template-columns:1fr}}
 .c-item{display:flex;align-items:center;gap:18px;margin-bottom:22px;padding:18px 20px;background:var(--panel);border:1px solid var(--line);text-decoration:none;color:var(--text);transition:all .25s;
   clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
@@ -219,7 +216,7 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .c-item .tx strong{font-size:16px;font-weight:600}
 .status-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:blink 1.6s steps(1) infinite;margin-right:8px}
 
-footer{border-top:1px solid var(--line);padding:30px 0;position:relative;z-index:2;font-family:var(--mono);font-size:12px;color:var(--dim)}
+footer{border-top:1px solid var(--line);padding:24px 0;position:relative;z-index:2;font-family:var(--mono);font-size:12px;color:var(--dim)}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .t-green{color:var(--green)}
 

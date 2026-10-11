@@ -8,8 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="stylesheet" href="assets/avatar.css">
+<link rel="stylesheet" href="assets/style.css?v=17">
+<link rel="stylesheet" href="assets/avatar.css?v=17">
+<script>try{history.scrollRestoration="manual"}catch(e){}</script>
 <link rel="preconnect" href="https://raw.githubusercontent.com">
 <link rel="preconnect" href="https://images.weserv.nl">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◈</text></svg>">
@@ -103,7 +104,6 @@
     <div class="sec-head rv">
       <div class="kicker">// 01 — HỒ SƠ</div>
       <h2><span class="n">01.</span>VỀ MÌNH</h2>
-      <p>cat ~/about.txt</p>
     </div>
     <div class="about-grid">
       <div class="rv">
@@ -142,7 +142,6 @@
     <div class="sec-head rv">
       <div class="kicker">// 02 — KỸ NĂNG</div>
       <h2><span class="n">02.</span>BỘ CÔNG CỤ</h2>
-      <p>./load_skills --verbose</p>
     </div>
     <div class="skills-grid">
       <div class="rv">
@@ -203,7 +202,6 @@
     <div class="sec-head rv" style="margin-top:90px">
       <div class="kicker">// 02.5 — HÀNH TRÌNH</div>
       <h2><span class="n">02.</span>NHẬT KÝ HÀNH TRÌNH</h2>
-      <p>git log --oneline --career</p>
     </div>
     <div class="timeline">
       <div class="t-item rv">
@@ -231,7 +229,6 @@
     <div class="sec-head rv">
       <div class="kicker">// 03 — DỰ ÁN</div>
       <h2><span class="n">03.</span>DỰ ÁN TIÊU BIỂU</h2>
-      <p>ls ~/projects --featured</p>
     </div>
     <div class="proj-grid" id="proj-grid"></div>
     <p id="proj-empty" class="rv" style="text-align:center;margin-top:44px;font-family:var(--mono);font-size:13px;color:var(--dim)" hidden>
@@ -244,39 +241,12 @@
   </div>
 </section>
 
-<!-- ================= TESTIMONIALS ================= -->
-<section id="testimonials">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <div class="kicker">// 04 — KHÁCH NÓI GÌ</div>
-      <h2><span class="n">04.</span>ĐÁNH GIÁ THẬT</h2>
-      <p>cat ~/testimonials.txt</p>
-    </div>
-    <!-- DEMO: Hùng sẽ thay bằng đánh giá thật của khách -->
-    <div class="quotes">
-      <div class="quote rv">
-        <p>"Menu mới nhìn là muốn gọi thêm món. Hùng hiểu ý quán, làm nhanh, sửa cũng nhanh."</p>
-        <span>— Anh Tuấn, chủ quán cà phê <em>(demo)</em></span>
-      </div>
-      <div class="quote rv" style="--d:.1s">
-        <p>"Thiết kế đẹp đã đành, còn hỗ trợ luôn cả phần kỹ thuật như miniapp, máy tính. Rất tiện."</p>
-        <span>— Chị Lan, chủ quán ăn <em>(demo)</em></span>
-      </div>
-      <div class="quote rv" style="--d:.2s">
-        <p>"Nhắn tin là trả lời ngay, báo giá rõ ràng từ đầu. Làm xong còn hướng dẫn tận tình."</p>
-        <span>— Anh Minh, chủ trà sữa <em>(demo)</em></span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ================= CONTACT ================= -->
 <section id="contact">
   <div class="wrap">
     <div class="sec-head rv">
       <div class="kicker">// 05 — LIÊN HỆ</div>
       <h2><span class="n">05.</span>KẾT NỐI VỚI MÌNH</h2>
-      <p>ping hoang@system — trả lời cực nhanh ⚡</p>
     </div>
     <div class="contact-grid">
       <div class="rv">
@@ -348,6 +318,6 @@
   <button class="lb-nav" id="lbNext" aria-label="Sau">›</button>
 </div>
 
-<script src="assets/app.js"></script>
+<script src="assets/app.js?v=17"></script>
 </body>
 </html>
