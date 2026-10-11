@@ -13,11 +13,27 @@
   });
 })();
 
-/* ---------- boot sequence ---------- */
+/* ---------- boot sequence: hiệu ứng + âm thanh tech ---------- */
 (function(){
   const log = document.getElementById("boot-log");
   const fill = document.getElementById("boot-fill");
   const boot = document.getElementById("boot");
+  let AC = null;
+  function beep(freq, dur, type, vol, delay){
+    try{
+      AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+      if (AC.state === "suspended") AC.resume();
+      const t = AC.currentTime + (delay || 0);
+      const o = AC.createOscillator(), g = AC.createGain();
+      o.type = type || "square";
+      o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol || 0.035, t + 0.015);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + (dur || 0.07));
+      o.connect(g); g.connect(AC.destination);
+      o.start(t); o.stop(t + (dur || 0.07) + 0.05);
+    }catch(e){}
+  }
   const lines = [
     "> đang khởi động portfolio.sys ...",
     "> tải mô-đun [████████] xong",
@@ -30,10 +46,14 @@
     if (i < lines.length){
       log.textContent = lines[i];
       fill.style.width = ((i + 1) / lines.length * 100) + "%";
+      beep(520 + i * 90, 0.06, "square", 0.035);
       i++;
     } else {
       clearInterval(t);
-      setTimeout(() => boot.classList.add("done"), 350);
+      beep(880, 0.09, "sine", 0.05);
+      beep(1318, 0.16, "sine", 0.05, 0.1);
+      boot.classList.add("flash");
+      setTimeout(() => { boot.classList.remove("flash"); boot.classList.add("done"); }, 220);
     }
   }, 220);
 })();
@@ -158,6 +178,21 @@
 
 document.getElementById("yr") && (document.getElementById("yr").textContent = new Date().getFullYear());
 
+/* ---------- nén ảnh: file >400KB tự qua proxy resize, lỗi thì về gốc ---------- */
+function optUrl(u, size, w){
+  if (size > 400 * 1024){
+    return "https://images.weserv.nl/?url=" + encodeURIComponent(u.replace(/^https?:\/\//, "")) +
+           "&w=" + w + "&q=70&output=jpg";
+  }
+  return u;
+}
+function smartImg(img, u, size, w){
+  const opt = optUrl(u, size, w);
+  img.decoding = "async";
+  if (opt !== u) img.onerror = () => { img.onerror = null; img.src = u; };
+  img.src = opt;
+}
+
 /* ---------- dự án: tự tải từ folder GitHub ---------- */
 const GH = { owner: "Masterhmh", repo: "Portfolio", branch: "main", dir: "projects" };
 const api = p => `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${p}?ref=${GH.branch}`;
@@ -195,7 +230,10 @@ async function loadProjects(){
       if (r.ok) files = (await r.json()).filter(f => f.type === "file" && IMG.test(f.name));
     }catch(e){}
     files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
-    const imgs = files.map(f => raw(`${GH.dir}/${encodeURIComponent(d.name)}/${encodeURIComponent(f.name)}`));
+    const imgs = files.map(f => ({
+      url: raw(`${GH.dir}/${encodeURIComponent(d.name)}/${encodeURIComponent(f.name)}`),
+      size: f.size || 0
+    }));
     return { name: d.name, imgs, info: await getInfo(d.name) };
   });
   const projects = (await Promise.all(jobs)).filter(p => p.imgs.length);
@@ -213,7 +251,8 @@ async function loadProjects(){
     const top = document.createElement("div");
     top.className = "proj-top";
     const img = document.createElement("img");
-    img.loading = "lazy"; img.alt = title; img.src = p.imgs[0];
+    img.loading = "lazy"; img.alt = title;
+    smartImg(img, p.imgs[0].url, p.imgs[0].size, 800);
     const ov = document.createElement("div"); ov.className = "ov";
     const tag = document.createElement("span"); tag.className = "p-tag"; tag.textContent = "[dự_án]";
     top.append(img, ov, tag);
@@ -222,14 +261,9 @@ async function loadProjects(){
     const h = document.createElement("h3"); h.textContent = title;
     const d = document.createElement("p");
     d.textContent = (p.info && p.info.VAN_DE) || "Bấm để xem ảnh và case study.";
-    const tech = document.createElement("div");
-    tech.className = "proj-tech";
-    (p.info ? ["chi-tiết"] : ["hình-ảnh"]).forEach(t => {
-      const s = document.createElement("span"); s.textContent = t; tech.append(s);
-    });
     const link = document.createElement("span");
     link.className = "proj-link"; link.textContent = p.info ? "mở_chi_tiết ▸" : "xem_ảnh ▸";
-    body.append(h, d, tech, link);
+    body.append(h, d, link);
     el.append(top, body);
     el.addEventListener("click", () => openModal(p, title));
     grid.appendChild(el);
@@ -258,9 +292,10 @@ function openModal(p, title){
     mCase.append(box);
   }
   mBody.innerHTML = "";
-  p.imgs.forEach((src, i) => {
+  p.imgs.forEach((im, i) => {
     const img = document.createElement("img");
-    img.src = src; img.loading = "lazy"; img.alt = title + " " + (i + 1);
+    smartImg(img, im.url, im.size, 1600);
+    img.loading = "lazy"; img.alt = title + " " + (i + 1);
     img.addEventListener("click", () => openLightbox(p.imgs, i));
     mBody.appendChild(img);
   });
@@ -280,12 +315,13 @@ modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
 const lb = document.getElementById("lightbox");
 const lbImg = document.getElementById("lbImg");
 let lbList = [], lbIdx = 0;
+function lbShow(){ const im = lbList[lbIdx]; smartImg(lbImg, im.url, im.size, 1600); }
 function openLightbox(list, i){
-  lbList = list; lbIdx = i; lbImg.src = list[i];
+  lbList = list; lbIdx = i; lbShow();
   lb.classList.add("open"); lb.setAttribute("aria-hidden", "false");
 }
 function closeLightbox(){ lb.classList.remove("open"); lb.setAttribute("aria-hidden", "true"); }
-function lbGo(d){ lbIdx = (lbIdx + d + lbList.length) % lbList.length; lbImg.src = lbList[lbIdx]; }
+function lbGo(d){ lbIdx = (lbIdx + d + lbList.length) % lbList.length; lbShow(); }
 document.getElementById("lbClose").addEventListener("click", closeLightbox);
 document.getElementById("lbPrev").addEventListener("click", e => { e.stopPropagation(); lbGo(-1); });
 document.getElementById("lbNext").addEventListener("click", e => { e.stopPropagation(); lbGo(1); });

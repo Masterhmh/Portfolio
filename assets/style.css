@@ -36,9 +36,18 @@ body{background:var(--bg);color:var(--text);font-family:var(--disp);overflow-x:h
 #boot{position:fixed;inset:0;background:#020409;z-index:100;display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
 [data-theme="light"] #boot{background:#EDF1F7}
 #boot.done{opacity:0;visibility:hidden}
-.boot-box{font-family:var(--mono);font-size:14px;color:var(--green);width:min(520px,88vw)}
+.boot-box{font-family:var(--mono);font-size:14px;color:var(--green);width:min(520px,88vw);
+  text-shadow:0 0 12px rgba(0,255,157,.45);animation:bootFlicker 2.4s infinite}
+@keyframes bootFlicker{0%,100%{opacity:1}90%{opacity:1}92%{opacity:.55}94%{opacity:1}97%{opacity:.75}98%{opacity:1}}
 .boot-box .bar{height:8px;border:1px solid var(--green);margin-top:14px;position:relative}
-.boot-box .bar i{position:absolute;inset:2px;background:var(--green);width:0;transition:width .2s}
+.boot-box .bar i{position:absolute;inset:2px;background:var(--green);width:0;transition:width .2s;box-shadow:0 0 14px var(--green)}
+.boot-scan{position:absolute;left:0;right:0;height:140px;top:-140px;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(0,229,255,.07),transparent);
+  animation:bootScan 1.8s linear infinite}
+@keyframes bootScan{to{transform:translateY(calc(100vh + 280px))}}
+#boot{transition:opacity .6s,visibility .6s,background-color .18s}
+#boot.flash{background-color:rgba(0,229,255,.9)}
+#boot.flash .boot-box{opacity:0}
 
 /* ---------- layout ---------- */
 main{position:relative;z-index:2}
@@ -189,8 +198,10 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .proj-body p{color:var(--dim);font-size:14px;line-height:1.7;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .proj-tech{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
 .proj-tech span{font-family:var(--mono);font-size:11px;color:var(--cyan);border:1px solid rgba(0,229,255,.3);padding:4px 10px;border-radius:20px}
-.proj-link{font-family:var(--mono);font-size:13px;color:var(--mag);letter-spacing:1px}
-.proj:hover .proj-link{text-shadow:0 0 12px var(--mag)}
+.proj-link{display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:1px;color:var(--cyan);
+  border:1px solid var(--cyan);padding:11px 26px;background:rgba(0,229,255,.06);
+  transition:all .25s;align-self:flex-start;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.proj:hover .proj-link{background:var(--cyan);color:#001318;font-weight:700;box-shadow:0 0 24px rgba(0,229,255,.55)}
 
 /* ---------- testimonials ---------- */
 .panel p{line-height:1.9}
