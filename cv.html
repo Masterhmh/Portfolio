@@ -18,6 +18,8 @@ body{font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);
 .cv-topbar a.back:hover{color:var(--accent)}
 .btn-print{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 20px;cursor:pointer}
 .btn-print:hover{filter:brightness(1.1)}
+.btn{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:500;color:var(--accent);text-decoration:none;border:1px solid var(--accent);border-radius:8px;padding:10px 20px}
+.btn:hover{background:var(--accent);color:#fff}
 .sheet{max-width:860px;margin:32px auto 64px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(20,40,70,.08)}
 .cv-head{display:grid;grid-template-columns:170px 1fr;gap:32px;padding:44px 48px;background:linear-gradient(135deg,#0b6e99,#083f5c);color:#fff}
 .photo{width:170px;height:170px;border-radius:50%;border:4px solid rgba(255,255,255,.35);flex:none}
@@ -142,6 +144,7 @@ body{font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);
     <section class="cv-sec">
       <h2>Dự án tiêu biểu</h2>
       <div class="proj-list" id="cv-projs"><p class="cv-loading">đang tải danh sách dự án…</p></div>
+      <p style="margin-top:14px"><a class="btn" href="https://masterhmh.github.io/Portfolio/#projects">xem đầy đủ tại portfolio ▸</a></p>
     </section>
     <script>
     (function(){
@@ -156,7 +159,7 @@ body{font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);
             return '<div class="proj"><b>' + n + "</b></div>";
           }).join("");
         })
-        .catch(function(){ box.innerHTML = '<p class="cv-loading">xem đầy đủ tại portfolio</p>'; });
+        .catch(function(){ box.innerHTML = '<p class="cv-loading"><a href="https://masterhmh.github.io/Portfolio/#projects">xem đầy đủ tại portfolio ▸</a></p>'; });
     })();
     </script>
   </div>
