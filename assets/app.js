@@ -239,8 +239,7 @@ async function loadProjects(){
     img.loading = "lazy"; img.alt = title;
     smartImg(img, p.name, p.imgs[0], 800);
     const ov = document.createElement("div"); ov.className = "ov";
-    const tag = document.createElement("span"); tag.className = "p-tag"; tag.textContent = "[dự_án]";
-    top.append(img, ov, tag);
+    top.append(img, ov);
     const body = document.createElement("div");
     body.className = "proj-body";
     const h = document.createElement("h3"); h.textContent = title;

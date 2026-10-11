@@ -194,7 +194,7 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .proj-top img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .proj:hover .proj-top img{transform:scale(1.06)}
 .proj-top .ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(4,6,12,.55));pointer-events:none}
-.proj-top .p-tag{position:absolute;top:12px;left:14px;font-family:var(--mono);font-size:11px;color:var(--green);letter-spacing:2px;background:rgba(4,6,12,.65);padding:4px 10px;border-radius:4px}
+.proj-top 
 .proj-body{padding:24px;flex:1;display:flex;flex-direction:column}
 .proj-body h3{font-size:19px;margin:0 0 8px}
 .proj-body p{color:var(--dim);font-size:14px;line-height:1.7;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
