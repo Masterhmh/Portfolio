@@ -1,0 +1,4 @@
+TEN: Namas
+VAN_DE: Viện nghiên cứu và đào tạo pha chế cần làm mới toàn bộ hình ảnh — từ nhận diện thương hiệu đến giáo trình, sao cho xứng tầm một học viện chuyên nghiệp.
+GIAI_PHAP: Đổi toàn bộ nhận diện thương hiệu, nâng cấp hình ảnh học viện, thiết kế hàng trăm bộ giáo trình, vận dụng AI để tối ưu khối lượng công việc.
+KET_QUA: Hệ thống hình ảnh đồng bộ, chuyên nghiệp trên mọi điểm chạm — từ thương hiệu đến lớp học.
