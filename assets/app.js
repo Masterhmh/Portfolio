@@ -386,3 +386,61 @@ addEventListener("keydown", e => {
 });
 
 loadProjects();
+
+/* ---------- terminal tương tác: gõ lệnh thật (chỉ desktop có chuột) ---------- */
+(function(){
+  var live = document.getElementById("termLive");
+  if (!live) return;
+  // điện thoại/màn hình cảm ứng tự tắt — mở bàn phím ảo để gõ lệnh rất bất tiện
+  if (!matchMedia("(hover:hover) and (pointer:fine)").matches) return;
+  if (matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+  var idle = document.getElementById("termIdle");
+  var out = document.getElementById("termOut");
+  var input = document.getElementById("termIn");
+  var hint = document.getElementById("termHint");
+  var body = live.closest(".term-body");
+  idle.hidden = true; live.hidden = false; hint.hidden = false;
+
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function print(html, cls){
+    var d = document.createElement("div");
+    if (cls) d.className = cls;
+    d.innerHTML = html;
+    out.appendChild(d);
+    body.scrollTop = body.scrollHeight;
+  }
+  var CMDS = {
+    help: function(){
+      return '<span class="t-cyan">Các lệnh có thể dùng:</span><br>' +
+        '&nbsp;&nbsp;<span class="t-green">whoami</span> — mình là ai<br>' +
+        '&nbsp;&nbsp;<span class="t-green">projects</span> — xem các dự án<br>' +
+        '&nbsp;&nbsp;<span class="t-green">contact</span> — thông tin liên hệ<br>' +
+        '&nbsp;&nbsp;<span class="t-green">cv</span> — mở trang CV<br>' +
+        '&nbsp;&nbsp;<span class="t-green">clear</span> — xóa màn hình';
+    },
+    whoami: function(){
+      return 'Hoàng Hùng — designer đồ họa đa mảng × kỹ thuật.<br>10+ năm thực chiến, mạnh nhất F&B (7+ năm), hiện phụ trách mảng 2D tại Namas.';
+    },
+    projects: function(){
+      return 'Kéo xuống mục <span class="t-cyan">DỰ ÁN TIÊU BIỂU</span> để xem các dự án — bấm vào từng dự án để xem ảnh và chi tiết.';
+    },
+    contact: function(){
+      return 'SĐT: <span class="t-amber">0964.843.943</span><br>Email: <span class="t-amber">masterhmh@gmail.com</span><br>Facebook: <span class="t-amber">facebook.com/masterhmh</span>';
+    },
+    cv: function(){ location.href = "cv.html"; return ""; }
+  };
+  print('Gõ <span class="t-cyan">help</span> rồi nhấn Enter để bắt đầu.', "t-dim");
+  live.addEventListener("click", function(){ input.focus(); });
+  input.addEventListener("keydown", function(e){
+    if (e.key !== "Enter") return;
+    var raw = input.value.trim();
+    input.value = "";
+    print('<span class="t-green">➜</span> <span class="t-cyan">~</span> ' + esc(raw));
+    if (!raw) return;
+    var cmd = raw.toLowerCase().split(/\s+/)[0];
+    if (cmd === "clear"){ out.innerHTML = ""; return; }
+    var fn = CMDS[cmd];
+    if (fn){ var r = fn(); if (r) print(r); }
+    else print('<span class="t-mag">Không có lệnh "' + esc(raw) + '".</span> Gõ <span class="t-cyan">help</span> để xem các lệnh.');
+  });
+})();

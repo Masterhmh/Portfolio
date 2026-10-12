@@ -114,6 +114,13 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 .t-green{color:var(--green)}.t-cyan{color:var(--cyan)}.t-dim{color:var(--dim)}.t-mag{color:var(--mag)}.t-amber{color:var(--amber)}
 .t-cursor{display:inline-block;animation:blink 1s steps(1) infinite;color:var(--green);font-weight:700}
 
+/* ---------- terminal tương tác: gõ lệnh thật ---------- */
+.term-body{max-height:400px;overflow-y:auto}
+.term-prompt{display:flex;align-items:center;gap:8px;margin-top:2px;cursor:text}
+#termIn{flex:1;min-width:0;background:transparent;border:0;outline:0;padding:0;color:var(--text);font:inherit;caret-color:var(--green)}
+#termOut>div{white-space:pre-wrap;word-break:break-word}
+.term-hint{margin:8px 0 0;font-size:12px}
+
 /* ---------- section headers ---------- */
 .sec-head{font-family:var(--mono);margin-bottom:30px}
 .sec-head .kicker{color:var(--mag);font-size:13px;letter-spacing:3px}
