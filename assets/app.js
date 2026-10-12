@@ -478,3 +478,47 @@ loadProjects();
     grid.querySelectorAll(".proj.tilting").forEach(untilt);
   });
 })();
+
+/* ---------- mưa ký tự matrix mờ ở hero ---------- */
+(function(){
+  var cv = document.getElementById("matrix");
+  if (!cv) return;
+  if (matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+  var hero = document.getElementById("home");
+  var ctx = cv.getContext("2d");
+  var chars = "アカサタナハマヤラワ0123456789ABCDEF$#*+-=<>".split("");
+  var coarse = matchMedia("(pointer:coarse)").matches; // điện thoại: thưa hơn cho nhẹ
+  var fs = coarse ? 14 : 16;
+  var drops = [], raf = 0, running = false;
+  function resize(){
+    cv.width = hero.clientWidth;
+    cv.height = hero.clientHeight;
+    var n = Math.max(1, Math.floor(cv.width / fs * (coarse ? 0.45 : 0.8)));
+    drops = [];
+    for (var i = 0; i < n; i++) drops.push(Math.random() * -60);
+  }
+  function frame(){
+    var light = document.documentElement.getAttribute("data-theme") === "light";
+    ctx.fillStyle = light ? "rgba(250,251,253,0.09)" : "rgba(4,6,12,0.09)";
+    ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.font = fs + "px monospace";
+    ctx.fillStyle = light ? "rgba(0,150,180,0.85)" : "rgba(0,229,255,0.85)";
+    for (var i = 0; i < drops.length; i++){
+      ctx.fillText(chars[(Math.random() * chars.length) | 0], i * fs, drops[i] * fs);
+      if (drops[i] * fs > cv.height && Math.random() > 0.976) drops[i] = 0;
+      drops[i]++;
+    }
+    raf = requestAnimationFrame(frame);
+  }
+  function start(){ if (!running){ running = true; frame(); } }
+  function stop(){ running = false; cancelAnimationFrame(raf); }
+  // chỉ chạy khi hero đang hiển thị + tab đang mở — tiết kiệm pin
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting) start(); else stop(); });
+  }).observe(hero);
+  document.addEventListener("visibilitychange", function(){
+    if (document.hidden) stop(); else start();
+  });
+  addEventListener("resize", resize);
+  resize(); start();
+})();
