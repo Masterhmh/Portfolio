@@ -1,0 +1,4 @@
+TEN: Pamika
+VAN_DE: Thương hiệu pizza đông lạnh cần bao bì và hình ảnh đủ hấp dẫn để nổi bật trên kệ hàng, đồng thời gợi được cảm giác ngon như pizza mới ra lò.
+GIAI_PHAP: Thiết kế bao bì và bộ hình ảnh sản phẩm bắt mắt, làm nổi bật độ tươi ngon của từng chiếc pizza.
+KET_QUA: Sản phẩm có diện mạo riêng, dễ nhận biết giữa các thương hiệu cùng kệ.

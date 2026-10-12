@@ -1,0 +1,4 @@
+TEN: Hiếu Presso
+VAN_DE: Quán cà phê kiêm đào tạo học viên cần hình ảnh vừa gần gũi với khách uống cà phê, vừa đủ chuyên nghiệp để tạo niềm tin cho người học nghề.
+GIAI_PHAP: Xây dựng nhận diện thống nhất cho cả hai mảng — từ logo, menu đến ấn phẩm lớp học.
+KET_QUA: Thương hiệu rõ chất riêng: khách đến uống nhớ, học viên đến học tin.
