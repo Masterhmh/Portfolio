@@ -444,3 +444,37 @@ loadProjects();
     else print('<span class="t-mag">Không có lệnh "' + esc(raw) + '".</span> Gõ <span class="t-cyan">help</span> để xem các lệnh.');
   });
 })();
+
+/* ---------- card dự án nghiêng 3D theo chuột (chỉ desktop có chuột) ---------- */
+(function(){
+  if (!matchMedia("(hover:hover) and (pointer:fine)").matches) return;
+  if (matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+  var grid = document.getElementById("proj-grid");
+  if (!grid) return;
+  var MAX = 7; // độ nghiêng tối đa (độ)
+  function tilt(card, e){
+    var r = card.getBoundingClientRect();
+    var px = (e.clientX - r.left) / r.width;
+    var py = (e.clientY - r.top) / r.height;
+    card.classList.add("tilting");
+    card.style.setProperty("--gx", (px * 100).toFixed(1) + "%");
+    card.style.setProperty("--gy", (py * 100).toFixed(1) + "%");
+    card.style.transform = "perspective(900px) rotateX(" + ((0.5 - py) * MAX).toFixed(2) +
+      "deg) rotateY(" + ((px - 0.5) * MAX).toFixed(2) + "deg) translateY(-6px)";
+  }
+  function untilt(card){
+    card.classList.remove("tilting");
+    card.style.transform = "";
+  }
+  grid.addEventListener("mousemove", function(e){
+    var card = e.target.closest(".proj");
+    if (card) tilt(card, e);
+  });
+  grid.addEventListener("mouseout", function(e){
+    var card = e.target.closest(".proj");
+    if (card && !card.contains(e.relatedTarget)) untilt(card);
+  });
+  grid.addEventListener("mouseleave", function(){
+    grid.querySelectorAll(".proj.tilting").forEach(untilt);
+  });
+})();

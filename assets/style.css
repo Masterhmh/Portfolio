@@ -121,6 +121,13 @@ h1 .glitch::after{color:var(--mag);z-index:-2;animation:gl2 2.7s infinite steps(
 #termOut>div{white-space:pre-wrap;word-break:break-word}
 .term-hint{margin:8px 0 0;font-size:12px}
 
+/* ---------- card dự án nghiêng 3D theo chuột ---------- */
+@media (hover:hover) and (pointer:fine){
+  .proj.tilting{transition:transform .1s ease-out,box-shadow .25s ease}
+  .proj.tilting::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:radial-gradient(520px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.10),transparent 46%)}
+}
+
 /* ---------- section headers ---------- */
 .sec-head{font-family:var(--mono);margin-bottom:30px}
 .sec-head .kicker{color:var(--mag);font-size:13px;letter-spacing:3px}
