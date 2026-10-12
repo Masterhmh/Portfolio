@@ -22,10 +22,12 @@ addEventListener("load", () => setTimeout(() => window.scrollTo(0, 0), 0));
   const fill = document.getElementById("boot-fill");
   const boot = document.getElementById("boot");
   let AC = null;
+  let bootAudible = false; // boot có phát ra tiếng thật không (trình duyệt có thể chặn tự phát tiếng)
   function beep(freq, dur, type, vol, delay){
     try{
       AC = AC || new (window.AudioContext || window.webkitAudioContext)();
-      if (AC.state === "suspended") AC.resume();
+      if (AC.state === "running") bootAudible = true;
+      else if (AC.state === "suspended") AC.resume();
       const t = AC.currentTime + (delay || 0);
       const o = AC.createOscillator(), g = AC.createGain();
       o.type = type || "square";
@@ -59,6 +61,26 @@ addEventListener("load", () => setTimeout(() => window.scrollTo(0, 0), 0));
       setTimeout(() => { boot.classList.remove("flash"); boot.classList.add("done"); }, 220);
     }
   }, 220);
+
+  // Trình duyệt (đặc biệt iPhone) cấm web tự phát tiếng khi người xem chưa thao tác,
+  // nên lần chạm/phím đầu tiên sẽ mở khóa âm thanh và phát tiếng chào boot.
+  let welcomed = false;
+  function unlockAudio(){
+    if (welcomed) return;
+    try{
+      AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+      const p = AC.resume();
+      const done = () => {
+        if (AC.state === "running" && !welcomed){
+          welcomed = true;
+          if (!bootAudible){ beep(880, 0.09, "sine", 0.05); beep(1318, 0.16, "sine", 0.05, 0.1); }
+        }
+      };
+      if (p && p.then) p.then(done).catch(()=>{});
+      else done();
+    }catch(e){}
+  }
+  ["pointerdown","keydown"].forEach(ev => addEventListener(ev, unlockAudio, {passive:true}));
 })();
 
 /* ---------- background: particle network (desktop only) ---------- */
