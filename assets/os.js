@@ -318,6 +318,21 @@ $("#os-desk").addEventListener("pointerdown", e => {
   });
 })();
 
+/* ---------- trình duyệt nội bộ: mở app ngay trong máy ---------- */
+const APP_URL = "https://masterhmh.github.io/Mockup/";
+function initBrowser(body){
+  const frame = $(".br-frame", body), loading = $(".br-loading", body);
+  if (!frame) return;
+  frame.addEventListener("load", () => {
+    let ok = false;
+    try { ok = frame.contentWindow.location.href !== "about:blank"; } catch (e) { ok = true; }
+    if (ok) loading.classList.add("done");
+  });
+  if (!frame.src) frame.src = APP_URL;
+  const re = $("[data-br='reload']", body);
+  if (re) re.addEventListener("click", () => { loading.classList.remove("done"); frame.src = APP_URL; });
+}
+
 /* ---------- terminal ---------- */
 let termReady = false, termInput = null, termOut = null, termBodyEl = null;function tEsc(s){ return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 function tPrint(html, cls){
