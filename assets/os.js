@@ -17,6 +17,34 @@ const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   });
 })();
 
+/* ---------- hình nền theo chế độ sáng/tối (folder Wallpapers trên GitHub) ---------- */
+const WP_SRC = {
+  dark:  { main: "https://images.weserv.nl/?url=raw.githubusercontent.com/Masterhmh/Portfolio/main/Wallpapers/Dark.jpg&w=1920&q=80&output=webp",  full: "Wallpapers/Dark.jpg" },
+  light: { main: "https://images.weserv.nl/?url=raw.githubusercontent.com/Masterhmh/Portfolio/main/Wallpapers/Light.jpg&w=1920&q=80&output=webp", full: "Wallpapers/Light.jpg" }
+};
+function wpApply(){
+  const theme = document.documentElement.dataset.osTheme === "light" ? "light" : "dark";
+  const src = WP_SRC[theme];
+  $$(".wallpaper").forEach(el => {
+    if (el.dataset.wp === theme) return;
+    el.dataset.wp = theme;
+    let layers = $$(".wp-l", el);
+    if (!layers.length){
+      el.insertAdjacentHTML("beforeend", '<div class="wp-l"></div><div class="wp-l"></div>');
+      layers = $$(".wp-l", el);
+    }
+    const front = layers.find(l => l.classList.contains("on")) || layers[0];
+    const back = layers.find(l => l !== front) || layers[1];
+    const show = u => { back.style.backgroundImage = 'url("' + u + '")'; back.classList.add("on"); front.classList.remove("on"); };
+    const img = new Image();
+    img.onload = () => show(src.main);
+    img.onerror = () => { const i2 = new Image(); i2.onload = () => show(src.full); i2.onerror = () => show(src.full); i2.src = src.full; };
+    img.src = src.main;
+  });
+}
+new MutationObserver(wpApply).observe(document.documentElement, { attributes: true, attributeFilter: ["data-os-theme"] });
+wpApply();
+
 /* ---------- đồng hồ ---------- */
 (function(){
   const DAYS = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
@@ -115,7 +143,7 @@ const WINCONF = {
   about:    { title: "Hồ sơ — Hoàng Hùng", w: 700, h: 610 },
   skills:   { title: "Kỹ năng", w: 660, h: 640 },
   journey:  { title: "Hành trình", w: 640, h: 580 },
-  why:      { title: "Vì sao chọn tôi", w: 880, h: 660 },
+  why:      { title: "Lý do tôi ứng tuyển Coolmate", w: 880, h: 660 },
   projects: { title: "Dự án", w: 920, h: 640 },
   cv:       { title: "CV — Hoàng Hùng", w: 620, h: 500 },
   contact:  { title: "Liên hệ", w: 520, h: 540 },
@@ -321,13 +349,13 @@ function runCmd(raw){
   const parts = raw.split(/\s+/), cmd = parts[0], arg = parts[1] || "";
   const OPENABLE = { "ho-so": "about", "about": "about", "ky-nang": "skills", "skills": "skills",
     "hanh-trinh": "journey", "journey": "journey", "du-an": "projects", "projects": "projects",
-    "vi-sao": "why", "why": "why", "lien-he": "contact", "contact": "contact", "cv": "cv", "chao": "welcome" };
+    "vi-sao": "why", "ly-do": "why", "ung-tuyen": "why", "why": "why", "lien-he": "contact", "contact": "contact", "cv": "cv", "chao": "welcome" };
   if (cmd === "clear"){ termOut.innerHTML = ""; return; }
   if (cmd === "help"){
     tPrint("<span class='cyn'>Các lệnh có thể dùng:</span>\n" +
       "  <span class='grn'>whoami</span>   — mình là ai\n" +
       "  <span class='grn'>ls</span>       — xem các thư mục trên máy\n" +
-      "  <span class='grn'>open</span> du-an | ho-so | ky-nang | vi-sao | lien-he — mở cửa sổ\n" +
+      "  <span class='grn'>open</span> du-an | ho-so | ky-nang | ly-do | lien-he — mở cửa sổ\n" +
       "  <span class='grn'>projects</span> — mở thư mục dự án\n" +
       "  <span class='grn'>contact</span>  — thông tin liên hệ\n" +
       "  <span class='grn'>cv</span>       — mở trang CV\n" +
