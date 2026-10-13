@@ -77,8 +77,8 @@ img{-webkit-user-drag:none}
 /* ---------- DESKTOP ---------- */
 #os-desk{position:fixed;inset:0;background:var(--wall);overflow:hidden}
 .wallpaper{z-index:0}
-html[data-os-theme="dark"] .wallpaper{filter:brightness(.94)}
-html[data-os-theme="light"] .wallpaper{filter:brightness(1.07) saturate(1.06)}
+html[data-os-theme="dark"] #os-desk .wallpaper{filter:brightness(.94)}
+html[data-os-theme="light"] #os-desk .wallpaper{filter:brightness(1.07) saturate(1.06)}
 #os-desk::before{content:"";position:absolute;inset:-18%;pointer-events:none;z-index:1;
   background:radial-gradient(560px 380px at 28% 32%,rgba(255,255,255,.16),transparent 65%);
   animation:glowmove 26s ease-in-out infinite alternate}
