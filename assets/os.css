@@ -382,3 +382,19 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
   #os-desk::before{animation:none}
   .win{transition:none}
 }
+
+/* ---------- trinh duyet noi bo (Safari trong may) ---------- */
+.browser{display:flex;flex-direction:column;height:100%;background:var(--win-bg)}
+.br-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--win-line);background:var(--bar-bg)}
+.br-btn{width:32px;height:32px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:9px;color:var(--win-text);background:transparent;border:0;cursor:pointer;padding:0}
+.br-btn:hover{background:rgba(127,127,140,.18)}
+.br-btn svg{width:17px;height:17px}
+.br-url{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(127,127,140,.16);border-radius:9px;padding:6px 12px;font-size:12.5px;font-weight:600;color:var(--win-text);min-width:0}
+.br-url svg{width:12px;height:12px;flex:none;opacity:.7}
+.br-url span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.br-view{position:relative;flex:1;min-height:0;background:#fff}
+.br-frame{width:100%;height:100%;border:0;display:block;background:#fff}
+.br-loading{position:absolute;inset:0;display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center;background:var(--win-bg);color:var(--win-dim);font-size:13.5px;font-weight:600;z-index:2;transition:opacity .3s}
+.br-loading.done{opacity:0;pointer-events:none}
+.br-spin{width:30px;height:30px;border-radius:50%;border:3px solid var(--win-line);border-top-color:var(--accent);animation:brspin .8s linear infinite}
+@keyframes brspin{to{transform:rotate(360deg)}}
