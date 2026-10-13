@@ -292,7 +292,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .show-bar i:nth-child(2){background:var(--amber,#ffb300)}
 .show-bar i:nth-child(3){background:var(--green,#00ff9d)}
 .show-bar span{margin-left:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.show-img{flex:1;min-height:340px}
+.show-img{flex:1;min-height:340px;background-color:#05080f}
 @media(max-width:600px){.show-img{min-height:230px}}
 .show-info{padding:30px 32px;display:flex;flex-direction:column}
 .show-tag{font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--mag);margin-bottom:14px}
