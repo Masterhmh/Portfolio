@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/os.css?v=4">
+<link rel="stylesheet" href="assets/os.css?v=5">
 <link rel="stylesheet" href="assets/wallpaper.css?v=3">
 <link rel="stylesheet" href="assets/avatar.css">
 <link rel="stylesheet" href="assets/showcase.css?v=43">
@@ -140,15 +140,15 @@
   <!-- dock -->
   <div id="dock" role="toolbar" aria-label="Dock ứng dụng">
     <button class="dock-app" data-open="projects" data-name="Dự án">
-      <span class="ic-wrap g-finder"><svg viewBox="0 0 24 24"><path d="M4 5 a2 2 0 0 1 2-2 h4 l2 2.4 h6 a2 2 0 0 1 2 2 V18 a2 2 0 0 1-2 2 H6 a2 2 0 0 1-2-2 Z" fill="none" stroke="#fff" stroke-width="1.8"/></svg></span>
+      <span class="ic-wrap ic-flat"><svg class="full" viewBox="0 0 48 48"><defs><linearGradient id="gFinder" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#63d2ff"/><stop offset="1" stop-color="#0a6cff"/></linearGradient></defs><rect width="48" height="48" rx="11" fill="url(#gFinder)"/><path d="M24 0h13a11 11 0 0 1 11 11v26a11 11 0 0 1-11 11H24Z" fill="#ffffff" opacity=".16"/><path d="M17.5 14v8M30.5 14v8" stroke="#083a66" stroke-width="3" stroke-linecap="round"/><path d="M13.5 30c3.2 4.4 6.9 6.4 10.5 6.4s7.3-2 10.5-6.4" stroke="#083a66" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span>
       <i class="dot"></i>
     </button>
     <button class="dock-app" data-open="about" data-name="Hồ sơ">
-      <span class="ic-wrap g-blue"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6" fill="#fff"/><path d="M5 19c1.4-3.2 4-4.6 7-4.6s5.6 1.4 7 4.6" fill="#fff"/></svg></span>
+      <span class="ic-wrap ic-flat"><svg class="full" viewBox="0 0 48 48"><defs><linearGradient id="gContact" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8c2cc"/><stop offset="1" stop-color="#77808c"/></linearGradient></defs><rect width="48" height="48" rx="11" fill="url(#gContact)"/><rect x="39" y="8" width="4.6" height="8" rx="2.3" fill="#ff5f57"/><rect x="39" y="20" width="4.6" height="8" rx="2.3" fill="#febc2e"/><rect x="39" y="32" width="4.6" height="8" rx="2.3" fill="#28c840"/><circle cx="20" cy="17.5" r="6.8" fill="#fff"/><path d="M7.5 39c2.6-6.4 7.1-9.2 12.5-9.2s9.9 2.8 12.5 9.2Z" fill="#fff"/></svg></span>
       <i class="dot"></i>
     </button>
     <button class="dock-app" data-open="skills" data-name="Kỹ năng">
-      <span class="ic-wrap g-purple"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L9.8 22 19 10h-6.5Z" fill="#fff"/></svg></span>
+      <span class="ic-wrap ic-flat"><svg class="full" viewBox="0 0 48 48"><defs><linearGradient id="gLaunch" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a5a64"/><stop offset="1" stop-color="#26262c"/></linearGradient></defs><rect width="48" height="48" rx="11" fill="url(#gLaunch)"/><g fill="#f2f2f7"><rect x="9" y="9" width="8" height="8" rx="2.2"/><rect x="20" y="9" width="8" height="8" rx="2.2"/><rect x="31" y="9" width="8" height="8" rx="2.2"/><rect x="9" y="20" width="8" height="8" rx="2.2"/><rect x="20" y="20" width="8" height="8" rx="2.2"/><rect x="31" y="20" width="8" height="8" rx="2.2"/><rect x="9" y="31" width="8" height="8" rx="2.2"/><rect x="20" y="31" width="8" height="8" rx="2.2"/><rect x="31" y="31" width="8" height="8" rx="2.2"/></g></svg></span>
       <i class="dot"></i>
     </button>
     <button class="dock-app" data-open="why" data-name="Vì sao chọn tôi">
@@ -170,7 +170,15 @@
       <span class="ic-wrap g-fb"><b>f</b></span>
     </a>
     <button class="dock-app" data-open="contact" data-name="Liên hệ">
-      <span class="ic-wrap g-green"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H13l-4.2 3.8c-.5.4-1.3.1-1.3-.6V16H6.5A2.5 2.5 0 0 1 4 13.5Z" fill="#fff"/></svg></span>
+      <span class="ic-wrap g-green"><svg viewBox="0 0 48 48" style="width:34px;height:34px"><path d="M24 7C14.6 7 7 13.6 7 21.7c0 4.6 2.5 8.7 6.4 11.3-.4 2.6-1.5 5.1-3.2 7.2 3.7-.4 7.3-1.9 10-4 1.2.2 2.5.3 3.8.3 9.4 0 17-6.6 17-14.8S33.4 7 24 7Z" fill="#fff"/></svg></span>
+      <i class="dot"></i>
+    </button>
+    <span class="dock-sep" aria-hidden="true"></span>
+    <a class="dock-app" href="index.html" data-name="Giao diện thường">
+      <span class="ic-wrap ic-clear"><svg class="full" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21.5" fill="#fdfdfd"/><circle cx="24" cy="24" r="21.5" fill="none" stroke="#c7c7cc" stroke-width="1.4"/><path d="M31.5 16.5 26.8 26.8 16.5 31.5l4.7-10.3Z" fill="#ff3b30"/><path d="M16.5 31.5l4.7-10.3 10.3-4.7-4.7 10.3Z" fill="#d8d8de"/><circle cx="24" cy="24" r="2" fill="#fff" stroke="#8e8e93" stroke-width="1"/></svg></span>
+    </a>
+    <button class="dock-app" data-open="trash" data-name="Thùng rác">
+      <span class="ic-wrap ic-clear"><svg class="full" viewBox="0 0 48 48"><path d="M17.5 11.5 20 6.8h8l2.5 4.7Z" fill="#ffffff" stroke="#d2d2da" stroke-width="1"/><path d="M14.5 15.5h19l-1.7 23.4a4.5 4.5 0 0 1-4.5 4.1h-6.6a4.5 4.5 0 0 1-4.5-4.1Z" fill="#ececf1" fill-opacity=".92" stroke="#aeaeb8" stroke-width="1.2"/><rect x="11" y="11.5" width="26" height="4.2" rx="2.1" fill="#cfcfd8"/><path d="M20.5 12V9.8A2.3 2.3 0 0 1 22.8 7.5h2.4a2.3 2.3 0 0 1 2.3 2.3V12" fill="none" stroke="#aeaeb8" stroke-width="1.6"/><path d="M19.5 21v13.5M24 21v13.5M28.5 21v13.5" stroke="#b9b9c4" stroke-width="2" stroke-linecap="round"/></svg></span>
       <i class="dot"></i>
     </button>
   </div>
@@ -332,6 +340,17 @@
   </div>
 </template>
 
+<template id="src-trash">
+  <div class="c-pad" style="text-align:center;padding-top:42px">
+    <h2 style="font-size:22px;font-weight:800;margin-bottom:12px">Thùng rác trống</h2>
+    <p style="text-align:center;max-width:340px;margin:0 auto 8px">Không có gì để xóa ở đây cả — chỉ có việc để làm và câu chuyện để kể. Cần thiết kế gì cứ nhắn mình.</p>
+    <div class="w-btns" style="justify-content:center">
+      <button class="wbtn primary" data-open="contact">Liên hệ làm việc</button>
+      <button class="wbtn" data-open="projects">Xem dự án</button>
+    </div>
+  </div>
+</template>
+
 <template id="src-terminal">
   <div class="term">
     <div class="term-out" id="os-term-out"></div>
@@ -347,6 +366,6 @@
   <button class="lb-nav" id="os-lb-next" aria-label="Ảnh sau">›</button>
 </div>
 
-<script src="assets/os.js?v=3"></script>
+<script src="assets/os.js?v=5"></script>
 </body>
 </html>

@@ -120,6 +120,7 @@ const WINCONF = {
   cv:       { title: "CV — Hoàng Hùng", w: 620, h: 500 },
   contact:  { title: "Liên hệ", w: 520, h: 540 },
   terminal: { title: "Terminal — hmh", w: 640, h: 450 },
+  trash:    { title: "Thùng rác", w: 440, h: 340 },
   case:     { title: "Dự án", w: 780, h: 660 }
 };
 const openWins = new Map();
@@ -168,7 +169,6 @@ function openWin(id, opts){
   winsEl.appendChild(win);
   openWins.set(id, win);
   focusWin(win);
-  requestAnimationFrame(() => requestAnimationFrame(() => win.classList.add("show")));
   if (isMobile()) win.classList.add("max");
   wireWin(win, bar);
   dockDots();
@@ -238,6 +238,29 @@ document.addEventListener("dblclick", e => {
   const t = e.target.closest(".dicon");
   if (t) openWin(t.dataset.open);
 });
+/* dự phòng cảm ứng: chạm nhả là mở ngay (một số trình duyệt trong app nuốt sự kiện click) */
+let lastTouchOpen = { id: null, t: 0 };
+let touchStartPos = null;
+document.addEventListener("pointerdown", e => {
+  if (e.pointerType === "touch" || e.pointerType === "pen") touchStartPos = { x: e.clientX, y: e.clientY };
+}, true);
+document.addEventListener("pointerup", e => {
+  if (e.pointerType !== "touch" && e.pointerType !== "pen") return;
+  if (touchStartPos && Math.hypot(e.clientX - touchStartPos.x, e.clientY - touchStartPos.y) > 12) return; // vừa vuốt cuộn, không phải chạm mở
+  const t = e.target.closest("[data-open]");
+  if (!t || t.closest(".tl-lights")) return;
+  lastTouchOpen = { id: t.dataset.open, t: Date.now() };
+  openWin(t.dataset.open);
+  if (t.classList.contains("dicon")) t.classList.remove("sel");
+});
+document.addEventListener("click", e => {
+  // click theo sau pointerup cảm ứng cho cùng một cửa sổ thì bỏ qua để khỏi mở 2 lần
+  const t = e.target.closest("[data-open]");
+  if (t && lastTouchOpen.id === t.dataset.open && Date.now() - lastTouchOpen.t < 700){
+    lastTouchOpen = { id: null, t: 0 };
+    e.stopImmediatePropagation();
+  }
+}, true);
 $("#os-desk").addEventListener("pointerdown", e => {
   if (!e.target.closest(".dicon")) $$(".dicon").forEach(d => d.classList.remove("sel"));
 });
