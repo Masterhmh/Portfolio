@@ -149,6 +149,7 @@ const WINCONF = {
   contact:  { title: "Liên hệ", w: 520, h: 540 },
   terminal: { title: "Terminal — hmh", w: 640, h: 450 },
   trash:    { title: "Thùng rác", w: 440, h: 340 },
+  browser:  { title: "Safari — Xưởng In Mẫu", w: 1120, h: 750 },
   case:     { title: "Dự án", w: 780, h: 660 }
 };
 const openWins = new Map();
@@ -202,6 +203,7 @@ function openWin(id, opts){
   dockDots();
   if (id === "skills") setTimeout(() => $$(".sbar i", body).forEach(b => b.style.width = b.dataset.w + "%"), 220);
   if (id === "projects") initProjects(body);
+  if (id === "browser") initBrowser(body);
   if (id === "terminal") initTerm(body);
   return win;
 }
