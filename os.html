@@ -8,7 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/os.css?v=2">
+<link rel="stylesheet" href="assets/os.css?v=3">
+<link rel="stylesheet" href="assets/wallpaper.css?v=3">
 <link rel="stylesheet" href="assets/avatar.css">
 <link rel="stylesheet" href="assets/showcase.css?v=43">
 <link rel="preconnect" href="https://raw.githubusercontent.com">
@@ -35,7 +36,7 @@
 
 <!-- ================= LOCK SCREEN ================= -->
 <div id="os-lock" hidden>
-  <div class="lock-blur"></div>
+  <div class="lock-blur wallpaper"></div>
   <div class="lock-center">
     <div class="lock-date" id="lock-date">Thứ Ba, 13 tháng 10</div>
     <div class="lock-clock" id="lock-clock">16:54</div>
@@ -53,6 +54,7 @@
 
 <!-- ================= DESKTOP ================= -->
 <div id="os-desk" hidden>
+  <div class="wallpaper" aria-hidden="true"></div>
 
   <!-- menu bar -->
   <header id="menubar">
@@ -81,10 +83,21 @@
   <!-- widgets -->
   <aside id="widgets">
     <div class="widget w-clock">
-      <div class="w-time" id="w-time">16:54</div>
-      <div class="w-date" id="w-date">Thứ Ba, 13/10</div>
+      <div class="w-top">
+        <div>
+          <div class="w-time" id="w-time">16:54</div>
+          <div class="w-date" id="w-date">Thứ Ba, 13/10</div>
+        </div>
+        <div class="w-weather" id="w-weather">
+          <div class="ww-temp"><span id="ww-icon">⛅</span> <span id="ww-temp">--°</span></div>
+          <div class="ww-cond" id="ww-cond">Đang tải thời tiết...</div>
+          <div class="ww-loc" id="ww-loc">Hà Nội</div>
+          <div class="ww-extra" id="ww-extra"></div>
+        </div>
+      </div>
       <div class="w-sub">Chào mừng đến với máy của Hùng</div>
     </div>
+    <div class="widget w-cal" id="w-cal" aria-label="Lịch tháng"></div>
     <div class="widget w-stats">
       <div class="w-stat"><b>10+</b><span>năm thực chiến</span></div>
       <div class="w-stat"><b>7+</b><span>năm chuyên F&amp;B</span></div>
@@ -334,6 +347,6 @@
   <button class="lb-nav" id="os-lb-next" aria-label="Ảnh sau">›</button>
 </div>
 
-<script src="assets/os.js?v=2"></script>
+<script src="assets/os.js?v=3"></script>
 </body>
 </html>

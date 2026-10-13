@@ -522,6 +522,70 @@ addEventListener("keydown", e => {
   }
 });
 
+/* ---------- widget lịch tháng ---------- */
+(function(){
+  const el = $("#w-cal");
+  if (!el) return;
+  const now = new Date(), y = now.getFullYear(), m = now.getMonth(), today = now.getDate();
+  const first = (new Date(y, m, 1).getDay() + 6) % 7; // thứ Hai = 0
+  const days = new Date(y, m + 1, 0).getDate();
+  const prevDays = new Date(y, m, 0).getDate();
+  let cells = "";
+  ["T2", "T3", "T4", "T5", "T6", "T7", "CN"].forEach(d => cells += "<i>" + d + "</i>");
+  for (let i = 0; i < first; i++) cells += "<b class='dim'>" + (prevDays - first + 1 + i) + "</b>";
+  for (let d = 1; d <= days; d++) cells += "<b class='" + (d === today ? "today" : "") + "'>" + d + "</b>";
+  const tail = (7 - (first + days) % 7) % 7;
+  for (let d = 1; d <= tail; d++) cells += "<b class='dim'>" + d + "</b>";
+  el.innerHTML = "<div class='cal-head'><b>Tháng " + (m + 1) + " " + y + "</b><span>Hôm nay: " + today + "/" + (m + 1) + "</span></div>" +
+    "<div class='cal-grid'>" + cells + "</div>";
+})();
+
+/* ---------- widget thời tiết (dữ liệu thật, Open-Meteo) ---------- */
+(function(){
+  const WMO = { 0: ["Trời quang", "☀️"], 1: ["Ít mây", "🌤️"], 2: ["Nhiều mây", "⛅"], 3: ["Âm u", "☁️"],
+    45: ["Sương mù", "🌫️"], 48: ["Sương mù", "🌫️"], 51: ["Mưa phùn nhẹ", "🌦️"], 53: ["Mưa phùn", "🌦️"],
+    55: ["Mưa phùn", "🌦️"], 61: ["Mưa nhẹ", "🌧️"], 63: ["Mưa vừa", "🌧️"], 65: ["Mưa to", "🌧️"],
+    71: ["Tuyết nhẹ", "🌨️"], 73: ["Có tuyết", "🌨️"], 75: ["Tuyết dày", "🌨️"], 80: ["Mưa rào nhẹ", "🌦️"],
+    81: ["Mưa rào", "🌧️"], 82: ["Mưa rào lớn", "⛈️"], 95: ["Có dông", "⛈️"], 96: ["Dông, mưa đá", "⛈️"], 99: ["Dông, mưa đá", "⛈️"] };
+  let lastPos = { lat: 21.0285, lon: 105.8542, label: "Hà Nội" };
+  async function loadWeather(){
+    const { lat, lon, label } = lastPos;
+    try{
+      const u = "https://api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + lon +
+        "&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m" +
+        "&daily=temperature_2m_max,temperature_2m_min&timezone=auto";
+      const r = await fetch(u);
+      if (!r.ok) throw new Error("wx");
+      const j = await r.json();
+      const cur = j.current, info = WMO[cur.weather_code] || ["—", "⛅"];
+      $("#ww-icon").textContent = info[1];
+      $("#ww-temp").textContent = Math.round(cur.temperature_2m) + "°";
+      $("#ww-cond").textContent = info[0];
+      $("#ww-loc").textContent = label;
+      $("#ww-extra").textContent =
+        "Cao " + Math.round(j.daily.temperature_2m_max[0]) + "° · Thấp " + Math.round(j.daily.temperature_2m_min[0]) + "°" +
+        " · Ẩm " + Math.round(cur.relative_humidity_2m) + "% · Gió " + Math.round(cur.wind_speed_10m) + " km/h";
+    }catch(e){
+      $("#ww-cond").textContent = "Chưa tải được thời tiết";
+    }
+  }
+  loadWeather();
+  setInterval(loadWeather, 30 * 60 * 1000);
+  if (navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(async pos => {
+      lastPos = { lat: pos.coords.latitude.toFixed(4), lon: pos.coords.longitude.toFixed(4), label: "Vị trí của bạn" };
+      try{
+        const r = await fetch("https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" +
+          lastPos.lat + "&longitude=" + lastPos.lon + "&localityLanguage=vi");
+        const j = await r.json();
+        const name = j.city || j.locality || j.principalSubdivision;
+        if (name) lastPos.label = name;
+      }catch(e){}
+      loadWeather();
+    }, () => {}, { timeout: 7000, maximumAge: 600000 });
+  }
+})();
+
 /* phím tắt: gõ cmd/ctrl + k mở terminal */
 addEventListener("keydown", e => {
   if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k"){
