@@ -76,9 +76,9 @@ img{-webkit-user-drag:none}
 
 /* ---------- DESKTOP ---------- */
 #os-desk{position:fixed;inset:0;background:var(--wall);overflow:hidden}
-.wallpaper{z-index:0}
-html[data-os-theme="dark"] #os-desk .wallpaper{filter:brightness(.94)}
-html[data-os-theme="light"] #os-desk .wallpaper{filter:brightness(1.07) saturate(1.06)}
+.wallpaper{z-index:0;overflow:hidden;background-color:#0b0b16}
+.wp-l{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .8s ease}
+.wp-l.on{opacity:1}
 #os-desk::before{content:"";position:absolute;inset:-18%;pointer-events:none;z-index:1;
   background:radial-gradient(560px 380px at 28% 32%,rgba(255,255,255,.16),transparent 65%);
   animation:glowmove 26s ease-in-out infinite alternate}
@@ -117,7 +117,7 @@ html[data-os-theme="light"] #os-desk .wallpaper{filter:brightness(1.07) saturate
 .w-date{font-size:15px;font-weight:600;color:var(--accent);margin-top:4px}
 .w-sub{font-size:13px;color:var(--win-dim);margin-top:8px}
 .w-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
-.w-weather{text-align:right;flex:none}
+.w-weather{text-align:right;flex:1;min-width:0}
 .ww-temp{font-size:31px;font-weight:800;line-height:1.05}
 .ww-cond{font-size:13px;font-weight:600;margin-top:2px}
 .ww-loc{font-size:12px;color:var(--accent);font-weight:600}
@@ -250,6 +250,11 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 .tl-item p{font-size:14.5px;margin:0}
 
 /* why */
+.why-title{font-size:24px;font-weight:800;margin-bottom:12px}
+.why-intro{font-size:14.5px;line-height:1.75;color:var(--win-text);max-width:730px;margin-bottom:20px}
+.why-apply{margin-top:24px}
+.why-apply h3{font-size:15px;font-weight:800;color:var(--accent);margin-bottom:12px;letter-spacing:.4px}
+.why-end{margin-top:22px;font-size:14.5px;line-height:1.7;font-weight:600;max-width:730px}
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:640px){.why-grid{grid-template-columns:1fr}}
 .why-card{background:var(--card-bg);border:1px solid var(--win-line);border-radius:14px;padding:18px}
