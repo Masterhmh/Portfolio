@@ -166,7 +166,8 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 }
 
 /* ---------- WINDOWS ---------- */
-#wins{position:absolute;inset:32px 0 0 0;z-index:10}
+#wins{position:absolute;inset:32px 0 0 0;z-index:10;pointer-events:none}
+.win{pointer-events:auto}
 .win{position:absolute;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;
   background:var(--win-bg);color:var(--win-text);box-shadow:var(--shadow);
   -webkit-backdrop-filter:blur(26px) saturate(1.5);backdrop-filter:blur(26px) saturate(1.5);
