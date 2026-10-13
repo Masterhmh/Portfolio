@@ -374,7 +374,7 @@ function initProjects(body){
   let allProjects = [];
   search.addEventListener("input", () => {
     const q = search.value.trim().toLowerCase();
-    $$(".pcard", grid).forEach(c =>
+    $$(".prow", grid).forEach(c =>
       c.style.display = c.dataset.name.toLowerCase().includes(q) ? "" : "none");
   });
   function render(projects){
@@ -384,14 +384,14 @@ function initProjects(body){
     projects.forEach(p => {
       const title = p.name.replace(/[-_]+/g, " ");
       const el = document.createElement("button");
-      el.className = "pcard"; el.dataset.name = title;
-      const img = document.createElement("img");
-      img.loading = "lazy"; img.alt = title;
-      smartImg(img, p.name, p.imgs[0], 800);
-      const pb = document.createElement("div"); pb.className = "pb";
+      el.className = "prow"; el.dataset.name = title;
+      el.innerHTML = '<svg class="prow-ic" viewBox="0 0 64 48"><path class="f-back" d="M4 8 a4 4 0 0 1 4-4 h14 l6 7 h32 a4 4 0 0 1 4 4 v25 a4 4 0 0 1-4 4 H8 a4 4 0 0 1-4-4 Z"/><path class="f-front" d="M2 16 a4 4 0 0 1 4-4 h52 a4 4 0 0 1 4 4 l-4 22 a4 4 0 0 1-4 3 H8 a4 4 0 0 1-4-3 Z"/></svg>';
+      const tx = document.createElement("div"); tx.className = "prow-tx";
       const h = document.createElement("h4"); h.textContent = title;
-      const d = document.createElement("p"); d.textContent = "Bấm để xem chi tiết";
-      pb.append(h, d); el.append(img, pb);
+      const d = document.createElement("p"); d.textContent = "Bấm để xem chi tiết và ảnh dự án";
+      tx.append(h, d);
+      const go = document.createElement("span"); go.className = "prow-go"; go.textContent = "›";
+      el.append(tx, go);
       el.addEventListener("click", () => openCase(p, h.textContent));
       grid.appendChild(el);
       getInfo(p.name).then(info => {
