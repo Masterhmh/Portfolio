@@ -137,7 +137,7 @@ async function loadProjects(){
     const d = document.createElement("p");
     d.textContent = (p.info && p.info.VAN_DE) || "Bấm để xem ảnh và chi tiết dự án.";
     const link = document.createElement("span");
-    link.className = "proj-link"; link.textContent = p.info ? "mở_chi_tiết ▸" : "xem_ảnh ▸";
+    link.className = "proj-link"; link.textContent = p.info ? "Xem chi tiết" : "Xem ảnh";
     body.append(h, d, link);
     el.append(top, body);
     el.addEventListener("click", () => openModal(p, title));
@@ -159,7 +159,7 @@ async function loadProjects(){
         p.info = info;
         if (info.TEN) h.textContent = info.TEN;
         if (info.VAN_DE) d.textContent = info.VAN_DE;
-        link.textContent = "mở_chi_tiết ▸";
+        link.textContent = "Xem chi tiết";
       }).catch(() => {});
     });
   }

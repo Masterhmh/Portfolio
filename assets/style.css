@@ -28,7 +28,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--disp);overflow-x:h
 /* ---------- layout ---------- */
 main{position:relative;z-index:2}
 .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
-section{padding:70px 0;position:relative}
+section{padding:46px 0;position:relative}
 
 /* ---------- nav ---------- */
 nav{position:fixed;top:0;left:0;right:0;z-index:50;
@@ -47,11 +47,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;
 @media(max-width:760px){.nav-links{display:none}}
 
 /* ---------- hero ---------- */
-#home{min-height:100vh;display:flex;align-items:center;padding-top:76px;position:relative;overflow:hidden}
+#home{display:flex;align-items:center;padding:138px 0 54px;position:relative;overflow:hidden}
 #home::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(720px 420px at 12% -6%,rgba(0,113,227,.16),transparent 62%),
-             radial-gradient(680px 460px at 88% 4%,rgba(191,90,242,.10),transparent 62%),
-             radial-gradient(560px 420px at 55% 108%,rgba(48,209,88,.07),transparent 62%)}
+  -webkit-mask-image:linear-gradient(180deg,#000 52%,transparent 97%);mask-image:linear-gradient(180deg,#000 52%,transparent 97%);
+  background:radial-gradient(720px 420px at 12% -6%,rgba(0,113,227,.11),transparent 62%),
+             radial-gradient(680px 460px at 88% 4%,rgba(191,90,242,.06),transparent 62%)}
 [data-theme="light"] #home::before{
   background:radial-gradient(720px 420px at 12% -6%,rgba(0,113,227,.10),transparent 62%),
              radial-gradient(680px 460px at 88% 4%,rgba(191,90,242,.07),transparent 62%)}
@@ -96,13 +96,13 @@ h1 .hl{color:var(--accent)}
 }
 
 /* ---------- section headers ---------- */
-.sec-head{margin-bottom:32px}
+.sec-head{margin-bottom:26px}
 .sec-head .kicker{color:var(--accent);font-size:13px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase}
 .sec-head h2{font-size:clamp(30px,4vw,44px);margin-top:8px;font-weight:700;letter-spacing:-1px}
 .sec-head p{color:var(--dim);margin-top:10px;font-size:14px}
 
 /* ---------- stats ---------- */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-20px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
 .stat{background:var(--panel);border:1px solid var(--line);padding:28px 20px;text-align:center;border-radius:20px;
   transition:transform .25s,box-shadow .25s}
