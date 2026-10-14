@@ -212,7 +212,7 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
   border:3px solid var(--win-line);box-shadow:0 12px 30px rgba(0,0,0,.3)}
 .w-ava .avatar-photo,.a-ava .avatar-photo{width:100%;height:100%;background-size:cover;background-position:center}
 .welcome h2{font-size:25px;font-weight:800;margin-bottom:12px}
-.welcome .w-lead{max-width:520px;margin:0 auto 10px;text-align:center}
+.welcome .w-lead{max-width:520px;margin:0 auto 10px;text-align:justify}
 .welcome .w-sub{color:var(--win-dim);text-align:center}
 .welcome .w-btns{justify-content:center}
 
@@ -435,3 +435,7 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 /* can deu hai ben: doan van thang hang voi cac khung */
 .about p,.why p,.journey p{text-align:justify}
 .why-card{height:100%}
+
+/* cua so Xin chao: doan gioi thieu can deu hai ben nhu cac cua so khac */
+.welcome .w-sub{text-align:justify;max-width:520px;margin-left:auto;margin-right:auto}
+.welcome .w-actions{justify-content:center}
