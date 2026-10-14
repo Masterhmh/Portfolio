@@ -254,6 +254,8 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 /* why */
 .why-title{font-size:24px;font-weight:800;margin-bottom:12px}
 .why-intro{font-size:14.5px;line-height:1.75;color:var(--win-text);max-width:730px;margin-bottom:20px}
+.why-intro2{margin-top:-8px}
+.pod-lead{margin-top:14px;font-size:13.5px;line-height:1.7;max-width:730px}
 .why-apply{margin-top:24px}
 .why-apply h3{font-size:15px;font-weight:800;color:var(--accent);margin-bottom:12px;letter-spacing:.4px}
 .why-end{margin-top:22px;font-size:14.5px;line-height:1.7;font-weight:600;max-width:730px}

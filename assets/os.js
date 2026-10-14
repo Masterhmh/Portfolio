@@ -150,6 +150,7 @@ const WINCONF = {
   terminal: { title: "Terminal — hmh", w: 640, h: 450 },
   trash:    { title: "Thùng rác", w: 440, h: 340 },
   browser:  { title: "Safari — Xưởng In Mẫu", w: 1120, h: 750 },
+  browsercv:{ title: "Safari — CV Hoàng Hùng", w: 1000, h: 780 },
   case:     { title: "Dự án", w: 780, h: 660 }
 };
 const openWins = new Map();
@@ -203,7 +204,7 @@ function openWin(id, opts){
   dockDots();
   if (id === "skills") setTimeout(() => $$(".sbar i", body).forEach(b => b.style.width = b.dataset.w + "%"), 220);
   if (id === "projects") initProjects(body);
-  if (id === "browser") initBrowser(body);
+  if (id === "browser" || id === "browsercv") initBrowser(body);
   if (id === "terminal") initTerm(body);
   return win;
 }
@@ -323,14 +324,16 @@ const APP_URL = "https://masterhmh.github.io/Mockup/";
 function initBrowser(body){
   const frame = $(".br-frame", body), loading = $(".br-loading", body);
   if (!frame) return;
+  const wrap = $(".browser", body);
+  const url = (wrap && wrap.dataset.url) || APP_URL;
   frame.addEventListener("load", () => {
     let ok = false;
     try { ok = frame.contentWindow.location.href !== "about:blank"; } catch (e) { ok = true; }
     if (ok) loading.classList.add("done");
   });
-  if (!frame.src) frame.src = APP_URL;
+  if (!frame.src) frame.src = url;
   const re = $("[data-br='reload']", body);
-  if (re) re.addEventListener("click", () => { loading.classList.remove("done"); frame.src = APP_URL; });
+  if (re) re.addEventListener("click", () => { loading.classList.remove("done"); frame.src = url; });
 }
 
 /* ---------- terminal ---------- */
