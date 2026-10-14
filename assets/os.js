@@ -595,6 +595,7 @@ function openCase(p, title){
   openWin("case", {
     conf: { title: title },
     build(body){
+      let caseAnchor = null;
       const pad = document.createElement("div");
       pad.className = "c-pad";
       if (p.info){
@@ -620,7 +621,7 @@ function openCase(p, title){
             const sec = document.createElement("div"); sec.className = "case-sec";
             const h = document.createElement("h5"); h.textContent = r[0].toUpperCase();
             const t = document.createElement("p"); t.textContent = r[1];
-            sec.append(h, t); pad.insertBefore(sec, gridEl);
+            sec.append(h, t); pad.insertBefore(sec, caseAnchor || gridEl);
           });
         }).catch(() => { msg.textContent = "Dự án đang được cập nhật nội dung chi tiết."; });
       }
@@ -641,8 +642,11 @@ function openCase(p, title){
         botBtn.target = "_blank"; botBtn.rel = "noopener";
         botBtn.textContent = "MỞ BOT TRÊN TELEGRAM ▸";
         botBtn.style.display = "inline-block";
-        botBtn.style.marginTop = "16px";
-        pad.appendChild(botBtn);
+        botBtn.style.margin = "4px 0 18px";
+        pad.insertBefore(botBtn, grid);
+        caseAnchor = botBtn;
+      } else {
+        caseAnchor = grid;
       }
       body.appendChild(pad);
     }
