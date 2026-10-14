@@ -456,3 +456,10 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 .fav-tx b{font-size:13.5px}
 .fav-tx small{font-size:11.5px;color:var(--win-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .br-note{margin-top:20px;font-size:12.5px;line-height:1.65;color:var(--win-dim);max-width:560px}
+
+/* Mobile: vung cua so dung tren dock, nut Xin chao xep luoi 2x2 */
+@media(max-width:760px){
+  #wins{bottom:96px}
+  .welcome .w-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:350px;margin-left:auto;margin-right:auto}
+  .welcome .wbtn{justify-content:center;width:100%}
+}
