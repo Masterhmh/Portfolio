@@ -151,6 +151,7 @@ const WINCONF = {
   trash:    { title: "Thùng rác", w: 440, h: 340 },
   browser:  { title: "Safari — Xưởng In Mẫu", w: 1120, h: 750 },
   browsercv:{ title: "Safari — CV Hoàng Hùng", w: 1000, h: 780 },
+  safari:   { title: "Safari", w: 1120, h: 750 },
   case:     { title: "Dự án", w: 780, h: 660 }
 };
 const openWins = new Map();
@@ -204,7 +205,7 @@ function openWin(id, opts){
   dockDots();
   if (id === "skills") setTimeout(() => $$(".sbar i", body).forEach(b => b.style.width = b.dataset.w + "%"), 220);
   if (id === "projects") initProjects(body);
-  if (id === "browser" || id === "browsercv") initBrowser(body);
+  if (id === "browser" || id === "browsercv" || id === "safari") initBrowser(body);
   if (id === "terminal") initTerm(body);
   return win;
 }
@@ -320,43 +321,61 @@ $("#os-desk").addEventListener("pointerdown", e => {
 })();
 
 /* ---------- trình duyệt nội bộ: mở app ngay trong máy ---------- */
-const APP_URL = "https://masterhmh.github.io/Mockup/";
+const APP_URL = "https://masterhmh.github.io/coolmate/";
 function initBrowser(body){
   const frame = $(".br-frame", body), loading = $(".br-loading", body);
   if (!frame) return;
   const wrap = $(".browser", body);
-  const url = (wrap && wrap.dataset.url) || APP_URL;
+  const url = (wrap && wrap.dataset.url) || "";
   const input = $(".br-input", body);
+  const startPage = $(".br-start", body);
   const pretty = (u) => u.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  function showStart(){ if (startPage) startPage.hidden = false; }
+  function hideStart(){ if (startPage) startPage.hidden = true; }
   function go(raw){
     let u = (raw || "").trim();
     if (!u) return;
     if (!/^https?:\/\//i.test(u)) u = "https://" + u;
     loading.classList.remove("done");
+    hideStart();
     frame.src = u;
     if (input) input.value = pretty(u);
   }
   frame.addEventListener("load", () => {
-    let ok = false;
+    let ok = false, href = "";
     try {
-      const href = frame.contentWindow.location.href;
+      href = frame.contentWindow.location.href;
       ok = href !== "about:blank";
       if (ok && input && document.activeElement !== input) input.value = pretty(href);
     } catch (e) { ok = true; }
-    if (ok) loading.classList.add("done");
+    if (ok) { loading.classList.add("done"); hideStart(); }
   });
-  if (!frame.src) frame.src = url;
+  if (url) { if (!frame.src) frame.src = url; }
+  else showStart();
   if (input) {
-    input.addEventListener("focus", () => input.select());
+    input.addEventListener("focus", () => { if (input.value) input.select(); });
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") { e.preventDefault(); go(input.value); input.blur(); }
     });
   }
+  if (startPage) $$("[data-go]", startPage).forEach(b =>
+    b.addEventListener("click", () => go(b.dataset.go)));
   const re = $("[data-br='reload']", body);
   if (re) re.addEventListener("click", () => {
     loading.classList.remove("done");
     try { frame.contentWindow.location.reload(); }
-    catch (e) { go(input ? input.value : url); }
+    catch (e) { go(input && input.value ? input.value : url); }
+  });
+  const bk = $("[data-br='back']", body);
+  if (bk) bk.addEventListener("click", () => { try { frame.contentWindow.history.back(); } catch (e) {} });
+  const fw = $("[data-br='forward']", body);
+  if (fw) fw.addEventListener("click", () => { try { frame.contentWindow.history.forward(); } catch (e) {} });
+  const hm = $("[data-br='home']", body);
+  if (hm) hm.addEventListener("click", () => {
+    frame.src = "about:blank";
+    if (input) input.value = "";
+    loading.classList.add("done");
+    showStart();
   });
 }
 

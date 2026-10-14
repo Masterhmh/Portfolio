@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/coolmate.css?v=2">
 <link rel="stylesheet" href="assets/pod-images.css?v=1">
-<link rel="stylesheet" href="assets/os.css?v=15">
+<link rel="stylesheet" href="assets/os.css?v=16">
 <link rel="stylesheet" href="assets/avatar.css">
 <link rel="stylesheet" href="assets/showcase.css?v=44">
 <link rel="preconnect" href="https://raw.githubusercontent.com">
@@ -172,9 +172,10 @@
       <i class="dot"></i>
     </button>
     <span class="dock-sep" aria-hidden="true"></span>
-    <a class="dock-app" href="index.html" data-name="Giao diện thường">
-      <span class="ic-wrap ic-clear"><svg class="full" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21.5" fill="#fdfdfd"/><circle cx="24" cy="24" r="21.5" fill="none" stroke="#c7c7cc" stroke-width="1.4"/><path d="M31.5 16.5 26.8 26.8 16.5 31.5l4.7-10.3Z" fill="#ff3b30"/><path d="M16.5 31.5l4.7-10.3 10.3-4.7-4.7 10.3Z" fill="#d8d8de"/><circle cx="24" cy="24" r="2" fill="#fff" stroke="#8e8e93" stroke-width="1"/></svg></span>
-    </a>
+    <button class="dock-app" data-open="safari" data-name="Safari">
+      <span class="ic-wrap ic-clear"><svg class="full" viewBox="0 0 48 48"><defs><linearGradient id="sfRing" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#19b5fe"/><stop offset="1" stop-color="#0456e8"/></linearGradient></defs><circle cx="24" cy="24" r="21.5" fill="#fdfdfd"/><circle cx="24" cy="24" r="20.4" fill="none" stroke="url(#sfRing)" stroke-width="2.2"/><g stroke="#9fc6f5" stroke-width="1.3" stroke-linecap="round"><path d="M24 5.6v3M24 39.4v3M5.6 24h3M39.4 24h3M11 11l2.1 2.1M34.9 34.9 37 37M37 11l-2.1 2.1M13.1 34.9 11 37"/></g><path d="M32.2 15.8 27.4 27.4 15.8 32.2l4.8-11.6Z" fill="#ff3b30"/><path d="M15.8 32.2l4.8-11.6 11.6-4.8-4.8 11.6Z" fill="#e9e9ee"/><circle cx="24" cy="24" r="2.1" fill="#fff" stroke="#8e8e93" stroke-width="1"/></svg></span>
+      <i class="dot"></i>
+    </button>
     <button class="dock-app" data-open="trash" data-name="Thùng rác">
       <span class="ic-wrap ic-clear"><svg class="full" viewBox="0 0 48 48"><path d="M17.5 11.5 20 6.8h8l2.5 4.7Z" fill="#ffffff" stroke="#d2d2da" stroke-width="1"/><path d="M14.5 15.5h19l-1.7 23.4a4.5 4.5 0 0 1-4.5 4.1h-6.6a4.5 4.5 0 0 1-4.5-4.1Z" fill="#ececf1" fill-opacity=".92" stroke="#aeaeb8" stroke-width="1.2"/><rect x="11" y="11.5" width="26" height="4.2" rx="2.1" fill="#cfcfd8"/><path d="M20.5 12V9.8A2.3 2.3 0 0 1 22.8 7.5h2.4a2.3 2.3 0 0 1 2.3 2.3V12" fill="none" stroke="#aeaeb8" stroke-width="1.6"/><path d="M19.5 21v13.5M24 21v13.5M28.5 21v13.5" stroke="#b9b9c4" stroke-width="2" stroke-linecap="round"/></svg></span>
       <i class="dot"></i>
@@ -306,7 +307,7 @@
     </div>
 <div class="showcase">
       <div class="show-frame">
-        <div class="show-bar"><i></i><i></i><i></i><span>xuong-in-mau — masterhmh.github.io/Mockup</span></div>
+        <div class="show-bar"><i></i><i></i><i></i><span>xuong-in-mau — masterhmh.github.io/coolmate</span></div>
         <div class="show-img" role="img" aria-label="Ảnh chụp app Xưởng In Mẫu với hình in trên áo"></div>
       </div>
       <div class="show-info">
@@ -376,11 +377,11 @@
 </template>
 
 <template id="src-browser">
-  <div class="browser" data-url="https://masterhmh.github.io/Mockup/">
+  <div class="browser" data-url="https://masterhmh.github.io/coolmate/">
     <div class="br-bar">
       <button class="br-btn" data-br="reload" title="Tải lại trang" aria-label="Tải lại trang"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 3v4h-4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <div class="br-url"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2" fill="currentColor"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg><input class="br-input" type="text" value="masterhmh.github.io/Mockup" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="Địa chỉ trang — nhập link rồi nhấn Enter"></div>
-      <a class="br-btn" href="https://masterhmh.github.io/Mockup/" target="_blank" rel="noopener" title="Mở ở tab mới" aria-label="Mở ở tab mới"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M9 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <div class="br-url"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2" fill="currentColor"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg><input class="br-input" type="text" value="masterhmh.github.io/coolmate" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="Địa chỉ trang — nhập link rồi nhấn Enter"></div>
+      <a class="br-btn" href="https://masterhmh.github.io/coolmate/" target="_blank" rel="noopener" title="Mở ở tab mới" aria-label="Mở ở tab mới"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M9 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
     <div class="br-view">
       <div class="br-loading"><div class="br-spin"></div>Đang tải Xưởng In Mẫu...</div>
@@ -429,6 +430,33 @@
   <button class="lb-nav" id="os-lb-next" aria-label="Ảnh sau">›</button>
 </div>
 
-<script src="assets/os.js?v=12"></script>
+<template id="src-safari">
+  <div class="browser" data-url="">
+    <div class="br-bar">
+      <button class="br-btn" data-br="back" title="Quay lại" aria-label="Quay lại"><svg viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="br-btn" data-br="forward" title="Tiến tới" aria-label="Tiến tới"><svg viewBox="0 0 24 24"><path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="br-btn" data-br="reload" title="Tải lại trang" aria-label="Tải lại trang"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 3v4h-4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="br-url"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20.5 20.5 16.7 16.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input class="br-input" type="text" placeholder="Tìm kiếm hoặc nhập địa chỉ web" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="Địa chỉ trang — nhập link rồi nhấn Enter"></div>
+      <button class="br-btn" data-br="home" title="Trang bắt đầu" aria-label="Trang bắt đầu"><svg viewBox="0 0 24 24"><path d="M4 11.2 12 4l8 7.2M6.5 9.8V20h11V9.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="br-view">
+      <div class="br-loading done"><div class="br-spin"></div>Đang tải trang...</div>
+      <iframe class="br-frame" title="Safari — trình duyệt web" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="br-start">
+        <h3>Trang bắt đầu</h3>
+        <p class="br-start-sub">Mục ưa thích — bấm để mở, hoặc gõ địa chỉ vào ô phía trên rồi nhấn Enter.</p>
+        <div class="fav-grid">
+          <button class="fav" data-go="https://masterhmh.github.io/coolmate/"><span class="fav-ic" style="background:#111;color:#fff">X</span><span class="fav-tx"><b>Xưởng In Mẫu</b><small>masterhmh.github.io/coolmate</small></span></button>
+          <button class="fav" data-go="cv-os.html"><span class="fav-ic" style="background:#0071e3;color:#fff">CV</span><span class="fav-tx"><b>CV Hoàng Hùng</b><small>masterhmh.github.io/Portfolio/cv-os</small></span></button>
+          <button class="fav" data-go="index.html"><span class="fav-ic" style="background:#0a1220;color:#00e5ff">H</span><span class="fav-tx"><b>Portfolio bản thường</b><small>masterhmh.github.io/Portfolio</small></span></button>
+          <button class="fav" data-go="https://github.com/Masterhmh"><span class="fav-ic" style="background:#24292f;color:#fff">G</span><span class="fav-tx"><b>GitHub — Masterhmh</b><small>github.com/Masterhmh</small></span></button>
+        </div>
+        <p class="br-note">Safari trong máy mở được hầu hết trang web. Một số trang lớn như Google, Facebook, YouTube tự chặn việc mở trong khung — gặp trang như vậy, hãy mở địa chỉ đó ở thẻ mới của trình duyệt thật.</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script src="assets/os.js?v=13"></script>
 </body>
 </html>

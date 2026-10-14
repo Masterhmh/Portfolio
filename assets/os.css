@@ -439,3 +439,17 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 /* cua so Xin chao: doan gioi thieu can deu hai ben nhu cac cua so khac */
 .welcome .w-sub{text-align:justify;max-width:520px;margin-left:auto;margin-right:auto}
 .welcome .w-actions{justify-content:center}
+
+/* Safari tong quat: trang bat dau + muc ua thich */
+.br-start{position:absolute;inset:0;overflow-y:auto;padding:30px 26px;background:var(--win-bg);z-index:3}
+.br-start[hidden]{display:none}
+.br-start h3{font-size:21px;font-weight:750;margin-bottom:6px}
+.br-start-sub{font-size:13px;color:var(--win-dim);margin-bottom:18px}
+.fav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.fav{display:flex;align-items:center;gap:12px;text-align:left;padding:13px 14px;border-radius:14px;background:var(--card-bg);border:1px solid var(--win-line);cursor:pointer;font:inherit;color:inherit;transition:transform .15s,box-shadow .15s}
+.fav:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.14)}
+.fav-ic{width:38px;height:38px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.fav-tx{display:flex;flex-direction:column;min-width:0}
+.fav-tx b{font-size:13.5px}
+.fav-tx small{font-size:11.5px;color:var(--win-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.br-note{margin-top:20px;font-size:12.5px;line-height:1.65;color:var(--win-dim);max-width:560px}
