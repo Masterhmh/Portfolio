@@ -395,7 +395,7 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 .br-btn svg{width:17px;height:17px}
 .br-url{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(127,127,140,.16);border-radius:9px;padding:6px 12px;font-size:12.5px;font-weight:600;color:var(--win-text);min-width:0}
 .br-url svg{width:12px;height:12px;flex:none;opacity:.7}
-.br-url span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.br-input{flex:1;min-width:0;background:none;border:none;outline:none;font:inherit;color:inherit;text-align:center;cursor:text}
 .br-view{position:relative;flex:1;min-height:0;background:#fff}
 .br-frame{width:100%;height:100%;border:0;display:block;background:#fff}
 .br-loading{position:absolute;inset:0;display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center;background:var(--win-bg);color:var(--win-dim);font-size:13.5px;font-weight:600;z-index:2;transition:opacity .3s}

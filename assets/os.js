@@ -326,14 +326,38 @@ function initBrowser(body){
   if (!frame) return;
   const wrap = $(".browser", body);
   const url = (wrap && wrap.dataset.url) || APP_URL;
+  const input = $(".br-input", body);
+  const pretty = (u) => u.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  function go(raw){
+    let u = (raw || "").trim();
+    if (!u) return;
+    if (!/^https?:\/\//i.test(u)) u = "https://" + u;
+    loading.classList.remove("done");
+    frame.src = u;
+    if (input) input.value = pretty(u);
+  }
   frame.addEventListener("load", () => {
     let ok = false;
-    try { ok = frame.contentWindow.location.href !== "about:blank"; } catch (e) { ok = true; }
+    try {
+      const href = frame.contentWindow.location.href;
+      ok = href !== "about:blank";
+      if (ok && input && document.activeElement !== input) input.value = pretty(href);
+    } catch (e) { ok = true; }
     if (ok) loading.classList.add("done");
   });
   if (!frame.src) frame.src = url;
+  if (input) {
+    input.addEventListener("focus", () => input.select());
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { e.preventDefault(); go(input.value); input.blur(); }
+    });
+  }
   const re = $("[data-br='reload']", body);
-  if (re) re.addEventListener("click", () => { loading.classList.remove("done"); frame.src = url; });
+  if (re) re.addEventListener("click", () => {
+    loading.classList.remove("done");
+    try { frame.contentWindow.location.reload(); }
+    catch (e) { go(input ? input.value : url); }
+  });
 }
 
 /* ---------- terminal ---------- */
