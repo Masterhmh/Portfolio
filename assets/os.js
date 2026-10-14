@@ -734,3 +734,40 @@ addEventListener("keydown", e => {
 window.addEventListener("message", function (e) {
   if (e.data && e.data.hmhOS === "open-projects") openWin("projects");
 });
+
+/* ---------- thu muc rieng Bot Quan Ly Chi Tieu tren desktop ---------- */
+async function openBotCase(){
+  const DIR = "Bot Quản Lý Chi Tiêu";
+  try{
+    let projects = null;
+    try{
+      const c = JSON.parse(localStorage.getItem("hh-projects-v2") || "null");
+      if (c && Date.now() - c.t < 15 * 60 * 1000 && c.projects && c.projects.length) projects = c.projects;
+    }catch(e){}
+    if (!projects){
+      const r = await fetch("https://api.github.com/repos/" + GH.owner + "/" + GH.repo + "/git/trees/" + GH.branch + "?recursive=1");
+      if (!r.ok) return;
+      const t = await r.json();
+      const map = {};
+      (t.tree || []).forEach(en => {
+        if (en.type !== "blob") return;
+        const m = en.path.match(/^projects\/([^/]+)\/(.+)$/);
+        if (!m || /^[._]/.test(m[1]) || !IMG_RE.test(m[2])) return;
+        (map[m[1]] = map[m[1]] || []).push({ name: m[2], size: en.size || 0,
+          url: rawUrl("projects/" + encodeURIComponent(m[1]) + "/" + encodeURIComponent(m[2])) });
+      });
+      projects = Object.keys(map).map(dir => ({ name: dir, info: null,
+        imgs: map[dir].sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true })) })).filter(x => x.imgs.length);
+    }
+    const p = projects.find(x => x.name === DIR);
+    if (!p) return;
+    if (!p.info) p.info = await getInfo(DIR);
+    openCase(p, (p.info && p.info.TEN) || DIR);
+  }catch(e){}
+}
+$$("[data-botcase]").forEach(b => {
+  let last = 0;
+  const tap = () => { const n = Date.now(); if (n - last < 700) return; last = n; openBotCase(); };
+  b.addEventListener("click", tap);
+  b.addEventListener("pointerup", tap);
+});
