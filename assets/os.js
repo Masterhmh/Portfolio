@@ -143,7 +143,7 @@ const WINCONF = {
   about:    { title: "Hồ sơ — Hoàng Hùng", w: 700, h: 610 },
   skills:   { title: "Kỹ năng", w: 660, h: 640 },
   journey:  { title: "Hành trình", w: 640, h: 580 },
-  why:      { title: "Lý do tôi ứng tuyển Coolmate", w: 880, h: 660 },
+  why:      { title: "Ứng tuyển Coolmate", w: 880, h: 660 },
   projects: { title: "Dự án", w: 920, h: 640 },
   cv:       { title: "CV — Hoàng Hùng", w: 620, h: 500 },
   contact:  { title: "Liên hệ", w: 520, h: 540 },
