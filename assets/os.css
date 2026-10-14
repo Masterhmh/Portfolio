@@ -425,3 +425,10 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
   #desk-icons{position:static;flex:none;display:grid;grid-template-columns:repeat(3,1fr);gap:20px 6px;
     margin-top:24px;padding:0 16px;justify-items:center;top:auto;right:auto}
 }
+
+/* anh minh hoa trong muc AI */
+.pod-imgs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.pod-img{aspect-ratio:4/3.4;border-radius:12px;background-size:cover;background-position:center 22%;border:1px solid var(--win-line);background-color:#101018}
+.pod-img.pi-2{background-position:center}
+.pod-cap{font-size:12px;color:var(--win-dim);line-height:1.6;margin-top:9px;max-width:730px}
+@media(max-width:640px){.pod-imgs{grid-template-columns:1fr}}
