@@ -6,7 +6,7 @@
   const root = document.documentElement;
   const btn = document.getElementById("themeBtn");
   const saved = localStorage.getItem("hh-theme");
-  root.dataset.theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  root.dataset.theme = saved || "dark";
   btn.addEventListener("click", () => {
     root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
     localStorage.setItem("hh-theme", root.dataset.theme);
