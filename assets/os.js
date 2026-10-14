@@ -332,9 +332,17 @@ function initBrowser(body){
   const pretty = (u) => u.replace(/^https?:\/\//, "").replace(/\/$/, "");
   function showStart(){ if (startPage) startPage.hidden = false; }
   function hideStart(){ if (startPage) startPage.hidden = true; }
-  let hist = [], hIdx = -1, navFlag = false;
-  function load_(u){
+  const START = "hmh:start";
+  let hist = startPage ? [START] : [], hIdx = startPage ? 0 : -1, navFlag = false;
+  function showPage(u){
     navFlag = true;
+    if (u === START) {
+      frame.src = "about:blank";
+      if (input) input.value = "";
+      loading.classList.add("done");
+      showStart();
+      return;
+    }
     loading.classList.remove("done");
     hideStart();
     frame.src = u;
@@ -344,15 +352,8 @@ function initBrowser(body){
     let u = (raw || "").trim();
     if (!u) return;
     if (!/^https?:\/\//i.test(u)) u = "https://" + u;
-    if (startPage) { hist = hist.slice(0, hIdx + 1); hist.push(u); hIdx = hist.length - 1; }
-    load_(u);
-  }
-  function toStart(){
-    frame.src = "about:blank";
-    if (input) input.value = "";
-    loading.classList.add("done");
-    hist = []; hIdx = -1;
-    showStart();
+    if (startPage) { hist = hist.slice(0, hIdx + 1); hist.push(u); hIdx = hist.length - 1; showPage(u); }
+    else { navFlag = true; loading.classList.remove("done"); frame.src = u; if (input) input.value = pretty(u); }
   }
   frame.addEventListener("load", () => {
     let ok = false, href = "";
@@ -379,25 +380,25 @@ function initBrowser(body){
     b.addEventListener("click", () => go(b.dataset.go)));
   const re = $("[data-br='reload']", body);
   if (re) re.addEventListener("click", () => {
+    if (startPage && !startPage.hidden) { loading.classList.add("done"); return; }
     loading.classList.remove("done");
     try { frame.contentWindow.location.reload(); }
     catch (e) { go(input && input.value ? input.value : url); }
   });
   const bk = $("[data-br='back']", body);
   if (bk) bk.addEventListener("click", () => {
-    if (startPage) {
-      if (hIdx > 0) { hIdx--; load_(hist[hIdx]); }
-      else toStart();
-    } else { try { frame.contentWindow.history.back(); } catch (e) {} }
+    if (startPage) { if (hIdx > 0) { hIdx--; showPage(hist[hIdx]); } }
+    else { try { frame.contentWindow.history.back(); } catch (e) {} }
   });
   const fw = $("[data-br='forward']", body);
   if (fw) fw.addEventListener("click", () => {
-    if (startPage) {
-      if (hIdx < hist.length - 1) { hIdx++; load_(hist[hIdx]); }
-    } else { try { frame.contentWindow.history.forward(); } catch (e) {} }
+    if (startPage) { if (hIdx < hist.length - 1) { hIdx++; showPage(hist[hIdx]); } }
+    else { try { frame.contentWindow.history.forward(); } catch (e) {} }
   });
   const hm = $("[data-br='home']", body);
-  if (hm) hm.addEventListener("click", toStart);
+  if (hm) hm.addEventListener("click", () => {
+    if (startPage) { hist = hist.slice(0, hIdx + 1); hist.push(START); hIdx = hist.length - 1; showPage(START); }
+  });
 }
 
 /* ---------- terminal ---------- */
