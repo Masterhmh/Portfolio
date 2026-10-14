@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/coolmate.css?v=1">
-<link rel="stylesheet" href="assets/os.css?v=8">
+<link rel="stylesheet" href="assets/os.css?v=9">
 <link rel="stylesheet" href="assets/avatar.css">
 <link rel="stylesheet" href="assets/showcase.css?v=43">
 <link rel="preconnect" href="https://raw.githubusercontent.com">
@@ -45,10 +45,6 @@
       <div class="lock-name">Hoàng Hùng</div>
       <div class="lock-hint">Nhấn để vào máy</div>
     </div>
-  </div>
-  <div class="lock-foot">
-    <span>Đây là chiếc máy của một người làm nghề — mở từng thư mục để nghe câu chuyện.</span>
-    <a href="index.html" id="lock-classic">Xem giao diện thường →</a>
   </div>
 </div>
 
@@ -99,9 +95,9 @@
     </div>
     <div class="widget w-cal" id="w-cal" aria-label="Lịch tháng"></div>
     <div class="widget w-stats">
-      <div class="w-stat"><b>10+</b><span>năm thực chiến</span></div>
-      <div class="w-stat"><b>7+</b><span>năm chuyên F&amp;B</span></div>
-      <div class="w-stat"><b>3.000+</b><span>chủ quán đồng hành</span></div>
+      <div class="w-stat"><b>10+</b><span>năm kinh nghiệm thiết kế</span></div>
+      <div class="w-stat"><b>POD</b><span>tự xây hệ thống xưởng in mẫu</span></div>
+      <div class="w-stat"><b>Code × AI</b><span>tự dựng công cụ làm việc</span></div>
       <div class="w-stat"><b>24h</b><span>phản hồi cực nhanh</span></div>
     </div>
   </aside>
@@ -190,16 +186,15 @@
 <template id="src-welcome">
   <div class="c-pad welcome">
     <div class="w-ava"><div class="avatar-photo"></div></div>
-    <h2>Xin chào, mình là Hoàng Hùng 👋</h2>
-    <p class="w-lead">Đây là chiếc máy làm việc của mình — nơi chứa hơn <b>10 năm làm nghề thiết kế</b>, với mảng sâu nhất là <b>F&amp;B (7+ năm)</b> tại Namas, cùng niềm mê công nghệ: đọc hiểu code, vận dụng AI, tự dựng công cụ.</p>
-    <p class="w-sub">Mở từng thư mục trên màn hình để xem câu chuyện. Muốn nhanh thì dùng mấy nút này:</p>
+    <h2>Xin chào, tôi là Hoàng Hùng</h2>
+    <p class="w-lead">Designer với hơn <b>10 năm kinh nghiệm thiết kế gắn liền sản xuất</b>. Chiếc máy này là hồ sơ ứng tuyển của tôi gửi tới <b>Coolmate</b> — gồm hành trình làm nghề, kỹ năng, các dự án đã thực hiện và một hệ thống công cụ do chính tôi xây dựng để tối ưu khâu in ấn.</p>
+    <p class="w-sub">Mời bạn mở từng thư mục trên màn hình để xem chi tiết, hoặc đi nhanh bằng các nút dưới đây:</p>
     <div class="w-btns">
       <button class="wbtn primary" data-open="projects">Xem dự án</button>
       <button class="wbtn" data-open="why">Lý do ứng tuyển</button>
-      <button class="wbtn" data-open="terminal">Thử Terminal</button>
+      <button class="wbtn" data-open="skills">Kỹ năng</button>
       <button class="wbtn" data-open="contact">Liên hệ</button>
     </div>
-    <p class="w-tip">Mẹo: kéo thả cửa sổ bằng thanh tiêu đề, dùng 3 nút tròn để đóng / thu nhỏ / phóng to — y như máy thật.</p>
   </div>
 </template>
 
@@ -287,6 +282,28 @@
         <li>Chuẩn hóa thư viện file thiết kế và quy cách file in, giúp khâu sản xuất nhanh và ít lỗi hơn</li>
         <li>Xây dựng công cụ nội bộ: mô phỏng sản phẩm, kiểm tra file in, tự động hóa các việc lặp lại của đội thiết kế</li>
       </ul>
+    </div>
+    <div class="pod">
+      <h3 class="pod-h">TỪ BÀI TOÁN POD: GỌN CẢ QUY TRÌNH VÀO MỘT CÔNG CỤ</h3>
+      <p class="pod-intro">In theo yêu cầu là chuỗi công việc lặp lại liên tục và qua tay nhiều người. Mỗi lần chuyển tay là thêm một lần chờ đợi, thêm một nguy cơ sai lệch — trong khi phần lớn các bước hoàn toàn có thể chuẩn hóa:</p>
+      <div class="flow">
+        <div class="flow-tag old">CÁCH LÀM CŨ</div>
+        <div class="flow-steps">
+          <span class="st">Nhận file / ý tưởng từ khách</span><i>&rarr;</i><span class="st">Sale báo giá</span><i>&rarr;</i><span class="st">Designer triển khai thiết kế</span><i>&rarr;</i><span class="st">Lên mockup gửi khách</span><i>&rarr;</i><span class="st">Khách chốt mockup</span><i>&rarr;</i><span class="st">Designer triển khai file in</span><i>&rarr;</i><span class="st">Chuyển xưởng in</span><i>&rarr;</i><span class="st">Xưởng bình file in</span><i>&rarr;</i><span class="st">In và giao hàng</span>
+        </div>
+        <p class="flow-note">9 bước, ít nhất 3 người thay nhau xử lý cùng một đơn hàng — designer bị cuốn vào việc lặp lại thay vì sáng tạo.</p>
+      </div>
+      <div class="flow">
+        <div class="flow-tag new">CÁCH LÀM MỚI — VỚI XƯỞNG IN MẪU</div>
+        <div class="flow-steps">
+          <span class="st">Sale nhận file / ý tưởng</span><i>&rarr;</i><span class="st">Nạp vào một công cụ duy nhất</span><i>&rarr;</i><span class="st">App tự căn vị trí in, kiểm tra chất lượng file, xuất mockup và báo giá</span><i>&rarr;</i><span class="st">Khách chốt</span><i>&rarr;</i><span class="st">Xuất file in đúng chuẩn, gửi thẳng xưởng</span>
+        </div>
+        <p class="flow-note">Sale tự làm trọn gói trong một công cụ. Designer được giải phóng khỏi các việc lặp lại để tập trung thiết kế mới — giảm khối lượng công việc của đội thiết kế, rút ngắn thời gian xử lý đơn và tăng thêm dư địa doanh số.</p>
+      </div>
+      <div class="pod-future">
+        <h4>HƯỚNG ĐI XA HƠN: ĐƯA AI VÀO HÌNH ẢNH SẢN PHẨM</h4>
+        <p>Tôi muốn tiến thêm một bước: ứng dụng AI vào xử lý ảnh sản phẩm. Chỉ cần chụp ảnh sản phẩm, hệ thống AI xử lý và trả về hình ảnh mẫu mặc trên người — đủ các góc chụp, đủ tư thế. Khâu hình ảnh vốn tốn nhiều thời gian và nhân lực sẽ được rút ngắn đáng kể, giảm chi phí mà chất lượng trình bày vẫn đồng đều. Đây là hướng tôi mong được cùng đội ngũ Coolmate thử nghiệm và hiện thực hóa.</p>
+      </div>
     </div>
 <div class="showcase">
       <div class="show-frame">
