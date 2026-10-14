@@ -634,6 +634,16 @@ function openCase(p, title){
         grid.appendChild(img);
       });
       pad.appendChild(grid);
+      if (p.name === "Bot Quản Lý Chi Tiêu"){
+        const botBtn = document.createElement("a");
+        botBtn.className = "wbtn primary";
+        botBtn.href = "https://t.me/hmh_finance_bot";
+        botBtn.target = "_blank"; botBtn.rel = "noopener";
+        botBtn.textContent = "MỞ BOT TRÊN TELEGRAM ▸";
+        botBtn.style.display = "inline-block";
+        botBtn.style.marginTop = "16px";
+        pad.appendChild(botBtn);
+      }
       body.appendChild(pad);
     }
   });
