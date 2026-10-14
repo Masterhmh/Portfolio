@@ -304,3 +304,23 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .show-list li:last-child{border-bottom:none}
 .show-list li::before{content:"▸";position:absolute;left:2px;color:var(--cyan);font-family:var(--mono)}
 .show-info .btn{align-self:flex-start;margin-top:auto}
+
+/* ---- dong bo noi dung voi ban HMH OS (2026-10-14) ---- */
+.why-intro{font-size:15.5px;line-height:1.85;text-align:justify;color:var(--text);margin-bottom:30px}
+.block-panel{margin-top:26px}
+.sub-h{font-family:var(--disp);font-size:19px;font-weight:700;letter-spacing:.4px;color:var(--cyan);margin-bottom:16px}
+.pod-txt{font-size:14.5px;line-height:1.8;color:var(--dim);text-align:justify;margin-bottom:14px}
+.pod-txt b{color:var(--text)}
+.flow-box{border:1px solid var(--line);background:rgba(0,229,255,.03);padding:18px;margin-bottom:14px}
+.flow-tag{font-family:var(--mono);font-size:12px;letter-spacing:1px;margin-bottom:12px;color:var(--amber)}
+.flow-tag.new{color:var(--green)}
+.flow-steps{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow-steps .st{font-size:12.5px;border:1px solid var(--line);padding:6px 10px;background:var(--panel);color:var(--text)}
+.flow-steps i{color:var(--mag);font-style:normal}
+.flow-note{font-size:13px;color:var(--dim);line-height:1.7;margin-top:12px;text-align:justify}
+.pod-imgs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+.pod-img{aspect-ratio:4/3.4;border:1px solid var(--line);background-size:cover;background-position:center 22%;background-color:#0a0f16}
+.pod-img.pi-2{background-position:center}
+@media(max-width:640px){.pod-imgs{grid-template-columns:1fr}}
+.why-end{font-size:16px;font-weight:600;line-height:1.8;text-align:justify;margin-top:30px;color:var(--text)}
+.contact-note{font-family:var(--mono);font-size:13px;color:var(--dim);text-align:center;margin-top:28px;line-height:1.8}
