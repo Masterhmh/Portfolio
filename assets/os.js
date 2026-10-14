@@ -664,3 +664,8 @@ addEventListener("keydown", e => {
     if (!$("#os-desk").hidden) openWin("terminal");
   }
 });
+
+/* CV ban OS goi mo thu muc Du an (nut "Xem day du tai portfolio" trong cv-os.html) */
+window.addEventListener("message", function (e) {
+  if (e.data && e.data.hmhOS === "open-projects") openWin("projects");
+});
