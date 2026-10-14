@@ -28,7 +28,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--disp);overflow-x:h
 /* ---------- layout ---------- */
 main{position:relative;z-index:2}
 .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
-section{padding:46px 0;position:relative}
+section{padding:32px 0;position:relative}
+.stats-sec{padding-top:6px}
 
 /* ---------- nav ---------- */
 nav{position:fixed;top:0;left:0;right:0;z-index:50;
@@ -47,7 +48,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;
 @media(max-width:760px){.nav-links{display:none}}
 
 /* ---------- hero ---------- */
-#home{display:flex;align-items:center;padding:138px 0 54px;position:relative;overflow:hidden}
+#home{display:flex;align-items:center;padding:132px 0 38px;position:relative;overflow:hidden}
 #home::before{content:"";position:absolute;inset:0;pointer-events:none;
   -webkit-mask-image:linear-gradient(180deg,#000 52%,transparent 97%);mask-image:linear-gradient(180deg,#000 52%,transparent 97%);
   background:radial-gradient(720px 420px at 12% -6%,rgba(0,113,227,.11),transparent 62%),
