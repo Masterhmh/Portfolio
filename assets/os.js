@@ -685,6 +685,7 @@ document.addEventListener("click", e => {
 /* ---------- widget phat nhac (chi ban may tinh) ---------- */
 const musAu = new Audio();
 musAu.preload = "auto";
+musAu.volume = 0.1;
 const MUS = { list: [], order: [], pos: -1, ready: false };
 const MUS_PLAY_SVG = '<svg viewBox="0 0 24 24"><path d="M8 5.6v12.8c0 .8.9 1.3 1.6.9l10-6.4a1.1 1.1 0 0 0 0-1.8l-10-6.4c-.7-.4-1.6.1-1.6.9z"/></svg>';
 const MUS_PAUSE_SVG = '<svg viewBox="0 0 24 24"><path d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg>';
@@ -724,6 +725,8 @@ async function musInit(){
     if (MUS.pos < 0) musPlayPos(0);
     else if (musAu.paused) musAu.play().catch(() => {}); else musAu.pause();
   });
+  const vol = $("#mus-vol");
+  if (vol) vol.addEventListener("input", () => { musAu.volume = vol.value / 100; });
   const seek = $("#mus-seek");
   seek.addEventListener("input", () => { if (musAu.duration) musAu.currentTime = seek.value / 1000 * musAu.duration; });
   musAu.addEventListener("timeupdate", () => {
