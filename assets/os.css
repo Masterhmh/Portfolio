@@ -87,7 +87,7 @@ img{-webkit-user-drag:none}
 .lock-foot a{color:#fff;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:1px}
 
 /* ---------- DESKTOP ---------- */
-#os-desk{position:fixed;inset:0;height:100dvh;background:var(--wall);overflow:hidden}
+#os-desk{position:fixed;inset:0;height:100dvh;box-sizing:border-box;background:var(--wall);overflow:hidden}
 .wallpaper{z-index:0;overflow:hidden;background-color:#0b0b16}
 .wp-l{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .8s ease}
 .wp-l.on{opacity:1}
@@ -227,8 +227,8 @@ html[data-os-theme="light"] #apple-menu{background:linear-gradient(160deg, rgba(
   #widgets .w-music{aspect-ratio:1/1.04;display:flex;flex-direction:column;justify-content:center}
   #widgets .w-music .mus-vol{display:none}
   #widgets .w-music .mus-title{font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  #widgets .w-music .mus-ctrl button{width:38px;height:38px}
-  #widgets .w-music .mus-ctrl #mus-play{width:46px;height:46px}
+  #widgets .w-music .mus-ctrl button{width:34px;height:34px}
+  #widgets .w-music .mus-ctrl #mus-play{width:42px;height:42px}
   #widgets>*{min-width:0}
   .w-music .mus-bar{min-width:0}
   .w-music .mus-bar input{flex:1;min-width:0}
@@ -515,10 +515,10 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 
 /* ---------- mobile: widget va thu muc chay theo luong doc, khong chong nhau ---------- */
 @media(max-width:760px){
-  #os-desk{display:flex;flex-direction:column;overflow-y:auto;padding:46px 0 210px}
+  #os-desk{display:flex;flex-direction:column;overflow-y:auto;padding:40px 0 120px}
   #widgets{position:static;flex:none;width:auto;margin:0 12px;top:auto;left:auto;right:auto}
-  #desk-icons{position:static;flex:none;display:grid;grid-template-columns:repeat(3,1fr);gap:20px 6px;
-    margin-top:24px;padding:0 16px;justify-items:center;top:auto;right:auto}
+  #desk-icons{position:static;flex:none;display:grid;grid-template-columns:repeat(3,1fr);gap:12px 6px;
+    margin-top:14px;padding:0 16px;justify-items:center;top:auto;right:auto}
 }
 
 /* anh minh hoa trong muc AI */
@@ -635,11 +635,18 @@ html[data-os-theme="light"] .spot-list{background:linear-gradient(160deg, rgba(2
       inset 1px 0 0 rgba(255,255,255,.09), inset -1px 0 0 rgba(255,255,255,.09)}
   html[data-os-theme="light"] .widget{background:linear-gradient(160deg, rgba(255,255,255,.74), rgba(255,255,255,.52) 55%, rgba(255,255,255,.44));border-color:rgba(255,255,255,.78)}
   html[data-os-theme="dark"] .widget{background:linear-gradient(160deg, rgba(40,44,62,.74), rgba(25,28,42,.64) 55%, rgba(21,23,36,.6));border-color:rgba(255,255,255,.22)}
-  #widgets .w-stats{aspect-ratio:auto;min-height:176px;align-content:space-between;padding-top:20px;padding-bottom:20px}
-  #widgets .w-music{aspect-ratio:auto;min-height:176px;justify-content:space-between;padding-top:15px;padding-bottom:15px}
+  #widgets .w-stats{aspect-ratio:auto;min-height:146px;align-content:space-between;padding-top:14px;padding-bottom:14px}
+  #widgets .w-music{aspect-ratio:auto;min-height:146px;justify-content:space-between;padding-top:12px;padding-bottom:12px}
   .w-music .mus-title{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;min-height:2.5em}
   .dicon span{text-wrap:balance}
-  #desk-icons{padding-bottom:128px}
   #dock{scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 20px,#000 calc(100% - 20px),transparent);mask-image:linear-gradient(90deg,transparent,#000 20px,#000 calc(100% - 20px),transparent)}
   #dock::-webkit-scrollbar{display:none}
+  .wx-temp{font-size:37px}
+  .wx-hours{padding-top:7px;gap:2px}
+  .wx-h{font-size:10.5px;gap:2px}
+  .wx-h i{font-size:14px}
+  .wx-h b{font-size:12px}
+  .folder-ic{width:40px;height:40px}
+  .dicon{gap:3px}
+  .dicon span{line-height:1.22}
 }
