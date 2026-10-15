@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/coolmate.css?v=8">
-<link rel="stylesheet" href="assets/os.css?v=31">
+<link rel="stylesheet" href="assets/os.css?v=32">
 <link rel="stylesheet" href="assets/avatar.css">
 <link rel="stylesheet" href="assets/showcase.css?v=45">
 <link rel="preconnect" href="https://raw.githubusercontent.com">
@@ -96,7 +96,12 @@
       <span class="mb-status"><i></i>Sẵn sàng cho công việc</span>
       <button id="mb-sound" class="mb-ic" aria-label="Bật/tắt tiếng khởi động" title="Tiếng khởi động">♪</button>
       <button id="mb-theme" class="mb-ic" aria-label="Đổi chế độ sáng/tối" title="Đổi sáng/tối">◐</button>
-      <span class="mb-clock" id="mb-clock">--:--</span>
+      <button class="mb-clock" id="mb-clock" aria-label="Xem đồng hồ và lịch">--:--</button>
+    </div>
+    <div id="nc-panel" hidden>
+      <div class="ncp-clock" id="ncp-clock">--:--</div>
+      <div class="ncp-date" id="ncp-date"></div>
+      <div class="ncp-cal" id="ncp-cal"></div>
     </div>
   </header>
 
@@ -310,7 +315,6 @@
     <div class="w-ava"><div class="avatar-photo"></div></div>
     <h2>Xin chào, tôi là Hoàng Hùng</h2>
     <p class="w-lead">Tôi là Designer với hơn <b>10 năm kinh nghiệm</b> thực chiến, mạnh ở thiết kế gắn liền sản xuất và vận hành thật. Portfolio này gói gọn hành trình làm nghề, các dự án tiêu biểu và những công cụ tự động hóa tôi tự xây để công việc nhanh hơn, gọn hơn — và để thiết kế luôn đi tới sản phẩm cuối cùng.</p>
-    <p class="w-sub">Mời bạn mở từng thư mục trên màn hình để xem chi tiết, hoặc đi nhanh bằng các nút dưới đây:</p>
     <div class="w-btns">
       <button class="wbtn primary" data-open="why">Ứng tuyển Coolmate</button>
       <button class="wbtn" data-open="projects">Xem dự án</button>
@@ -569,6 +573,13 @@
       </div>
     </div>
     <div class="set-group">
+      <div class="set-label">ĐỒNG HỒ</div>
+      <div class="set-opts" id="set-clock">
+        <button data-v="24">24 giờ</button>
+        <button data-v="12">12 giờ</button>
+      </div>
+    </div>
+    <div class="set-group">
       <div class="set-label">ÂM NHẠC</div>
       <label class="set-row">
         <span>Tự phát một bài nhạc khi vào máy</span>
@@ -630,6 +641,6 @@
   </div>
 </template>
 
-<script src="assets/os.js?v=27"></script>
+<script src="assets/os.js?v=28"></script>
 </body>
 </html>
