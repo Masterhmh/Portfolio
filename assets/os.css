@@ -120,7 +120,7 @@ img{-webkit-user-drag:none}
 .mb-clock{font-weight:600;font-variant-numeric:tabular-nums;margin-left:6px;white-space:nowrap;cursor:pointer;padding:3px 8px;border-radius:6px}
 .mb-clock:hover{background:var(--win-soft)}
 #nc-panel{position:absolute;top:36px;right:8px;z-index:200;width:322px;max-width:calc(100vw - 16px);padding:18px;border-radius:22px;
-  background:linear-gradient(155deg, rgba(255,255,255,.36), rgba(255,255,255,.22) 55%, rgba(255,255,255,.16));
+  background:linear-gradient(155deg, rgba(255,255,255,.30), rgba(255,255,255,.16) 55%, rgba(255,255,255,.11)), rgba(22,22,30,.62);
   -webkit-backdrop-filter:blur(34px) saturate(1.6);backdrop-filter:blur(34px) saturate(1.6);
   border:1px solid rgba(255,255,255,.42);box-shadow:0 22px 55px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.45);
   color:var(--win-text)}
@@ -155,7 +155,7 @@ html[data-os-theme="light"] .widget{
 #mb-apple-btn{display:flex;align-items:center;padding:2px 8px 2px 2px;border-radius:6px;cursor:pointer}
 #mb-apple-btn:hover,#mb-apple-btn.open{background:var(--win-soft)}
 #apple-menu{position:absolute;top:36px;left:8px;z-index:200;min-width:258px;padding:6px;border-radius:14px;
-  background:linear-gradient(155deg, rgba(255,255,255,.36), rgba(255,255,255,.22) 55%, rgba(255,255,255,.16));
+  background:linear-gradient(155deg, rgba(255,255,255,.30), rgba(255,255,255,.16) 55%, rgba(255,255,255,.11)), rgba(22,22,30,.62);
   -webkit-backdrop-filter:blur(34px) saturate(1.6);backdrop-filter:blur(34px) saturate(1.6);
   border:1px solid rgba(255,255,255,.42);box-shadow:0 22px 55px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.45);
   color:var(--win-text)}
