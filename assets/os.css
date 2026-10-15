@@ -73,8 +73,8 @@ img{-webkit-user-drag:none}
 .lock-blur{position:absolute;inset:-40px;background-color:#241243;filter:blur(28px) brightness(.92);transform:scale(1.08)}
 #os-lock .lock-blur{inset:-46px}
 .lock-center{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;padding-top:9vh;color:#fff;text-align:center}
-.lock-date{font-size:clamp(17px,2.4vw,22px);font-weight:600;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.6));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 12px rgba(0,0,0,.3))}
-.lock-clock{font-size:clamp(74px,13vw,124px);font-weight:800;line-height:1.05;letter-spacing:-2px;background:linear-gradient(180deg,rgba(255,255,255,.99) 0%,rgba(255,255,255,.78) 34%,rgba(255,255,255,.38) 52%,rgba(255,255,255,.72) 72%,rgba(255,255,255,.96) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 16px rgba(0,0,0,.30)) drop-shadow(0 0 3px rgba(255,255,255,.18))}
+.lock-date{font-size:clamp(17px,2.4vw,22px);font-weight:600;background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.65));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:.3px rgba(255,255,255,.4);filter:drop-shadow(0 2px 14px rgba(0,0,0,.35)) drop-shadow(0 0 5px rgba(255,255,255,.35))}
+.lock-clock{font-size:clamp(74px,13vw,124px);font-weight:800;line-height:1.05;letter-spacing:-2px;background:linear-gradient(180deg,rgba(255,255,255,1) 0%,rgba(255,255,255,.88) 30%,rgba(255,255,255,.45) 50%,rgba(255,255,255,.82) 70%,rgba(255,255,255,1) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:.6px rgba(255,255,255,.38);filter:drop-shadow(0 6px 22px rgba(0,0,0,.38)) drop-shadow(0 0 7px rgba(255,255,255,.4)) drop-shadow(0 1px 1px rgba(255,255,255,.35))}
 .lock-user{margin-top:6vh;display:flex;flex-direction:column;align-items:center;gap:10px}
 .lock-avatar{width:96px;height:96px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,.65);
   box-shadow:0 12px 34px rgba(0,0,0,.4)}
@@ -117,7 +117,18 @@ img{-webkit-user-drag:none}
 .mb-ic{width:28px;height:22px;border-radius:5px;font-size:14px;display:flex;align-items:center;justify-content:center}
 .mb-ic:hover{background:var(--win-soft)}
 .mb-ic.off{opacity:.35}
-.mb-clock{font-weight:600;font-variant-numeric:tabular-nums;margin-left:6px;white-space:nowrap}
+.mb-clock{font-weight:600;font-variant-numeric:tabular-nums;margin-left:6px;white-space:nowrap;cursor:pointer;padding:3px 8px;border-radius:6px}
+.mb-clock:hover{background:var(--win-soft)}
+#nc-panel{position:absolute;top:36px;right:8px;z-index:200;width:322px;max-width:calc(100vw - 16px);padding:18px;border-radius:22px;
+  background:linear-gradient(155deg, rgba(255,255,255,.36), rgba(255,255,255,.22) 55%, rgba(255,255,255,.16));
+  -webkit-backdrop-filter:blur(34px) saturate(1.6);backdrop-filter:blur(34px) saturate(1.6);
+  border:1px solid rgba(255,255,255,.42);box-shadow:0 22px 55px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.45);
+  color:var(--win-text)}
+html[data-os-theme="light"] #nc-panel{background:linear-gradient(155deg, rgba(255,255,255,.95), rgba(255,255,255,.88) 55%, rgba(255,255,255,.82));border-color:rgba(255,255,255,.9)}
+#nc-panel[hidden]{display:none}
+.ncp-clock{font-size:44px;font-weight:800;line-height:1;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.ncp-date{font-size:14.5px;font-weight:600;color:var(--accent);margin:5px 0 14px}
+.ncp-cal .cal-head b{font-size:14.5px}
 @media(max-width:860px){.mb-menu{display:none}.mb-status{display:none}}
 
 /* widgets */
@@ -144,11 +155,11 @@ html[data-os-theme="light"] .widget{
 #mb-apple-btn{display:flex;align-items:center;padding:2px 8px 2px 2px;border-radius:6px;cursor:pointer}
 #mb-apple-btn:hover,#mb-apple-btn.open{background:var(--win-soft)}
 #apple-menu{position:absolute;top:36px;left:8px;z-index:200;min-width:258px;padding:6px;border-radius:14px;
-  background:linear-gradient(155deg, rgba(255,255,255,.20), rgba(255,255,255,.09) 55%, rgba(255,255,255,.06));
-  -webkit-backdrop-filter:blur(30px) saturate(1.8);backdrop-filter:blur(30px) saturate(1.8);
-  border:1px solid rgba(255,255,255,.30);box-shadow:0 22px 55px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.35);
+  background:linear-gradient(155deg, rgba(255,255,255,.36), rgba(255,255,255,.22) 55%, rgba(255,255,255,.16));
+  -webkit-backdrop-filter:blur(34px) saturate(1.6);backdrop-filter:blur(34px) saturate(1.6);
+  border:1px solid rgba(255,255,255,.42);box-shadow:0 22px 55px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.45);
   color:var(--win-text)}
-html[data-os-theme="light"] #apple-menu{background:linear-gradient(155deg, rgba(255,255,255,.78), rgba(255,255,255,.55) 55%, rgba(255,255,255,.42));border-color:rgba(255,255,255,.75)}
+html[data-os-theme="light"] #apple-menu{background:linear-gradient(155deg, rgba(255,255,255,.95), rgba(255,255,255,.88) 55%, rgba(255,255,255,.82));border-color:rgba(255,255,255,.9)}
 #apple-menu[hidden]{display:none}
 .am-item{display:flex;width:100%;text-align:left;padding:6px 10px;border-radius:8px;font-size:13.5px;cursor:pointer}
 .am-item:hover{background:var(--accent);color:#fff}
@@ -179,7 +190,7 @@ html[data-os-theme="light"] #apple-menu{background:linear-gradient(155deg, rgba(
 .set-switch i::after{content:"";position:absolute;top:2px;left:2px;width:23px;height:23px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:left .2s}
 .set-switch input:checked + i{background:#30d158}
 .set-switch input:checked + i::after{left:21px}
-.set-note{font-size:12px;color:var(--win-dim);text-align:left}
+.set-note{font-size:12px;color:var(--win-dim);text-align:left;opacity:.5}
 
 /* widget lịch */
 .w-cal{padding:16px 18px}
