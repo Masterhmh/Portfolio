@@ -271,7 +271,7 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 .show-bar i{width:10px;height:10px;border-radius:50%;background:var(--win-line)}
 .show-bar i:first-child{background:#ff5f57}.show-bar i:nth-child(2){background:#febc2e}.show-bar i:nth-child(3){background:#28c840}
 .show-bar span{margin-left:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.show-img{height:250px;background-color:#05080f}
+.show-img{aspect-ratio:1900/832;background-color:#05080f}
 .show-info{padding:20px 22px}
 .show-tag{font-size:11.5px;font-weight:700;letter-spacing:1.6px;color:#ff6482;margin-bottom:10px}
 .show-info h3{font-size:20px;font-weight:800;margin-bottom:10px}
