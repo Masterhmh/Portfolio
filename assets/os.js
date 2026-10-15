@@ -72,9 +72,9 @@ function fmtHM(d, sec){
     if (lockC) lockC.textContent = fmtHM(d);
     if (lockD) lockD.textContent = DAYS[d.getDay()] + ", " + d.getDate() + " tháng " + (d.getMonth() + 1);
     const mb = $("#mb-clock");
-    if (mb) mb.textContent = DAYS_S[d.getDay()] + " " + d.getDate() + " thg " + (d.getMonth() + 1) + "  " + fmtHM(d, true);
+    if (mb) mb.textContent = DAYS_S[d.getDay()] + " " + d.getDate() + " thg " + (d.getMonth() + 1) + "  " + fmtHM(d);
     const ncpC = $("#ncp-clock"), ncpD = $("#ncp-date");
-    if (ncpC) ncpC.textContent = fmtHM(d, true);
+    if (ncpC) ncpC.textContent = fmtHM(d);
     if (ncpD) ncpD.textContent = DAYS[d.getDay()] + ", " + d.getDate() + " tháng " + (d.getMonth() + 1) + " năm " + d.getFullYear();
     const wt = $("#w-time"), wd = $("#w-date");
     if (wt) wt.textContent = fmtHM(d);
@@ -158,7 +158,7 @@ function playChime(){
 const winsEl = $("#wins");
 let zTop = 20, cascade = 0;
 const WINCONF = {
-  welcome:  { title: "Xin chào", w: 580, h: 600 },
+  welcome:  { title: "Xin chào", w: 580, h: 490 },
   about:    { title: "Hồ sơ — Hoàng Hùng", w: 700, h: 610 },
   skills:   { title: "Kỹ năng", w: 660, h: 640 },
   journey:  { title: "Hành trình", w: 640, h: 580 },
@@ -228,7 +228,7 @@ function openWin(id, opts){
   winsEl.appendChild(win);
   openWins.set(id, win);
   focusWin(win);
-  if (isMobile()) win.classList.add("max");
+  if (isMobile() && id !== "welcome") win.classList.add("max");
   wireWin(win, bar);
   dockDots();
   if (id === "skills") setTimeout(() => $$(".sbar i", body).forEach(b => b.style.width = b.dataset.w + "%"), 220);
@@ -531,6 +531,7 @@ async function getInfo(dir){
     return (m.VAN_DE || m.GIAI_PHAP || m.KET_QUA) ? m : null;
   }catch(e){ return null; }
 }
+let HMH_PROJECTS = [];
 function initProjects(body){
   const grid = $("#os-proj-grid", body), empty = $("#os-proj-empty", body),
         errBox = $("#os-proj-error", body), loading = $("#os-proj-loading", body),
@@ -544,6 +545,7 @@ function initProjects(body){
   });
   function render(projects){
     allProjects = projects;
+    HMH_PROJECTS = projects;
     grid.innerHTML = "";
     loading.hidden = true;
     projects.forEach(p => {
@@ -876,6 +878,67 @@ function initSettings(body){
   mus.addEventListener("change", () => localStorage.setItem("hmh-music-auto", mus.checked ? "1" : "0"));
 }
 
+
+/* ---------- Spotlight: tim ung dung va du an ---------- */
+const SPOT_APPS = [
+  ["welcome", "Xin chào"], ["about", "Hồ sơ — Hoàng Hùng"], ["skills", "Kỹ năng"],
+  ["journey", "Hành trình"], ["why", "Ứng tuyển Coolmate"], ["projects", "Dự án"],
+  ["cv", "CV — Hoàng Hùng"], ["contact", "Liên hệ"], ["terminal", "Terminal"],
+  ["settings", "Cài đặt hệ thống"], ["aboutmac", "Giới thiệu về máy này"], ["trash", "Thùng rác"]
+];
+const spotEl = $("#spotlight"), spotIn = $("#spot-input"), spotList = $("#spot-list");
+let spotItems = [], spotSel = 0;
+function spotNorm(s){ return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d"); }
+function spotSources(){
+  const out = SPOT_APPS.map(([id, name]) => ({ name, kind: "Ứng dụng", act: () => openWin(id) }));
+  (HMH_PROJECTS || []).forEach(p => {
+    const title = (p.info && p.info.TEN) || p.name.replace(/[-_]+/g, " ");
+    out.push({ name: title, kind: "Dự án", act: () => openCase(p, title) });
+  });
+  return out;
+}
+function spotRender(q){
+  const nq = spotNorm(q.trim());
+  spotItems = spotSources().filter(x => !nq || spotNorm(x.name).includes(nq)).slice(0, 9);
+  spotSel = 0;
+  spotList.innerHTML = "";
+  if (!spotItems.length){
+    spotList.innerHTML = '<div class="spot-empty">Không tìm thấy kết quả nào.</div>';
+    return;
+  }
+  spotItems.forEach((x, i) => {
+    const b = document.createElement("button");
+    b.className = "spot-item" + (i === spotSel ? " sel" : "");
+    const nm = document.createElement("span"); nm.textContent = x.name;
+    const kd = document.createElement("small"); kd.textContent = x.kind;
+    b.append(nm, kd);
+    b.addEventListener("click", () => { spotClose(); x.act(); });
+    spotList.appendChild(b);
+  });
+}
+function spotMark(){
+  $$(".spot-item", spotList).forEach((el, i) => el.classList.toggle("sel", i === spotSel));
+}
+function spotOpen(){
+  if (!spotEl) return;
+  spotEl.hidden = false;
+  spotIn.value = "";
+  spotRender("");
+  setTimeout(() => spotIn.focus(), 30);
+}
+function spotClose(){ if (spotEl) spotEl.hidden = true; }
+if (spotEl){
+  spotIn.addEventListener("input", () => spotRender(spotIn.value));
+  spotIn.addEventListener("keydown", e => {
+    if (e.key === "ArrowDown"){ e.preventDefault(); spotSel = Math.min(spotSel + 1, spotItems.length - 1); spotMark(); }
+    else if (e.key === "ArrowUp"){ e.preventDefault(); spotSel = Math.max(spotSel - 1, 0); spotMark(); }
+    else if (e.key === "Enter"){ const x = spotItems[spotSel]; if (x){ spotClose(); x.act(); } }
+    else if (e.key === "Escape") spotClose();
+  });
+  spotEl.addEventListener("pointerdown", e => { if (e.target === spotEl) spotClose(); });
+}
+if ($("#mb-spot")) $("#mb-spot").addEventListener("click", spotOpen);
+
 /* ---------- lịch tháng (dung chung widget va bang ngay gio) ---------- */
 function buildCalHTML(){
   const now = new Date(), y = now.getFullYear(), m = now.getMonth(), today = now.getDate();
@@ -921,19 +984,38 @@ if (mbClockBtn && ncPanel){
     const { lat, lon, label } = lastPos;
     try{
       const u = "https://api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + lon +
-        "&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m" +
+        "&current=temperature_2m,weather_code,is_day" +
+        "&hourly=temperature_2m,weather_code&forecast_days=2" +
         "&daily=temperature_2m_max,temperature_2m_min&timezone=auto";
       const r = await fetch(u);
       if (!r.ok) throw new Error("wx");
       const j = await r.json();
       const cur = j.current, info = WMO[cur.weather_code] || ["—", "⛅"];
-      $("#ww-icon").textContent = info[1];
       $("#ww-temp").textContent = Math.round(cur.temperature_2m) + "°";
       $("#ww-cond").textContent = info[0];
       $("#ww-loc").textContent = label;
-      $("#ww-extra").textContent =
-        "Cao " + Math.round(j.daily.temperature_2m_max[0]) + "° · Thấp " + Math.round(j.daily.temperature_2m_min[0]) + "°" +
-        " · Ẩm " + Math.round(cur.relative_humidity_2m) + "% · Gió " + Math.round(cur.wind_speed_10m) + " km/h";
+      $("#ww-hl").textContent = "H:" + Math.round(j.daily.temperature_2m_max[0]) + "°  L:" + Math.round(j.daily.temperature_2m_min[0]) + "°";
+      const code = cur.weather_code;
+      const grp = code <= 1 ? (cur.is_day ? "clear" : "clear-night") :
+        (code === 71 || code === 73 || code === 75) ? "snow" :
+        (code >= 95) ? "storm" :
+        (code >= 51) ? "rain" : "cloudy";
+      $("#w-wx").dataset.wx = grp;
+      const times = j.hourly.time, temps = j.hourly.temperature_2m, codes = j.hourly.weather_code;
+      const nowD = new Date();
+      let hi = times.findIndex(t => { const tt = new Date(t); return tt.getHours() === nowD.getHours() && tt.getDate() === nowD.getDate(); });
+      if (hi < 0) hi = 0;
+      let hh = "";
+      for (let k = 0; k < 8 && hi + k < times.length; k++){
+        const t = new Date(times[hi + k]);
+        const wmi = WMO[codes[hi + k]] || ["—", "⛅"];
+        let lab;
+        if (localStorage.getItem("hmh-clock-24h") === "0"){
+          lab = (t.getHours() % 12 || 12) + (t.getHours() >= 12 ? " PM" : " AM");
+        } else lab = t.getHours() + "h";
+        hh += '<div class="wx-h"><span>' + (k === 0 ? "Bây giờ" : lab) + '</span><i>' + wmi[1] + '</i><b>' + Math.round(temps[hi + k]) + '°</b></div>';
+      }
+      $("#ww-hours").innerHTML = hh;
     }catch(e){
       $("#ww-cond").textContent = "Chưa tải được thời tiết";
     }
@@ -955,11 +1037,11 @@ if (mbClockBtn && ncPanel){
   }
 })();
 
-/* phím tắt: gõ cmd/ctrl + k mở terminal */
+/* phím tắt: cmd/ctrl + k mở Spotlight */
 addEventListener("keydown", e => {
   if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k"){
     e.preventDefault();
-    if (!$("#os-desk").hidden) openWin("terminal");
+    if (!$("#os-desk").hidden) spotOpen();
   }
 });
 
