@@ -431,11 +431,9 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 
 /* anh minh hoa trong muc AI */
 .pod-future h5{font-size:12.5px;font-weight:800;color:var(--win-text);letter-spacing:.4px;margin:18px 0 6px}
-.cm-cover{width:100%;aspect-ratio:16/9.2;object-fit:cover;border-radius:12px;border:1px solid var(--win-line);cursor:zoom-in;display:block;margin-top:14px;background:#101018}
-.cm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-.cm-grid .cm-img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;border:1px solid var(--win-line);cursor:zoom-in;display:block;background:#101018}
-.cm-note{font-size:12px!important;color:var(--win-dim);margin-top:12px}
-@media(max-width:640px){.cm-grid{grid-template-columns:repeat(2,1fr)}}
+.cm-wide{width:100%;height:auto;border-radius:12px;border:1px solid var(--win-line);cursor:zoom-in;display:block;margin-top:12px;background:#101018}
+.cm-duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.cm-duo .cm-img{width:100%;height:auto;border-radius:12px;border:1px solid var(--win-line);cursor:zoom-in;display:block;background:#101018}
 
 /* can deu hai ben: doan van thang hang voi cac khung */
 .about p,.why p,.journey p{text-align:justify}
