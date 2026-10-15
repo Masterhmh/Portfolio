@@ -649,4 +649,12 @@ html[data-os-theme="light"] .spot-list{background:linear-gradient(160deg, rgba(2
   .folder-ic{width:40px;height:40px}
   .dicon{gap:3px}
   .dicon span{line-height:1.22}
+  html,body{overflow:hidden;overscroll-behavior:none}
+  #os-desk{overflow:hidden;overscroll-behavior:none}
+}
+@media(max-width:760px) and (max-height:740px){
+  .wx-temp{font-size:32px}
+  #widgets .w-stats,#widgets .w-music{min-height:130px}
+  .folder-ic{width:36px;height:36px}
+  #desk-icons{gap:9px 6px;margin-top:10px}
 }
