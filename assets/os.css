@@ -432,8 +432,7 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 /* anh minh hoa trong muc AI */
 .pod-future h5{font-size:12.5px;font-weight:800;color:var(--win-text);letter-spacing:.4px;margin:18px 0 6px}
 .cm-wide{width:100%;height:auto;border-radius:12px;border:1px solid var(--win-line);cursor:zoom-in;display:block;margin-top:12px;background:#101018}
-.cm-duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.cm-duo .cm-img{width:100%;height:auto;border-radius:12px;border:1px solid var(--win-line);cursor:zoom-in;display:block;background:#101018}
+
 
 /* can deu hai ben: doan van thang hang voi cac khung */
 .about p,.why p,.journey p{text-align:justify}
