@@ -226,6 +226,7 @@ function openWin(id, opts){
   win.style.width = w + "px"; win.style.height = h + "px";
   win.style.left = Math.max(6, (W - w) / 2 + off - 40) + "px";
   win.style.top = Math.max(6, (H - h) / 2 + off - 26) + "px";
+  if (isMobile() && id === "welcome") win.style.top = (parseInt(win.style.top, 10) + 38) + "px";
   winsEl.appendChild(win);
   openWins.set(id, win);
   focusWin(win);
