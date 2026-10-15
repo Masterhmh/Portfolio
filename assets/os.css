@@ -641,6 +641,13 @@ html[data-os-theme="light"] .spot-list{background:linear-gradient(160deg, rgba(2
   .dicon span{text-wrap:balance}
   #dock{scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 20px,#000 calc(100% - 20px),transparent);mask-image:linear-gradient(90deg,transparent,#000 20px,#000 calc(100% - 20px),transparent)}
   #dock::-webkit-scrollbar{display:none}
+  .c-pad{padding:20px 18px 24px}
+  .sk-list{gap:12px}
+  .skill .row{font-size:13.5px;margin-bottom:5px}
+  .sbar{height:7px}
+  .chips{gap:6px}
+  .chip{font-size:12.5px;padding:5px 11px}
+  .sk-notes{margin-top:16px}
   .wx-temp{font-size:37px}
   .wx-hours{padding-top:7px;gap:2px}
   .wx-h{font-size:10.5px;gap:2px}
