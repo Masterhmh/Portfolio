@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/coolmate.css?v=8">
-<link rel="stylesheet" href="assets/os.css?v=33">
+<link rel="stylesheet" href="assets/os.css?v=34">
 <link rel="stylesheet" href="assets/avatar.css">
 <link rel="stylesheet" href="assets/showcase.css?v=45">
 <link rel="preconnect" href="https://raw.githubusercontent.com">
@@ -79,6 +79,7 @@
     </div>
     <div class="mb-right">
       <span class="mb-status"><i></i>Sẵn sàng cho công việc</span>
+      <button id="mb-spot" class="mb-ic" aria-label="Tìm kiếm Spotlight" title="Tìm kiếm Spotlight"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.3 15.3 L21 21" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button>
       <button id="mb-sound" class="mb-ic" aria-label="Bật/tắt tiếng khởi động" title="Tiếng khởi động">♪</button>
       <button id="mb-theme" class="mb-ic" aria-label="Đổi chế độ sáng/tối" title="Đổi sáng/tối">◐</button>
       <button class="mb-clock" id="mb-clock" aria-label="Xem đồng hồ và lịch">--:--</button>
@@ -104,25 +105,28 @@
       <div class="ncp-date" id="ncp-date"></div>
       <div class="ncp-cal" id="ncp-cal"></div>
     </div>
+<div id="spotlight" hidden>
+  <div class="spot-box">
+    <svg class="spot-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.3 15.3 L21 21" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+    <input id="spot-input" type="text" placeholder="Spotlight Search" autocomplete="off" aria-label="Tìm kiếm Spotlight">
+  </div>
+  <div class="spot-list" id="spot-list"></div>
+</div>
 
 
   <aside id="widgets">
     <div class="widget w-clock">
-      <div class="w-top">
-        <div>
-          <div class="w-time" id="w-time">16:54</div>
-          <div class="w-date" id="w-date">Thứ Ba, 13/10</div>
-        </div>
-        <div class="w-weather" id="w-weather">
-          <div class="ww-temp"><span id="ww-icon">⛅</span> <span id="ww-temp">--°</span></div>
-          <div class="ww-cond" id="ww-cond">Đang tải thời tiết...</div>
-          <div class="ww-loc" id="ww-loc">Hà Nội</div>
-        </div>
-      </div>
-      <div class="ww-extra" id="ww-extra"></div>
+      <div class="w-time" id="w-time">16:54</div>
+      <div class="w-date" id="w-date">Thứ Ba, 13/10</div>
       <div class="w-sub">Chào mừng đến với máy của Hùng</div>
     </div>
-    <div class="widget w-cal" id="w-cal" aria-label="Lịch tháng"></div>
+    <div class="widget w-wx" id="w-wx" data-wx="cloudy">
+      <div class="wx-loc" id="ww-loc">Hà Nội</div>
+      <div class="wx-temp" id="ww-temp">--°</div>
+      <div class="wx-cond" id="ww-cond">Đang tải thời tiết...</div>
+      <div class="wx-hl" id="ww-hl">H:--° L:--°</div>
+      <div class="wx-hours" id="ww-hours"></div>
+    </div>
     <div class="widget w-stats">
       <div class="w-stat"><b>10+</b><span>Năm chuyên sâu thiết kế &amp; Branding</span></div>
       <div class="w-stat"><b>900+</b><span>Khách hàng tin tưởng lựa chọn</span></div>
@@ -641,6 +645,6 @@
   </div>
 </template>
 
-<script src="assets/os.js?v=28"></script>
+<script src="assets/os.js?v=29"></script>
 </body>
 </html>
