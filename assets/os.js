@@ -47,6 +47,19 @@ function wpApply(){
 new MutationObserver(wpApply).observe(document.documentElement, { attributes: true, attributeFilter: ["data-os-theme"] });
 wpApply();
 
+/* ---------- dinh dang gio 12h/24h (Cai dat he thong) ---------- */
+function fmtHM(d, sec){
+  let h = d.getHours();
+  const m = String(d.getMinutes()).padStart(2, "0");
+  const s = String(d.getSeconds()).padStart(2, "0");
+  if (localStorage.getItem("hmh-clock-24h") === "0"){
+    const ap = h >= 12 ? "PM" : "AM";
+    h = h % 12 || 12;
+    return h + ":" + m + (sec ? ":" + s : "") + " " + ap;
+  }
+  return String(h).padStart(2, "0") + ":" + m + (sec ? ":" + s : "");
+}
+
 /* ---------- đồng hồ ---------- */
 (function(){
   const DAYS = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
@@ -56,12 +69,15 @@ wpApply();
     const hh = String(d.getHours()).padStart(2, "0"), mm = String(d.getMinutes()).padStart(2, "0"),
           ss = String(d.getSeconds()).padStart(2, "0");
     const lockC = $("#lock-clock"), lockD = $("#lock-date");
-    if (lockC) lockC.textContent = hh + ":" + mm;
+    if (lockC) lockC.textContent = fmtHM(d);
     if (lockD) lockD.textContent = DAYS[d.getDay()] + ", " + d.getDate() + " tháng " + (d.getMonth() + 1);
     const mb = $("#mb-clock");
-    if (mb) mb.textContent = DAYS_S[d.getDay()] + " " + d.getDate() + " thg " + (d.getMonth() + 1) + "  " + hh + ":" + mm + ":" + ss;
+    if (mb) mb.textContent = DAYS_S[d.getDay()] + " " + d.getDate() + " thg " + (d.getMonth() + 1) + "  " + fmtHM(d, true);
+    const ncpC = $("#ncp-clock"), ncpD = $("#ncp-date");
+    if (ncpC) ncpC.textContent = fmtHM(d, true);
+    if (ncpD) ncpD.textContent = DAYS[d.getDay()] + ", " + d.getDate() + " tháng " + (d.getMonth() + 1) + " năm " + d.getFullYear();
     const wt = $("#w-time"), wd = $("#w-date");
-    if (wt) wt.textContent = hh + ":" + mm;
+    if (wt) wt.textContent = fmtHM(d);
     if (wd) wd.textContent = DAYS[d.getDay()] + ", " + d.getDate() + "/" + (d.getMonth() + 1);
     setTimeout(tick, 1000);
   }
@@ -792,7 +808,7 @@ function relockTick(){
   const c = $("#relock-clock"), dEl = $("#relock-date");
   if (!c || !dEl) return;
   const d = new Date();
-  c.textContent = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+  c.textContent = fmtHM(d);
   dEl.textContent = RE_DAYS[d.getDay()] + ", " + d.getDate() + " tháng " + (d.getMonth() + 1);
 }
 setInterval(relockTick, 5000);
@@ -821,7 +837,7 @@ if (amBtn && amMenu){
       setTimeout(() => { showRelock(); dim.classList.remove("on"); setTimeout(() => { dim.hidden = true; }, 400); }, 1300);
     }
     else if (act === "restart") location.reload();
-    else if (act === "shutdown") $("#os-off").hidden = false;
+    else if (act === "shutdown"){ try{ musAu.pause(); }catch(e){} $("#os-off").hidden = false; }
   });
 }
 if ($("#os-off")) $("#os-off").addEventListener("click", () => location.reload());
@@ -847,15 +863,21 @@ function initSettings(body){
     wpApply();
     mark("set-wp", b.dataset.v);
   });
+  const curClock = () => localStorage.getItem("hmh-clock-24h") === "0" ? "12" : "24";
+  mark("set-clock", curClock());
+  $("#set-clock", body).addEventListener("click", e => {
+    const b = e.target.closest("button[data-v]"); if (!b) return;
+    if (b.dataset.v === "12") localStorage.setItem("hmh-clock-24h", "0");
+    else localStorage.removeItem("hmh-clock-24h");
+    mark("set-clock", b.dataset.v);
+  });
   const mus = $("#set-music", body);
   mus.checked = localStorage.getItem("hmh-music-auto") !== "0";
   mus.addEventListener("change", () => localStorage.setItem("hmh-music-auto", mus.checked ? "1" : "0"));
 }
 
-/* ---------- widget lịch tháng ---------- */
-(function(){
-  const el = $("#w-cal");
-  if (!el) return;
+/* ---------- lịch tháng (dung chung widget va bang ngay gio) ---------- */
+function buildCalHTML(){
   const now = new Date(), y = now.getFullYear(), m = now.getMonth(), today = now.getDate();
   const first = (new Date(y, m, 1).getDay() + 6) % 7; // thứ Hai = 0
   const days = new Date(y, m + 1, 0).getDate();
@@ -866,9 +888,26 @@ function initSettings(body){
   for (let d = 1; d <= days; d++) cells += "<b class='" + (d === today ? "today" : "") + "'>" + d + "</b>";
   const tail = (7 - (first + days) % 7) % 7;
   for (let d = 1; d <= tail; d++) cells += "<b class='dim'>" + d + "</b>";
-  el.innerHTML = "<div class='cal-head'><b>Tháng " + (m + 1) + " " + y + "</b><span>Hôm nay: " + today + "/" + (m + 1) + "</span></div>" +
+  return "<div class='cal-head'><b>Tháng " + (m + 1) + " " + y + "</b><span>Hôm nay: " + today + "/" + (m + 1) + "</span></div>" +
     "<div class='cal-grid'>" + cells + "</div>";
+}
+(function(){
+  const el = $("#w-cal");
+  if (el) el.innerHTML = buildCalHTML();
 })();
+
+/* ---------- bang ngay gio (bam vao ngay gio tren thanh menu) ---------- */
+const ncPanel = $("#nc-panel"), mbClockBtn = $("#mb-clock");
+function ncClose(){ if (ncPanel) ncPanel.hidden = true; }
+if (mbClockBtn && ncPanel){
+  mbClockBtn.addEventListener("click", e => {
+    e.stopPropagation();
+    if (ncPanel.hidden){ $("#ncp-cal").innerHTML = buildCalHTML(); ncPanel.hidden = false; }
+    else ncClose();
+  });
+  document.addEventListener("pointerdown", e => { if (!e.target.closest("#nc-panel") && !e.target.closest("#mb-clock")) ncClose(); });
+  addEventListener("keydown", e => { if (e.key === "Escape") ncClose(); });
+}
 
 /* ---------- widget thời tiết (dữ liệu thật, Open-Meteo) ---------- */
 (function(){
