@@ -148,6 +148,7 @@ function playChime(){
     lock.classList.add("bye");
     desk.hidden = false;
     musicAutoStart();
+    if (window.HMH_askGeo) window.HMH_askGeo();
     setTimeout(() => { lock.remove(); openWin("welcome"); }, 420);
   }
   lock.addEventListener("click", e => { if (e.target.closest("a")) return; enter(); });
@@ -991,10 +992,11 @@ if (mbClockBtn && ncPanel){
       if (!r.ok) throw new Error("wx");
       const j = await r.json();
       const cur = j.current, info = WMO[cur.weather_code] || ["—", "⛅"];
+      $("#ww-icon").textContent = info[1];
       $("#ww-temp").textContent = Math.round(cur.temperature_2m) + "°";
       $("#ww-cond").textContent = info[0];
       $("#ww-loc").textContent = label;
-      $("#ww-hl").textContent = "H:" + Math.round(j.daily.temperature_2m_max[0]) + "°  L:" + Math.round(j.daily.temperature_2m_min[0]) + "°";
+      $("#ww-hl").innerHTML = "H:" + Math.round(j.daily.temperature_2m_max[0]) + "°<br>L:" + Math.round(j.daily.temperature_2m_min[0]) + "°";
       const code = cur.weather_code;
       const grp = code <= 1 ? (cur.is_day ? "clear" : "clear-night") :
         (code === 71 || code === 73 || code === 75) ? "snow" :
@@ -1022,7 +1024,16 @@ if (mbClockBtn && ncPanel){
   }
   loadWeather();
   setInterval(loadWeather, 30 * 60 * 1000);
-  if (navigator.geolocation){
+  function ipFallback(){
+    fetch("https://ipapi.co/json/").then(r => r.json()).then(j => {
+      if (j && j.latitude && j.longitude){
+        lastPos = { lat: (+j.latitude).toFixed(4), lon: (+j.longitude).toFixed(4), label: j.city || lastPos.label };
+        loadWeather();
+      }
+    }).catch(() => {});
+  }
+  function askGeo(){
+    if (!navigator.geolocation){ ipFallback(); return; }
     navigator.geolocation.getCurrentPosition(async pos => {
       lastPos = { lat: pos.coords.latitude.toFixed(4), lon: pos.coords.longitude.toFixed(4), label: "Vị trí của bạn" };
       try{
@@ -1033,8 +1044,10 @@ if (mbClockBtn && ncPanel){
         if (name) lastPos.label = name;
       }catch(e){}
       loadWeather();
-    }, () => {}, { timeout: 7000, maximumAge: 600000 });
+    }, () => ipFallback(), { timeout: 7000, maximumAge: 600000 });
   }
+  window.HMH_askGeo = askGeo;
+  askGeo();
 })();
 
 /* phím tắt: cmd/ctrl + k mở Spotlight */
