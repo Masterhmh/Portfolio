@@ -444,6 +444,9 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 .mus-ctrl button{width:38px;height:38px;border-radius:50%;border:1px solid var(--win-line);background:var(--win-soft);color:var(--win-text);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
 .mus-ctrl button#mus-play{width:46px;height:46px;background:var(--accent);color:#fff;border:none}
 .mus-ctrl svg{width:16px;height:16px;fill:currentColor}
+.mus-vol{display:flex;align-items:center;gap:8px;margin-top:11px;color:var(--win-dim)}
+.mus-vol svg{width:16px;height:16px;flex:none}
+.mus-vol input{flex:1;accent-color:var(--accent);cursor:pointer}
 .mus-ctrl #mus-play svg{width:19px;height:19px}
 .cm-note{font-size:12px!important;color:var(--win-dim);margin-top:12px}
 .cm-wide{width:100%;height:auto;border-radius:12px;border:1px solid var(--win-line);cursor:zoom-in;display:block;margin-top:12px;background:#101018}
