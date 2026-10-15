@@ -712,7 +712,7 @@ async function musInit(){
     const r = await fetch("https://api.github.com/repos/" + GH.owner + "/" + GH.repo + "/git/trees/" + GH.branch + "?recursive=1");
     const d = await r.json();
     MUS.list = (d.tree || []).filter(x => x.type === "blob" && /^music\/[^/]+\.(mp3|ogg|m4a)$/i.test(x.path))
-      .map(x => ({ name: x.path.split("/").pop().replace(/\.(mp3|ogg|m4a)$/i, "").replace(/[-_]+/g, " ").trim(), url: x.path }));
+      .map(x => ({ name: x.path.split("/").pop().replace(/\.(mp3|ogg|m4a)$/i, "").replace(/[-_]+/g, " ").trim(), url: x.path.split("/").map(encodeURIComponent).join("/") }));
     MUS.order = MUS.list.map((_, i) => i);
     for (let i = MUS.order.length - 1; i > 0; i--){ const k = Math.floor(Math.random() * (i + 1)); const tmp = MUS.order[i]; MUS.order[i] = MUS.order[k]; MUS.order[k] = tmp; }
   }catch(e){}
