@@ -58,6 +58,18 @@ img{-webkit-user-drag:none}
 #os-lock{position:fixed;inset:0;z-index:150;overflow:hidden;display:flex;flex-direction:column;
   transition:transform .75s cubic-bezier(.7,0,.2,1),opacity .75s;cursor:pointer}
 #os-lock.bye{transform:translateY(-100%);opacity:.4;pointer-events:none}
+#os-relock{position:fixed;inset:0;z-index:150;overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .75s cubic-bezier(.7,0,.2,1),opacity .75s;cursor:pointer}
+#os-relock[hidden]{display:none}
+#os-relock.bye{transform:translateY(-100%);opacity:.4;pointer-events:none}
+#os-relock .lock-blur{inset:-46px}
+#os-dim{position:fixed;inset:0;background:#000;z-index:140;opacity:0;transition:opacity 1.2s ease}
+#os-dim[hidden]{display:none}
+#os-dim.on{opacity:1}
+#os-off{position:fixed;inset:0;background:#000;z-index:160;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;color:#fff}
+#os-off[hidden]{display:none}
+.off-text{font-size:26px;font-weight:700;opacity:.85}
+.off-sub{font-size:14px;opacity:.45}
 .lock-blur{position:absolute;inset:-40px;background-color:#241243;filter:blur(28px) brightness(.92);transform:scale(1.08)}
 #os-lock .lock-blur{inset:-46px}
 .lock-center{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;padding-top:9vh;color:#fff;text-align:center}
@@ -128,6 +140,47 @@ html[data-os-theme="light"] .widget{
 .ww-cond{font-size:13px;font-weight:600;margin-top:2px}
 .ww-loc{font-size:12px;color:var(--accent);font-weight:600}
 .ww-extra{font-size:11.5px;color:var(--win-dim);margin-top:3px;line-height:1.5}
+/* ---------- menu qua tao + cua so he thong ---------- */
+#mb-apple-btn{display:flex;align-items:center;padding:2px 8px 2px 2px;border-radius:6px;cursor:pointer}
+#mb-apple-btn:hover,#mb-apple-btn.open{background:var(--win-soft)}
+#apple-menu{position:absolute;top:36px;left:8px;z-index:200;min-width:258px;padding:6px;border-radius:14px;
+  background:linear-gradient(155deg, rgba(255,255,255,.20), rgba(255,255,255,.09) 55%, rgba(255,255,255,.06));
+  -webkit-backdrop-filter:blur(30px) saturate(1.8);backdrop-filter:blur(30px) saturate(1.8);
+  border:1px solid rgba(255,255,255,.30);box-shadow:0 22px 55px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.35);
+  color:var(--win-text)}
+html[data-os-theme="light"] #apple-menu{background:linear-gradient(155deg, rgba(255,255,255,.78), rgba(255,255,255,.55) 55%, rgba(255,255,255,.42));border-color:rgba(255,255,255,.75)}
+#apple-menu[hidden]{display:none}
+.am-item{display:flex;width:100%;text-align:left;padding:6px 10px;border-radius:8px;font-size:13.5px;cursor:pointer}
+.am-item:hover{background:var(--accent);color:#fff}
+.am-sep{height:1px;background:var(--win-line);margin:5px 8px}
+.am-label{font-size:11px;font-weight:700;letter-spacing:.8px;color:var(--win-dim);padding:4px 10px 2px}
+.am-empty{font-size:13px;color:var(--win-dim);padding:4px 10px 6px}
+.amc{text-align:center;padding-top:30px}
+.amc-apple{width:52px;height:62px;fill:var(--win-text);margin:0 auto 8px;display:block}
+.amc-name{font-size:27px;font-weight:800;text-align:center}
+.amc-ver{color:var(--win-dim);font-size:13px;text-align:center;margin:2px 0 18px}
+.amc-avatar{width:78px;height:78px;border-radius:50%;overflow:hidden;margin:0 auto 8px;border:2px solid var(--win-line)}
+.amc-avatar .avatar-photo{width:100%;height:100%;background-size:cover;background-position:center}
+.amc-user{font-size:18px;font-weight:700;text-align:center}
+.amc-role{color:var(--win-dim);font-size:13.5px;text-align:center;margin-bottom:20px}
+.amc-specs{max-width:320px;margin:0 auto;text-align:left}
+.amc-specs div{display:flex;justify-content:space-between;padding:7px 2px;border-top:1px solid var(--win-line);font-size:13.5px}
+.amc-specs dt{color:var(--win-dim)}
+.amc-specs dd{font-weight:600}
+.set-group{margin-bottom:20px}
+.set-label{font-size:11px;font-weight:800;letter-spacing:1.2px;color:var(--win-dim);margin-bottom:8px}
+.set-opts{display:flex;gap:8px;flex-wrap:wrap}
+.set-opts button{padding:7px 14px;border-radius:999px;border:1px solid var(--win-line);background:var(--win-soft);font-size:13.5px;cursor:pointer}
+.set-opts button.on{background:var(--accent);border-color:transparent;color:#fff;font-weight:700}
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:14px;cursor:pointer}
+.set-switch{position:relative;flex:none}
+.set-switch input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.set-switch i{display:block;width:46px;height:27px;border-radius:999px;background:rgba(120,120,128,.32);transition:background .2s;position:relative}
+.set-switch i::after{content:"";position:absolute;top:2px;left:2px;width:23px;height:23px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:left .2s}
+.set-switch input:checked + i{background:#30d158}
+.set-switch input:checked + i::after{left:21px}
+.set-note{font-size:12px;color:var(--win-dim);text-align:left}
+
 /* widget lịch */
 .w-cal{padding:16px 18px}
 .cal-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
