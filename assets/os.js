@@ -1100,3 +1100,8 @@ $$("[data-botcase]").forEach(b => {
   b.addEventListener("click", tap);
   b.addEventListener("pointerup", tap);
 });
+
+/* Khoa vuot doc lop ngoai tren dien thoai: chi cho cuon trong cua so, dock va cac vung cuon rieng */
+document.addEventListener("touchmove", function(e){
+  if (!e.target.closest(".win-body, .win-bar, #dock, .wx-hours, #spotlight, input, textarea, select")) e.preventDefault();
+}, { passive: false });
