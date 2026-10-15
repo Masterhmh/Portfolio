@@ -23,7 +23,9 @@ const WP_SRC = {
   light: { main: "https://images.weserv.nl/?url=raw.githubusercontent.com/Masterhmh/Portfolio/main/Wallpapers/Light.jpg&w=1920&q=80&output=webp", full: "Wallpapers/Light.jpg" }
 };
 function wpApply(){
-  const theme = document.documentElement.dataset.osTheme === "light" ? "light" : "dark";
+  const wpSel = localStorage.getItem("hmh-os-wp");
+  const theme = (wpSel === "dark" || wpSel === "light") ? wpSel :
+    (document.documentElement.dataset.osTheme === "light" ? "light" : "dark");
   const src = WP_SRC[theme];
   $$(".wallpaper").forEach(el => {
     if (el.dataset.wp === theme) return;
@@ -150,12 +152,15 @@ const WINCONF = {
   contact:  { title: "Liên hệ", w: 520, h: 540 },
   terminal: { title: "Terminal — hmh", w: 640, h: 450 },
   trash:    { title: "Thùng rác", w: 440, h: 340 },
+  aboutmac: { title: "Giới thiệu về máy này", w: 460, h: 520 },
+  settings: { title: "Cài đặt hệ thống", w: 480, h: 430 },
   browser:  { title: "Safari — Xưởng In Mẫu", w: 1120, h: 750 },
   browsercv:{ title: "Safari — CV Hoàng Hùng", w: 1000, h: 780 },
   safari:   { title: "Safari", w: 1120, h: 750 },
   case:     { title: "Dự án", w: 780, h: 660 }
 };
 const openWins = new Map();
+const RECENT_WINS = [];
 
 function dockDots(){
   $$(".dock-app[data-open]").forEach(b =>
@@ -167,6 +172,12 @@ function focusWin(win){
 }
 function openWin(id, opts){
   opts = opts || {};
+  if (id !== "aboutmac" && id !== "settings"){
+    const ri = RECENT_WINS.indexOf(id);
+    if (ri >= 0) RECENT_WINS.splice(ri, 1);
+    RECENT_WINS.unshift(id);
+    if (RECENT_WINS.length > 5) RECENT_WINS.length = 5;
+  }
   if (openWins.has(id)){
     const w = openWins.get(id);
     if (w.hidden){ w.hidden = false; requestAnimationFrame(() => w.classList.remove("minning")); }
@@ -208,6 +219,7 @@ function openWin(id, opts){
   if (id === "projects") initProjects(body);
   if (id === "browser" || id === "browsercv" || id === "safari") initBrowser(body);
   if (id === "terminal") initTerm(body);
+  if (id === "settings") initSettings(body);
   return win;
 }
 function closeWin(win){
@@ -706,7 +718,7 @@ function musPlayPos(pos){
   musAu.play().catch(() => {});
   musUI();
 }
-function musicAutoStart(){ if (MUS.ready && MUS.list.length && MUS.pos < 0) musPlayPos(0); }
+function musicAutoStart(){ if (localStorage.getItem("hmh-music-auto") === "0") return; if (MUS.ready && MUS.list.length && MUS.pos < 0) musPlayPos(0); }
 async function musInit(){
   if (!$("#w-music")) return;
   try{
@@ -740,6 +752,105 @@ async function musInit(){
   musUI();
 }
 musInit();
+
+
+/* ---------- menu qua tao (goc trai thanh menu) ---------- */
+const amMenu = $("#apple-menu"), amBtn = $("#mb-apple-btn");
+function amClose(){ if (amMenu) amMenu.hidden = true; if (amBtn) amBtn.classList.remove("open"); }
+function amRenderRecent(){
+  const box = $("#am-recent");
+  if (!box) return;
+  box.innerHTML = "";
+  if (!RECENT_WINS.length){
+    box.innerHTML = '<div class="am-empty">Chưa có ứng dụng nào</div>';
+    return;
+  }
+  RECENT_WINS.forEach(id => {
+    const b = document.createElement("button");
+    b.className = "am-item";
+    b.textContent = (WINCONF[id] || {}).title || id;
+    b.addEventListener("click", () => { amClose(); openWin(id); });
+    box.appendChild(b);
+  });
+}
+function showRelock(){
+  const rl = $("#os-relock");
+  if (!rl) return;
+  relockTick();
+  rl.hidden = false;
+  rl.classList.remove("bye");
+  wpApply();
+}
+function hideRelock(){
+  const rl = $("#os-relock");
+  if (!rl || rl.hidden) return;
+  rl.classList.add("bye");
+  setTimeout(() => { rl.hidden = true; rl.classList.remove("bye"); }, 780);
+}
+const RE_DAYS = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+function relockTick(){
+  const c = $("#relock-clock"), dEl = $("#relock-date");
+  if (!c || !dEl) return;
+  const d = new Date();
+  c.textContent = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+  dEl.textContent = RE_DAYS[d.getDay()] + ", " + d.getDate() + " tháng " + (d.getMonth() + 1);
+}
+setInterval(relockTick, 5000);
+if ($("#os-relock")) $("#os-relock").addEventListener("click", hideRelock);
+if (amBtn && amMenu){
+  amBtn.addEventListener("click", e => {
+    e.stopPropagation();
+    if (amMenu.hidden){ amRenderRecent(); amMenu.hidden = false; amBtn.classList.add("open"); }
+    else amClose();
+  });
+  document.addEventListener("pointerdown", e => { if (!e.target.closest("#apple-menu") && !e.target.closest("#mb-apple-btn")) amClose(); });
+  addEventListener("keydown", e => { if (e.key === "Escape") amClose(); });
+  amMenu.addEventListener("click", e => {
+    const item = e.target.closest("[data-am]");
+    if (!item) return;
+    const act = item.dataset.am;
+    amClose();
+    if (act === "aboutmac") openWin("aboutmac");
+    else if (act === "settings") openWin("settings");
+    else if (act === "forcequit") [...openWins.values()].forEach(w => closeWin(w));
+    else if (act === "lock") showRelock();
+    else if (act === "sleep"){
+      const dim = $("#os-dim");
+      dim.hidden = false;
+      requestAnimationFrame(() => dim.classList.add("on"));
+      setTimeout(() => { showRelock(); dim.classList.remove("on"); setTimeout(() => { dim.hidden = true; }, 400); }, 1300);
+    }
+    else if (act === "restart") location.reload();
+    else if (act === "shutdown") $("#os-off").hidden = false;
+  });
+}
+if ($("#os-off")) $("#os-off").addEventListener("click", () => location.reload());
+
+/* ---------- cua so Cai dat he thong ---------- */
+function initSettings(body){
+  const root = document.documentElement;
+  const mark = (boxId, val) => $$("#" + boxId + " button", body).forEach(b => b.classList.toggle("on", b.dataset.v === val));
+  const curTheme = () => root.dataset.osTheme === "light" ? "light" : "dark";
+  const curWp = () => localStorage.getItem("hmh-os-wp") || "auto";
+  mark("set-theme", curTheme());
+  mark("set-wp", curWp());
+  $("#set-theme", body).addEventListener("click", e => {
+    const b = e.target.closest("button[data-v]"); if (!b) return;
+    root.dataset.osTheme = b.dataset.v;
+    localStorage.setItem("hmh-os-theme", b.dataset.v);
+    mark("set-theme", b.dataset.v);
+  });
+  $("#set-wp", body).addEventListener("click", e => {
+    const b = e.target.closest("button[data-v]"); if (!b) return;
+    if (b.dataset.v === "auto") localStorage.removeItem("hmh-os-wp");
+    else localStorage.setItem("hmh-os-wp", b.dataset.v);
+    wpApply();
+    mark("set-wp", b.dataset.v);
+  });
+  const mus = $("#set-music", body);
+  mus.checked = localStorage.getItem("hmh-music-auto") !== "0";
+  mus.addEventListener("change", () => localStorage.setItem("hmh-music-auto", mus.checked ? "1" : "0"));
+}
 
 /* ---------- widget lịch tháng ---------- */
 (function(){
