@@ -673,7 +673,7 @@ addEventListener("keydown", e => {
 });
 
 /* ---------- anh AI Coolmate trong cua so Ung tuyen ---------- */
-const CM_SIZES = [339525,337010,303581,4048279,2286513,307869,4058673];
+const CM_SIZES = [339525,3969891,3973266,3852240,2383870,2541552,2606327];
 const CM_PROJ = { name: "Coolmate", dirPath: "Coolmate",
   imgs: CM_SIZES.map((s, i) => ({ name: i + ".png", url: "Coolmate/" + i + ".png", size: s })) };
 document.addEventListener("click", e => {
