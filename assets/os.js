@@ -1101,6 +1101,16 @@ $$("[data-botcase]").forEach(b => {
   b.addEventListener("pointerup", tap);
 });
 
+/* Sap xep thu muc tren man hinh theo bang chu cai (bo dau khi so sanh) */
+(function(){
+  const nav = document.getElementById("desk-icons");
+  if (!nav) return;
+  const key = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
+  [...nav.querySelectorAll(".dicon")].sort((a, b) =>
+    key(a.querySelector("span").textContent).localeCompare(key(b.querySelector("span").textContent))
+  ).forEach(el => nav.appendChild(el));
+})();
+
 /* Khoa vuot doc lop ngoai tren dien thoai: chi cho cuon trong cua so, dock va cac vung cuon rieng */
 document.addEventListener("touchmove", function(e){
   if (!e.target.closest(".win-body, .win-bar, #dock, .wx-hours, #spotlight, input, textarea, select")) e.preventDefault();
