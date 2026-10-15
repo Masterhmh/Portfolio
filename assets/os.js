@@ -479,7 +479,7 @@ const IMG_RE = /\.(jpe?g|png|webp|gif|svg)$/i;
 function optUrl(dir, name, url, size, w){
   if (size > 400 * 1024){
     const clean = "raw.githubusercontent.com/" + GH.owner + "/" + GH.repo + "/" + GH.branch +
-                  "/projects/" + dir + "/" + name;
+                  "/" + dir + "/" + name;
     return "https://images.weserv.nl/?url=" + encodeURIComponent(clean) + "&w=" + w + "&q=70&output=jpg";
   }
   return url;
@@ -630,7 +630,7 @@ function openCase(p, title){
       p.imgs.forEach((im, i) => {
         const img = document.createElement("img");
         img.loading = "lazy"; img.alt = title + " " + (i + 1);
-        smartImg(img, p.name, im, 800);
+        smartImg(img, "projects/" + p.name, im, 800);
         img.addEventListener("click", () => openLightbox(p, i));
         grid.appendChild(img);
       });
@@ -656,7 +656,7 @@ function openCase(p, title){
 /* ---------- lightbox ---------- */
 const lb = $("#os-lightbox"), lbImg = $("#os-lb-img");
 let lbProj = null, lbIdx = 0;
-function lbShow(){ smartImg(lbImg, lbProj.name, lbProj.imgs[lbIdx], 1600); }
+function lbShow(){ smartImg(lbImg, lbProj.dirPath || ("projects/" + lbProj.name), lbProj.imgs[lbIdx], 1600); }
 function openLightbox(p, i){ lbProj = p; lbIdx = i; lbShow(); lb.hidden = false; }
 function closeLightbox(){ lb.hidden = true; }
 function lbGo(d){ lbIdx = (lbIdx + d + lbProj.imgs.length) % lbProj.imgs.length; lbShow(); }
@@ -670,6 +670,15 @@ addEventListener("keydown", e => {
     if (e.key === "ArrowLeft") lbGo(-1);
     if (e.key === "ArrowRight") lbGo(1);
   }
+});
+
+/* ---------- anh AI Coolmate trong cua so Ung tuyen ---------- */
+const CM_SIZES = [339525,337010,303581,4048279,2286513,307869,4058673,4436669,178832,3818877,4478217,359183,4621359,364846,4824117,384184,4862702];
+const CM_PROJ = { name: "Coolmate", dirPath: "Coolmate",
+  imgs: CM_SIZES.map((s, i) => ({ name: i + ".png", url: "Coolmate/" + i + ".png", size: s })) };
+document.addEventListener("click", e => {
+  const t = e.target.closest(".cm-img");
+  if (t) openLightbox(CM_PROJ, +t.dataset.i);
 });
 
 /* ---------- widget lịch tháng ---------- */
