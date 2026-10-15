@@ -215,6 +215,21 @@ html[data-os-theme="light"] #apple-menu{background:linear-gradient(160deg, rgba(
   #widgets .w-sub{display:none}
   .w-stats{grid-template-columns:repeat(4,1fr);gap:8px}
   .w-stat b{font-size:16.5px}
+  #widgets{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  #widgets .w-wx{grid-column:1/-1}
+  #widgets .w-stats{grid-template-columns:1fr 1fr;gap:10px 8px;aspect-ratio:1/1.04;display:grid;align-content:center}
+  #widgets .w-stats .w-stat b{font-size:19px}
+  #widgets .w-stats .w-stat span{font-size:10.5px;line-height:1.35;display:block}
+  #widgets .w-music{aspect-ratio:1/1.04;display:flex;flex-direction:column;justify-content:center}
+  #widgets .w-music .mus-vol{display:none}
+  #widgets .w-music .mus-title{font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #widgets .w-music .mus-ctrl button{width:38px;height:38px}
+  #widgets .w-music .mus-ctrl #mus-play{width:46px;height:46px}
+  #widgets>*{min-width:0}
+  .w-music .mus-bar{min-width:0}
+  .w-music .mus-bar input{flex:1;min-width:0}
+  .w-wx .wx-hours{max-width:100%}
+  .w-wx .wx-cond{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
   .w-stat span{font-size:10.5px;line-height:1.3;display:block}
 }
 
@@ -511,10 +526,12 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 .widget.w-wx[data-wx="rain"]{background:linear-gradient(168deg,#33506b 0%,#52708c 55%,#7490a8 100%)}
 .widget.w-wx[data-wx="storm"]{background:linear-gradient(168deg,#333650 0%,#4e5170 55%,#6f7394 100%)}
 .widget.w-wx[data-wx="snow"]{background:linear-gradient(168deg,#6e87a0 0%,#9db4c9 55%,#c9d9e8 100%)}
+.wx-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.wx-right{text-align:right;padding-top:3px}
 .wx-loc{font-size:16px;font-weight:700;line-height:1.15}
 .wx-temp{font-size:44px;font-weight:200;line-height:1.05;letter-spacing:-1px}
 .wx-cond{font-size:13.5px;font-weight:600;opacity:.95}
-.wx-hl{font-size:13px;font-weight:600;opacity:.9;margin-bottom:10px}
+.wx-hl{font-size:13px;font-weight:600;opacity:.9;margin-top:5px;line-height:1.5}
 .wx-hours{display:flex;gap:4px;overflow-x:auto;padding-top:9px;border-top:1px solid rgba(255,255,255,.35);scrollbar-width:none}
 .wx-hours::-webkit-scrollbar{display:none}
 .wx-h{flex:1 0 40px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11.5px}
@@ -522,7 +539,7 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 .wx-h b{font-size:12.5px}
 
 /* ---------- Spotlight ---------- */
-#spotlight{position:absolute;inset:0;z-index:210;background:rgba(10,10,18,.22);display:flex;flex-direction:column;align-items:center;padding-top:16vh}
+#spotlight{position:fixed;inset:0;z-index:210;background:rgba(10,10,18,.22);display:flex;flex-direction:column;align-items:center;padding-top:16vh}
 #spotlight[hidden]{display:none}
 .spot-box{display:flex;align-items:center;gap:10px;width:min(600px,92vw);padding:13px 18px;border-radius:18px;color:var(--win-text);
   background:linear-gradient(160deg, rgba(255,255,255,.26), rgba(255,255,255,.10) 55%, rgba(255,255,255,.13)), rgba(18,18,26,.44);
