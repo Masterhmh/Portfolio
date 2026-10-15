@@ -129,6 +129,7 @@ function playChime(){
     playChime();
     lock.classList.add("bye");
     desk.hidden = false;
+    musicAutoStart();
     setTimeout(() => { lock.remove(); openWin("welcome"); }, 420);
   }
   lock.addEventListener("click", e => { if (e.target.closest("a")) return; enter(); });
@@ -680,6 +681,62 @@ document.addEventListener("click", e => {
   const t = e.target.closest(".cm-img");
   if (t) openLightbox(CM_PROJ, +t.dataset.i);
 });
+
+/* ---------- widget phat nhac (chi ban may tinh) ---------- */
+const musAu = new Audio();
+musAu.preload = "auto";
+const MUS = { list: [], order: [], pos: -1, ready: false };
+const MUS_PLAY_SVG = '<svg viewBox="0 0 24 24"><path d="M8 5.6v12.8c0 .8.9 1.3 1.6.9l10-6.4a1.1 1.1 0 0 0 0-1.8l-10-6.4c-.7-.4-1.6.1-1.6.9z"/></svg>';
+const MUS_PAUSE_SVG = '<svg viewBox="0 0 24 24"><path d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg>';
+function musFmt(s){ s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); }
+function musUI(){
+  const t = $("#mus-title"), p = $("#mus-play"), box = $("#w-music");
+  if (!t || !p || !box) return;
+  if (!MUS.list.length){ t.textContent = "Chưa có bài nhạc nào"; return; }
+  const cur = MUS.pos >= 0 ? MUS.list[MUS.order[MUS.pos]] : null;
+  t.textContent = cur ? cur.name : "Nhạc nền";
+  p.innerHTML = musAu.paused ? MUS_PLAY_SVG : MUS_PAUSE_SVG;
+  box.classList.toggle("playing", !musAu.paused && MUS.pos >= 0);
+}
+function musPlayPos(pos){
+  if (!MUS.list.length) return;
+  MUS.pos = ((pos % MUS.order.length) + MUS.order.length) % MUS.order.length;
+  musAu.src = MUS.list[MUS.order[MUS.pos]].url;
+  musAu.play().catch(() => {});
+  musUI();
+}
+function musicAutoStart(){ if (MUS.ready && MUS.list.length && MUS.pos < 0) musPlayPos(0); }
+async function musInit(){
+  if (!$("#w-music")) return;
+  try{
+    const r = await fetch("https://api.github.com/repos/" + GH.owner + "/" + GH.repo + "/git/trees/" + GH.branch + "?recursive=1");
+    const d = await r.json();
+    MUS.list = (d.tree || []).filter(x => x.type === "blob" && /^music\/[^/]+\.(mp3|ogg|m4a)$/i.test(x.path))
+      .map(x => ({ name: x.path.split("/").pop().replace(/\.(mp3|ogg|m4a)$/i, "").replace(/[-_]+/g, " ").trim(), url: x.path }));
+    MUS.order = MUS.list.map((_, i) => i);
+    for (let i = MUS.order.length - 1; i > 0; i--){ const k = Math.floor(Math.random() * (i + 1)); const tmp = MUS.order[i]; MUS.order[i] = MUS.order[k]; MUS.order[k] = tmp; }
+  }catch(e){}
+  MUS.ready = true;
+  $("#mus-prev").addEventListener("click", () => musPlayPos(MUS.pos - 1));
+  $("#mus-next").addEventListener("click", () => musPlayPos(MUS.pos + 1));
+  $("#mus-play").addEventListener("click", () => {
+    if (!MUS.list.length) return;
+    if (MUS.pos < 0) musPlayPos(0);
+    else if (musAu.paused) musAu.play().catch(() => {}); else musAu.pause();
+  });
+  const seek = $("#mus-seek");
+  seek.addEventListener("input", () => { if (musAu.duration) musAu.currentTime = seek.value / 1000 * musAu.duration; });
+  musAu.addEventListener("timeupdate", () => {
+    const c = $("#mus-cur"); if (c) c.textContent = musFmt(musAu.currentTime);
+    if (musAu.duration) seek.value = Math.round(musAu.currentTime / musAu.duration * 1000);
+  });
+  musAu.addEventListener("loadedmetadata", () => { const dEl = $("#mus-dur"); if (dEl) dEl.textContent = musFmt(musAu.duration); });
+  musAu.addEventListener("play", musUI);
+  musAu.addEventListener("pause", musUI);
+  musAu.addEventListener("ended", () => musPlayPos(MUS.pos + 1));
+  musUI();
+}
+musInit();
 
 /* ---------- widget lịch tháng ---------- */
 (function(){
