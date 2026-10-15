@@ -1111,7 +1111,15 @@ $$("[data-botcase]").forEach(b => {
   ).forEach(el => nav.appendChild(el));
 })();
 
-/* Khoa vuot doc lop ngoai tren dien thoai: chi cho cuon trong cua so, dock va cac vung cuon rieng */
+/* Khoa vuot doc lop ngoai tren dien thoai: vung nao con cuon duoc thi de yen */
 document.addEventListener("touchmove", function(e){
-  if (!e.target.closest(".win-body, .win-bar, #dock, .wx-hours, #spotlight, input, textarea, select")) e.preventDefault();
+  if (e.target.closest("input, textarea, select, .win-bar")) return;
+  let el = e.target;
+  while (el && el !== document.body){
+    const st = getComputedStyle(el);
+    if (((st.overflowY === "auto" || st.overflowY === "scroll") && el.scrollHeight > el.clientHeight) ||
+        ((st.overflowX === "auto" || st.overflowX === "scroll") && el.scrollWidth > el.clientWidth)) return;
+    el = el.parentElement;
+  }
+  e.preventDefault();
 }, { passive: false });
