@@ -1266,6 +1266,10 @@ document.addEventListener("touchmove", function(e){
    ===================================================================== */
 (function(){
   try {
+    /* Safari/iOS ket xuat bo loc SVG theo ti le co dinh lam meo vien be mat:
+       cac trinh duyet nay giu kinh mo goc (von da dep), chi Chromium moi bat lop khuc xa */
+    const ua = navigator.userAgent || "";
+    if (/iPhone|iPad|iPod/.test(ua) || (/Safari/.test(ua) && !/Chrome|Chromium|Edg|OPR|Android/.test(ua))) return;
     const desk = document.getElementById("os-desk");
     const wpEl = document.querySelector(".wallpaper");
     let defsRoot = document.getElementById("lg-defs-root");
