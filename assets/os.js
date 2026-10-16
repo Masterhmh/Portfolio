@@ -956,11 +956,6 @@ function buildCalHTML(){
   return "<div class='cal-head'><b>Tháng " + (m + 1) + " " + y + "</b><span>Hôm nay: " + today + "/" + (m + 1) + "</span></div>" +
     "<div class='cal-grid'>" + cells + "</div>";
 }
-(function(){
-  const el = $("#w-cal");
-  if (el) el.innerHTML = buildCalHTML();
-})();
-
 /* ---------- bang ngay gio (bam vao ngay gio tren thanh menu) ---------- */
 const ncPanel = $("#nc-panel"), mbClockBtn = $("#mb-clock");
 function ncClose(){ if (ncPanel) ncPanel.hidden = true; }
@@ -1059,7 +1054,7 @@ addEventListener("keydown", e => {
   }
 });
 
-/* CV ban OS goi mo thu muc Du an (nut "Xem day du tai portfolio" trong cv-os.html) */
+/* CV ban OS goi mo thu muc Du an (nut "Xem day du tai portfolio" trong cv-coolmate.html) */
 window.addEventListener("message", function (e) {
   if (e.data && e.data.hmhOS === "open-projects") openWin("projects");
 });
@@ -1226,7 +1221,7 @@ document.addEventListener("touchmove", function(e){
       if (!window.__wfpCache || now - window.__wfpCache.t > 60000){
         net.textContent = "Đang lấy thông tin mạng…";
         fetch("https://ipapi.co/json/").then(r => r.json()).then(d => {
-          window.__wfpCache = { t: Date.now(), txt: "Địa chỉ IP: " + (d.ip || "—") + (d.org ? " — Nhà mạng: " + d.org : "") + (d.city ? " — Khu vực: " + d.city : "") };
+          window.__wfpCache = { t: Date.now(), txt: [d.org ? "Nhà mạng: " + d.org : "", d.city ? "Khu vực: " + d.city : ""].filter(Boolean).join(" — ") };
           net.textContent = window.__wfpCache.txt;
         }).catch(() => { net.textContent = ""; });
       } else net.textContent = window.__wfpCache.txt;
@@ -1288,7 +1283,6 @@ document.addEventListener("touchmove", function(e){
     const MAP_SCALE = 0.5, PULL = 0.34, CURVE = 0.02, BAND = 0.38;
     const mapCache = new Map();
 
-    function smoothStep(a, b, t){ t = Math.max(0, Math.min(1, (t - a) / (b - a))); return t * t * (3 - 2 * t); }
     function roundedRectSDF(x, y, hw, hh, r){
       const qx = Math.abs(x) - hw + r, qy = Math.abs(y) - hh + r;
       return Math.min(Math.max(qx, qy), 0) + Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) - r;
