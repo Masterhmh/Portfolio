@@ -74,6 +74,7 @@ img{-webkit-user-drag:none}
 #os-lock .lock-blur{inset:-46px}
 .lock-center{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;padding-top:9vh;color:#fff;text-align:center}
 .lock-date{font-size:clamp(17px,2.4vw,22px);font-weight:600;background:linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,.65));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:.3px rgba(255,255,255,.4);filter:drop-shadow(0 2px 14px rgba(0,0,0,.35)) drop-shadow(0 0 5px rgba(255,255,255,.35))}
+.lock-clock .ampm{font-size:.3em;font-weight:700;letter-spacing:.02em;margin-left:.14em}
 .lock-clock{font-size:clamp(74px,13vw,124px);font-weight:800;line-height:1.05;letter-spacing:-2px;background:linear-gradient(180deg,rgba(255,255,255,1) 0%,rgba(255,255,255,.88) 30%,rgba(255,255,255,.45) 50%,rgba(255,255,255,.82) 70%,rgba(255,255,255,1) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:.6px rgba(255,255,255,.38);filter:drop-shadow(0 6px 22px rgba(0,0,0,.38)) drop-shadow(0 0 7px rgba(255,255,255,.4)) drop-shadow(0 1px 1px rgba(255,255,255,.35))}
 .lock-user{margin-top:6vh;display:flex;flex-direction:column;align-items:center;gap:10px}
 .lock-avatar{width:96px;height:96px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,.65);
