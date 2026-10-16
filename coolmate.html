@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/coolmate.css?v=8">
-<link rel="stylesheet" href="assets/os.css?v=40">
+<link rel="stylesheet" href="assets/os.css?v=41">
 <link rel="stylesheet" href="assets/avatar.css">
 <link rel="stylesheet" href="assets/showcase.css?v=45">
 <link rel="preconnect" href="https://raw.githubusercontent.com">
@@ -99,6 +99,23 @@
         <button class="am-item" data-am="shutdown">Tắt máy…</button>
         <div class="am-sep"></div>
         <button class="am-item" data-am="lock">Khóa màn hình</button>
+      </div>
+<div id="ctx-menu" hidden>
+        <button class="am-item" data-ctx="welcome">Mở cửa sổ Xin chào</button>
+        <button class="am-item" data-ctx="projects">Mở thư mục Dự án</button>
+        <div class="am-sep"></div>
+        <div class="am-label">HÌNH NỀN</div>
+        <button class="am-item" data-ctx="wp-dark">Hình nền tối</button>
+        <button class="am-item" data-ctx="wp-light">Hình nền sáng</button>
+        <div class="am-sep"></div>
+        <div class="am-label">GIAO DIỆN</div>
+        <button class="am-item" data-ctx="th-light">Giao diện sáng</button>
+        <button class="am-item" data-ctx="th-dark">Giao diện tối</button>
+        <div class="am-sep"></div>
+        <button class="am-item" data-ctx="settings">Cài đặt hệ thống…</button>
+        <button class="am-item" data-ctx="aboutmac">Giới thiệu về máy này</button>
+        <div class="am-sep"></div>
+        <button class="am-item" data-ctx="lock">Khóa màn hình</button>
       </div>
 <div id="nc-panel" hidden>
       <div class="ncp-clock" id="ncp-clock">--:--</div>
@@ -653,6 +670,6 @@
   </div>
 </template>
 
-<script src="assets/os.js?v=35"></script>
+<script src="assets/os.js?v=36"></script>
 </body>
 </html>
