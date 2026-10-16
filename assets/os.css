@@ -581,8 +581,9 @@ html[data-os-theme="dark"] .f-front{fill:#6db3f2}
 @media(max-width:760px){
   #os-desk{display:flex;flex-direction:column;overflow-y:auto;padding:40px 0 120px}
   #widgets{position:static;flex:none;width:auto;margin:0 12px;top:auto;left:auto;right:auto}
-  #desk-icons{position:static;flex:none;display:grid;grid-template-columns:repeat(3,1fr);gap:12px 6px;
+  #desk-icons{position:relative;z-index:2;flex:none;display:grid;grid-template-columns:repeat(3,1fr);gap:12px 6px;
     margin-top:14px;padding:0 16px;justify-items:center;top:auto;right:auto}
+  #desk-icons .dicon{width:auto}
 }
 
 /* anh minh hoa trong muc AI */
