@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/coolmate.css?v=8">
-<link rel="stylesheet" href="assets/os.css?v=49">
+<link rel="stylesheet" href="assets/os.css?v=50">
 <link rel="stylesheet" href="assets/avatar.css">
 <link rel="stylesheet" href="assets/showcase.css?v=45">
 <link rel="preconnect" href="https://raw.githubusercontent.com">
@@ -94,8 +94,75 @@
 
 
 
-        <button class="am-item" data-pw="lock"><svg class="am-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5.5" y="10.5" width="13" height="9" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>Khóa màn hình</button>
+      <aside id="widgets">
+    <div class="widget w-wx" id="w-wx" data-wx="cloudy">
+      <div class="wx-top">
+        <div class="wx-left">
+          <div class="wx-loc" id="ww-loc">Hà Nội</div>
+          <div class="wx-temp" id="ww-temp">--°</div>
+        </div>
+        <div class="wx-right">
+          <div class="wx-cond"><span id="ww-icon">⛅</span> <span id="ww-cond">Đang tải thời tiết...</span></div>
+          <div class="wx-hl" id="ww-hl">H:--°<br>L:--°</div>
+        </div>
       </div>
+      <div class="wx-hours" id="ww-hours"></div>
+    </div>
+    <div class="widget w-stats">
+      <div class="w-stat"><b>10+</b><span>Năm chuyên sâu thiết kế &amp; Branding</span></div>
+      <div class="w-stat"><b>900+</b><span>Khách hàng tin tưởng lựa chọn</span></div>
+      <div class="w-stat"><b>24h</b><span>Phản hồi siêu tốc &amp; Tối ưu thời gian</span></div>
+      <div class="w-stat"><b>100%</b><span>Giải pháp số hóa &amp; Tự động hóa thiết kế</span></div>
+    </div>
+  
+    <div class="widget w-music" id="w-music">
+      <div class="mus-head"><span class="mus-dot"></span><span>ÂM NHẠC</span></div>
+      <div class="mus-title" id="mus-title">Đang tải danh sách...</div>
+      <div class="mus-bar"><span id="mus-cur">0:00</span><input type="range" id="mus-seek" min="0" max="1000" value="0" aria-label="Tua bài nhạc"><span id="mus-dur">0:00</span></div>
+      <div class="mus-ctrl">
+        <button id="mus-prev" aria-label="Bài trước"><svg viewBox="0 0 24 24"><path d="M6 5h2.4v14H6zM19 5.8v12.4c0 .8-.9 1.3-1.6.9L8.6 13a1.1 1.1 0 0 1 0-1.9l8.8-6.2c.7-.4 1.6.1 1.6.9z"/></svg></button>
+        <button id="mus-play" aria-label="Phát hoặc tạm dừng"><svg viewBox="0 0 24 24"><path d="M8 5.6v12.8c0 .8.9 1.3 1.6.9l10-6.4a1.1 1.1 0 0 0 0-1.8l-10-6.4c-.7-.4-1.6.1-1.6.9z"/></svg></button>
+        <button id="mus-next" aria-label="Bài tiếp theo"><svg viewBox="0 0 24 24"><path d="M15.6 5H18v14h-2.4zM5 5.8v12.4c0 .8.9 1.3 1.6.9l8.8-6.1a1.1 1.1 0 0 0 0-1.9L6.6 4.9c-.7-.4-1.6.1-1.6.9z"/></svg></button>
+      </div>
+      <div class="mus-vol"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5c0 .8.7 1.5 1.5 1.5H9l5.2 4.2c.8.6 1.8.1 1.8-.9V4.7c0-1-1-1.5-1.8-.9L9 8H5.5C4.7 8 4 8.7 4 9.5zM18.6 8.9a4.4 4.4 0 0 1 0 6.2M21 6.2a8.2 8.2 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><input type="range" id="mus-vol" min="0" max="100" value="10" aria-label="Âm lượng nhạc nền">
+      </div>
+    </div>
+  </aside>
+<nav id="desk-icons" aria-label="Thư mục trên màn hình">
+    <button class="dicon" data-open="about">
+      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
+      <span>Hồ sơ</span>
+    </button>
+    <button class="dicon" data-open="skills">
+      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
+      <span>Kỹ năng</span>
+    </button>
+    <button class="dicon" data-open="journey">
+      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
+      <span>Hành trình</span>
+    </button>
+    <button class="dicon" data-open="why">
+      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
+      <span>Ứng tuyển Coolmate</span>
+    </button>
+    <button class="dicon" data-open="projects">
+      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
+      <span>Dự án</span>
+    </button>
+    <button class="dicon" data-botcase="1">
+      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
+      <span>Bot Chi Tiêu</span>
+    </button>
+    <button class="dicon" data-open="contact">
+      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
+      <span>Liên hệ</span>
+    </button>
+    <button class="dicon" data-open="welcome">
+      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
+      <span>Xin chào</span>
+    </button>
+  </nav>
+</div>
 <div id="apple-menu" hidden>
         <button class="am-item" data-am="aboutmac"><svg class="am-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r="1" fill="currentColor" stroke="none"/></svg>Giới thiệu về máy này</button>
         <button class="am-item" data-am="settings"><svg class="am-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h9.5M18 8h2M4 16h3.5M12 16h8"/><circle cx="15.8" cy="8" r="2.2"/><circle cx="9.8" cy="16" r="2.2"/></svg>Cài đặt hệ thống…</button>
@@ -158,76 +225,10 @@
 </div>
 
 
-  <aside id="widgets">
-    <div class="widget w-wx" id="w-wx" data-wx="cloudy">
-      <div class="wx-top">
-        <div class="wx-left">
-          <div class="wx-loc" id="ww-loc">Hà Nội</div>
-          <div class="wx-temp" id="ww-temp">--°</div>
-        </div>
-        <div class="wx-right">
-          <div class="wx-cond"><span id="ww-icon">⛅</span> <span id="ww-cond">Đang tải thời tiết...</span></div>
-          <div class="wx-hl" id="ww-hl">H:--°<br>L:--°</div>
-        </div>
-      </div>
-      <div class="wx-hours" id="ww-hours"></div>
-    </div>
-    <div class="widget w-stats">
-      <div class="w-stat"><b>10+</b><span>Năm chuyên sâu thiết kế &amp; Branding</span></div>
-      <div class="w-stat"><b>900+</b><span>Khách hàng tin tưởng lựa chọn</span></div>
-      <div class="w-stat"><b>24h</b><span>Phản hồi siêu tốc &amp; Tối ưu thời gian</span></div>
-      <div class="w-stat"><b>100%</b><span>Giải pháp số hóa &amp; Tự động hóa thiết kế</span></div>
-    </div>
   
-    <div class="widget w-music" id="w-music">
-      <div class="mus-head"><span class="mus-dot"></span><span>ÂM NHẠC</span></div>
-      <div class="mus-title" id="mus-title">Đang tải danh sách...</div>
-      <div class="mus-bar"><span id="mus-cur">0:00</span><input type="range" id="mus-seek" min="0" max="1000" value="0" aria-label="Tua bài nhạc"><span id="mus-dur">0:00</span></div>
-      <div class="mus-ctrl">
-        <button id="mus-prev" aria-label="Bài trước"><svg viewBox="0 0 24 24"><path d="M6 5h2.4v14H6zM19 5.8v12.4c0 .8-.9 1.3-1.6.9L8.6 13a1.1 1.1 0 0 1 0-1.9l8.8-6.2c.7-.4 1.6.1 1.6.9z"/></svg></button>
-        <button id="mus-play" aria-label="Phát hoặc tạm dừng"><svg viewBox="0 0 24 24"><path d="M8 5.6v12.8c0 .8.9 1.3 1.6.9l10-6.4a1.1 1.1 0 0 0 0-1.8l-10-6.4c-.7-.4-1.6.1-1.6.9z"/></svg></button>
-        <button id="mus-next" aria-label="Bài tiếp theo"><svg viewBox="0 0 24 24"><path d="M15.6 5H18v14h-2.4zM5 5.8v12.4c0 .8.9 1.3 1.6.9l8.8-6.1a1.1 1.1 0 0 0 0-1.9L6.6 4.9c-.7-.4-1.6.1-1.6.9z"/></svg></button>
-      </div>
-      <div class="mus-vol"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5c0 .8.7 1.5 1.5 1.5H9l5.2 4.2c.8.6 1.8.1 1.8-.9V4.7c0-1-1-1.5-1.8-.9L9 8H5.5C4.7 8 4 8.7 4 9.5zM18.6 8.9a4.4 4.4 0 0 1 0 6.2M21 6.2a8.2 8.2 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><input type="range" id="mus-vol" min="0" max="100" value="10" aria-label="Âm lượng nhạc nền">
-      </div>
-    </div>
-  </aside>
 
   <!-- desktop folders -->
-  <nav id="desk-icons" aria-label="Thư mục trên màn hình">
-    <button class="dicon" data-open="about">
-      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
-      <span>Hồ sơ</span>
-    </button>
-    <button class="dicon" data-open="skills">
-      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
-      <span>Kỹ năng</span>
-    </button>
-    <button class="dicon" data-open="journey">
-      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
-      <span>Hành trình</span>
-    </button>
-    <button class="dicon" data-open="why">
-      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
-      <span>Ứng tuyển Coolmate</span>
-    </button>
-    <button class="dicon" data-open="projects">
-      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
-      <span>Dự án</span>
-    </button>
-    <button class="dicon" data-botcase="1">
-      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
-      <span>Bot Chi Tiêu</span>
-    </button>
-    <button class="dicon" data-open="contact">
-      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
-      <span>Liên hệ</span>
-    </button>
-    <button class="dicon" data-open="welcome">
-      <svg class="folder-ic" viewBox="0 0 16.933 16.933" aria-hidden="true"><use href="#hmh-folder-sym"/></svg>
-      <span>Xin chào</span>
-    </button>
-  </nav>
+  
 
   <!-- windows -->
   <div id="wins"></div>
