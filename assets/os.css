@@ -202,13 +202,32 @@ html[data-os-theme="light"] #wifi-panel{background:linear-gradient(160deg, rgba(
 .wfp-dot{width:9px;height:9px;border-radius:50%;background:#30d158;flex:none}
 .wfp-dot.off{background:#ff453a}
 .wfp-sub{font-size:12.5px;color:var(--win-dim);margin-top:5px}
-#power-menu{position:absolute;top:36px;right:8px;z-index:200;min-width:228px;padding:6px;border-radius:14px;
+#cc-panel{position:absolute;top:36px;right:8px;z-index:200;width:308px;max-width:92vw;padding:14px;border-radius:22px;
   background:linear-gradient(160deg, rgba(255,255,255,.26), rgba(255,255,255,.10) 45%, rgba(255,255,255,.05) 70%, rgba(255,255,255,.13)), rgba(18,18,26,.36);
   -webkit-backdrop-filter:blur(42px) saturate(1.9);backdrop-filter:blur(42px) saturate(1.9);
   border:1px solid rgba(255,255,255,.55);box-shadow:0 22px 55px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.6);
   color:var(--win-text)}
-html[data-os-theme="light"] #power-menu{background:linear-gradient(160deg, rgba(255,255,255,.92), rgba(255,255,255,.78) 55%, rgba(255,255,255,.66));border-color:rgba(255,255,255,.85)}
-#power-menu[hidden]{display:none}
+html[data-os-theme="light"] #cc-panel{background:linear-gradient(160deg, rgba(255,255,255,.92), rgba(255,255,255,.78) 55%, rgba(255,255,255,.66));border-color:rgba(255,255,255,.85)}
+#cc-panel[hidden]{display:none}
+.cc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cc-cell{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:16px;text-align:left;cursor:pointer;color:var(--win-text);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22)}
+html[data-os-theme="light"] .cc-cell{background:rgba(255,255,255,.5);border-color:rgba(255,255,255,.7)}
+.cc-cell:active{transform:scale(.97)}
+.cc-ic{width:34px;height:34px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0a84ff;color:#fff}
+.cc-tx{display:flex;flex-direction:column;min-width:0}
+.cc-tx b{font-size:13.5px}
+.cc-tx small{font-size:11.5px;color:var(--win-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc-sec{margin-top:12px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22)}
+html[data-os-theme="light"] .cc-sec{background:rgba(255,255,255,.5);border-color:rgba(255,255,255,.7)}
+.cc-sec-t{font-size:12px;font-weight:600;color:var(--win-dim)}
+.cc-volrow{display:flex;align-items:center;gap:10px;margin-top:7px}
+.cc-volrow input{flex:1}
+.cc-mini{width:30px;height:30px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--win-text);background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);font-size:13px}
+.cc-musrow{display:flex;align-items:center;gap:10px;margin-top:7px}
+#cc-mus-title{flex:1;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc-musbtns{display:flex;gap:6px}
+.cc-settings{width:100%;margin-top:12px;padding:9px;border-radius:12px;cursor:pointer;font-size:13.5px;color:var(--win-text);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22)}
+html[data-os-theme="light"] .cc-settings{background:rgba(255,255,255,.5)}
 #mb-wifi.off{opacity:.45}
 @media(max-width:760px){#mb-sound{display:none}#wifi-panel{right:8px}}
 .am-item:hover{background:var(--accent);color:#fff}
