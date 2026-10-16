@@ -1204,7 +1204,7 @@ document.addEventListener("touchmove", function(e){
     if (dot) dot.classList.toggle("off", !on);
     if (tp){
       const c = navigator.connection;
-      tp.textContent = on ? (c && c.effectiveType ? "Loại kết nối: " + c.effectiveType.toUpperCase() + (c.downlink ? " — Tốc độ ước tính " + c.downlink + " Mb/giây" : "") : "") : "Kiểm tra lại đường truyền của bạn.";
+      tp.textContent = on ? (c && c.downlink ? "Tốc độ kết nối ước tính: " + c.downlink + " Mb/giây" : "") : "Kiểm tra lại đường truyền của bạn.";
     }
     const net = document.getElementById("wfp-net");
     if (net && on){
