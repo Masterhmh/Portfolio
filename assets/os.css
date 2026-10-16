@@ -229,7 +229,7 @@ html[data-os-theme="light"] .cc-sec{background:rgba(255,255,255,.5);border-color
 .cc-settings{width:100%;margin-top:12px;padding:9px;border-radius:12px;cursor:pointer;font-size:13.5px;color:var(--win-text);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22)}
 html[data-os-theme="light"] .cc-settings{background:rgba(255,255,255,.5)}
 #mb-wifi.off{opacity:.45}
-@media(max-width:760px){#mb-sound{display:none}#wifi-panel{right:8px}}
+@media(max-width:760px){#wifi-panel{right:8px}}
 .am-item:hover{background:var(--accent);color:#fff}
 .am-sep{height:1px;background:var(--win-line);margin:5px 8px}
 .am-label{font-size:11px;font-weight:700;letter-spacing:.8px;color:var(--win-dim);padding:4px 10px 2px}
