@@ -86,15 +86,6 @@ function fmtHM(d, sec){
 
 /* ---------- tiếng khởi động (tổng hợp WebAudio, kiểu chuông Mac) ---------- */
 let osMuted = localStorage.getItem("hmh-os-mute") === "1";
-const soundBtn = $("#mb-sound");
-function syncSoundBtn(){ soundBtn.classList.toggle("off", osMuted); soundBtn.textContent = osMuted ? "✕" : "♪"; }
-syncSoundBtn();
-soundBtn.addEventListener("click", () => {
-  osMuted = !osMuted;
-  localStorage.setItem("hmh-os-mute", osMuted ? "1" : "0");
-  syncSoundBtn();
-  if (!osMuted) playChime();
-});
 function playChime(){
   if (osMuted) return;
   try{
