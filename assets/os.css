@@ -172,6 +172,20 @@ html[data-os-theme="light"] #apple-menu{background:linear-gradient(160deg, rgba(
   color:var(--win-text)}
 html[data-os-theme="light"] #ctx-menu{background:linear-gradient(160deg, rgba(255,255,255,.92), rgba(255,255,255,.78) 55%, rgba(255,255,255,.66));border-color:rgba(255,255,255,.85)}
 #ctx-menu[hidden]{display:none}
+/* Liquid Glass kieu ban sao hinh nen: lop canh bi loc nam duoi noi dung (JS chi bat khi gan thanh cong) */
+.lg-host{isolation:isolate}
+.lg-copy{position:absolute;inset:0;border-radius:inherit;overflow:hidden;z-index:0;pointer-events:none}
+.lg-scene{position:absolute;inset:0;overflow:hidden}
+.lg-img{position:absolute;left:0;top:0;background-size:cover;background-position:center}
+.lg-tint{position:absolute;inset:0}
+.lg-host>*:not(.lg-copy){position:relative;z-index:1}
+.widget.lg-host::before{z-index:1}
+.spot-list.lg-host{position:relative}
+.lg-tint.t-widget{background:linear-gradient(155deg, rgba(255,255,255,.22), rgba(255,255,255,.09) 45%, rgba(255,255,255,.04) 75%, rgba(255,255,255,.09))}
+html[data-os-theme="light"] .lg-tint.t-widget{background:linear-gradient(155deg, rgba(255,255,255,.55), rgba(255,255,255,.28) 52%, rgba(255,255,255,.16))}
+.lg-tint.t-dock{background:var(--bar-bg)}
+.lg-tint.t-menu{background:linear-gradient(160deg, rgba(255,255,255,.26), rgba(255,255,255,.10) 45%, rgba(255,255,255,.05) 70%, rgba(255,255,255,.13)), rgba(18,18,26,.36)}
+html[data-os-theme="light"] .lg-tint.t-menu{background:linear-gradient(160deg, rgba(255,255,255,.92), rgba(255,255,255,.78) 55%, rgba(255,255,255,.66))}
 .am-item{display:flex;width:100%;text-align:left;padding:6px 10px;border-radius:8px;font-size:13.5px;cursor:pointer}
 .am-item:hover{background:var(--accent);color:#fff}
 .am-sep{height:1px;background:var(--win-line);margin:5px 8px}
