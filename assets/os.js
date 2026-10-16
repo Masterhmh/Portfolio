@@ -1135,7 +1135,7 @@ $$("[data-botcase]").forEach(b => {
     else if (k === "aboutmac") openWin("aboutmac");
     else if (k === "lock") showRelock();
     else if (k === "wp-dark" || k === "wp-light"){ localStorage.setItem("hmh-os-wp", k === "wp-dark" ? "dark" : "light"); wpApply(); }
-    else if (k === "th-light" || k === "th-dark"){ const v = k === "th-light" ? "light" : "dark"; document.documentElement.dataset.osTheme = v; localStorage.setItem("hmh-os-theme", v); }
+    else if (k === "th-light" || k === "th-dark"){ const v = k === "th-light" ? "light" : "dark"; localStorage.removeItem("hmh-os-wp"); document.documentElement.dataset.osTheme = v; localStorage.setItem("hmh-os-theme", v); wpApply(); }
   });
 })();
 
