@@ -1111,6 +1111,34 @@ $$("[data-botcase]").forEach(b => {
   ).forEach(el => nav.appendChild(el));
 })();
 
+/* Menu chuot phai kieu Mac tren man hinh chinh */
+(function(){
+  const desk = document.getElementById("os-desk"), menu = document.getElementById("ctx-menu");
+  if (!desk || !menu) return;
+  const hide = () => { menu.hidden = true; };
+  desk.addEventListener("contextmenu", function(e){
+    if (e.target.closest(".win, input, textarea, select, #ctx-menu")) return;
+    e.preventDefault();
+    menu.hidden = false;
+    const mw = menu.offsetWidth, mh = menu.offsetHeight;
+    menu.style.left = Math.max(4, Math.min(e.clientX, innerWidth - mw - 8)) + "px";
+    menu.style.top = Math.max(4, Math.min(e.clientY, innerHeight - mh - 8)) + "px";
+  });
+  document.addEventListener("pointerdown", function(e){ if (!e.target.closest("#ctx-menu")) hide(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") hide(); });
+  menu.addEventListener("click", function(e){
+    const b = e.target.closest("[data-ctx]"); if (!b) return;
+    const k = b.dataset.ctx; hide();
+    if (k === "welcome") openWin("welcome");
+    else if (k === "projects") openWin("projects");
+    else if (k === "settings") openWin("settings");
+    else if (k === "aboutmac") openWin("aboutmac");
+    else if (k === "lock") showRelock();
+    else if (k === "wp-dark" || k === "wp-light"){ localStorage.setItem("hmh-os-wp", k === "wp-dark" ? "dark" : "light"); wpApply(); }
+    else if (k === "th-light" || k === "th-dark"){ const v = k === "th-light" ? "light" : "dark"; document.documentElement.dataset.osTheme = v; localStorage.setItem("hmh-os-theme", v); }
+  });
+})();
+
 /* Khoa vuot doc lop ngoai tren dien thoai: vung nao con cuon duoc thi de yen */
 document.addEventListener("touchmove", function(e){
   if (e.target.closest("input, textarea, select, .win-bar")) return;
