@@ -788,7 +788,7 @@ function amRenderRecent(){
   RECENT_WINS.forEach(id => {
     const b = document.createElement("button");
     b.className = "am-item";
-    b.textContent = (WINCONF[id] || {}).title || id;
+    b.innerHTML = '<svg class="am-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.6 12a7.4 7.4 0 1 1 2.1 5.2"/><path d="M4.4 17.4v-4h4"/><path d="M12 8.6V12l2.4 1.5"/></svg>' + ((WINCONF[id] || {}).title || id);
     b.addEventListener("click", () => { amClose(); openWin(id); });
     box.appendChild(b);
   });
@@ -1152,6 +1152,63 @@ document.addEventListener("touchmove", function(e){
   e.preventDefault();
 }, { passive: false });
 
+/* ---------- nut Wi-Fi, loa, nguon tren thanh menu ---------- */
+(function(){
+  const wifiBtn = document.getElementById("mb-wifi"), wifiPanel = document.getElementById("wifi-panel");
+  const volBtn = document.getElementById("mb-vol"), pwBtn = document.getElementById("mb-power"), pwMenu = document.getElementById("power-menu");
+  function closeOthers(except){
+    ["wifi-panel", "power-menu", "nc-panel"].forEach(id => { const p = document.getElementById(id); if (p && id !== except) p.hidden = true; });
+    if (except !== "apple-menu" && typeof amClose === "function") amClose();
+  }
+  function wifiRefresh(){
+    const on = navigator.onLine;
+    if (wifiBtn){ wifiBtn.classList.toggle("off", !on); const sl = wifiBtn.querySelector(".wifi-slash"); if (sl) sl.hidden = on; }
+    const st = document.getElementById("wfp-state"), dot = document.getElementById("wfp-dot"), tp = document.getElementById("wfp-type");
+    if (st) st.textContent = on ? "Đã kết nối mạng" : "Đang mất kết nối";
+    if (dot) dot.classList.toggle("off", !on);
+    if (tp){
+      const c = navigator.connection;
+      tp.textContent = on ? (c && c.effectiveType ? "Loại kết nối: " + c.effectiveType.toUpperCase() : "") : "Kiểm tra lại đường truyền của bạn.";
+    }
+  }
+  if (wifiBtn && wifiPanel){
+    wifiBtn.addEventListener("click", () => {
+      const willOpen = wifiPanel.hidden;
+      closeOthers("wifi-panel");
+      wifiPanel.hidden = !willOpen;
+      if (willOpen) wifiRefresh();
+    });
+    document.addEventListener("pointerdown", e => { if (!e.target.closest("#wifi-panel") && !e.target.closest("#mb-wifi")) wifiPanel.hidden = true; });
+    window.addEventListener("online", wifiRefresh);
+    window.addEventListener("offline", wifiRefresh);
+    wifiRefresh();
+  }
+  if (volBtn){
+    const sync = () => {
+      const m = typeof musAu !== "undefined" && musAu.muted;
+      const w = volBtn.querySelector(".vol-waves"), x = volBtn.querySelector(".vol-x");
+      if (w) w.hidden = !!m; if (x) x.hidden = !m;
+      volBtn.style.opacity = m ? ".55" : "";
+    };
+    volBtn.addEventListener("click", () => { if (typeof musAu !== "undefined"){ musAu.muted = !musAu.muted; } sync(); });
+    sync();
+  }
+  if (pwBtn && pwMenu){
+    pwBtn.addEventListener("click", () => {
+      const willOpen = pwMenu.hidden;
+      closeOthers("power-menu");
+      pwMenu.hidden = !willOpen;
+    });
+    document.addEventListener("pointerdown", e => { if (!e.target.closest("#power-menu") && !e.target.closest("#mb-power")) pwMenu.hidden = true; });
+    pwMenu.addEventListener("click", e => {
+      const b = e.target.closest("[data-pw]"); if (!b) return;
+      pwMenu.hidden = true;
+      const target = document.querySelector('#apple-menu [data-am="' + b.dataset.pw + '"]');
+      if (target) target.click();
+    });
+  }
+})();
+
 /* =====================================================================
    Liquid Glass kieu "be cong ban sao hinh nen" (refract-a-copy):
    moi be mat kinh chua mot ban sao cua hinh nen, can khop vi tri that,
@@ -1286,8 +1343,10 @@ document.addEventListener("touchmove", function(e){
     attach(document.getElementById("nc-panel"), "ncpanel", "t-menu");
     attach(document.querySelector(".spot-box"), "spotbox", "t-menu");
     attach(document.getElementById("spot-list"), "spotlist", "t-menu");
+    attach(document.getElementById("wifi-panel"), "wifipanel", "t-menu");
+    attach(document.getElementById("power-menu"), "powermenu", "t-menu");
     /* mo menu/bang -> can lai vi tri va ban do theo kich thuoc moi */
-    ["apple-menu", "ctx-menu", "nc-panel", "spotlight"].forEach(id => {
+    ["apple-menu", "ctx-menu", "nc-panel", "spotlight", "wifi-panel", "power-menu"].forEach(id => {
       const m = document.getElementById(id); if (!m) return;
       new MutationObserver(() => { if (!m.hidden) { placeSoon(); setTimeout(placeAll, 60); } })
         .observe(m, { attributes: true, attributeFilter: ["hidden", "class"] });
