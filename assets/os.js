@@ -1151,3 +1151,156 @@ document.addEventListener("touchmove", function(e){
   }
   e.preventDefault();
 }, { passive: false });
+
+/* =====================================================================
+   Liquid Glass kieu "be cong ban sao hinh nen" (refract-a-copy):
+   moi be mat kinh chua mot ban sao cua hinh nen, can khop vi tri that,
+   bi be cong bang bo loc SVG (SDF hinh bo goc, dai cong o mep, tan sac nhe).
+   Filter thuong (khong phai backdrop-filter) nen chay ca tren Safari.
+   Ky thuat pho bien boi liquid-glass-react (rdev) va @samasante/liquid-glass (MIT).
+   Neu co loi, module tu go bo va trang quay ve kinh mo nhu cu.
+   ===================================================================== */
+(function(){
+  try {
+    const desk = document.getElementById("os-desk");
+    const wpEl = document.querySelector(".wallpaper");
+    const defsRoot = document.getElementById("lg-defs-root");
+    if (!desk || !wpEl || !defsRoot) return;
+    const SVGNS = "http://www.w3.org/2000/svg";
+    const MAP_SCALE = 0.5, PULL = 0.34, CURVE = 0.02, BAND = 0.38;
+    const mapCache = new Map();
+
+    function smoothStep(a, b, t){ t = Math.max(0, Math.min(1, (t - a) / (b - a))); return t * t * (3 - 2 * t); }
+    function roundedRectSDF(x, y, hw, hh, r){
+      const qx = Math.abs(x) - hw + r, qy = Math.abs(y) - hh + r;
+      return Math.min(Math.max(qx, qy), 0) + Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) - r;
+    }
+    function genMap(w, h, r){
+      w = Math.max(16, Math.round(w / 8) * 8); h = Math.max(16, Math.round(h / 8) * 8);
+      const ck = w + "x" + h + "x" + r;
+      if (mapCache.has(ck)) return mapCache.get(ck);
+      const mw = Math.round(w * MAP_SCALE), mh = Math.round(h * MAP_SCALE);
+      const cv = document.createElement("canvas"); cv.width = mw; cv.height = mh;
+      const cx = cv.getContext("2d");
+      const img = cx.createImageData(mw, mh); const d = img.data;
+      const raw = new Float32Array(mw * mh * 2); let maxScale = 0;
+      const aspect = mw / mh, hw = aspect / 2, hh = 0.5, rr = (r * MAP_SCALE) / mh;
+      for (let y = 0; y < mh; y++) for (let x = 0; x < mw; x++){
+        const uvx = (x / mw - 0.5) * aspect, uvy = y / mh - 0.5;
+        const dist = roundedRectSDF(uvx, uvy, hw, hh, rr);
+        const t = dist >= 0 ? 0 : Math.min(1, -dist / BAND);
+        const bend = Math.pow(Math.sin(Math.PI * t), 1.3);
+        const scaled = 1 - CURVE - PULL * bend;
+        const dx = uvx * (scaled - 1) * mh, dy = uvy * (scaled - 1) * mh;
+        const i = (y * mw + x) * 2; raw[i] = dx; raw[i + 1] = dy;
+        maxScale = Math.max(maxScale, Math.abs(dx), Math.abs(dy));
+      }
+      maxScale = Math.max(maxScale, 1);
+      for (let y = 0; y < mh; y++) for (let x = 0; x < mw; x++){
+        const i2 = (y * mw + x) * 2, p = (y * mw + x) * 4;
+        const edge = Math.min(x, y, mw - x - 1, mh - y - 1);
+        const ef = Math.min(1, edge / 2);
+        const rv = (raw[i2] * ef) / maxScale + 0.5, gv = (raw[i2 + 1] * ef) / maxScale + 0.5;
+        d[p] = Math.max(0, Math.min(255, rv * 255));
+        d[p + 1] = Math.max(0, Math.min(255, gv * 255));
+        d[p + 2] = Math.max(0, Math.min(255, gv * 255));
+        d[p + 3] = 255;
+      }
+      cx.putImageData(img, 0, 0);
+      const url = cv.toDataURL("image/png");
+      if (mapCache.size > 24) mapCache.clear();
+      mapCache.set(ck, url);
+      return url;
+    }
+    function ensureFilter(key){
+      const fid = "lgf-" + key;
+      if (document.getElementById(fid)) return fid;
+      const f = document.createElementNS(SVGNS, "filter");
+      f.setAttribute("id", fid);
+      f.setAttribute("x", "-35%"); f.setAttribute("y", "-35%");
+      f.setAttribute("width", "170%"); f.setAttribute("height", "170%");
+      f.setAttribute("color-interpolation-filters", "sRGB");
+      const parts = [
+        '<feImage id="lgm-' + key + '" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="DM"/>',
+        '<feDisplacementMap in="SourceGraphic" in2="DM" scale="-50" xChannelSelector="R" yChannelSelector="B" result="RD"/>',
+        '<feColorMatrix in="RD" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="RC"/>',
+        '<feDisplacementMap in="SourceGraphic" in2="DM" scale="-53" xChannelSelector="R" yChannelSelector="B" result="GD"/>',
+        '<feColorMatrix in="GD" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="GC"/>',
+        '<feDisplacementMap in="SourceGraphic" in2="DM" scale="-56" xChannelSelector="R" yChannelSelector="B" result="BD"/>',
+        '<feColorMatrix in="BD" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="BC"/>',
+        '<feBlend in="GC" in2="BC" mode="screen" result="GB"/>',
+        '<feBlend in="RC" in2="GB" mode="screen" result="RGB"/>',
+        '<feGaussianBlur in="RGB" stdDeviation="0.35"/>'
+      ];
+      f.innerHTML = parts.join("");
+      defsRoot.appendChild(f);
+      return fid;
+    }
+    function wpLayer(){ return wpEl.querySelector(".wp-l.on") || wpEl.querySelector(".wp-l") || wpEl; }
+    function wpURL(){ const l = wpEl.querySelector(".wp-l.on"); return l ? (l.style.backgroundImage || "") : ""; }
+    const hosts = [];
+    function place(rec){
+      const hr = rec.el.getBoundingClientRect();
+      if (hr.width < 8 || hr.height < 8 || !hr.width) return;
+      const wr = wpLayer().getBoundingClientRect();
+      if (wr.width < 8) return;
+      rec.img.style.width = wr.width + "px";
+      rec.img.style.height = wr.height + "px";
+      rec.img.style.transform = "translate(" + (wr.left - hr.left).toFixed(1) + "px," + (wr.top - hr.top).toFixed(1) + "px)";
+      const url = wpURL(); if (url) rec.img.style.backgroundImage = url;
+      const radius = parseFloat(getComputedStyle(rec.el).borderTopLeftRadius) || 16;
+      const mkey = Math.round(hr.width / 8) + "x" + Math.round(hr.height / 8) + "x" + Math.round(radius);
+      if (rec.mkey !== mkey){
+        rec.mkey = mkey;
+        const fe = document.getElementById("lgm-" + rec.key);
+        if (fe) fe.setAttribute("href", genMap(hr.width, hr.height, radius));
+      }
+    }
+    function placeAll(){ hosts.forEach(place); }
+    let rafPend = false;
+    function placeSoon(){
+      if (rafPend) return; rafPend = true;
+      requestAnimationFrame(() => { rafPend = false; placeAll(); });
+    }
+    function attach(el, key, tintClass){
+      if (!el || el.querySelector(":scope > .lg-copy")) return;
+      ensureFilter(key);
+      const copy = document.createElement("span"); copy.className = "lg-copy"; copy.setAttribute("aria-hidden", "true");
+      const scene = document.createElement("span"); scene.className = "lg-scene";
+      scene.style.filter = "url(#lgf-" + key + ")";
+      const img = document.createElement("span"); img.className = "lg-img";
+      const tint = document.createElement("span"); tint.className = "lg-tint " + tintClass;
+      scene.appendChild(img); copy.appendChild(scene); copy.appendChild(tint);
+      el.prepend(copy); el.classList.add("lg-host");
+      el.style.background = "transparent";
+      el.style.webkitBackdropFilter = "none"; el.style.backdropFilter = "none";
+      const rec = { el, key, img, mkey: "" };
+      hosts.push(rec);
+      new ResizeObserver(() => placeSoon()).observe(el);
+      place(rec);
+    }
+    attach(document.getElementById("dock"), "dock", "t-dock");
+    document.querySelectorAll(".widget").forEach((w, i) => attach(w, "wg" + i, "t-widget"));
+    attach(document.getElementById("apple-menu"), "applemenu", "t-menu");
+    attach(document.getElementById("ctx-menu"), "ctxmenu", "t-menu");
+    attach(document.getElementById("nc-panel"), "ncpanel", "t-menu");
+    attach(document.querySelector(".spot-box"), "spotbox", "t-menu");
+    attach(document.getElementById("spot-list"), "spotlist", "t-menu");
+    /* mo menu/bang -> can lai vi tri va ban do theo kich thuoc moi */
+    ["apple-menu", "ctx-menu", "nc-panel", "spotlight"].forEach(id => {
+      const m = document.getElementById(id); if (!m) return;
+      new MutationObserver(() => { if (!m.hidden) { placeSoon(); setTimeout(placeAll, 60); } })
+        .observe(m, { attributes: true, attributeFilter: ["hidden", "class"] });
+    });
+    /* doi hinh nen -> cap nhat anh sao chep */
+    new MutationObserver(() => placeSoon()).observe(wpEl, { subtree: true, attributes: true, attributeFilter: ["class", "style"] });
+    window.addEventListener("resize", placeSoon);
+    setTimeout(placeAll, 1200); setTimeout(placeAll, 3000);
+  } catch (err) {
+    document.querySelectorAll(".lg-host").forEach(el => {
+      el.classList.remove("lg-host");
+      el.style.background = ""; el.style.backdropFilter = ""; el.style.webkitBackdropFilter = "";
+      const c = el.querySelector(":scope > .lg-copy"); if (c) c.remove();
+    });
+  }
+})();
