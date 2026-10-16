@@ -1152,12 +1152,62 @@ document.addEventListener("touchmove", function(e){
   e.preventDefault();
 }, { passive: false });
 
+/* ---------- Trung tam dieu khien (mo tu thanh menu, ben phai) ---------- */
+(function(){
+  const btn = document.getElementById("mb-cc"), panel = document.getElementById("cc-panel");
+  if (!btn || !panel) return;
+  const $id = id => document.getElementById(id);
+  function curWpMode(){ return localStorage.getItem("hmh-os-wp") || document.documentElement.getAttribute("data-os-theme") || "dark"; }
+  function sync(){
+    const th = document.documentElement.getAttribute("data-os-theme") || "dark";
+    const ts = $id("cc-theme-sub"); if (ts) ts.textContent = th === "dark" ? "Tối" : "Sáng";
+    const ws = $id("cc-wp-sub"); if (ws) ws.textContent = curWpMode() === "dark" ? "Tối" : "Sáng";
+    const wf = $id("cc-wifi-sub"); if (wf) wf.textContent = navigator.onLine ? "Đã kết nối" : "Mất kết nối";
+    if (typeof musAu !== "undefined"){
+      const v = $id("cc-vol"); if (v) v.value = Math.round((musAu.volume || 0) * 100);
+      const mt = $id("cc-mus-title"), src = $id("mus-title");
+      if (mt && src) mt.textContent = src.textContent;
+      const pl = $id("cc-play"), srcPlay = $id("mus-play");
+      if (pl && srcPlay) pl.textContent = musAu.paused ? "▶" : "⏸";
+    }
+  }
+  btn.addEventListener("click", () => {
+    const willOpen = panel.hidden;
+    ["wifi-panel", "nc-panel"].forEach(id => { const p = $id(id); if (p) p.hidden = true; });
+    if (typeof amClose === "function") amClose();
+    panel.hidden = !willOpen;
+    if (willOpen) sync();
+  });
+  document.addEventListener("pointerdown", e => { if (!e.target.closest("#cc-panel") && !e.target.closest("#mb-cc")) panel.hidden = true; });
+  panel.addEventListener("click", e => {
+    const cell = e.target.closest(".cc-cell"); if (!cell) return;
+    if (cell.id === "cc-wifi"){ panel.hidden = true; const wb = $id("mb-wifi"); if (wb) wb.click(); }
+    else if (cell.id === "cc-theme"){ const tb = $id("mb-theme"); if (tb) tb.click(); setTimeout(sync, 60); }
+    else if (cell.id === "cc-wp"){ const nx = curWpMode() === "dark" ? "light" : "dark"; localStorage.setItem("hmh-os-wp", nx); if (typeof wpApply === "function") wpApply(); setTimeout(sync, 60); }
+    else if (cell.id === "cc-lock"){ panel.hidden = true; if (typeof showRelock === "function") showRelock(); }
+  });
+  const cvol = $id("cc-vol");
+  if (cvol) cvol.addEventListener("input", () => {
+    if (typeof musAu !== "undefined") musAu.volume = cvol.value / 100;
+    const mv = $id("mus-vol"); if (mv) mv.value = cvol.value;
+  });
+  const cmute = $id("cc-mute");
+  if (cmute) cmute.addEventListener("click", () => { const vb = $id("mb-vol"); if (vb) vb.click(); });
+  [["cc-prev", "mus-prev"], ["cc-play", "mus-play"], ["cc-next", "mus-next"]].forEach(([a, b]) => {
+    const el = $id(a), src = $id(b);
+    if (el && src) el.addEventListener("click", () => { src.click(); setTimeout(sync, 120); });
+  });
+  const cset = $id("cc-settings");
+  if (cset) cset.addEventListener("click", () => { panel.hidden = true; if (typeof openWin === "function") openWin("settings"); });
+  setInterval(() => { if (!panel.hidden) sync(); }, 1500);
+})();
+
 /* ---------- nut Wi-Fi, loa, nguon tren thanh menu ---------- */
 (function(){
   const wifiBtn = document.getElementById("mb-wifi"), wifiPanel = document.getElementById("wifi-panel");
-  const volBtn = document.getElementById("mb-vol"), pwBtn = document.getElementById("mb-power"), pwMenu = document.getElementById("power-menu");
+  const volBtn = document.getElementById("mb-vol");
   function closeOthers(except){
-    ["wifi-panel", "power-menu", "nc-panel"].forEach(id => { const p = document.getElementById(id); if (p && id !== except) p.hidden = true; });
+    ["wifi-panel", "cc-panel", "nc-panel"].forEach(id => { const p = document.getElementById(id); if (p && id !== except) p.hidden = true; });
     if (except !== "apple-menu" && typeof amClose === "function") amClose();
   }
   function wifiRefresh(){
@@ -1168,8 +1218,19 @@ document.addEventListener("touchmove", function(e){
     if (dot) dot.classList.toggle("off", !on);
     if (tp){
       const c = navigator.connection;
-      tp.textContent = on ? (c && c.effectiveType ? "Loại kết nối: " + c.effectiveType.toUpperCase() : "") : "Kiểm tra lại đường truyền của bạn.";
+      tp.textContent = on ? (c && c.effectiveType ? "Loại kết nối: " + c.effectiveType.toUpperCase() + (c.downlink ? " — Tốc độ ước tính " + c.downlink + " Mb/giây" : "") : "") : "Kiểm tra lại đường truyền của bạn.";
     }
+    const net = document.getElementById("wfp-net");
+    if (net && on){
+      const now = Date.now();
+      if (!window.__wfpCache || now - window.__wfpCache.t > 60000){
+        net.textContent = "Đang lấy thông tin mạng…";
+        fetch("https://ipapi.co/json/").then(r => r.json()).then(d => {
+          window.__wfpCache = { t: Date.now(), txt: "Địa chỉ IP: " + (d.ip || "—") + (d.org ? " — Nhà mạng: " + d.org : "") + (d.city ? " — Khu vực: " + d.city : "") };
+          net.textContent = window.__wfpCache.txt;
+        }).catch(() => { net.textContent = ""; });
+      } else net.textContent = window.__wfpCache.txt;
+    } else if (net) net.textContent = "";
   }
   if (wifiBtn && wifiPanel){
     wifiBtn.addEventListener("click", () => {
@@ -1192,20 +1253,6 @@ document.addEventListener("touchmove", function(e){
     };
     volBtn.addEventListener("click", () => { if (typeof musAu !== "undefined"){ musAu.muted = !musAu.muted; } sync(); });
     sync();
-  }
-  if (pwBtn && pwMenu){
-    pwBtn.addEventListener("click", () => {
-      const willOpen = pwMenu.hidden;
-      closeOthers("power-menu");
-      pwMenu.hidden = !willOpen;
-    });
-    document.addEventListener("pointerdown", e => { if (!e.target.closest("#power-menu") && !e.target.closest("#mb-power")) pwMenu.hidden = true; });
-    pwMenu.addEventListener("click", e => {
-      const b = e.target.closest("[data-pw]"); if (!b) return;
-      pwMenu.hidden = true;
-      const target = document.querySelector('#apple-menu [data-am="' + b.dataset.pw + '"]');
-      if (target) target.click();
-    });
   }
 })();
 
@@ -1344,9 +1391,9 @@ document.addEventListener("touchmove", function(e){
     attach(document.querySelector(".spot-box"), "spotbox", "t-menu");
     attach(document.getElementById("spot-list"), "spotlist", "t-menu");
     attach(document.getElementById("wifi-panel"), "wifipanel", "t-menu");
-    attach(document.getElementById("power-menu"), "powermenu", "t-menu");
+    attach(document.getElementById("cc-panel"), "ccpanel", "t-menu");
     /* mo menu/bang -> can lai vi tri va ban do theo kich thuoc moi */
-    ["apple-menu", "ctx-menu", "nc-panel", "spotlight", "wifi-panel", "power-menu"].forEach(id => {
+    ["apple-menu", "ctx-menu", "nc-panel", "spotlight", "wifi-panel", "cc-panel"].forEach(id => {
       const m = document.getElementById(id); if (!m) return;
       new MutationObserver(() => { if (!m.hidden) { placeSoon(); setTimeout(placeAll, 60); } })
         .observe(m, { attributes: true, attributeFilter: ["hidden", "class"] });
