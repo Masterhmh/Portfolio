@@ -947,6 +947,17 @@ function buildCalHTML(){
   return "<div class='cal-head'><b>Tháng " + (m + 1) + " " + y + "</b><span>Hôm nay: " + today + "/" + (m + 1) + "</span></div>" +
     "<div class='cal-grid'>" + cells + "</div>";
 }
+/* ---------- dong bo giao dien sang cac trang mo trong OS (vd: trang CV) ---------- */
+(function(){
+  function cast(){
+    const v = document.documentElement.getAttribute("data-os-theme");
+    document.querySelectorAll("#wins iframe").forEach(f => {
+      try { f.contentWindow.postMessage({ hmhOS: "theme", value: v }, location.origin); } catch(e){}
+    });
+  }
+  new MutationObserver(cast).observe(document.documentElement, { attributes: true, attributeFilter: ["data-os-theme"] });
+})();
+
 /* ---------- bang ngay gio (bam vao ngay gio tren thanh menu) ---------- */
 const ncPanel = $("#nc-panel"), mbClockBtn = $("#mb-clock");
 function ncClose(){ if (ncPanel) ncPanel.hidden = true; }
