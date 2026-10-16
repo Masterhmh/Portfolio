@@ -1162,13 +1162,13 @@ document.addEventListener("touchmove", function(e){
     const th = document.documentElement.getAttribute("data-os-theme") || "dark";
     const ts = $id("cc-theme-sub"); if (ts) ts.textContent = th === "dark" ? "Tối" : "Sáng";
     const ws = $id("cc-wp-sub"); if (ws) ws.textContent = curWpMode() === "dark" ? "Tối" : "Sáng";
-    const wf = $id("cc-wifi-sub"); if (wf) wf.textContent = navigator.onLine ? "Đã kết nối" : "Mất kết nối";
+    const wf = $id("cc-wifi-sub"); if (wf) wf.textContent = navigator.onLine ? "HMH Designer" : "Chưa kết nối";
     if (typeof musAu !== "undefined"){
       const v = $id("cc-vol"); if (v) v.value = Math.round((musAu.volume || 0) * 100);
       const mt = $id("cc-mus-title"), src = $id("mus-title");
       if (mt && src) mt.textContent = src.textContent;
       const pl = $id("cc-play"), srcPlay = $id("mus-play");
-      if (pl && srcPlay) pl.textContent = musAu.paused ? "▶" : "⏸";
+      if (pl && srcPlay) pl.innerHTML = musAu.paused ? '<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M8 5.14v13.72c0 .8.87 1.3 1.56.88l10-6.86a1.03 1.03 0 0 0 0-1.76l-10-6.86A1.03 1.03 0 0 0 8 5.14z"/></svg>' : '<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg>';
     }
   }
   btn.addEventListener("click", () => {
@@ -1212,9 +1212,9 @@ document.addEventListener("touchmove", function(e){
   }
   function wifiRefresh(){
     const on = navigator.onLine;
-    if (wifiBtn){ wifiBtn.classList.toggle("off", !on); const sl = wifiBtn.querySelector(".wifi-slash"); if (sl) sl.hidden = on; }
+    
     const st = document.getElementById("wfp-state"), dot = document.getElementById("wfp-dot"), tp = document.getElementById("wfp-type");
-    if (st) st.textContent = on ? "Đã kết nối mạng" : "Đang mất kết nối";
+    if (st) st.textContent = on ? "Đã kết nối mạng: HMH Designer" : "Đang mất kết nối";
     if (dot) dot.classList.toggle("off", !on);
     if (tp){
       const c = navigator.connection;
