@@ -6,6 +6,27 @@
 <title>CV — Hoàng Hùng | Thiết kế đồ họa đa mảng</title>
 <meta name="description" content="CV của Hoàng Hùng — Designer đồ họa đa mảng, mạnh nhất ở F&B; đọc hiểu code, vận dụng AI và tự động hóa. Bản CV theo phong cách HMH OS.">
 <link rel="stylesheet" href="assets/avatar.css">
+<script>
+/* Khi mo ben trong HMH OS (iframe cung nguon goc): giao dien di theo cai dat cua OS.
+   Mo doc lap ben ngoai: giu nguyen theo thiet bi nhu cu. */
+(function(){
+  function apply(t){ if (t === "dark" || t === "light") document.documentElement.setAttribute("data-cv-theme", t); }
+  try {
+    if (window.self !== window.top){
+      var t = null;
+      try { t = window.parent.document.documentElement.getAttribute("data-os-theme"); } catch(e){}
+      if (!t) t = localStorage.getItem("hmh-os-theme");
+      apply(t);
+      window.addEventListener("message", function(e){
+        if (e.origin === location.origin && e.data && e.data.hmhOS === "theme") apply(e.data.value);
+      });
+      window.addEventListener("storage", function(e){
+        if (e.key === "hmh-os-theme") apply(e.newValue);
+      });
+    }
+  } catch(e){}
+})();
+</script>
 <style>
 :root{
   --bg:#e8ecf3; --sheet:rgba(255,255,255,.82); --ink:#1d1d1f; --muted:#6e6e73; --line:rgba(0,0,0,.09);
@@ -16,6 +37,14 @@
     --bg:#14161c; --sheet:rgba(38,40,48,.86); --ink:#f5f5f7; --muted:#a1a1a6; --line:rgba(255,255,255,.12);
     --accent:#2997ff; --accent2:#64b5f6; --chip:rgba(255,255,255,.07); --head1:#0a4d8f; --head2:#06283d;
   }
+}
+html[data-cv-theme="light"]{
+  --bg:#e8ecf3; --sheet:rgba(255,255,255,.82); --ink:#1d1d1f; --muted:#6e6e73; --line:rgba(0,0,0,.09);
+  --accent:#0071e3; --accent2:#42a5f5; --chip:rgba(0,0,0,.045); --head1:#0a5cad; --head2:#083f5c;
+}
+html[data-cv-theme="dark"]{
+  --bg:#14161c; --sheet:rgba(38,40,48,.86); --ink:#f5f5f7; --muted:#a1a1a6; --line:rgba(255,255,255,.12);
+  --accent:#2997ff; --accent2:#64b5f6; --chip:rgba(255,255,255,.07); --head1:#0a4d8f; --head2:#06283d;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,Roboto,sans-serif;
