@@ -1254,6 +1254,10 @@ document.addEventListener("touchmove", function(e){
   try {
     /* Safari/iOS ket xuat bo loc SVG theo ti le co dinh lam meo vien be mat:
        cac trinh duyet nay giu kinh mo goc (von da dep), chi Chromium moi bat lop khuc xa */
+    /* TAM GO HAN (2026-10-16): lop ban sao khuc xa vo thanh hop dac tren mot so may/trinh duyet
+       (da thay tren iPhone Safari va tren may tinh cua Hung). Tat toan bo module, moi be mat
+       dung kinh mo goc on dinh. Muon bat lai: xoa dong return ngay duoi day. */
+    return;
     const ua = navigator.userAgent || "";
     if (/iPhone|iPad|iPod/.test(ua) || (/Safari/.test(ua) && !/Chrome|Chromium|Edg|OPR|Android/.test(ua))) return;
     const desk = document.getElementById("os-desk");
