@@ -47,8 +47,11 @@ html[data-cv-theme="dark"]{
   --accent:#2997ff; --accent2:#64b5f6; --chip:rgba(255,255,255,.07); --head1:#0a4d8f; --head2:#06283d;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,Roboto,sans-serif;
-  background:var(--bg);color:var(--ink);line-height:1.65;font-size:15px;
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,Roboto,sans-serif;}
+/* Toan trang chi dung mot font duy nhat: moi phan tu con deu ke thua font cua body */
+body *{font-family:inherit}
+button,input,select,textarea{font-family:inherit;font-size:inherit}
+body{background:var(--bg);color:var(--ink);line-height:1.65;font-size:15px;
   background-image:radial-gradient(1100px 550px at 85% -10%,rgba(0,113,227,.20),transparent 60%),radial-gradient(900px 500px at -10% 110%,rgba(255,94,98,.12),transparent 60%);
   background-attachment:fixed;min-height:100vh}
 a{color:var(--accent)}
