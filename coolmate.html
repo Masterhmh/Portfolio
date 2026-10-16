@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/coolmate.css?v=8">
-<link rel="stylesheet" href="assets/os.css?v=44">
+<link rel="stylesheet" href="assets/os.css?v=45">
 <link rel="stylesheet" href="assets/avatar.css">
 <link rel="stylesheet" href="assets/showcase.css?v=45">
 <link rel="preconnect" href="https://raw.githubusercontent.com">
@@ -85,7 +85,7 @@
       <button id="mb-theme" class="mb-ic" aria-label="Đổi chế độ sáng/tối" title="Đổi sáng/tối">◐</button>
       <button id="mb-wifi" class="mb-ic" aria-label="Trạng thái mạng" title="Mạng"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 10.6a12 12 0 0 1 16 0M6.8 13.9a8 8 0 0 1 10.4 0M9.7 17a4 4 0 0 1 4.6 0"/><circle cx="12" cy="19.3" r="1.1" fill="currentColor" stroke="none"/><path class="wifi-slash" d="M4.5 4.5l15 15" hidden/></svg></button>
       <button id="mb-vol" class="mb-ic" aria-label="Tắt/bật tiếng nhạc" title="Âm lượng nhạc"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.8v4.4h3.4L12 18.6V5.4L7.4 9.8H4z" fill="currentColor" stroke="none"/><path class="vol-waves" d="M15.3 9.6a3.8 3.8 0 0 1 0 4.8M17.8 7.2a7.2 7.2 0 0 1 0 9.6"/><path class="vol-x" d="M15.5 9.8l5 5M20.5 9.8l-5 5" hidden/></svg></button>
-      <button id="mb-power" class="mb-ic" aria-label="Nguồn" title="Nguồn"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 3.2v7.3"/><path d="M6.5 6.5a8.2 8.2 0 1 0 11 0"/></svg></button>
+      <button id="mb-cc" class="mb-ic" aria-label="Trung tâm điều khiển" title="Trung tâm điều khiển"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h9.5M18 8h2M4 16h3.5M12 16h8"/><circle cx="15.8" cy="8" r="2.2" fill="var(--bar-bg)"/><circle cx="9.8" cy="16" r="2.2" fill="var(--bar-bg)"/></svg></button>
       <button class="mb-clock" id="mb-clock" aria-label="Xem đồng hồ và lịch">--:--</button>
     </div>
   </header>
@@ -129,12 +129,19 @@
 <div id="wifi-panel" hidden>
       <div class="wfp-row"><span class="wfp-dot" id="wfp-dot"></span><span id="wfp-state">Đã kết nối mạng</span></div>
       <div class="wfp-sub" id="wfp-type"></div>
+      <div class="wfp-sub" id="wfp-net"></div>
     </div>
-<div id="power-menu" hidden>
-        <button class="am-item" data-pw="sleep"><svg class="am-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg>Ngủ</button>
-        <button class="am-item" data-pw="restart"><svg class="am-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19.8 12a7.8 7.8 0 1 1-2.2-5.5"/><path d="M20 3.9v4h-4"/></svg>Khởi động lại…</button>
-        <button class="am-item" data-pw="shutdown"><svg class="am-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v7.5"/><path d="M6.4 6.4a8.4 8.4 0 1 0 11.2 0"/></svg>Tắt máy…</button>
-        <div class="am-sep"></div>
+<div id="cc-panel" hidden>
+      <div class="cc-grid">
+        <button class="cc-cell" id="cc-wifi"><span class="cc-ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 10.6a12 12 0 0 1 16 0M6.8 13.9a8 8 0 0 1 10.4 0M9.7 17a4 4 0 0 1 4.6 0"/><circle cx="12" cy="19.3" r="1.1" fill="currentColor" stroke="none"/></svg></span><span class="cc-tx"><b>Wi-Fi</b><small id="cc-wifi-sub">Đã kết nối</small></span></button>
+        <button class="cc-cell" id="cc-theme"><span class="cc-ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none"/></svg></span><span class="cc-tx"><b>Giao diện</b><small id="cc-theme-sub">Tối</small></span></button>
+        <button class="cc-cell" id="cc-wp"><span class="cc-ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4.5 17.5l4.5-4 3.5 3 3-2.5 4.5 3.5"/></svg></span><span class="cc-tx"><b>Hình nền</b><small id="cc-wp-sub">Tối</small></span></button>
+        <button class="cc-cell" id="cc-lock"><span class="cc-ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5.5" y="10.5" width="13" height="9" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg></span><span class="cc-tx"><b>Khóa máy</b><small>Khóa màn hình</small></span></button>
+      </div>
+      <div class="cc-sec"><span class="cc-sec-t">Âm lượng nhạc</span><div class="cc-volrow"><button id="cc-mute" class="cc-mini" aria-label="Tắt/bật tiếng">♪</button><input id="cc-vol" type="range" min="0" max="100" step="1" value="10"></div></div>
+      <div class="cc-sec"><span class="cc-sec-t">Nhạc nền</span><div class="cc-musrow"><span id="cc-mus-title">Chưa có bài nhạc nào</span><span class="cc-musbtns"><button id="cc-prev" class="cc-mini" aria-label="Bài trước">⏮</button><button id="cc-play" class="cc-mini" aria-label="Phát/dừng">▶</button><button id="cc-next" class="cc-mini" aria-label="Bài sau">⏭</button></span></div></div>
+      <button class="cc-settings" id="cc-settings">Mở Cài đặt hệ thống…</button>
+    </div>
         <button class="am-item" data-pw="lock"><svg class="am-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5.5" y="10.5" width="13" height="9" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>Khóa màn hình</button>
       </div>
 <div id="spotlight" hidden>
@@ -685,7 +692,7 @@
   </div>
 </template>
 
-<script src="assets/os.js?v=39"></script>
+<script src="assets/os.js?v=40"></script>
 <svg id="lg-defs" width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="lg-defs-root"></defs></svg>
 </body>
 </html>
