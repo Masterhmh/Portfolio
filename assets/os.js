@@ -59,6 +59,12 @@ function fmtHM(d, sec){
   }
   return String(h).padStart(2, "0") + ":" + m + (sec ? ":" + s : "");
 }
+/* Dong ho man khoa: chu AM/PM hien nho lai trong mot the rieng */
+function fmtLockHTML(d){
+  const s = fmtHM(d);
+  const m = s.match(/^(.*) (AM|PM)$/);
+  return m ? m[1] + '<span class="ampm">' + m[2] + "</span>" : s;
+}
 
 /* ---------- đồng hồ ---------- */
 (function(){
@@ -69,7 +75,7 @@ function fmtHM(d, sec){
     const hh = String(d.getHours()).padStart(2, "0"), mm = String(d.getMinutes()).padStart(2, "0"),
           ss = String(d.getSeconds()).padStart(2, "0");
     const lockC = $("#lock-clock"), lockD = $("#lock-date");
-    if (lockC) lockC.textContent = fmtHM(d);
+    if (lockC) lockC.innerHTML = fmtLockHTML(d);
     if (lockD) lockD.textContent = DAYS[d.getDay()] + ", " + d.getDate() + " tháng " + (d.getMonth() + 1);
     const mb = $("#mb-clock");
     if (mb) mb.textContent = DAYS_S[d.getDay()] + " " + d.getDate() + " thg " + (d.getMonth() + 1) + "  " + fmtHM(d);
@@ -803,7 +809,7 @@ function relockTick(){
   const c = $("#relock-clock"), dEl = $("#relock-date");
   if (!c || !dEl) return;
   const d = new Date();
-  c.textContent = fmtHM(d);
+  c.innerHTML = fmtLockHTML(d);
   dEl.textContent = RE_DAYS[d.getDay()] + ", " + d.getDate() + " tháng " + (d.getMonth() + 1);
 }
 setInterval(relockTick, 5000);
