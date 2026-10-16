@@ -1268,8 +1268,18 @@ document.addEventListener("touchmove", function(e){
   try {
     const desk = document.getElementById("os-desk");
     const wpEl = document.querySelector(".wallpaper");
-    const defsRoot = document.getElementById("lg-defs-root");
-    if (!desk || !wpEl || !defsRoot) return;
+    let defsRoot = document.getElementById("lg-defs-root");
+    if (!defsRoot){
+      const svgEl = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svgEl.setAttribute("width", "1"); svgEl.setAttribute("height", "1");
+      svgEl.setAttribute("style", "position:absolute;opacity:.01");
+      svgEl.setAttribute("aria-hidden", "true");
+      defsRoot = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      defsRoot.id = "lg-defs-root";
+      svgEl.appendChild(defsRoot);
+      document.body.appendChild(svgEl);
+    }
+    if (!desk || !wpEl) return;
     const SVGNS = "http://www.w3.org/2000/svg";
     const MAP_SCALE = 0.5, PULL = 0.34, CURVE = 0.02, BAND = 0.38;
     const mapCache = new Map();
@@ -1376,8 +1386,8 @@ document.addEventListener("touchmove", function(e){
       const tint = document.createElement("span"); tint.className = "lg-tint " + tintClass;
       scene.appendChild(img); copy.appendChild(scene); copy.appendChild(tint);
       el.prepend(copy); el.classList.add("lg-host");
-      el.style.background = "transparent";
-      el.style.webkitBackdropFilter = "none"; el.style.backdropFilter = "none";
+      /* giu nguyen nen kinh mo goc lam lop du phong: ban sao nam tren se che no
+         noi hieu ung chay duoc; noi khong, bang van dac va nam tren moi thu */
       const rec = { el, key, img, mkey: "" };
       hosts.push(rec);
       new ResizeObserver(() => placeSoon()).observe(el);
@@ -1405,7 +1415,6 @@ document.addEventListener("touchmove", function(e){
   } catch (err) {
     document.querySelectorAll(".lg-host").forEach(el => {
       el.classList.remove("lg-host");
-      el.style.background = ""; el.style.backdropFilter = ""; el.style.webkitBackdropFilter = "";
       const c = el.querySelector(":scope > .lg-copy"); if (c) c.remove();
     });
   }
