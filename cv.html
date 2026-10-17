@@ -4,66 +4,117 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CV — Hoàng Hùng | Thiết kế đồ họa đa mảng</title>
-<meta name="description" content="CV của Hoàng Hùng — Designer đồ họa đa mảng, mạnh nhất ở F&B; đọc hiểu code, vận dụng AI và tự động hóa.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="description" content="CV của Hoàng Hùng — Designer đồ họa đa mảng, mạnh nhất ở F&B; đọc hiểu code, vận dụng AI và tự động hóa. Bản CV theo phong cách HMH OS.">
 <link rel="stylesheet" href="assets/avatar.css">
+<script>
+/* Khi mo ben trong HMH OS (iframe cung nguon goc): giao dien di theo cai dat cua OS.
+   Mo doc lap ben ngoai: giu nguyen theo thiet bi nhu cu. */
+(function(){
+  function apply(t){ if (t === "dark" || t === "light") document.documentElement.setAttribute("data-cv-theme", t); }
+  try {
+    if (window.self !== window.top){
+      var t = null;
+      try { t = window.parent.document.documentElement.getAttribute("data-os-theme"); } catch(e){}
+      if (!t) t = localStorage.getItem("hmh-os-theme");
+      apply(t);
+      window.addEventListener("message", function(e){
+        if (e.origin === location.origin && e.data && e.data.hmhOS === "theme") apply(e.data.value);
+      });
+      window.addEventListener("storage", function(e){
+        if (e.key === "hmh-os-theme") apply(e.newValue);
+      });
+    }
+  } catch(e){}
+})();
+</script>
 <style>
-:root{--ink:#1a2333;--muted:#5b6b82;--line:#e3e9f2;--accent:#0b6e99;--bg:#f2f5f9}
+:root{
+  --bg:#e8ecf3; --sheet:rgba(255,255,255,.82); --ink:#1d1d1f; --muted:#6e6e73; --line:rgba(0,0,0,.09);
+  --accent:#0071e3; --accent2:#42a5f5; --chip:rgba(0,0,0,.045); --head1:#0a5cad; --head2:#083f5c;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#14161c; --sheet:rgba(38,40,48,.86); --ink:#f5f5f7; --muted:#a1a1a6; --line:rgba(255,255,255,.12);
+    --accent:#2997ff; --accent2:#64b5f6; --chip:rgba(255,255,255,.07); --head1:#0a4d8f; --head2:#06283d;
+  }
+}
+html[data-cv-theme="light"]{
+  --bg:#e8ecf3; --sheet:rgba(255,255,255,.82); --ink:#1d1d1f; --muted:#6e6e73; --line:rgba(0,0,0,.09);
+  --accent:#0071e3; --accent2:#42a5f5; --chip:rgba(0,0,0,.045); --head1:#0a5cad; --head2:#083f5c;
+}
+html[data-cv-theme="dark"]{
+  --bg:#14161c; --sheet:rgba(38,40,48,.86); --ink:#f5f5f7; --muted:#a1a1a6; --line:rgba(255,255,255,.12);
+  --accent:#2997ff; --accent2:#64b5f6; --chip:rgba(255,255,255,.07); --head1:#0a4d8f; --head2:#06283d;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:15px}
-.cv-topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
-.cv-topbar .in{max-width:860px;margin:0 auto;padding:12px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.cv-topbar a.back{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--muted);text-decoration:none}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,Roboto,sans-serif;}
+/* Toan trang chi dung mot font duy nhat: moi phan tu con deu ke thua font cua body */
+body *{font-family:inherit}
+button,input,select,textarea{font-family:inherit;font-size:inherit}
+body{background:var(--bg);color:var(--ink);line-height:1.65;font-size:15px;
+  background-image:radial-gradient(1100px 550px at 85% -10%,rgba(0,113,227,.20),transparent 60%),radial-gradient(900px 500px at -10% 110%,rgba(255,94,98,.12),transparent 60%);
+  background-attachment:fixed;min-height:100vh}
+a{color:var(--accent)}
+/* thanh cong cu kieu macOS */
+.cv-topbar{position:sticky;top:0;z-index:10;backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);
+  background:var(--sheet);border-bottom:1px solid var(--line)}
+.cv-topbar .in{max-width:880px;margin:0 auto;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.dots{display:flex;gap:8px;align-items:center}
+.dots i{width:12px;height:12px;border-radius:50%;display:block}
+.dots .r{background:#ff5f57}.dots .y{background:#febc2e}.dots .g{background:#28c840}
+.cv-topbar .fname{font-size:13px;color:var(--muted);font-weight:500;margin-left:6px}
+.cv-topbar a.back{font-size:13px;color:var(--muted);text-decoration:none}
 .cv-topbar a.back:hover{color:var(--accent)}
-.btn-print{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 20px;cursor:pointer}
-.btn-print:hover{filter:brightness(1.1)}
-.btn{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:500;color:var(--accent);text-decoration:none;border:1px solid var(--accent);border-radius:8px;padding:10px 20px}
+.btn-print{font-size:13px;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 18px;cursor:pointer;box-shadow:0 1px 4px rgba(0,113,227,.35)}
+.btn-print:hover{filter:brightness(1.08)}
+.btn{display:inline-block;font-size:13.5px;font-weight:500;color:var(--accent);text-decoration:none;border:1px solid var(--accent);border-radius:10px;padding:10px 22px;transition:.2s}
 .btn:hover{background:var(--accent);color:#fff}
-.sheet{max-width:860px;margin:32px auto 64px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(20,40,70,.08)}
-.cv-head{display:grid;grid-template-columns:170px 1fr;gap:32px;padding:44px 48px;background:linear-gradient(135deg,#0b6e99,#083f5c);color:#fff}
-.photo{width:170px;height:170px;border-radius:50%;border:4px solid rgba(255,255,255,.35);flex:none}
-.cv-head h1{font-size:2.4rem;letter-spacing:-.01em;line-height:1.15}
-.cv-head .role{font-family:"JetBrains Mono",monospace;font-size:13.5px;color:#bfe3f2;margin:10px 0 18px;letter-spacing:.04em}
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-size:13.5px}
+/* to CV dang the kinh */
+.sheet{max-width:880px;margin:28px auto 60px;background:var(--sheet);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);
+  border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 24px 70px rgba(15,30,60,.18)}
+.cv-head{display:grid;grid-template-columns:168px 1fr;gap:30px;padding:42px 46px;background:linear-gradient(135deg,var(--head1),var(--head2));color:#fff}
+.photo{width:168px;height:168px;border-radius:50%;border:4px solid rgba(255,255,255,.35);flex:none;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.cv-head h1{font-size:2.35rem;letter-spacing:-.01em;line-height:1.15;font-weight:700}
+.cv-head .role{font-size:13.5px;color:#bfe0f5;margin:9px 0 18px;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:9px 24px;font-size:13.5px}
 .contact a{color:#fff;text-decoration:none}
 .contact a:hover{text-decoration:underline}
-.contact .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;color:#9fd0e6;text-transform:uppercase;display:block}
-.cv-body{padding:40px 48px}
-.cv-sec{margin-bottom:36px}
-.cv-sec h2{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:8px;margin-bottom:20px}
-.summary{font-size:15.5px;color:#33415a;text-align:justify}
+.contact .k{font-size:10.5px;letter-spacing:.12em;color:#9fd0e6;text-transform:uppercase;display:block;font-weight:600}
+.cv-body{padding:38px 46px}
+.cv-sec{margin-bottom:34px}
+.cv-sec h2{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border-bottom:1.5px solid var(--line);padding-bottom:9px;margin-bottom:19px;font-weight:600}
+.summary{font-size:15.5px;text-align:justify}
 .job{margin-bottom:24px}
 .job:last-child{margin-bottom:0}
-.job .when{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--accent);letter-spacing:.06em}
-.job h3{font-size:1.1rem;margin:4px 0 2px}
+.job .when{font-size:12px;color:var(--accent);letter-spacing:.07em;font-weight:600}
+.job h3{font-size:1.08rem;margin:4px 0 2px;font-weight:650}
 .job h3 span{color:var(--muted);font-weight:500;font-size:.92rem}
-.job ul{margin:8px 0 0 18px;color:#33415a;font-size:14.5px;text-align:justify}
+.job ul{margin:8px 0 0 18px;font-size:14.5px;text-align:justify;opacity:.92}
 .job li{margin-bottom:5px}
-.skills{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px}
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:15px 30px}
 .skill .row{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px}
 .skill .row b{font-weight:600}
-.skill .row span{font-family:"JetBrains Mono",monospace;color:var(--muted);font-size:12px}
-.bar{height:7px;background:var(--line);border-radius:99px;overflow:hidden}
-.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#33a8d8);border-radius:99px}
-.proj-list{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.proj{border:1px solid var(--line);border-radius:99px;padding:7px 17px;font-size:13.5px;background:#f7fafd}
+.skill .row span{color:var(--muted);font-size:12px}
+.bar{height:7px;background:var(--chip);border-radius:99px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px}
+.proj-list{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+.proj{border:1px solid var(--line);border-radius:99px;padding:7px 16px;font-size:13.5px;background:var(--chip)}
 .proj b{font-weight:500}
-.proj span{color:var(--muted);font-size:13px}
-.cv-loading{font-family:"JetBrains Mono",monospace;font-size:12.5px;color:var(--muted);grid-column:1/-1}
-.cv-foot{padding:24px 48px;border-top:1px solid var(--line);font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted);display:flex;justify-content:center;text-align:center;flex-wrap:wrap;gap:8px 24px}
+.cv-loading{font-size:12.5px;color:var(--muted)}
+.cv-foot{padding:22px 46px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;justify-content:center;text-align:center;flex-wrap:wrap;gap:8px 24px}
 @media(max-width:640px){
-  .cv-head{grid-template-columns:1fr;text-align:center;padding:36px 24px}
-  .photo{margin:0 auto;width:140px;height:140px}
+  .cv-head{grid-template-columns:1fr;text-align:center;padding:34px 22px}
+  .photo{margin:0 auto;width:138px;height:138px}
   .contact{grid-template-columns:1fr}
-  .cv-body{padding:28px 22px}
+  .cv-body{padding:26px 20px}
   .skills{grid-template-columns:1fr}
-  .sheet{margin:16px 12px 48px}
+  .sheet{margin:14px 10px 44px}
+  .cv-topbar .fname{display:none}
 }
 @media print{
   .cv-topbar{display:none}
-  body{background:#fff}
-  .sheet{margin:0;box-shadow:none;border:none;border-radius:0;max-width:none}
+  body{background:#fff;background-image:none}
+  .sheet{margin:0;box-shadow:none;border:none;border-radius:0;max-width:none;background:#fff;backdrop-filter:none}
   .cv-head{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
@@ -72,8 +123,14 @@ body{font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);
 
 <div class="cv-topbar">
   <div class="in">
-    <a class="back" href="index.html">← về portfolio</a>
-    <button class="btn-print" onclick="window.print()">⎙ In / Tải PDF</button>
+    <span style="display:flex;align-items:center;gap:10px">
+      <span class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></span>
+      <span class="fname">CV — Hoàng Hùng</span>
+    </span>
+    <span style="display:flex;align-items:center;gap:16px">
+      <a class="back" href="index.html">← về portfolio</a>
+      <button class="btn-print" onclick="window.print()">In / Tải PDF</button>
+    </span>
   </div>
 </div>
 
@@ -83,6 +140,7 @@ body{font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);
     <div>
       <h1>Hoàng Hùng</h1>
       <p class="role">Thiết kế đồ họa đa mảng × Kỹ thuật</p>
+      <p class="role" style="color:#fff;font-weight:700;margin-top:2px">Vị trí: Senior Designer</p>
       <div class="contact">
         <div><span class="k">Điện thoại</span><a href="tel:+84964843943">0964.843.943</a></div>
         <div><span class="k">Email</span><a href="mailto:masterhmh@gmail.com">masterhmh@gmail.com</a></div>
@@ -143,7 +201,7 @@ body{font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);
     <section class="cv-sec">
       <h2>Dự án tiêu biểu</h2>
       <div class="proj-list" id="cv-projs"><p class="cv-loading">đang tải danh sách dự án…</p></div>
-      <p style="margin-top:14px;text-align:center"><a class="btn" href="https://masterhmh.github.io/Portfolio/#projects">Xem đầy đủ các dự án</a></p>
+      <p style="margin-top:16px;text-align:center"><a class="btn" id="cvFullBtn" href="index.html#projects">Xem đầy đủ các dự án</a></p>
     </section>
     <script>
     (function(){
@@ -158,7 +216,15 @@ body{font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);
             return '<div class="proj"><b>' + n + "</b></div>";
           }).join("");
         })
-        .catch(function(){ box.innerHTML = '<p class="cv-loading"><a href="https://masterhmh.github.io/Portfolio/#projects">Xem đầy đủ các dự án</a></p>'; });
+        .catch(function(){ box.innerHTML = '<p class="cv-loading">Chưa tải được danh sách — bấm nút bên dưới để xem dự án.</p>'; });
+      // Trong may HMH OS: nut "Xem day du" mo thu muc Du an ngay trong may
+      var btn = document.getElementById("cvFullBtn");
+      btn.addEventListener("click", function(ev){
+        if (window.parent && window.parent !== window) {
+          ev.preventDefault();
+          window.parent.postMessage({ hmhOS: "open-projects" }, "*");
+        }
+      });
     })();
     </script>
   </div>
