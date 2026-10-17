@@ -140,6 +140,7 @@ h1.hero-title .hl{white-space:nowrap}
 .skill .row{display:flex;justify-content:space-between;font-size:13.5px;font-weight:500;margin-bottom:9px}
 .bar{height:8px;background:var(--soft);border-radius:99px;position:relative;overflow:hidden}
 .bar i{position:absolute;inset:0;background:linear-gradient(90deg,var(--accent-solid),#42a5f5);width:0;transition:width 1.4s cubic-bezier(.2,.8,.2,1);border-radius:99px}
+.c-h3{font-size:16px;font-weight:700;margin:24px 0 12px;color:var(--text)}
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
 .chip{font-size:13px;padding:9px 16px;border:1px solid var(--line);color:var(--text);background:var(--soft);border-radius:980px;transition:all .25s}
 .chip:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
