@@ -1000,7 +1000,7 @@ if (mbClockBtn && ncPanel){
       $("#ww-temp").textContent = Math.round(cur.temperature_2m) + "°";
       $("#ww-cond").textContent = info[0];
       $("#ww-loc").textContent = label;
-      $("#ww-hl").innerHTML = "H:" + Math.round(j.daily.temperature_2m_max[0]) + "°<br>L:" + Math.round(j.daily.temperature_2m_min[0]) + "°";
+      $("#ww-hl").innerHTML = "C:" + Math.round(j.daily.temperature_2m_max[0]) + "°<br>T:" + Math.round(j.daily.temperature_2m_min[0]) + "°";
       const code = cur.weather_code;
       const grp = code <= 1 ? (cur.is_day ? "clear" : "clear-night") :
         (code === 71 || code === 73 || code === 75) ? "snow" :
