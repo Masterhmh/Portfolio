@@ -253,6 +253,7 @@ var ua=navigator.userAgent||"";
 var d=/iPad|Tablet|Android(?!.*Mobile)/i.test(ua)?"M\u00e1y t\u00ednh b\u1ea3ng":(/Mobi|iPhone|Android/i.test(ua)?"\u0110i\u1ec7n tho\u1ea1i":"M\u00e1y t\u00ednh");
 var os=/iPhone|iPad|iPod/i.test(ua)?"iOS":(/Android/i.test(ua)?"Android":(/Windows/i.test(ua)?"Windows":(/Macintosh|Mac OS/i.test(ua)?"macOS":(/Linux/i.test(ua)?"Linux":""))));
 var u="https://script.google.com/macros/s/AKfycbyiLUGKqiCuNImBB0P9ojJIDjW3mey-O3OAzUVJnj5iIOvjXeOPHQ7wi2rpK4ST3lmIRg/exec?ping=1&k=hmh-ping-2026&p="+encodeURIComponent(location.pathname)+"&d="+encodeURIComponent(d+(os?" ("+os+")":""));
+try{if(window.self!==window.top&&window.parent.document.getElementById("os-desk"))u+="&via=os";}catch(e){}
 if(window.fetch){fetch(u,{mode:"no-cors",keepalive:true}).catch(function(){});}
 }catch(e){}})();
 </script>
