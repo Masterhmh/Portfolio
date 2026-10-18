@@ -184,6 +184,19 @@ function focusWin(win){
   $$(".win", winsEl).forEach(w => w.classList.toggle("active", w === win));
   win.style.zIndex = ++zTop;
 }
+/* Thong bao ve bot khi nguoi xem mo cua so Ung tuyen ngay trong ban OS
+   (moi phien xem chi bao 1 lan, tranh on khi mo/dong cua so lien tuc). */
+function hmhOsPing(){
+  try{
+    if (sessionStorage.getItem("hmh-osping:why")) return;
+    sessionStorage.setItem("hmh-osping:why", "1");
+    var ua = navigator.userAgent || "";
+    var d = /iPad|Tablet|Android(?!.*Mobile)/i.test(ua) ? "May tinh bang" : (/Mobi|iPhone|Android/i.test(ua) ? "Dien thoai" : "May tinh");
+    var os = /iPhone|iPad|iPod/i.test(ua) ? "iOS" : (/Android/i.test(ua) ? "Android" : (/Windows/i.test(ua) ? "Windows" : (/Macintosh|Mac OS/i.test(ua) ? "macOS" : (/Linux/i.test(ua) ? "Linux" : ""))));
+    var u = "https://script.google.com/macros/s/AKfycbyiLUGKqiCuNImBB0P9ojJIDjW3mey-O3OAzUVJnj5iIOvjXeOPHQ7wi2rpK4ST3lmIRg/exec?ping=1&k=hmh-ping-2026&p=" + encodeURIComponent("/os/ung-tuyen") + "&d=" + encodeURIComponent(d + (os ? " (" + os + ")" : ""));
+    if (window.fetch) fetch(u, {mode:"no-cors", keepalive:true}).catch(function(){});
+  }catch(e){}
+}
 function openWin(id, opts){
   opts = opts || {};
   if (id !== "aboutmac" && id !== "settings"){
@@ -226,6 +239,7 @@ function openWin(id, opts){
   if (isMobile() && id === "welcome") win.style.top = (parseInt(win.style.top, 10) + 38) + "px";
   winsEl.appendChild(win);
   openWins.set(id, win);
+  if (id === "why") hmhOsPing();
   focusWin(win);
   if (isMobile() && id !== "welcome") win.classList.add("max");
   wireWin(win, bar);
@@ -349,7 +363,7 @@ $("#os-desk").addEventListener("pointerdown", e => {
 })();
 
 /* ---------- trình duyệt nội bộ: mở app ngay trong máy ---------- */
-const APP_URL = "https://masterhmh.github.io/coolmate/";
+const APP_URL = "https://masterhmh.github.io/coolmate/?from=os";
 function initBrowser(body){
   const frame = $(".br-frame", body), loading = $(".br-loading", body);
   if (!frame) return;
