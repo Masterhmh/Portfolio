@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hoàng Hùng — Portfolio ứng tuyển Coolmate</title>
+<meta name="description" content="Hoàng Hùng — Designer đồ họa đa mảng, hơn 10 năm kinh nghiệm, mạnh nhất ở F&B (7+ năm). Thiết kế × Code × AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=52">
+<link rel="stylesheet" href="assets/showcase.css?v=47">
+<link rel="stylesheet" href="assets/avatar.css">
+<script>try{history.scrollRestoration="manual"}catch(e){}</script>
+<link rel="preconnect" href="https://raw.githubusercontent.com">
+<link rel="preconnect" href="https://images.weserv.nl">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230071e3'/><text x='50' y='68' font-size='58' font-family='Arial' font-weight='700' fill='white' text-anchor='middle'>H</text></svg>">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5QTHFLFE3H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5QTHFLFE3H');
+</script>
+
+<style>
+/* ===== Muc Ung tuyen Coolmate (chi co o trang nay) + 2 nut co dinh goc phai ===== */
+html{scroll-behavior:smooth}
+#coolmate,#coolxprint{scroll-margin-top:84px}
+.ut-role{color:var(--accent);font-weight:600;font-size:16px;margin:-6px 0 16px}
+.ut-intro{font-size:15.5px;line-height:1.8;color:var(--text);text-align:justify;margin-bottom:26px}
+.ut-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.ut-grid{grid-template-columns:1fr}}
+.ut-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;height:100%}
+.ut-num{font-family:var(--mono);font-size:12px;color:#ff6482;letter-spacing:2px;margin-bottom:9px}
+.ut-card h3{font-size:15px;font-weight:700;margin-bottom:8px;color:var(--accent)}
+.ut-card p{font-size:14px;line-height:1.75;margin:0;color:var(--dim);text-align:justify}
+.ut-apply{margin-top:30px}
+.ut-apply h3,.pod-h{font-size:16px;font-weight:800;color:var(--accent);margin-bottom:12px;letter-spacing:.4px}
+.ut-list{list-style:none;margin:0 0 18px;padding:0}
+.ut-list li{font-size:14.5px;line-height:1.65;color:var(--dim);padding:7px 0 7px 22px;position:relative;border-bottom:1px dashed var(--line)}
+.ut-list li:last-child{border-bottom:none}
+.ut-list li::before{content:"\25B8";position:absolute;left:2px;color:var(--accent)}
+.pod{margin-top:30px}
+.pod-intro{font-size:14.5px;line-height:1.8;text-align:justify}
+.pod-cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.pod-col{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px 16px 8px}
+.pod-col.new{border-color:var(--accent)}
+.pod-tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 11px;border-radius:99px;background:rgba(127,127,140,.25);margin-bottom:11px}
+.pod-tag.new{background:#0a84ff;color:#fff}
+.pod-sum{font-size:11.5px;font-weight:800;letter-spacing:.4px;padding:7px 10px;border-radius:8px;margin-bottom:13px;text-align:center;background:rgba(127,127,140,.18);color:var(--dim)}
+.pod-col.new .pod-sum{background:rgba(10,132,255,.14);color:var(--accent)}
+.pod-step{position:relative;padding:0 0 12px 33px;font-size:13px;line-height:1.55}
+.pod-step::before{content:attr(data-n);position:absolute;left:0;top:-1px;width:20px;height:20px;border-radius:50%;background:#86868b;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:1}
+.pod-col.new .pod-step::before{background:#0a84ff}
+.pod-step::after{content:"";position:absolute;left:9.5px;top:22px;bottom:0;width:2px;background:var(--line)}
+.pod-step:last-of-type::after{display:none}
+.pod-note{font-size:13px;color:var(--dim);margin-top:2px;line-height:1.7;text-align:justify}
+@media(max-width:760px){.pod-cmp{grid-template-columns:1fr}}
+.pod-lead{margin-top:16px;font-size:14.5px;line-height:1.8;text-align:justify}
+.ut-show{margin-top:22px;border:1px solid var(--line);border-radius:24px;background:var(--panel);overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.12)}
+.ut-frame{border-bottom:1px solid var(--line)}
+.ut-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+.ut-bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.ut-bar i:first-child{background:#ff5f57}.ut-bar i:nth-child(2){background:#febc2e}.ut-bar i:nth-child(3){background:#28c840}
+.ut-bar span{margin-left:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ut-show .show-img{aspect-ratio:1900/832;min-height:0;flex:none;width:100%;background-size:cover;background-position:center;background-color:#05080f}
+.ut-info{padding:24px 26px}
+.ut-info h3{font-size:22px;font-weight:800;margin-bottom:10px}
+.ut-info h3 span{display:block;font-size:13px;letter-spacing:1.4px;color:var(--accent);margin-top:3px;font-weight:700}
+.ut-problem{font-size:14.5px;line-height:1.75;text-align:justify;margin-bottom:8px}
+.pod-future{margin-top:26px}
+.pod-future h4{font-size:15px;font-weight:800;color:var(--accent);letter-spacing:.4px;margin-bottom:10px}
+.pod-future h5{font-size:13.5px;font-weight:800;color:var(--text);letter-spacing:.4px;margin:20px 0 8px}
+.pod-future p{font-size:14.5px;line-height:1.8;text-align:justify}
+.ut-wide{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);display:block;margin-top:12px;background:#101018}
+.ut-note{font-size:12.5px!important;color:var(--dim);margin-top:12px}
+.ut-end{margin-top:26px;font-size:15.5px;line-height:1.8;font-weight:600;text-align:justify}
+.ut-btns{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 4px}
+/* 2 nut co dinh goc duoi ben phai */
+.ut-dock{position:fixed;right:16px;bottom:16px;z-index:95;display:flex;flex-direction:column;gap:12px;align-items:center}
+.ut-dock-btn{display:flex;flex-direction:column;align-items:center;gap:5px;text-decoration:none}
+.ut-dock-ic{width:54px;height:54px;border-radius:15px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.30);display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
+.ut-dock-ic.cm{background:#fff}
+.ut-dock-ic.cm img{width:100%;height:100%;object-fit:cover;display:block}
+.ut-dock-ic.cx{background:#0a0a0c}
+.ut-dock-ic.cx svg{width:42px;height:26px;display:block}
+.ut-dock-ic.cx text{fill:#fff;font-weight:800;font-size:11px;font-family:'Montserrat',sans-serif}
+.ut-dock-tx{font-size:10.5px;font-weight:700;color:var(--text);background:var(--panel);border:1px solid var(--line);padding:3px 9px;border-radius:99px;box-shadow:0 4px 14px rgba(0,0,0,.18);white-space:nowrap}
+.ut-dock-btn:hover .ut-dock-ic{transform:translateY(-2px)}
+.ut-dock-ic{transition:transform .2s}
+@media(max-width:600px){.ut-dock{right:12px;bottom:12px;gap:10px}.ut-dock-ic{width:46px;height:46px;border-radius:13px}.ut-dock-ic.cx svg{width:36px;height:22px}.ut-dock-tx{font-size:9.5px;padding:2px 7px}}
+</style>
+</head>
+<body>
+
+
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <div class="logo">Hoàng Hùng<span class="dot">.</span></div>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Trang chủ</a></li>
+      <li><a href="#about">Hồ sơ</a></li>
+      <li><a href="#skills">Kỹ năng</a></li>
+      <li><a href="#why">Lý do</a></li>
+      <li><a href="#projects">Dự án</a></li>
+      <li><a href="#coolmate">Ứng tuyển</a></li>
+      <li><a href="#contact">Liên hệ</a></li>
+      <li><a href="cv.html">CV</a></li>
+    </ul>
+    <div class="nav-right">
+      <button id="themeBtn" class="theme-btn" aria-label="Đổi chế độ sáng/tối">◐</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+<!-- ================= HERO ================= -->
+<section id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="tag rv">Thiết kế đồ họa × Công nghệ × AI</div>
+      <h1 class="hero-title rv">Xin chào, tôi là<br><span class="hl">Hoàng Hùng</span></h1>
+      <div class="hero-sub rv"><span id="typed"></span><span class="caret"></span></div>
+      <p class="hero-desc rv">Mình là designer đồ họa đa mảng với hơn 10 năm kinh nghiệm — mạnh nhất ở F&B (7+ năm), hiện phụ trách mảng 2D tại Namas. Mình đọc hiểu code cơ bản, vận dụng AI để dựng miniapp, chatbot, tự động hóa — thiết kế xong là chạy được thật.</p>
+      <div class="hero-btns rv">
+        <a class="btn btn-primary" href="#projects">Xem dự án</a>
+        <a class="btn btn-ghost" href="cv.html">Xem CV</a>
+        <a class="btn btn-ghost" href="#contact">Liên hệ</a>
+      </div>
+    </div>
+    <div class="rv">
+      <div class="terminal">
+        <div class="term-bar"><i></i><i></i><i></i><span>hmh@system: ~/portfolio</span></div>
+        <div class="term-body">
+          <div><span class="t-green">➜</span> <span class="t-cyan">~</span> whoami</div>
+          <div class="t-dim">Hoàng Hùng — designer × kỹ thuật</div>
+          <div><span class="t-green">➜</span> <span class="t-cyan">~</span> cat profile.json</div>
+          <div>{</div>
+                    <div>&nbsp;&nbsp;<span class="t-mag">"role"</span>: <span class="t-amber">"Multi-disciplinary Designer"</span>,
+          <div>&nbsp;&nbsp;<span class="t-mag">"exp"</span>: <span class="t-amber">"10+ years · F&B: 7+ years"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-mag">"now"</span>: <span class="t-amber">"Initializing next career move..."</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-mag">"stack"</span>: [<span class="t-amber">"Photoshop"</span>, <span class="t-amber">"AI"</span>, <span class="t-amber">"code"</span>],</div>
+          <div>&nbsp;&nbsp;<span class="t-mag">"status"</span>: <span class="t-green">"Ready for deployment"</span></div>
+          <div>}</div>
+          <div id="termIdle"><span class="t-green">➜</span> <span class="t-cyan">~</span> <span class="t-cursor">▊</span></div>
+          <div id="termLive" hidden>
+            <div id="termOut"></div>
+            <div class="term-prompt"><span class="t-green">➜</span><span class="t-cyan">~</span><input id="termIn" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Nhập lệnh terminal"></div>
+          </div>
+          <p class="term-hint t-dim" id="termHint" hidden>Mẹo: Gõ <span class="t-cyan">help</span> rồi nhấn Enter để xem các lệnh.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="stats-sec">
+  <div class="wrap stats">
+    <div class="stat rv"><div class="num"><span data-count="10">0</span><em>+</em></div><div class="lbl">Năm chuyên sâu thiết kế &amp; Branding</div></div>
+    <div class="stat rv"><div class="num"><span data-count="900">0</span><em>+</em></div><div class="lbl">Khách hàng tin tưởng lựa chọn</div></div>
+    <div class="stat rv"><div class="num"><span data-count="24">0</span><em>h</em></div><div class="lbl">Phản hồi siêu tốc &amp; Tối ưu thời gian</div></div>
+    <div class="stat rv"><div class="num"><span data-count="100">0</span><em>%</em></div><div class="lbl">Giải pháp số hóa &amp; Tự động hóa thiết kế</div></div>
+  </div>
+  </section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">01 · Hồ sơ</div>
+      <h2>Về mình</h2>
+    </div>
+    <div class="about-grid">
+      <div class="rv">
+        <div class="avatar-frame">
+          <div class="avatar-wrap"><div class="avatar-photo"></div></div>
+        </div>
+      </div>
+      <div class="about-text rv">
+        <div class="panel">
+          <p>Mình là <b>Hoàng Hùng</b> — designer đồ họa với hơn <b>10 năm kinh nghiệm</b> thực chiến (từ 2016). Mảng mình gắn bó sâu nhất là <b>F&B</b>: Hơn 7 năm trong ngành tại <b>Namas — Viện nghiên cứu & đào tạo pha chế</b> — nơi mình thay đổi toàn bộ bộ nhận diện thương hiệu, nâng cấp hình ảnh học viện và thiết kế hàng trăm bộ giáo trình giảng dạy; đồng hành cùng hơn <b>900 chủ quán</b>.</p>
+          <p>Nhưng mình không đóng khung trong một ngành. Thương hiệu, ấn phẩm, bao bì, biển hiệu, menu — lĩnh vực nào cần thiết kế, mình đều làm được. Điểm khác biệt là <b>tư duy kỹ thuật</b>: <b>đọc hiểu code cơ bản</b>, dùng AI để dựng miniapp, viết bot, làm tự động hóa; <b>rành mạng máy tính và xử lý sự cố</b>. Thiết kế xong là chạy được thật, không phải chờ ai.</p>
+          <p>Triết lý làm nghề của mình rất đơn giản: <b>Thiết kế đẹp phải bán được hàng</b> — và phải giải quyết được việc thật của khách.</p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">02 · Kỹ năng</div>
+      <h2>Bộ công cụ</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="rv">
+        <div class="skill">
+          <div class="row"><span>Nắm bắt tiếp thu công nghệ</span></div>
+          <div class="bar"><i data-w="88"></i></div>
+        </div>
+        <div class="skill">
+          <div class="row"><span>Thiết kế thương hiệu</span></div>
+          <div class="bar"><i data-w="92"></i></div>
+        </div>
+        <div class="skill">
+          <div class="row"><span>Code × AI × Tự động hóa</span></div>
+          <div class="bar"><i data-w="68"></i></div>
+        </div>
+        <div class="skill">
+          <div class="row"><span>In ấn &amp; sản xuất</span></div>
+          <div class="bar"><i data-w="78"></i></div>
+        </div>
+        <div class="skill">
+          <div class="row"><span>Thiết kế F&amp;B</span></div>
+          <div class="bar"><i data-w="96"></i></div>
+        </div>
+        <div class="skill">
+          <div class="row"><span>Mạng máy tính &amp; xử lý sự cố</span></div>
+          <div class="bar"><i data-w="62"></i></div>
+        </div>
+      </div>
+      <div class="rv">
+        <div class="panel" style="height:100%">
+          <h3 class="c-h3">Công cụ dùng hằng ngày</h3>
+          <div class="chips">
+            <span class="chip hot">Photoshop</span>
+            <span class="chip hot">Illustrator</span>
+            <span class="chip hot">InDesign</span>
+            <span class="chip hot">ChatGPT</span>
+            <span class="chip hot">Claude</span>
+            <span class="chip hot">Muse</span>
+            <span class="chip hot">HTML/CSS/JS</span>
+          </div>
+          <h3 class="c-h3">Sản phẩm làm được</h3>
+          <div class="chips">
+            <span class="chip">Logo &amp; Nhận diện</span>
+            <span class="chip">Menu</span>
+            <span class="chip">Biển hiệu</span>
+            <span class="chip">Bao bì</span>
+            <span class="chip">Ấn phẩm</span>
+            <span class="chip">Chatbot &amp; Mini app</span>
+          </div>
+          <p style="font-size:14px;color:var(--dim);margin-top:24px;line-height:1.9;text-align:justify">
+            › Quan điểm của mình rất rõ: AI không thay người thiết kế — AI giải phóng người thiết kế khỏi việc lặp lại, để dành thời gian cho phần sáng tạo và quyết định.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= JOURNEY ================= -->
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">03 · Hành trình</div>
+      <h2>Nhật ký hành trình</h2>
+    </div>
+    <div class="timeline">
+      <div class="t-item rv">
+        <div class="date">2019 — Nay</div>
+        <h3>Designer đồ họa (mảng 2D) <span>— Namas · Viện nghiên cứu & đào tạo pha chế</span></h3>
+        <p>Phụ trách toàn bộ mảng thiết kế 2D của học viện: Thay đổi toàn bộ bộ nhận diện thương hiệu, nâng cấp hình ảnh, thiết kế hàng trăm bộ giáo trình giảng dạy. Đưa AI vào quy trình làm việc của học viện và hệ sinh thái công ty: Xây dựng miniapp, chatbot và các luồng tự động hóa phục vụ đào tạo và vận hành. Đồng hành cùng hơn 900 chủ quán.</p>
+      </div>
+      <div class="t-item rv">
+        <div class="date">2016 — 2019</div>
+        <h3>Thiết kế đồ họa <span>— làm tự do</span></h3>
+        <p>Thiết kế đa lĩnh vực cho khách hàng cá nhân và cửa hàng: Thương hiệu, ấn phẩm, biển hiệu, menu. Song song buôn bán, sửa chữa máy tính và xử lý sự cố mạng — nền tảng cho thế mạnh kỹ thuật sau này.</p>
+      </div>
+      <div class="t-item rv">
+        <div class="date">2012 — 2016</div>
+        <h3>Sinh viên <span>— Đại học Thủy Lợi</span></h3>
+        <p>Tự học thiết kế đồ họa và kỹ thuật máy tính từ thời sinh viên — đặt nền móng cho hướng đi "designer rành kỹ thuật" sau này.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY ME ================= -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">04 · Lý do chọn mình</div>
+      <h2>Vì sao chọn tôi?</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card rv">
+        <div class="why-num">01</div>
+        <h3>Kinh nghiệm thực chiến</h3>
+        <p>Hơn 10 năm làm nghề, trong đó 7+ năm chuyên sâu F&amp;B. Mọi quyết định thiết kế đều đã đi qua sản xuất thật, không dừng ở lý thuyết.</p>
+      </div>
+      <div class="why-card rv">
+        <div class="why-num">02</div>
+        <h3>Hiểu người làm kẹt ở đâu</h3>
+        <p>Từng trực tiếp làm nên biết rõ các điểm nghẽn: Brief mơ hồ, file sai quy cách khi in, sửa đi sửa lại, tiến độ bị ép. Thiết kế từ đầu đã tính trước những khâu đó.</p>
+      </div>
+      <div class="why-card rv">
+        <div class="why-num">03</div>
+        <h3>Tối ưu cả quy trình</h3>
+        <p>Không chỉ giao file đẹp. Mình nhìn cả chuỗi thiết kế — duyệt — sản xuất — vận hành; khâu nào chậm hoặc dễ sai đều có cách gọn lại.</p>
+      </div>
+      <div class="why-card rv">
+        <div class="why-num">04</div>
+        <h3>Bắt nhịp công nghệ nhanh</h3>
+        <p>Công nghệ mới xuất hiện là thử và áp dụng sớm: AI, miniapp, chatbot, tự động hóa — miễn là giải quyết được việc thật.</p>
+      </div>
+      <div class="why-card rv">
+        <div class="why-num">05</div>
+        <h3>Đọc hiểu code × AI</h3>
+        <p>Đọc hiểu code cơ bản, vận dụng AI để tự dựng công cụ phục vụ công việc — phối hợp trơn tru với đội kỹ thuật, không loay hoay với công nghệ.</p>
+      </div>
+      <div class="why-card rv">
+        <div class="why-num">06</div>
+        <h3>Hiểu hệ thống, xử lý sự cố</h3>
+        <p>Có nền tảng mạng máy tính và xử lý sự cố máy tính. Giao file xong vẫn đồng hành được ở khâu vận hành — không phải xong việc là hết.</p>
+      </div>
+    </div>
+
+    <div class="showcase rv">
+      <div class="show-frame">
+        <div class="show-bar"><i></i><i></i><i></i><span>quan-ly-chi-tieu — t.me/hmh_finance_bot</span></div>
+        <div class="show-img show-img-bot" role="img" aria-label="Màn hình mini app quản lý chi tiêu trong Telegram"></div>
+      </div>
+      <div class="show-info">
+        <div class="show-tag">Công cụ tự dựng</div>
+        <h3>Bot Quản Lý Chi Tiêu <span>Tự động hóa qua Telegram</span></h3>
+        <p class="show-problem">Ghi chép chi tiêu thủ công rất dễ sót khoản và tốn công: Mỗi lần chi lại phải mở ứng dụng, chọn mục, gõ số tiền; cuối tháng muốn nhìn lại tổng quan hay đưa dữ liệu ra máy tính lại phải tự tổng hợp bằng tay. Mình tự dựng bot này ngay trên Telegram để xử lý gọn:</p>
+        <ul class="show-list">
+          <li>Chỉ cần nhắn một tin tự do theo ngày: Bot tự tách từng khoản, chẳng hạn "35k ăn trưa. 7k gửi xe gym. 131k ăn tối"</li>
+          <li>Tự phân loại khoản chi theo bộ từ khóa đã thêm sẵn và trả kết quả về ngay trong khung chat</li>
+          <li>Mini app xem tổng quan chi tiêu trong ngày, sửa hoặc xóa từng giao dịch</li>
+          <li>Báo cáo theo tuần, tháng, năm: Biểu đồ cột và biểu đồ tỉ trọng theo danh mục</li>
+          <li>Tìm kiếm giao dịch theo nội dung hoặc số tiền, hiểu cả dạng rút gọn như 50k, 1tr5</li>
+          <li>Đồng bộ dữ liệu sang Google Sheets theo từng tháng kèm biểu đồ — xem trực quan trên máy tính như một tệp Excel</li>
+          <li>Xuất tệp CSV và báo cáo PDF khi cần lưu trữ</li>
+        </ul>
+        <a class="btn btn-primary" href="https://t.me/hmh_finance_bot" target="_blank" rel="noopener">Mở bot trên Telegram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">05 · Dự án</div>
+      <h2>Dự án tiêu biểu</h2>
+    </div>
+    <div class="proj-grid" id="proj-grid"></div>
+    <p id="proj-empty" class="rv" style="text-align:center;margin-top:44px;font-size:13px;color:var(--dim)" hidden>
+      <span class="t-green">></span> chưa có dự án nào — thêm thư mục vào <span class="t-cyan">projects/</span> là web tự hiện
+    </p>
+    <p id="proj-error" class="rv" style="text-align:center;margin-top:44px;font-size:13px;color:var(--dim)" hidden>
+      <span class="t-mag">></span> không tải được danh sách dự án (mạng hoặc giới hạn truy cập) —
+      <button id="proj-retry" class="retry-btn">thử lại</button>
+    </p>
+  </div>
+</section>
+
+
+<!-- ================= COOLMATE APPLICATION ================= -->
+<section id="coolmate">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">06 · Ứng tuyển Coolmate</div>
+      <h2>Lý do tôi ứng tuyển Coolmate</h2>
+    </div>
+    <p class="ut-role">Vị trí: Senior Designer</p>
+    <p class="ut-intro rv">Tôi chọn Coolmate vì triết lý: Thiết kế không chỉ nằm trên màn hình, mà mỗi hình in, mỗi ấn phẩm đều phải hiện thực hóa thành sản phẩm chất lượng đến tay khách hàng. Hơn một thập kỷ thực chiến giúp tôi thấu suốt hành trình đó. Mục tiêu của tôi khi gia nhập đội ngũ không chỉ dừng lại ở việc tạo ra các thiết kế ấn tượng, mà còn ứng dụng tự động hóa để giải phóng thời gian thao tác thủ công, gia tăng hiệu suất và để designer có thêm không gian cho sự sáng tạo thực sự.</p>
+    <div class="ut-grid rv">
+      <div class="ut-card"><div class="ut-num">/01</div><h3>THIẾT KẾ GẮN LIỀN SẢN XUẤT</h3><p>Hơn 10 năm làm nghề, quen thuộc với in ấn, chất liệu và quy cách sản xuất. File giao ra là sản xuất được ngay, hạn chế tối đa các vòng sửa vì sai quy cách.</p></div>
+      <div class="ut-card"><div class="ut-num">/02</div><h3>HIỂU NGƯỜI DÙNG THẬT</h3><p>7+ năm trong ngành dịch vụ, đồng hành cùng hơn 900 chủ quán: Quen lắng nghe khách hàng thật để thiết kế đúng nhu cầu, thay vì thiết kế theo cảm tính.</p></div>
+      <div class="ut-card"><div class="ut-num">/03</div><h3>TỐI ƯU CẢ QUY TRÌNH</h3><p>Không dừng ở một file đẹp. Tôi nhìn cả chuỗi thiết kế — duyệt — sản xuất — bán hàng; khâu nào chậm hoặc dễ sai đều tìm cách gọn lại và chuẩn hóa.</p></div>
+      <div class="ut-card"><div class="ut-num">/04</div><h3>TỰ XÂY CÔNG CỤ LÀM VIỆC</h3><p>Không chỉ dùng công cụ có sẵn. Khâu nào trong quy trình còn lặp lại và tốn công, tôi tìm cách tự xây công cụ riêng cho khâu đó — để cả đội làm nhanh hơn mà vẫn giữ chuẩn chất lượng.</p></div>
+      <div class="ut-card"><div class="ut-num">/05</div><h3>ĐỌC HIỂU CODE × AI</h3><p>Đọc hiểu code, vận dụng AI để dựng miniapp và tự động hóa các việc lặp lại. Sẵn sàng xây thêm công cụ nội bộ phục vụ đội thiết kế và sản xuất của Coolmate.</p></div>
+      <div class="ut-card"><div class="ut-num">/06</div><h3>BẮT NHỊP NHANH, TỰ CHỦ</h3><p>Thích nghi nhanh với quy trình và công cụ mới; có nền tảng hệ thống và xử lý sự cố nên tự chủ trong công việc hằng ngày, ít phụ thuộc vào hỗ trợ kỹ thuật.</p></div>
+    </div>
+    <div class="ut-apply rv">
+      <h3>TÔI CÓ THỂ ĐÓNG GÓP GÌ TẠI COOLMATE</h3>
+      <ul class="ut-list">
+        <li>Thiết kế hình in, họa tiết và nhận diện cho các dòng sản phẩm mặc hằng ngày</li>
+        <li>Hình ảnh truyền thông phục vụ bán hàng trực tuyến: Banner, hình sản phẩm, ấn phẩm chiến dịch</li>
+        <li>Chuẩn hóa thư viện file thiết kế và quy cách file in, giúp khâu sản xuất nhanh và ít lỗi hơn</li>
+        <li>Xây dựng công cụ nội bộ: Mô phỏng sản phẩm, kiểm tra file in, tự động hóa các việc lặp lại của đội thiết kế</li>
+      </ul>
+    </div>
+    <div class="pod" id="coolxprint">
+      <h3 class="pod-h">TỪ BÀI TOÁN POD: GỌN CẢ QUY TRÌNH VÀO MỘT CÔNG CỤ</h3>
+      <p class="pod-intro">In theo yêu cầu là chuỗi công việc lặp lại liên tục và qua tay nhiều người. Mỗi lần chuyển tay là thêm một lần chờ đợi, thêm một nguy cơ sai lệch — trong khi phần lớn các bước hoàn toàn có thể chuẩn hóa:</p>
+      <div class="pod-cmp">
+        <div class="pod-col">
+          <div class="pod-tag">CÁCH LÀM CŨ</div>
+          <div class="pod-sum">9 BƯỚC · ÍT NHẤT 3 NGƯỜI THAY NHAU</div>
+          <div class="pod-step" data-n="1">Nhận file / ý tưởng từ khách</div>
+          <div class="pod-step" data-n="2">Sale báo giá</div>
+          <div class="pod-step" data-n="3">Designer triển khai thiết kế</div>
+          <div class="pod-step" data-n="4">Lên mockup gửi khách</div>
+          <div class="pod-step" data-n="5">Khách chốt mockup</div>
+          <div class="pod-step" data-n="6">Designer triển khai file in</div>
+          <div class="pod-step" data-n="7">Chuyển xưởng in</div>
+          <div class="pod-step" data-n="8">Xưởng bình file in</div>
+          <div class="pod-step" data-n="9">In và giao hàng</div>
+          <p class="pod-note">9 bước, ít nhất 3 người thay nhau xử lý cùng một đơn hàng — designer bị cuốn vào việc lặp lại thay vì sáng tạo.</p>
+        </div>
+        <div class="pod-col new">
+          <div class="pod-tag new">CÁCH LÀM MỚI — VỚI XƯỞNG IN MẪU</div>
+          <div class="pod-sum">5 BƯỚC · SALE TỰ LÀM TRỌN GÓI TRONG 1 CÔNG CỤ</div>
+          <div class="pod-step" data-n="1">Sale nhận file / ý tưởng</div>
+          <div class="pod-step" data-n="2">Nạp vào một công cụ duy nhất</div>
+          <div class="pod-step" data-n="3">App tự căn vị trí in, kiểm tra chất lượng file, xuất mockup và báo giá</div>
+          <div class="pod-step" data-n="4">Khách chốt</div>
+          <div class="pod-step" data-n="5">Xuất file in đúng chuẩn, gửi thẳng xưởng</div>
+          <p class="pod-note">Sale tự làm trọn gói trong một công cụ. Designer được giải phóng khỏi các việc lặp lại để tập trung thiết kế mới — giảm khối lượng công việc của đội thiết kế, rút ngắn thời gian xử lý đơn và tăng thêm dư địa doanh số.</p>
+        </div>
+      </div>
+      <p class="pod-lead">Và đó chính là lý do tôi tự xây dựng <b>Xưởng In Mẫu</b> — công cụ đang hoàn thiện và cần tối ưu sau vận hành thử để phù hợp với doanh nghiệp, được giới thiệu ngay bên dưới đây:</p>
+    </div>
+    <div class="ut-show rv">
+      <div class="ut-frame">
+        <div class="ut-bar"><i></i><i></i><i></i><span>xuong-in-mau — masterhmh.github.io/coolmate</span></div>
+        <div class="show-img" role="img" aria-label="Ảnh chụp app Xưởng In Mẫu với hình in trên áo"></div>
+      </div>
+      <div class="ut-info">
+        <h3>XƯỞNG IN MẪU <span>— TỐI ƯU SẢN XUẤT POD</span></h3>
+        <p class="ut-problem">Mọi khâu thủ công dễ sai lệch — căn vị trí in, ước lượng kích thước, bình file in — đều được app tự động hóa:</p>
+        <ul class="ut-list">
+          <li>Kéo-thả file thiết kế, nạp nhiều file cùng lúc, đọc được cả file AI/EPS</li>
+          <li>Khóa tỉ lệ gốc — hình in không bao giờ bị kéo méo</li>
+          <li>5 vị trí in chuẩn theo thông số áo thật: Bấm một cái là đúng chỗ, đúng cỡ</li>
+          <li>Tự chấm độ phân giải của file, gợi ý chuyển vector khi file yếu</li>
+          <li>Xem trước trên ảnh áo thật với 10 màu áo, đổi kiểu áo mà không mất vị trí in</li>
+          <li>Xuất file in 300 DPI nền trong suốt, đúng vị trí — nhà in in luôn, khỏi bình file</li>
+          <li>Tự sinh phiếu kỹ thuật và ảnh báo giá gửi khách</li>
+        </ul>
+        <a class="btn btn-primary" href="https://masterhmh.github.io/coolmate/" target="_blank" rel="noopener">MỞ APP XEM THỬ ▸</a>
+      </div>
+    </div>
+    <div class="pod-future rv">
+      <h4>HƯỚNG ĐI XA HƠN: ĐƯA AI VÀO HÌNH ẢNH SẢN PHẨM</h4>
+      <p>Ứng dụng trí tuệ nhân tạo để tự động hóa khâu sản xuất hình ảnh sản phẩm: Từ một bức ảnh chụp gốc, hệ thống tạo ra bộ ảnh người mẫu hoàn chỉnh với nhiều tư thế và trang phục khác nhau, mà không cần tổ chức thêm buổi chụp.</p>
+      <p><b>Tối ưu vận hành</b>: Cắt giảm tối đa thời gian, nhân lực và chi phí sản xuất, đồng thời vẫn giữ chất lượng hình ảnh đồng đều.</p>
+      <p><b>Mở rộng linh hoạt</b>: Sử dụng khung chuyển động 3D để tùy chỉnh tư thế và góc chụp mới ngay từ ảnh sẵn có, giúp nhân bản một buổi chụp thành cả bộ sưu tập đa dạng mà không tốn thêm chi phí studio.</p>
+      <a href="Coolmate/0.png" target="_blank" rel="noopener"><img class="ut-wide" loading="lazy" alt="Sơ đồ quy trình xử lý hình ảnh sản phẩm bằng AI" src="Coolmate/0.png"></a>
+      <h5>THAY ĐỔI TƯ THẾ NGƯỜI MẪU</h5>
+      <p>Khi thiết kế cần một tư thế khác của người mẫu mà không thể chụp lại: Lấy một ảnh tư thế tham chiếu, chuyển tư thế đó thành mô hình 3D, rồi kết hợp mô hình 3D với ảnh chụp của người mẫu — kết quả là chính người mẫu đó trong một tư thế hoàn toàn mới.</p>
+      <a href="Coolmate/1.png" target="_blank" rel="noopener"><img class="ut-wide" loading="lazy" alt="Đổi tư thế — ví dụ 1: Người mẫu — dáng tham chiếu — tách dáng 3D — dáng mẫu mới" src="https://images.weserv.nl/?url=raw.githubusercontent.com%2FMasterhmh%2FPortfolio%2Fmain%2FCoolmate%2F1.png&w=1200&q=80&output=jpg" onerror="this.onerror=null;this.src='Coolmate/1.png'"></a>
+      <a href="Coolmate/2.png" target="_blank" rel="noopener"><img class="ut-wide" loading="lazy" alt="Đổi tư thế — ví dụ 2: Người mẫu — dáng tham chiếu — tách dáng 3D — dáng mẫu mới" src="https://images.weserv.nl/?url=raw.githubusercontent.com%2FMasterhmh%2FPortfolio%2Fmain%2FCoolmate%2F2.png&w=1200&q=80&output=jpg" onerror="this.onerror=null;this.src='Coolmate/2.png'"></a>
+      <a href="Coolmate/3.png" target="_blank" rel="noopener"><img class="ut-wide" loading="lazy" alt="Đổi tư thế — ví dụ 3: Người mẫu — dáng tham chiếu — tách dáng 3D — dáng mẫu mới" src="https://images.weserv.nl/?url=raw.githubusercontent.com%2FMasterhmh%2FPortfolio%2Fmain%2FCoolmate%2F3.png&w=1200&q=80&output=jpg" onerror="this.onerror=null;this.src='Coolmate/3.png'"></a>
+      <h5>THAY ĐỔI TRANG PHỤC</h5>
+      <p>Khi cần hình ảnh người mẫu mặc một bộ trang phục khác nhưng chưa kịp chụp: Bóc tách trang phục từ ảnh của người mẫu A, sau đó ghép lên người mẫu B — kết quả là người mẫu B đang mặc đúng bộ trang phục của người mẫu A.</p>
+      <a href="Coolmate/4.png" target="_blank" rel="noopener"><img class="ut-wide" loading="lazy" alt="Bóc tách trang phục từ ảnh người mẫu A" src="https://images.weserv.nl/?url=raw.githubusercontent.com%2FMasterhmh%2FPortfolio%2Fmain%2FCoolmate%2F4.png&w=1200&q=80&output=jpg" onerror="this.onerror=null;this.src='Coolmate/4.png'"></a>
+      <a href="Coolmate/5.png" target="_blank" rel="noopener"><img class="ut-wide" loading="lazy" alt="Người mẫu B trước và sau khi mặc trang phục của người mẫu A" src="https://images.weserv.nl/?url=raw.githubusercontent.com%2FMasterhmh%2FPortfolio%2Fmain%2FCoolmate%2F5.png&w=1200&q=80&output=jpg" onerror="this.onerror=null;this.src='Coolmate/5.png'"></a>
+      <a href="Coolmate/6.png" target="_blank" rel="noopener"><img class="ut-wide" loading="lazy" alt="Người mẫu khác trước và sau khi đổi trang phục" src="https://images.weserv.nl/?url=raw.githubusercontent.com%2FMasterhmh%2FPortfolio%2Fmain%2FCoolmate%2F6.png&w=1200&q=80&output=jpg" onerror="this.onerror=null;this.src='Coolmate/6.png'"></a>
+      <p class="ut-note">Bấm vào từng ảnh để xem phóng to.</p>
+    </div>
+    <p class="ut-end rv">Nếu Coolmate cần một người thiết kế làm được sản phẩm thật, nghĩ được cả quy trình và tự xây được công cụ để cả đội làm nhanh hơn — tôi sẵn sàng bắt đầu.</p>
+    <div class="ut-btns rv"><a class="btn btn-primary" href="#contact">Liên hệ với tôi</a><a class="btn btn-ghost" href="cv-coolmate.html" target="_blank" rel="noopener">Xem CV</a></div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">07 · Liên hệ</div>
+      <h2>Kết nối với mình</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="rv">
+        <div class="c-item" style="cursor:default">
+          <div class="ic">◉</div>
+          <div class="tx"><small>Trạng thái <span class="status-dot dot-inline"></span></small><strong>Sẵn sàng cho công việc</strong></div>
+        </div>
+        <a class="c-item" href="tel:+84964843943">
+          <div class="ic">✆</div>
+          <div class="tx"><small>Điện thoại</small><strong>0964.843.943</strong></div>
+        </a>
+        <a class="c-item" href="mailto:masterhmh@gmail.com">
+          <div class="ic">✉</div>
+          <div class="tx"><small>Email</small><strong>masterhmh@gmail.com</strong></div>
+        </a>
+        <a class="c-item" href="https://www.facebook.com/masterhmh" target="_blank" rel="noopener">
+          <div class="ic">f</div>
+          <div class="tx"><small>Facebook</small><strong>facebook.com/masterhmh</strong></div>
+        </a>
+      </div>
+    </div>
+    <p class="rv contact-note">Phản hồi trong vòng 24h. Cứ nhắn thẳng việc cần làm — mình tư vấn hướng xử lý trước, hợp mới làm.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Hoàng Hùng</div>
+    <div><span class="status-dot"></span>Đang hoạt động</div>
+  </div>
+</footer>
+
+<!-- 2 nut co dinh: Nhay toi phan gioi thieu Coolmate / CoolX Print -->
+<div class="ut-dock">
+  <a class="ut-dock-btn" href="#coolmate" aria-label="Tới phần giới thiệu Coolmate">
+    <span class="ut-dock-ic cm"><img src="data:image/png;base64,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" alt="Coolmate"></span>
+    <span class="ut-dock-tx">Coolmate</span>
+  </a>
+  <a class="ut-dock-btn" href="#coolxprint" aria-label="Tới phần giới thiệu CoolX Print">
+    <span class="ut-dock-ic cx"><svg viewBox="0 0 40 24" aria-hidden="true"><text x="20" y="10" text-anchor="middle" textLength="33" lengthAdjust="spacingAndGlyphs">COOLX</text><text x="20" y="22" text-anchor="middle" textLength="33" lengthAdjust="spacingAndGlyphs">PRINT</text></svg></span>
+    <span class="ut-dock-tx">CoolX Print</span>
+  </a>
+</div>
+
+
+<!-- Modal case study -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true">
+    <button class="sheet-close" id="mClose" aria-label="Đóng">✕</button>
+    <h3 id="mTitle" class="sheet-title"></h3>
+    <div id="mCase"></div>
+    <div id="mBody" class="sheet-grid"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="sheet-close" id="lbClose" aria-label="Đóng">✕</button>
+  <button class="lb-nav" id="lbPrev" aria-label="Trước">‹</button>
+  <img id="lbImg" alt="">
+  <button class="lb-nav" id="lbNext" aria-label="Sau">›</button>
+</div>
+
+<script src="assets/app.js?v=45"></script>
+<script>
+/* Chuong bao mo trang: Gui tin hieu ve bot thong ke khi co nguoi mo trang (moi phien trinh duyet 1 lan cho moi trang). */
+(function(){try{
+var k="hmh-ping:"+location.pathname;
+if(sessionStorage.getItem(k))return;
+sessionStorage.setItem(k,"1");
+var ua=navigator.userAgent||"";
+var d=/iPad|Tablet|Android(?!.*Mobile)/i.test(ua)?"M\u00e1y t\u00ednh b\u1ea3ng":(/Mobi|iPhone|Android/i.test(ua)?"\u0110i\u1ec7n tho\u1ea1i":"M\u00e1y t\u00ednh");
+var os=/iPhone|iPad|iPod/i.test(ua)?"iOS":(/Android/i.test(ua)?"Android":(/Windows/i.test(ua)?"Windows":(/Macintosh|Mac OS/i.test(ua)?"macOS":(/Linux/i.test(ua)?"Linux":""))));
+var u="https://script.google.com/macros/s/AKfycbyiLUGKqiCuNImBB0P9ojJIDjW3mey-O3OAzUVJnj5iIOvjXeOPHQ7wi2rpK4ST3lmIRg/exec?ping=1&k=hmh-ping-2026&p="+encodeURIComponent(location.pathname)+"&d="+encodeURIComponent(d+(os?" ("+os+")":""));
+if(window.fetch){fetch(u,{mode:"no-cors",keepalive:true}).catch(function(){});}
+}catch(e){}})();
+</script>
+</body>
+</html>
