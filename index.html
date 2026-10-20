@@ -15,6 +15,15 @@
 <link rel="preconnect" href="https://raw.githubusercontent.com">
 <link rel="preconnect" href="https://images.weserv.nl">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230071e3'/><text x='50' y='68' font-size='58' font-family='Arial' font-weight='700' fill='white' text-anchor='middle'>H</text></svg>">
+<script>
+/* Hợp nhất địa chỉ trang chủ về dạng gốc (Hùng chốt 20/10/2026): Ai mở
+   địa chỉ có đuôi index.html sẽ được đưa ngay sang địa chỉ gốc cùng thư
+   mục. Đoạn này phải đứng TRƯỚC mã Google Analytics để lượt xem chỉ ghi
+   thống nhất tại một địa chỉ duy nhất. */
+if (location.pathname.endsWith("/index.html")) {
+  location.replace(location.pathname.slice(0, -"index.html".length) + location.search + location.hash);
+}
+</script>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5QTHFLFE3H"></script>
 <script>
