@@ -34,6 +34,7 @@ h2{font-size:clamp(24px,3.5vw,32px);line-height:1.3;margin:0 0 10px;font-weight:
 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:24px;background:#eee9df}
 .card h3{margin:12px 4px 2px;font-size:18px}
 .card p{margin:0 4px;color:#7a7f87;font-size:14px}
+.card p.lead{color:#3d4148;font-size:14.5px;line-height:1.5;margin-top:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .feature{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;align-items:center;background:transparent;border:0;cursor:pointer;text-align:left;color:#22252b;padding:0;font:inherit;width:100%}
 .feature img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:24px;background:#eee9df}
 .feature p{text-align:justify;color:#555a63}
@@ -197,7 +198,8 @@ var card=document.createElement('button'); card.className='card'; card.type='but
 var img=makeImg(p.name, p.imgs[0], 900); img.alt=p.title;
 var h=document.createElement('h3'); h.textContent=p.title;
 var d=document.createElement('p'); d.textContent=(SPECIAL[p.name] || p.imgs.length+' ảnh');
-if(SPECIAL[p.name]){var c=document.createElement('p'); c.textContent=p.imgs.length+' ảnh'; card.append(img,h,d,c);} else {card.append(img,h,d);}
+var lead=document.createElement('p'); lead.className='lead'; card._lead=lead;
+if(SPECIAL[p.name]){var c=document.createElement('p'); c.textContent=p.imgs.length+' ảnh'; card.append(img,h,d,c,lead);} else {card.append(img,h,d,lead);}
 card.addEventListener('click', function(){openProject(p);});
 return card;
 }
@@ -234,10 +236,10 @@ f.addEventListener('click', function(){openProject(Object.assign({},namas,{title
 namasBox.append(f);
 }
 var mainGrid=document.getElementById('mainGrid'); mainGrid.innerHTML='';
-main.forEach(function(p){mainGrid.appendChild(cardEl(p));});
+main.forEach(function(p){p.card=cardEl(p); mainGrid.appendChild(p.card);});
 var extraGrid=document.getElementById('extraGrid'); extraGrid.innerHTML='';
-extra.forEach(function(p){extraGrid.appendChild(cardEl(p));});
-projects.forEach(function(p){getInfo(p.name).then(function(info){if(info){p.info=info; if(info.TEN) p.title=info.TEN;}}).catch(function(){});});
+extra.forEach(function(p){p.card=cardEl(p); extraGrid.appendChild(p.card);});
+projects.forEach(function(p){getInfo(p.name).then(function(info){if(info){p.info=info; if(info.TEN) p.title=info.TEN; if(info.VAN_DE && p.card && p.card._lead) p.card._lead.textContent=info.VAN_DE;}}).catch(function(){});});
 }catch(e){err.hidden=false; document.getElementById('namasBox').innerHTML='<p class="note">Chưa tải được dự án Namas. Vui lòng tải lại trang.</p>';}
 }
 document.getElementById('retryBtn').addEventListener('click', boot);
