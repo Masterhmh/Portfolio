@@ -275,7 +275,7 @@ var grids=[document.getElementById('mainGrid'), document.getElementById('extraGr
 grids.forEach(function(g){
 if(!g) return;
 var cards=Array.prototype.slice.call(g.querySelectorAll('.card'));
-cards.forEach(function(c){if(c._lead) c._lead.style.marginTop='';});
+cards.forEach(function(c){if(c._lead) c._lead.style.paddingTop='';});
 var rows={};
 cards.forEach(function(c){var t=c.offsetTop; (rows[t]=rows[t]||[]).push(c);});
 var rowCount=0, adjCount=0, sample='';
@@ -283,7 +283,7 @@ Object.keys(rows).forEach(function(t){
 var row=rows[t]; if(row.length<2) return; rowCount++;
 var maxB=0;
 row.forEach(function(c){if(c._lead){var b=c._lead.getBoundingClientRect().bottom; if(b>maxB) maxB=b;}});
-row.forEach(function(c){if(c._lead){var d=maxB-c._lead.getBoundingClientRect().bottom; if(d>0.5){c._lead.style.marginTop=d+'px'; adjCount++; if(!sample) sample=c.querySelector('h3').textContent+' +'+d.toFixed(1)+'px';}}});
+row.forEach(function(c){if(c._lead){var d=maxB-c._lead.getBoundingClientRect().bottom; if(d>0.5){c._lead.style.paddingTop=(6+d)+'px'; adjCount++; if(!sample) sample=c.querySelector('h3').textContent+' +'+d.toFixed(1)+'px';}}});
 });
 var dbg=document.getElementById('alignDbg');
 if(dbg) dbg.textContent='Căn đáy: '+rowCount+' hàng, '+adjCount+' thẻ đã chỉnh'+(sample?' (ví dụ: '+sample+')':'')+'.';
