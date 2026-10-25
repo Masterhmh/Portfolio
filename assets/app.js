@@ -248,7 +248,9 @@ async function loadProjects(){
     const grids = [gridMain, gridExtra].filter(Boolean);
     const cards = grids.flatMap(g => Array.from(g.querySelectorAll(".proj")));
     const ps = cards.map(c => c.querySelector(".proj-body p")).filter(Boolean);
-    ps.forEach(x => { x.style.paddingTop = ""; });
+    // p co flex:1 nen hop da cao bang nhau, do hop se luon cho diff = 0.
+    // Tam bo flex de p co lai theo chu that, do day chu that, roi tra lai flex.
+    ps.forEach(x => { x.style.paddingTop = ""; x.style.flex = "none"; });
     const rows = {};
     cards.forEach(c => { const t = c.offsetTop; (rows[t] = rows[t] || []).push(c); });
     Object.keys(rows).forEach(t => {
@@ -256,8 +258,10 @@ async function loadProjects(){
       let maxB = 0;
       const rps = row.map(c => c.querySelector(".proj-body p")).filter(Boolean);
       rps.forEach(x => { const b = x.getBoundingClientRect().bottom; if (b > maxB) maxB = b; });
-      rps.forEach(x => { const dd = maxB - x.getBoundingClientRect().bottom; if (dd > 0.5) x.style.paddingTop = dd + "px"; });
+      rps.forEach(x => { const dd = maxB - x.getBoundingClientRect().bottom; x.style.flex = ""; if (dd > 0.5) x.style.paddingTop = dd + "px"; });
     });
+    // Hang chi co 1 the: tra lai flex cho cac p chua duoc tra
+    ps.forEach(x => { if (x.style.flex === "none") x.style.flex = ""; });
   }
   let alignTimer = null;
   window.addEventListener("resize", () => { clearTimeout(alignTimer); alignTimer = setTimeout(alignMainLeads, 150); });
