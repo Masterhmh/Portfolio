@@ -113,13 +113,17 @@ async function fetchJson(url){
   return r.json();
 }
 
+const PROJ_SPECIAL = {"Hương Fitness Studio": "Lĩnh vực sức khỏe.", "Vietinbank": "Lĩnh vực sự kiện cuối năm.", "Bot Quản Lý Chi Tiêu": "Bot và miniapp quản lý chi tiêu"};
+const PROJ_EXTRA = ["Hương Fitness Studio", "Vietinbank", "Bot Quản Lý Chi Tiêu"];
 async function loadProjects(){
-  const grid = document.getElementById("proj-grid");
+  const gridMain = document.getElementById("proj-grid-main");
+  const gridExtra = document.getElementById("proj-grid-extra");
+  const namasBox = document.getElementById("proj-namas");
   const empty = document.getElementById("proj-empty");
   const errBox = document.getElementById("proj-error");
   const CACHE_KEY = "hh-projects-v2", TTL = 15 * 60 * 1000;
 
-  function card(p, i, rio){
+  function card(p, i, rio, g){
     const title = (p.info && p.info.TEN) || p.name.replace(/[-_]+/g, " ");
     const el = document.createElement("article");
     el.className = "proj rv";
@@ -134,24 +138,68 @@ async function loadProjects(){
     const body = document.createElement("div");
     body.className = "proj-body";
     const h = document.createElement("h3"); h.textContent = title;
+    const parts = [h];
+    if (PROJ_SPECIAL[p.name]){
+      const tag = document.createElement("span");
+      tag.className = "proj-tag"; tag.textContent = PROJ_SPECIAL[p.name];
+      parts.push(tag);
+    }
     const d = document.createElement("p");
     d.textContent = (p.info && p.info.VAN_DE) || "Bấm để xem ảnh và chi tiết dự án.";
     const link = document.createElement("span");
     link.className = "proj-link"; link.textContent = p.info ? "Xem chi tiết" : "Xem ảnh";
-    body.append(h, d, link);
+    parts.push(d, link);
+    body.append(...parts);
     el.append(top, body);
     el.addEventListener("click", () => openModal(p, title));
-    grid.appendChild(el);
+    g.appendChild(el);
     rio.observe(el);
     return { el, d, link, h };
   }
 
+  function featureNamas(p, rio){
+    const el = document.createElement("article");
+    el.className = "proj-feature rv";
+    const top = document.createElement("div");
+    top.className = "proj-top";
+    const img = document.createElement("img");
+    img.loading = "lazy"; img.alt = "Namas";
+    smartImg(img, p.name, p.imgs[0], 1200);
+    const ov = document.createElement("div"); ov.className = "ov";
+    top.append(img, ov);
+    const body = document.createElement("div");
+    body.className = "proj-body";
+    const h = document.createElement("h3"); h.textContent = "Namas — Viện nghiên cứu và đào tạo pha chế";
+    const d = document.createElement("p");
+    d.textContent = "Tôi thay đổi toàn bộ bộ nhận diện thương hiệu, nâng cấp hình ảnh học viện và thiết kế hàng trăm bộ giáo trình. Bấm để xem bộ ảnh, với " + p.imgs.length + " ảnh.";
+    const link = document.createElement("span");
+    link.className = "proj-link"; link.textContent = "Xem chi tiết";
+    body.append(h, d, link);
+    el.append(top, body);
+    el.addEventListener("click", () => openModal(p, "Namas"));
+    namasBox.appendChild(el);
+    rio.observe(el);
+    return { p };
+  }
+
   function render(projects){
-    grid.innerHTML = "";
+    if (gridMain) gridMain.innerHTML = "";
+    if (gridExtra) gridExtra.innerHTML = "";
+    if (namasBox) namasBox.innerHTML = "";
     const rio = new IntersectionObserver(es => es.forEach(e => {
       if (e.isIntersecting){ e.target.classList.add("on"); rio.unobserve(e.target); }
     }), { threshold: .1 });
-    const refs = projects.map((p, i) => Object.assign(card(p, i, rio), { p }));
+    const namas = projects.find(x => x.name === "Namas");
+    const extra = projects.filter(x => PROJ_EXTRA.indexOf(x.name) >= 0);
+    const main = projects.filter(x => x.name !== "Namas" && PROJ_EXTRA.indexOf(x.name) < 0);
+    main.sort((a, b) => a.name.localeCompare(b.name, "vi"));
+    extra.sort((a, b) => PROJ_EXTRA.indexOf(a.name) - PROJ_EXTRA.indexOf(b.name));
+    if (namas && namasBox) featureNamas(namas, rio);
+    const refs = main.map((p, i) => Object.assign(card(p, i, rio, gridMain), { p }))
+      .concat(extra.map((p, i) => Object.assign(card(p, i, rio, gridExtra), { p })));
+    if (namas){
+      getInfo(namas.name).then(info => { if (info) namas.info = info; }).catch(() => {});
+    }
     // tải case study nền: có thì cập nhật thẻ, không thì thôi
     refs.forEach(({ p, d, link, h }) => {
       getInfo(p.name).then(info => {
@@ -197,9 +245,8 @@ async function loadProjects(){
   }
 
   function alignMainLeads(){
-    const g = document.getElementById("proj-grid");
-    if (!g) return;
-    const cards = Array.from(g.querySelectorAll(".proj"));
+    const grids = [gridMain, gridExtra].filter(Boolean);
+    const cards = grids.flatMap(g => Array.from(g.querySelectorAll(".proj")));
     const ps = cards.map(c => c.querySelector(".proj-body p")).filter(Boolean);
     ps.forEach(x => { x.style.paddingTop = ""; });
     const rows = {};
