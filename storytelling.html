@@ -29,14 +29,20 @@ section{padding:36px 0}
 h2{font-size:clamp(24px,3.5vw,32px);line-height:1.3;margin:0 0 10px;font-weight:700}
 .sub{color:#666b73;text-align:justify;margin:0 0 24px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
-.card{background:transparent;border:0;cursor:pointer;text-align:left;color:#22252b;padding:0;font:inherit;display:flex;flex-direction:column}
+.card{background:transparent;border:0;cursor:pointer;text-align:left;color:#22252b;padding:0;font:inherit}
 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:24px;background:#eee9df;flex:none}
 .card h3{margin:12px 4px 2px;font-size:18px}
 .card p{margin:0 4px;color:#7a7f87;font-size:14px}
 .card p.lead{color:#3d4148;font-size:14.5px;line-height:1.5;margin-top:auto;padding-top:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card-in{display:flex;flex-direction:column;height:100%}
 .feature{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;align-items:center;background:transparent;border:0;cursor:pointer;text-align:left;color:#22252b;padding:0;font:inherit;width:100%}
 .feature img{width:100%;aspect-ratio:2048/779;object-fit:cover;display:block;border-radius:24px;background:#eee9df}
 .feature p{text-align:justify;color:#555a63}
+.why{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
+.why-card{background:#fff;border:1px solid #ece7de;border-radius:24px;padding:22px}
+.why-num{color:#0071e3;font-weight:700;font-size:14px}
+.why-card h3{margin:8px 0 6px;font-size:18px}
+.why-card p{margin:0;color:#555a63;text-align:justify;font-size:14.5px;line-height:1.6}
 .cv{background:#fff;border:1px solid #ece7de;border-radius:28px;padding:clamp(22px,4vw,40px);box-shadow:0 12px 40px rgba(60,50,30,.08)}
 .cv h2{margin-bottom:4px}
 .cv .role{color:#0071e3;font-weight:700;margin:0 0 18px}
@@ -88,6 +94,19 @@ footer p{text-align:justify;max-width:720px}
 <h2 style="font-size:22px;margin-top:44px">Thử sức ngoài F&amp;B</h2>
 <p class="sub">Ngoài quán cà phê, tôi còn làm cho lĩnh vực khác, và tự xây công cụ số để công việc lặp lại chạy nhanh hơn.</p>
 <div class="grid" id="extraGrid"><p class="note">Đang tải dự án...</p></div>
+</section>
+
+<section id="ly-do">
+<h2>Vì sao chọn tôi?</h2>
+<p class="sub">Sáu điểm dưới đây là những gì tôi mang tới cho mỗi dự án, đúc từ hơn 10 năm làm nghề và 7+ năm sâu trong ngành F&amp;B.</p>
+<div class="why">
+<div class="why-card"><div class="why-num">01</div><h3>Kinh nghiệm thực chiến</h3><p>Hơn 10 năm làm nghề, trong đó 7+ năm chuyên sâu F&amp;B. Mọi quyết định thiết kế đều đã đi qua sản xuất thật, không dừng ở lý thuyết.</p></div>
+<div class="why-card"><div class="why-num">02</div><h3>Hiểu người làm kẹt ở đâu</h3><p>Từng trực tiếp làm nên biết rõ các điểm nghẽn: Brief mơ hồ, file sai quy cách khi in, sửa đi sửa lại, tiến độ bị ép. Thiết kế từ đầu đã tính trước những khâu đó.</p></div>
+<div class="why-card"><div class="why-num">03</div><h3>Tối ưu cả quy trình</h3><p>Không chỉ giao file đẹp. Mình nhìn cả chuỗi thiết kế — duyệt — sản xuất — vận hành; khâu nào chậm hoặc dễ sai đều có cách gọn lại.</p></div>
+<div class="why-card"><div class="why-num">04</div><h3>Bắt nhịp công nghệ nhanh</h3><p>Công nghệ mới xuất hiện là thử và áp dụng sớm: AI, miniapp, chatbot, tự động hóa — miễn là giải quyết được việc thật.</p></div>
+<div class="why-card"><div class="why-num">05</div><h3>Đọc hiểu code × AI</h3><p>Đọc hiểu code cơ bản, vận dụng AI để tự dựng công cụ phục vụ công việc — phối hợp trơn tru với đội kỹ thuật, không loay hoay với công nghệ.</p></div>
+<div class="why-card"><div class="why-num">06</div><h3>Hiểu hệ thống, xử lý sự cố</h3><p>Có nền tảng mạng máy tính và xử lý sự cố máy tính. Giao file xong vẫn đồng hành được ở khâu vận hành — không phải xong việc là hết.</p></div>
+</div>
 </section>
 
 <section id="cv">
@@ -194,11 +213,13 @@ modal.addEventListener('click', function(e){if(e.target===modal) closeModal();})
 document.addEventListener('keydown', function(e){if(e.key==='Escape') closeModal();});
 function cardEl(p){
 var card=document.createElement('button'); card.className='card'; card.type='button';
+var inner=document.createElement('div'); inner.className='card-in';
 var img=makeImg(p.name, p.imgs[0], 900); img.alt=p.title;
 var h=document.createElement('h3'); h.textContent=p.title;
 var d=document.createElement('p'); d.textContent=(SPECIAL[p.name] || p.imgs.length+' ảnh');
 var lead=document.createElement('p'); lead.className='lead'; card._lead=lead;
-if(SPECIAL[p.name]){var c=document.createElement('p'); c.textContent=p.imgs.length+' ảnh'; card.append(img,h,d,c,lead);} else {card.append(img,h,d,lead);}
+if(SPECIAL[p.name]){var c=document.createElement('p'); c.textContent=p.imgs.length+' ảnh'; inner.append(img,h,d,c,lead);} else {inner.append(img,h,d,lead);}
+card.append(inner);
 card.addEventListener('click', function(){openProject(p);});
 return card;
 }
