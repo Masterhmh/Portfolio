@@ -1,49 +1,38 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hoàng Hùng — Dự Án Và CV</title>
-<meta name="description" content="Hoàng Hùng — Designer đồ họa đa mảng, hơn 10 năm kinh nghiệm, mạnh nhất ở F&B.">
+<title>Hoàng Hùng — Portfolio</title>
+<meta name="description" content="Hoàng Hùng — Designer đồ họa đa mảng, hơn 10 năm kinh nghiệm, mạnh nhất ở F&B (7+ năm). Thiết kế × Code × AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=53">
+<link rel="stylesheet" href="assets/showcase.css?v=47">
+<link rel="stylesheet" href="assets/avatar.css">
+<script>try{history.scrollRestoration="manual"}catch(e){}</script>
+<link rel="preconnect" href="https://raw.githubusercontent.com">
+<link rel="preconnect" href="https://images.weserv.nl">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230071e3'/><text x='50' y='68' font-size='58' font-family='Arial' font-weight='700' fill='white' text-anchor='middle'>H</text></svg>">
+<script>
+/* Hợp nhất địa chỉ trang chủ về dạng gốc (Hùng chốt 20/10/2026): Ai mở
+   địa chỉ có đuôi index.html sẽ được đưa ngay sang địa chỉ gốc cùng thư
+   mục. Đoạn này phải đứng TRƯỚC mã Google Analytics để lượt xem chỉ ghi
+   thống nhất tại một địa chỉ duy nhất. */
+if (location.pathname.endsWith("/index.html")) {
+  location.replace(location.pathname.slice(0, -"index.html".length) + location.search + location.hash);
+}
+</script>
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5QTHFLFE3H"></script>
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-5QTHFLFE3H');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5QTHFLFE3H');
 </script>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#fbfaf7;color:#22252b;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.9}
-.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}
-.logo{font-weight:700;font-size:18px}
-.nav{display:flex;gap:8px;flex-wrap:wrap}
-.nav a{color:#22252b;background:#fff;border:1px solid #e8e2d9;border-radius:999px;padding:8px 16px;font-size:14px;text-decoration:none}
-.hero{padding:42px 0 20px}
-h1{font-size:clamp(32px,5.5vw,52px);line-height:1.25;margin:0 0 18px;letter-spacing:-.02em;font-weight:700}
-h1 span{color:#0071e3}
-.lead{font-size:clamp(17px,2.3vw,20px);color:#555a63;text-align:justify}
-.lead b{color:#22252b}
-section{padding:36px 0}
-h2{font-size:clamp(24px,3.5vw,32px);line-height:1.3;margin:0 0 10px;font-weight:700}
-.sub{color:#666b73;text-align:justify;margin:0 0 24px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
-.card{background:transparent;border:0;cursor:pointer;text-align:left;color:#22252b;padding:0;font:inherit;display:flex;flex-direction:column}
-.card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:24px;background:#eee9df;flex:none}
-.card h3{margin:12px 4px 2px;font-size:18px}
-.card p{margin:0 4px;color:#7a7f87;font-size:14px}
-.card p.lead{color:#3d4148;font-size:14.5px;line-height:1.5;padding-top:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.card-link{display:inline-block;font-size:13px;font-weight:600;color:#0071e3;border:1px solid #e8e2d9;padding:8px 18px;border-radius:999px;margin:12px 0 0 auto;background:#fff}
-.card:hover .card-link{background:#0071e3;border-color:transparent;color:#fff}
-.feature{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;align-items:center;background:transparent;border:0;cursor:pointer;text-align:left;color:#22252b;padding:0;font:inherit;width:100%}
-.feature img{width:100%;aspect-ratio:2048/779;object-fit:cover;display:block;border-radius:24px;background:#eee9df}
-.feature p{text-align:justify;color:#555a63}
-.why{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
-.why-card{background:#fff;border:1px solid #ece7de;border-radius:24px;padding:22px}
-.why-num{color:#0071e3;font-weight:700;font-size:14px}
-.why-card h3{margin:8px 0 6px;font-size:18px}
-.why-card p{margin:0;color:#555a63;text-align:justify;font-size:14.5px;line-height:1.6}
 .cv{background:#fff;border:1px solid #ece7de;border-radius:28px;padding:clamp(22px,4vw,40px);box-shadow:0 12px 40px rgba(60,50,30,.08)}
 .cv h2{margin-bottom:4px}
 .cv .role{color:#0071e3;font-weight:700;margin:0 0 18px}
@@ -61,60 +50,288 @@ h2{font-size:clamp(24px,3.5vw,32px);line-height:1.3;margin:0 0 10px;font-weight:
 .job b{color:#0071e3}
 .job p{margin:0}
 .note{font-size:14px;color:#7a7f87;text-align:justify}
-.btn{background:#0071e3;color:#fff;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;font-weight:700}
-.modal{position:fixed;inset:0;background:rgba(20,18,15,.82);display:none;z-index:50;overflow:auto;padding:24px 16px}
-.modal.open{display:block}
-.sheet{max-width:920px;margin:0 auto;background:#fbfaf7;border-radius:24px;padding:22px}
-.sheet img{width:100%;border-radius:18px;margin-bottom:14px;display:block}
-.sheet-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
-footer{padding:20px 0 44px;color:#7a7f87;font-size:14px}
-footer p{text-align:justify;max-width:720px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="top">
-<div class="logo">Hoàng Hùng</div>
-<nav class="nav"><a href="#du-an">Dự án</a><a href="#cv">CV</a></nav>
-</header>
+
+
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <div class="logo">Hoàng Hùng<span class="dot">.</span></div>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Trang chủ</a></li>
+      <li><a href="#about">Hồ sơ</a></li>
+      <li><a href="#skills">Kỹ năng</a></li>
+      <li><a href="#why">Lý do</a></li>
+      <li><a href="#projects">Dự án</a></li>
+            <li><a href="#cv">CV</a></li>
+    </ul>
+    <div class="nav-right">
+      <button id="themeBtn" class="theme-btn" aria-label="Đổi chế độ sáng/tối">◐</button>
+    </div>
+  </div>
+</nav>
 
 <main>
-<section class="hero">
-<h1>Thiết kế cho quán,<br><span>nhìn là nhớ, dùng là tiện.</span></h1>
-<p class="lead">Tôi là Hoàng Hùng, designer đồ họa đa mảng. Tôi đã làm nghề hơn <b>10 năm</b>, gắn bó sâu nhất với F&amp;B hơn <b>7 năm</b>, và đồng hành cùng hơn <b>900 chủ quán</b>. Trang này chỉ có hai thứ: Dự án thật để xem, và CV gọn để hiểu người làm ra chúng.</p>
-<p><a href="#du-an" style="display:inline-block;background:#0071e3;color:#fff;border-radius:999px;padding:10px 22px;text-decoration:none;font-weight:700">Xem dự án</a> <a href="#cv" style="margin-left:14px;color:#0071e3;font-weight:700">Xem CV</a></p>
+<!-- ================= HERO ================= -->
+<section id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="tag rv">Thiết kế đồ họa × Công nghệ × AI</div>
+      <h1 class="hero-title rv">Xin chào, tôi là<br><span class="hl">Hoàng Hùng</span></h1>
+      <div class="hero-sub rv"><span id="typed"></span><span class="caret"></span></div>
+      <p class="hero-desc rv">Mình là designer đồ họa đa mảng với hơn 10 năm kinh nghiệm — mạnh nhất ở F&B (7+ năm), hiện phụ trách mảng 2D tại Namas. Mình đọc hiểu code cơ bản, vận dụng AI để dựng miniapp, chatbot, tự động hóa — thiết kế xong là chạy được thật.</p>
+      <div class="hero-btns rv">
+        <a class="btn btn-primary" href="#projects">Xem dự án</a>
+        <a class="btn btn-ghost" href="#cv">Xem CV</a>
+      </div>
+    </div>
+    <div class="rv">
+      <div class="terminal">
+        <div class="term-bar"><i></i><i></i><i></i><span>hmh@system: ~/portfolio</span></div>
+        <div class="term-body">
+          <div><span class="t-green">➜</span> <span class="t-cyan">~</span> whoami</div>
+          <div class="t-dim">Hoàng Hùng — designer × kỹ thuật</div>
+          <div><span class="t-green">➜</span> <span class="t-cyan">~</span> cat profile.json</div>
+          <div>{</div>
+                    <div>&nbsp;&nbsp;<span class="t-mag">"role"</span>: <span class="t-amber">"Multi-disciplinary Designer"</span>,
+          <div>&nbsp;&nbsp;<span class="t-mag">"exp"</span>: <span class="t-amber">"10+ years · F&B: 7+ years"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-mag">"now"</span>: <span class="t-amber">"Initializing next career move..."</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-mag">"stack"</span>: [<span class="t-amber">"Photoshop"</span>, <span class="t-amber">"AI"</span>, <span class="t-amber">"code"</span>],</div>
+          <div>&nbsp;&nbsp;<span class="t-mag">"status"</span>: <span class="t-green">"Ready for deployment"</span></div>
+          <div>}</div>
+          <div id="termIdle"><span class="t-green">➜</span> <span class="t-cyan">~</span> <span class="t-cursor">▊</span></div>
+          <div id="termLive" hidden>
+            <div id="termOut"></div>
+            <div class="term-prompt"><span class="t-green">➜</span><span class="t-cyan">~</span><input id="termIn" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Nhập lệnh terminal"></div>
+          </div>
+          <p class="term-hint t-dim" id="termHint" hidden>Mẹo: Gõ <span class="t-cyan">help</span> rồi nhấn Enter để xem các lệnh.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="du-an">
-<h2>Dự án</h2>
+<!-- ================= STATS ================= -->
+<section class="stats-sec">
+  <div class="wrap stats">
+    <div class="stat rv"><div class="num"><span data-count="10">0</span><em>+</em></div><div class="lbl">Năm chuyên sâu thiết kế &amp; Branding</div></div>
+    <div class="stat rv"><div class="num"><span data-count="900">0</span><em>+</em></div><div class="lbl">Khách hàng tin tưởng lựa chọn</div></div>
+    <div class="stat rv"><div class="num"><span data-count="24">0</span><em>h</em></div><div class="lbl">Phản hồi siêu tốc &amp; Tối ưu thời gian</div></div>
+    <div class="stat rv"><div class="num"><span data-count="100">0</span><em>%</em></div><div class="lbl">Giải pháp số hóa &amp; Tự động hóa thiết kế</div></div>
+  </div>
+  </section>
 
-<h2 style="font-size:22px;margin-top:10px">Làm lâu dài cùng một thương hiệu</h2>
-<p class="sub">Đây là nơi tôi gắn bó lâu nhất, và cũng là nơi thể hiện rõ nhất khả năng giữ một hệ thống hình ảnh nhất quán trong nhiều năm.</p>
-<div id="namasBox"><p class="note">Đang tải dự án...</p></div>
-
-<h2 style="font-size:22px;margin-top:44px">Nhiều quán, cùng một cách làm</h2>
-<p class="sub">Mỗi quán một cá tính, nhưng đều đi chung một hướng: Nhận diện rõ ràng, trình bày dễ nhìn, và dùng được ngay trong ngày bán hàng.</p>
-<div class="grid" id="mainGrid"><p class="note">Đang tải dự án...</p></div>
-<p class="note" id="projError" hidden>Chưa tải được danh sách dự án. Vui lòng tải lại trang, hoặc bấm thử lại. <button class="btn" id="retryBtn" type="button">Thử lại</button></p>
-
-<h2 style="font-size:22px;margin-top:44px">Thử sức ngoài F&amp;B</h2>
-<p class="sub">Ngoài quán cà phê, tôi còn làm cho lĩnh vực khác, và tự xây công cụ số để công việc lặp lại chạy nhanh hơn.</p>
-<div class="grid" id="extraGrid"><p class="note">Đang tải dự án...</p></div>
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">01 · Hồ sơ</div>
+      <h2>Về mình</h2>
+    </div>
+    <div class="about-grid">
+      <div class="rv">
+        <div class="avatar-frame">
+          <div class="avatar-wrap"><div class="avatar-photo"></div></div>
+        </div>
+      </div>
+      <div class="about-text rv">
+        <div class="panel">
+          <p>Mình là <b>Hoàng Hùng</b> — designer đồ họa với hơn <b>10 năm kinh nghiệm</b> thực chiến (từ 2016). Mảng mình gắn bó sâu nhất là <b>F&B</b>: Hơn 7 năm trong ngành tại <b>Namas — Viện nghiên cứu & đào tạo pha chế</b> — nơi mình thay đổi toàn bộ bộ nhận diện thương hiệu, nâng cấp hình ảnh học viện và thiết kế hàng trăm bộ giáo trình giảng dạy; đồng hành cùng hơn <b>900 chủ quán</b>.</p>
+          <p>Nhưng mình không đóng khung trong một ngành. Thương hiệu, ấn phẩm, bao bì, biển hiệu, menu — lĩnh vực nào cần thiết kế, mình đều làm được. Điểm khác biệt là <b>tư duy kỹ thuật</b>: <b>đọc hiểu code cơ bản</b>, dùng AI để dựng miniapp, viết bot, làm tự động hóa; <b>rành mạng máy tính và xử lý sự cố</b>. Thiết kế xong là chạy được thật, không phải chờ ai.</p>
+          <p>Triết lý làm nghề của mình rất đơn giản: <b>Thiết kế đẹp phải bán được hàng</b> — và phải giải quyết được việc thật của khách.</p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="ly-do">
-<h2>Vì sao chọn tôi?</h2>
-<p class="sub">Sáu điểm dưới đây là những gì tôi mang tới cho mỗi dự án, đúc từ hơn 10 năm làm nghề và 7+ năm sâu trong ngành F&amp;B.</p>
-<div class="why">
-<div class="why-card"><div class="why-num">01</div><h3>Kinh nghiệm thực chiến</h3><p>Hơn 10 năm làm nghề, trong đó 7+ năm chuyên sâu F&amp;B. Mọi quyết định thiết kế đều đã đi qua sản xuất thật, không dừng ở lý thuyết.</p></div>
-<div class="why-card"><div class="why-num">02</div><h3>Hiểu người làm kẹt ở đâu</h3><p>Từng trực tiếp làm nên biết rõ các điểm nghẽn: Brief mơ hồ, file sai quy cách khi in, sửa đi sửa lại, tiến độ bị ép. Thiết kế từ đầu đã tính trước những khâu đó.</p></div>
-<div class="why-card"><div class="why-num">03</div><h3>Tối ưu cả quy trình</h3><p>Không chỉ giao file đẹp. Mình nhìn cả chuỗi thiết kế — duyệt — sản xuất — vận hành; khâu nào chậm hoặc dễ sai đều có cách gọn lại.</p></div>
-<div class="why-card"><div class="why-num">04</div><h3>Bắt nhịp công nghệ nhanh</h3><p>Công nghệ mới xuất hiện là thử và áp dụng sớm: AI, miniapp, chatbot, tự động hóa — miễn là giải quyết được việc thật.</p></div>
-<div class="why-card"><div class="why-num">05</div><h3>Đọc hiểu code × AI</h3><p>Đọc hiểu code cơ bản, vận dụng AI để tự dựng công cụ phục vụ công việc — phối hợp trơn tru với đội kỹ thuật, không loay hoay với công nghệ.</p></div>
-<div class="why-card"><div class="why-num">06</div><h3>Hiểu hệ thống, xử lý sự cố</h3><p>Có nền tảng mạng máy tính và xử lý sự cố máy tính. Giao file xong vẫn đồng hành được ở khâu vận hành — không phải xong việc là hết.</p></div>
-</div>
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">02 · Kỹ năng</div>
+      <h2>Bộ công cụ</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="rv">
+        <div class="skill">
+          <div class="row"><span>Nắm bắt tiếp thu công nghệ</span></div>
+          <div class="bar"><i data-w="88"></i></div>
+        </div>
+        <div class="skill">
+          <div class="row"><span>Thiết kế thương hiệu</span></div>
+          <div class="bar"><i data-w="92"></i></div>
+        </div>
+        <div class="skill">
+          <div class="row"><span>Code × AI × Tự động hóa</span></div>
+          <div class="bar"><i data-w="68"></i></div>
+        </div>
+        <div class="skill">
+          <div class="row"><span>In ấn &amp; sản xuất</span></div>
+          <div class="bar"><i data-w="78"></i></div>
+        </div>
+        <div class="skill">
+          <div class="row"><span>Thiết kế F&amp;B</span></div>
+          <div class="bar"><i data-w="96"></i></div>
+        </div>
+        <div class="skill">
+          <div class="row"><span>Mạng máy tính &amp; xử lý sự cố</span></div>
+          <div class="bar"><i data-w="62"></i></div>
+        </div>
+      </div>
+      <div class="rv">
+        <div class="panel" style="height:100%">
+          <h3 class="c-h3">Công cụ dùng hằng ngày</h3>
+          <div class="chips">
+            <span class="chip hot">Photoshop</span>
+            <span class="chip hot">Illustrator</span>
+            <span class="chip hot">InDesign</span>
+            <span class="chip hot">ChatGPT</span>
+            <span class="chip hot">Claude</span>
+            <span class="chip hot">Muse</span>
+            <span class="chip hot">HTML/CSS/JS</span>
+          </div>
+          <h3 class="c-h3">Sản phẩm làm được</h3>
+          <div class="chips">
+            <span class="chip">Logo &amp; Nhận diện</span>
+            <span class="chip">Menu</span>
+            <span class="chip">Biển hiệu</span>
+            <span class="chip">Bao bì</span>
+            <span class="chip">Ấn phẩm</span>
+            <span class="chip">Chatbot &amp; Mini app</span>
+          </div>
+          <p style="font-size:14px;color:var(--dim);margin-top:24px;line-height:1.9;text-align:justify">
+            › Quan điểm của mình rất rõ: AI không thay người thiết kế — AI giải phóng người thiết kế khỏi việc lặp lại, để dành thời gian cho phần sáng tạo và quyết định.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
 
+<!-- ================= JOURNEY ================= -->
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">03 · Hành trình</div>
+      <h2>Nhật ký hành trình</h2>
+    </div>
+    <div class="timeline">
+      <div class="t-item rv">
+        <div class="date">2019 — Nay</div>
+        <h3>Designer đồ họa (mảng 2D) <span>— Namas · Viện nghiên cứu & đào tạo pha chế</span></h3>
+        <p>Phụ trách toàn bộ mảng thiết kế 2D của học viện: Thay đổi toàn bộ bộ nhận diện thương hiệu, nâng cấp hình ảnh, thiết kế hàng trăm bộ giáo trình giảng dạy. Đưa AI vào quy trình làm việc của học viện và hệ sinh thái công ty: Xây dựng miniapp, chatbot và các luồng tự động hóa phục vụ đào tạo và vận hành. Đồng hành cùng hơn 900 chủ quán.</p>
+      </div>
+      <div class="t-item rv">
+        <div class="date">2016 — 2019</div>
+        <h3>Thiết kế đồ họa <span>— làm tự do</span></h3>
+        <p>Thiết kế đa lĩnh vực cho khách hàng cá nhân và cửa hàng: Thương hiệu, ấn phẩm, biển hiệu, menu. Song song buôn bán, sửa chữa máy tính và xử lý sự cố mạng — nền tảng cho thế mạnh kỹ thuật sau này.</p>
+      </div>
+      <div class="t-item rv">
+        <div class="date">2012 — 2016</div>
+        <h3>Sinh viên <span>— Đại học Thủy Lợi</span></h3>
+        <p>Tự học thiết kế đồ họa và kỹ thuật máy tính từ thời sinh viên — đặt nền móng cho hướng đi "designer rành kỹ thuật" sau này.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY ME ================= -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">04 · Lý do chọn mình</div>
+      <h2>Vì sao chọn tôi?</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card rv">
+        <div class="why-num">01</div>
+        <h3>Kinh nghiệm thực chiến</h3>
+        <p>Hơn 10 năm làm nghề, trong đó 7+ năm chuyên sâu F&amp;B. Mọi quyết định thiết kế đều đã đi qua sản xuất thật, không dừng ở lý thuyết.</p>
+      </div>
+      <div class="why-card rv">
+        <div class="why-num">02</div>
+        <h3>Hiểu người làm kẹt ở đâu</h3>
+        <p>Từng trực tiếp làm nên biết rõ các điểm nghẽn: Brief mơ hồ, file sai quy cách khi in, sửa đi sửa lại, tiến độ bị ép. Thiết kế từ đầu đã tính trước những khâu đó.</p>
+      </div>
+      <div class="why-card rv">
+        <div class="why-num">03</div>
+        <h3>Tối ưu cả quy trình</h3>
+        <p>Không chỉ giao file đẹp. Mình nhìn cả chuỗi thiết kế — duyệt — sản xuất — vận hành; khâu nào chậm hoặc dễ sai đều có cách gọn lại.</p>
+      </div>
+      <div class="why-card rv">
+        <div class="why-num">04</div>
+        <h3>Bắt nhịp công nghệ nhanh</h3>
+        <p>Công nghệ mới xuất hiện là thử và áp dụng sớm: AI, miniapp, chatbot, tự động hóa — miễn là giải quyết được việc thật.</p>
+      </div>
+      <div class="why-card rv">
+        <div class="why-num">05</div>
+        <h3>Đọc hiểu code × AI</h3>
+        <p>Đọc hiểu code cơ bản, vận dụng AI để tự dựng công cụ phục vụ công việc — phối hợp trơn tru với đội kỹ thuật, không loay hoay với công nghệ.</p>
+      </div>
+      <div class="why-card rv">
+        <div class="why-num">06</div>
+        <h3>Hiểu hệ thống, xử lý sự cố</h3>
+        <p>Có nền tảng mạng máy tính và xử lý sự cố máy tính. Giao file xong vẫn đồng hành được ở khâu vận hành — không phải xong việc là hết.</p>
+      </div>
+    </div>
+
+    <div class="showcase rv">
+      <div class="show-frame">
+        <div class="show-bar"><i></i><i></i><i></i><span>quan-ly-chi-tieu — t.me/hmh_finance_bot</span></div>
+        <div class="show-img show-img-bot" role="img" aria-label="Màn hình mini app quản lý chi tiêu trong Telegram"></div>
+      </div>
+      <div class="show-info">
+        <div class="show-tag">Công cụ tự dựng</div>
+        <h3>Bot Quản Lý Chi Tiêu <span>Tự động hóa qua Telegram</span></h3>
+        <p class="show-problem">Ghi chép chi tiêu thủ công rất dễ sót khoản và tốn công: Mỗi lần chi lại phải mở ứng dụng, chọn mục, gõ số tiền; cuối tháng muốn nhìn lại tổng quan hay đưa dữ liệu ra máy tính lại phải tự tổng hợp bằng tay. Mình tự dựng bot này ngay trên Telegram để xử lý gọn:</p>
+        <ul class="show-list">
+          <li>Chỉ cần nhắn một tin tự do theo ngày: Bot tự tách từng khoản, chẳng hạn "35k ăn trưa. 7k gửi xe gym. 131k ăn tối"</li>
+          <li>Tự phân loại khoản chi theo bộ từ khóa đã thêm sẵn và trả kết quả về ngay trong khung chat</li>
+          <li>Mini app xem tổng quan chi tiêu trong ngày, sửa hoặc xóa từng giao dịch</li>
+          <li>Báo cáo theo tuần, tháng, năm: Biểu đồ cột và biểu đồ tỉ trọng theo danh mục</li>
+          <li>Tìm kiếm giao dịch theo nội dung hoặc số tiền, hiểu cả dạng rút gọn như 50k, 1tr5</li>
+          <li>Đồng bộ dữ liệu sang Google Sheets theo từng tháng kèm biểu đồ — xem trực quan trên máy tính như một tệp Excel</li>
+          <li>Xuất tệp CSV và báo cáo PDF khi cần lưu trữ</li>
+        </ul>
+        <a class="btn btn-primary" href="https://t.me/hmh_finance_bot" target="_blank" rel="noopener">Mở bot trên Telegram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">05 · Dự án</div>
+      <h2>Dự án tiêu biểu</h2>
+    </div>
+    <h3 class="proj-group-title" style="margin-top:0">Làm lâu nhất</h3>
+    <p class="proj-group-sub">Đây là nơi tôi gắn bó lâu nhất, và cũng là nơi thể hiện rõ nhất khả năng giữ một hệ thống hình ảnh nhất quán trong nhiều năm.</p>
+    <div id="proj-namas"></div>
+    <h3 class="proj-group-title">Mảng F&amp;B</h3>
+    <p class="proj-group-sub">Mỗi quán một cá tính, nhưng đều đi chung một hướng: Nhận diện rõ ràng, trình bày dễ nhìn, và dùng được ngay trong ngày bán hàng.</p>
+    <div class="proj-grid" id="proj-grid-main"></div>
+    <h3 class="proj-group-title">Các mảng khác</h3>
+    <p class="proj-group-sub">Ngoài quán cà phê, tôi còn làm cho lĩnh vực khác, và tự xây công cụ số để công việc lặp lại chạy nhanh hơn.</p>
+    <div class="proj-grid" id="proj-grid-extra"></div>
+    <p id="proj-empty" class="rv" style="text-align:center;margin-top:44px;font-size:13px;color:var(--dim)" hidden>
+      <span class="t-green">></span> chưa có dự án nào — thêm thư mục vào <span class="t-cyan">projects/</span> là web tự hiện
+    </p>
+    <p id="proj-error" class="rv" style="text-align:center;margin-top:44px;font-size:13px;color:var(--dim)" hidden>
+      <span class="t-mag">></span> không tải được danh sách dự án (mạng hoặc giới hạn truy cập) —
+      <button id="proj-retry" class="retry-btn">thử lại</button>
+    </p>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
 <section id="cv">
 <div class="cv">
 <h2>CV</h2>
@@ -149,154 +366,57 @@ footer p{text-align:justify;max-width:720px}
 <p class="note">Dự án minh chứng cho CV này nằm ở mục Dự án phía trên, với bộ ảnh đầy đủ của từng dự án.</p>
 </div>
 </section>
-<p id="alignDbg" class="note" style="text-align:center"></p>
 </main>
 
+<footer>
+  <div class="wrap">
+    <div>© 2026 Hoàng Hùng</div>
+    <div><span class="status-dot"></span>Đang hoạt động</div>
+  </div>
+</footer>
+
+<!-- Modal case study -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true">
+    <button class="sheet-close" id="mClose" aria-label="Đóng">✕</button>
+    <h3 id="mTitle" class="sheet-title"></h3>
+    <div id="mCase"></div>
+    <div id="mBody" class="sheet-grid"></div>
+  </div>
 </div>
 
-<div class="modal" id="modal" aria-hidden="true"><div class="sheet">
-<div class="sheet-head"><h2 id="mTitle" style="margin:0">Dự án</h2><button class="btn" id="mClose" type="button">Đóng</button></div>
-<div id="mCase"></div>
-<div id="mBody"></div>
-</div></div>
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="sheet-close" id="lbClose" aria-label="Đóng">✕</button>
+  <button class="lb-nav" id="lbPrev" aria-label="Trước">‹</button>
+  <img id="lbImg" alt="">
+  <button class="lb-nav" id="lbNext" aria-label="Sau">›</button>
+</div>
 
+<script src="assets/app.js?v=48"></script>
 <script>
-var GH={owner:'Masterhmh',repo:'Portfolio',branch:'main'};
-var IMG=/\.(jpe?g|png|webp|gif|svg)$/i;
-function rawPath(p){return 'https://raw.githubusercontent.com/'+GH.owner+'/'+GH.repo+'/'+GH.branch+'/'+p;}
-function enc(s){return encodeURIComponent(s);}
-function optUrl(dir,file){
-if(file.size>400*1024){
-var clean='raw.githubusercontent.com/'+GH.owner+'/'+GH.repo+'/'+GH.branch+'/projects/'+enc(dir)+'/'+enc(file.name);
-return 'https://images.weserv.nl/?url='+encodeURIComponent(clean)+'&w=900&q=70&output=jpg';
-}
-return file.url;
-}
-function makeImg(dir,file,w){
-var img=document.createElement('img');
-img.loading='lazy'; img.alt=dir;
-var url=optUrl(dir,file);
-if(w && file.size>400*1024){url=url.replace('w=900','w='+w);}
-img.src=url;
-img.onerror=function(){img.onerror=null; img.src=file.url;};
-return img;
-}
-var SPECIAL={'Hương Fitness Studio':'Lĩnh vực sức khỏe.','Vietinbank':'Lĩnh vực sự kiện cuối năm.','Bot Quản Lý Chi Tiêu':'Bot và miniapp quản lý chi tiêu'};
-var EXTRA=['Hương Fitness Studio','Vietinbank','Bot Quản Lý Chi Tiêu'];
-async function getInfo(dir){
-try{
-var r=await fetch(rawPath('projects/'+enc(dir)+'/info.txt'));
-if(!r.ok) return null;
-var m={};
-(await r.text()).split(/\r?\n/).forEach(function(line){
-var mm=line.match(/^(TEN|VAN_DE|GIAI_PHAP|KET_QUA)\s*:\s*(.+)$/);
-if(mm) m[mm[1]]=mm[2].trim();
-});
-return (m.VAN_DE||m.GIAI_PHAP||m.KET_QUA||m.TEN) ? m : null;
-}catch(e){return null;}
-}
-var modal=document.getElementById('modal');
-var mTitle=document.getElementById('mTitle');
-var mCase=document.getElementById('mCase');
-var mBody=document.getElementById('mBody');
-var cur=null;
-function openProject(p){
-cur=p; mTitle.textContent=p.title; mCase.innerHTML='';
-if(p.info){
-var box=document.createElement('div'); box.style.cssText='background:#fff;border:1px solid #ece7de;border-radius:16px;padding:16px;margin-bottom:18px';
-[['Vấn đề',p.info.VAN_DE],['Giải pháp',p.info.GIAI_PHAP],['Kết quả',p.info.KET_QUA]].filter(function(r){return r[1];}).forEach(function(r){
-var row=document.createElement('p'); row.style.margin='8px 0';
-var k=document.createElement('b'); k.style.color='#0071e3'; k.textContent=r[0]+': ';
-var v=document.createElement('span'); v.textContent=r[1];
-row.append(k,v); box.append(row);
-});
-if(box.children.length) mCase.append(box);
-}
-mBody.innerHTML='';
-cur.imgs.forEach(function(im){var img=makeImg(cur.name, im, 1400); img.alt=cur.title; mBody.appendChild(img);});
-modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
-}
-function closeModal(){modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow='';}
-document.getElementById('mClose').addEventListener('click', closeModal);
-modal.addEventListener('click', function(e){if(e.target===modal) closeModal();});
-document.addEventListener('keydown', function(e){if(e.key==='Escape') closeModal();});
-function cardEl(p){
-var card=document.createElement('div'); card.className='card'; card.setAttribute('role','button'); card.tabIndex=0;
-var img=makeImg(p.name, p.imgs[0], 900); img.alt=p.title;
-var h=document.createElement('h3'); h.textContent=p.title;
-var d=document.createElement('p'); d.textContent=(SPECIAL[p.name] || p.imgs.length+' ảnh');
-var lead=document.createElement('p'); lead.className='lead'; card._lead=lead;
-var link=document.createElement('span'); link.className='card-link'; link.textContent='Xem chi tiết';
-if(SPECIAL[p.name]){var c=document.createElement('p'); c.textContent=p.imgs.length+' ảnh'; card.append(img,h,d,c,lead,link);} else {card.append(img,h,d,lead,link);}
-card.addEventListener('keydown', function(e){if(e.key==='Enter' || e.key===' '){e.preventDefault(); openProject(p);}});
-card.addEventListener('click', function(){openProject(p);});
-return card;
-}
-async function boot(){
-var err=document.getElementById('projError'); err.hidden=true;
-try{
-var r=await fetch('https://api.github.com/repos/'+GH.owner+'/'+GH.repo+'/git/trees/'+GH.branch+'?recursive=1');
-if(!r.ok) throw new Error('HTTP '+r.status);
-var t=await r.json(); var map={};
-(t.tree||[]).forEach(function(e){
-if(e.type!=='blob') return;
-var m=e.path.match(/^projects\/([^\/]+)\/(.+)$/);
-if(!m || /^[._]/.test(m[1]) || !IMG.test(m[2])) return;
-(map[m[1]]=map[m[1]]||[]).push({name:m[2],size:e.size||0,url:rawPath('projects/'+enc(m[1])+'/'+enc(m[2]))});
-});
-var projects=Object.keys(map).map(function(dir){
-return {name:dir,title:dir,imgs:map[dir].sort(function(a,b){return a.name.localeCompare(b.name,undefined,{numeric:true});}),info:null};
-}).filter(function(x){return x.imgs.length;});
-if(!projects.length) throw new Error('Không có dự án');
-var namas=projects.find(function(p){return p.name==='Namas';});
-var extra=projects.filter(function(p){return EXTRA.indexOf(p.name)>=0;});
-var main=projects.filter(function(p){return p.name!=='Namas' && EXTRA.indexOf(p.name)<0;});
-main.sort(function(a,b){return a.name.localeCompare(b.name,'vi');});
-extra.sort(function(a,b){return EXTRA.indexOf(a.name)-EXTRA.indexOf(b.name);});
-var namasBox=document.getElementById('namasBox'); namasBox.innerHTML='';
-if(namas){
-var f=document.createElement('button'); f.className='feature'; f.type='button';
-var img=makeImg(namas.name, namas.imgs[0], 1200); img.alt='Namas';
-var fb=document.createElement('div');
-var h=document.createElement('h3'); h.textContent='Namas — Viện nghiên cứu và đào tạo pha chế';
-var p1=document.createElement('p'); p1.textContent='Tôi thay đổi toàn bộ bộ nhận diện thương hiệu, nâng cấp hình ảnh học viện và thiết kế hàng trăm bộ giáo trình. Bấm để xem bộ ảnh, với '+namas.imgs.length+' ảnh.';
-fb.append(h,p1); f.append(img,fb);
-f.addEventListener('click', function(){openProject(Object.assign({},namas,{title:'Namas'}));});
-namasBox.append(f);
-}
-var mainGrid=document.getElementById('mainGrid'); mainGrid.innerHTML='';
-main.forEach(function(p){p.card=cardEl(p); mainGrid.appendChild(p.card);});
-alignLeads();
-var extraGrid=document.getElementById('extraGrid'); extraGrid.innerHTML='';
-extra.forEach(function(p){p.card=cardEl(p); extraGrid.appendChild(p.card);});
-alignLeads();
-projects.forEach(function(p){getInfo(p.name).then(function(info){if(info){p.info=info; if(info.TEN) p.title=info.TEN; if(info.VAN_DE && p.card && p.card._lead) p.card._lead.textContent=info.VAN_DE; alignLeads();}}).catch(function(){});});
-}catch(e){err.hidden=false; document.getElementById('namasBox').innerHTML='<p class="note">Chưa tải được dự án Namas. Vui lòng tải lại trang.</p>';}
-}
-function alignLeads(){
-var grids=[document.getElementById('mainGrid'), document.getElementById('extraGrid')];
-grids.forEach(function(g){
-if(!g) return;
-var cards=Array.prototype.slice.call(g.querySelectorAll('.card'));
-cards.forEach(function(c){if(c._lead) c._lead.style.paddingTop='';});
-var rows={};
-cards.forEach(function(c){var t=c.offsetTop; (rows[t]=rows[t]||[]).push(c);});
-var rowCount=0, adjCount=0, sample='';
-Object.keys(rows).forEach(function(t){
-var row=rows[t]; if(row.length<2) return; rowCount++;
-var maxB=0;
-row.forEach(function(c){if(c._lead){var b=c._lead.getBoundingClientRect().bottom; if(b>maxB) maxB=b;}});
-row.forEach(function(c){if(c._lead){var d=maxB-c._lead.getBoundingClientRect().bottom; if(d>0.5){c._lead.style.paddingTop=(6+d)+'px'; adjCount++; if(!sample) sample=c.querySelector('h3').textContent+' +'+d.toFixed(1)+'px';}}});
-});
-var dbg=document.getElementById('alignDbg');
-if(dbg) dbg.textContent='Căn đáy: '+rowCount+' hàng, '+adjCount+' thẻ đã chỉnh'+(sample?' (ví dụ: '+sample+')':'')+'.';
-});
-}
-var alignTimer=null;
-window.addEventListener('resize', function(){clearTimeout(alignTimer); alignTimer=setTimeout(alignLeads,150);});
-if(document.fonts && document.fonts.ready) document.fonts.ready.then(alignLeads);
-document.getElementById('retryBtn').addEventListener('click', boot);
-boot();
+/* Ban storytelling khong co thong tin lien lac: chan lenh contact/cv cua terminal. */
+document.addEventListener("keydown", function(e){
+  if (e.key !== "Enter") return;
+  var input = document.getElementById("termIn");
+  if (!input || document.activeElement !== input) return;
+  var cmd = input.value.trim().toLowerCase().split(/\s+/)[0];
+  if (cmd !== "contact" && cmd !== "cv") return;
+  e.stopPropagation();
+  var out = document.getElementById("termOut");
+  var live = document.getElementById("termLive");
+  var body = live ? live.closest(".term-body") : null;
+  function line(html){
+    var d = document.createElement("div");
+    d.innerHTML = html;
+    out.appendChild(d);
+    if (body) body.scrollTop = body.scrollHeight;
+  }
+  line('<span class="t-green">\u279c</span> <span class="t-cyan">~</span> ' + cmd);
+  if (cmd === "contact") line("Trang này không kèm thông tin liên lạc. Bạn có thể xem CV và dự án phía dưới.");
+  else { line("Cuộn xuống mục CV phía dưới."); document.getElementById("cv").scrollIntoView({behavior:"smooth"}); }
+  input.value = "";
+}, true);
 </script>
 <script>
 /* Chuong bao mo trang: Gui tin hieu ve bot thong ke khi co nguoi mo trang (moi phien trinh duyet 1 lan cho moi trang). */
