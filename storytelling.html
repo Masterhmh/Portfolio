@@ -262,11 +262,32 @@ namasBox.append(f);
 }
 var mainGrid=document.getElementById('mainGrid'); mainGrid.innerHTML='';
 main.forEach(function(p){p.card=cardEl(p); mainGrid.appendChild(p.card);});
+alignLeads();
 var extraGrid=document.getElementById('extraGrid'); extraGrid.innerHTML='';
 extra.forEach(function(p){p.card=cardEl(p); extraGrid.appendChild(p.card);});
-projects.forEach(function(p){getInfo(p.name).then(function(info){if(info){p.info=info; if(info.TEN) p.title=info.TEN; if(info.VAN_DE && p.card && p.card._lead) p.card._lead.textContent=info.VAN_DE;}}).catch(function(){});});
+alignLeads();
+projects.forEach(function(p){getInfo(p.name).then(function(info){if(info){p.info=info; if(info.TEN) p.title=info.TEN; if(info.VAN_DE && p.card && p.card._lead) p.card._lead.textContent=info.VAN_DE; alignLeads();}}).catch(function(){});});
 }catch(e){err.hidden=false; document.getElementById('namasBox').innerHTML='<p class="note">Chưa tải được dự án Namas. Vui lòng tải lại trang.</p>';}
 }
+function alignLeads(){
+var grids=[document.getElementById('mainGrid'), document.getElementById('extraGrid')];
+grids.forEach(function(g){
+if(!g) return;
+var cards=Array.prototype.slice.call(g.querySelectorAll('.card'));
+cards.forEach(function(c){if(c._lead) c._lead.style.marginTop='';});
+var rows={};
+cards.forEach(function(c){var t=c.offsetTop; (rows[t]=rows[t]||[]).push(c);});
+Object.keys(rows).forEach(function(t){
+var row=rows[t]; if(row.length<2) return;
+var maxB=0;
+row.forEach(function(c){if(c._lead){var b=c._lead.getBoundingClientRect().bottom; if(b>maxB) maxB=b;}});
+row.forEach(function(c){if(c._lead){var d=maxB-c._lead.getBoundingClientRect().bottom; if(d>0.5) c._lead.style.marginTop=d+'px';}});
+});
+});
+}
+var alignTimer=null;
+window.addEventListener('resize', function(){clearTimeout(alignTimer); alignTimer=setTimeout(alignLeads,150);});
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(alignLeads);
 document.getElementById('retryBtn').addEventListener('click', boot);
 boot();
 </script>
