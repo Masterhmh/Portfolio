@@ -160,8 +160,10 @@ async function loadProjects(){
         if (info.TEN) h.textContent = info.TEN;
         if (info.VAN_DE) d.textContent = info.VAN_DE;
         link.textContent = "Xem chi tiết";
+        alignMainLeads();
       }).catch(() => {});
     });
+    alignMainLeads();
   }
 
   async function fetchFresh(){
@@ -193,6 +195,26 @@ async function loadProjects(){
     }catch(e){}
     return null;
   }
+
+  function alignMainLeads(){
+    const g = document.getElementById("proj-grid");
+    if (!g) return;
+    const cards = Array.from(g.querySelectorAll(".proj"));
+    const ps = cards.map(c => c.querySelector(".proj-body p")).filter(Boolean);
+    ps.forEach(x => { x.style.paddingTop = ""; });
+    const rows = {};
+    cards.forEach(c => { const t = c.offsetTop; (rows[t] = rows[t] || []).push(c); });
+    Object.keys(rows).forEach(t => {
+      const row = rows[t]; if (row.length < 2) return;
+      let maxB = 0;
+      const rps = row.map(c => c.querySelector(".proj-body p")).filter(Boolean);
+      rps.forEach(x => { const b = x.getBoundingClientRect().bottom; if (b > maxB) maxB = b; });
+      rps.forEach(x => { const dd = maxB - x.getBoundingClientRect().bottom; if (dd > 0.5) x.style.paddingTop = dd + "px"; });
+    });
+  }
+  let alignTimer = null;
+  window.addEventListener("resize", () => { clearTimeout(alignTimer); alignTimer = setTimeout(alignMainLeads, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignMainLeads);
 
   async function boot(){
     errBox.hidden = true; empty.hidden = true;
