@@ -33,7 +33,9 @@ h2{font-size:clamp(24px,3.5vw,32px);line-height:1.3;margin:0 0 10px;font-weight:
 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:24px;background:#eee9df;flex:none}
 .card h3{margin:12px 4px 2px;font-size:18px}
 .card p{margin:0 4px;color:#7a7f87;font-size:14px}
-.card p.lead{color:#3d4148;font-size:14.5px;line-height:1.5;margin-top:auto;padding-top:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card p.lead{color:#3d4148;font-size:14.5px;line-height:1.5;padding-top:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card-link{display:inline-block;font-size:13px;font-weight:600;color:#0071e3;border:1px solid #e8e2d9;padding:8px 18px;border-radius:999px;margin:12px 0 0 auto;background:#fff}
+.card:hover .card-link{background:#0071e3;border-color:transparent;color:#fff}
 .feature{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;align-items:center;background:transparent;border:0;cursor:pointer;text-align:left;color:#22252b;padding:0;font:inherit;width:100%}
 .feature img{width:100%;aspect-ratio:2048/779;object-fit:cover;display:block;border-radius:24px;background:#eee9df}
 .feature p{text-align:justify;color:#555a63}
@@ -224,7 +226,8 @@ var img=makeImg(p.name, p.imgs[0], 900); img.alt=p.title;
 var h=document.createElement('h3'); h.textContent=p.title;
 var d=document.createElement('p'); d.textContent=(SPECIAL[p.name] || p.imgs.length+' ảnh');
 var lead=document.createElement('p'); lead.className='lead'; card._lead=lead;
-if(SPECIAL[p.name]){var c=document.createElement('p'); c.textContent=p.imgs.length+' ảnh'; card.append(img,h,d,c,lead);} else {card.append(img,h,d,lead);}
+var link=document.createElement('span'); link.className='card-link'; link.textContent='Xem chi tiết';
+if(SPECIAL[p.name]){var c=document.createElement('p'); c.textContent=p.imgs.length+' ảnh'; card.append(img,h,d,c,lead,link);} else {card.append(img,h,d,lead,link);}
 card.addEventListener('keydown', function(e){if(e.key==='Enter' || e.key===' '){e.preventDefault(); openProject(p);}});
 card.addEventListener('click', function(){openProject(p);});
 return card;
