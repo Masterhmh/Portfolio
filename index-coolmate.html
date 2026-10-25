@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=52">
+<link rel="stylesheet" href="assets/style.css?v=53">
 <link rel="stylesheet" href="assets/showcase.css?v=47">
 <link rel="stylesheet" href="assets/avatar.css">
 <script>try{history.scrollRestoration="manual"}catch(e){}</script>
@@ -356,7 +356,15 @@ html{scroll-behavior:smooth}
       <div class="kicker">05 · Dự án</div>
       <h2>Dự án tiêu biểu</h2>
     </div>
-    <div class="proj-grid" id="proj-grid"></div>
+    <h3 class="proj-group-title" style="margin-top:0">Làm lâu nhất</h3>
+    <p class="proj-group-sub">Đây là nơi tôi gắn bó lâu nhất, và cũng là nơi thể hiện rõ nhất khả năng giữ một hệ thống hình ảnh nhất quán trong nhiều năm.</p>
+    <div id="proj-namas"></div>
+    <h3 class="proj-group-title">Mảng F&amp;B</h3>
+    <p class="proj-group-sub">Mỗi quán một cá tính, nhưng đều đi chung một hướng: Nhận diện rõ ràng, trình bày dễ nhìn, và dùng được ngay trong ngày bán hàng.</p>
+    <div class="proj-grid" id="proj-grid-main"></div>
+    <h3 class="proj-group-title">Các mảng khác</h3>
+    <p class="proj-group-sub">Ngoài quán cà phê, tôi còn làm cho lĩnh vực khác, và tự xây công cụ số để công việc lặp lại chạy nhanh hơn.</p>
+    <div class="proj-grid" id="proj-grid-extra"></div>
     <p id="proj-empty" class="rv" style="text-align:center;margin-top:44px;font-size:13px;color:var(--dim)" hidden>
       <span class="t-green">></span> chưa có dự án nào — thêm thư mục vào <span class="t-cyan">projects/</span> là web tự hiện
     </p>
@@ -537,7 +545,7 @@ html{scroll-behavior:smooth}
   <button class="lb-nav" id="lbNext" aria-label="Sau">›</button>
 </div>
 
-<script src="assets/app.js?v=46"></script>
+<script src="assets/app.js?v=47"></script>
 <script>
 /* Chuong bao mo trang: Gui tin hieu ve bot thong ke khi co nguoi mo trang (moi phien trinh duyet 1 lan cho moi trang). */
 (function(){try{
